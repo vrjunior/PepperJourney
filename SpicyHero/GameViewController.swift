@@ -15,6 +15,11 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        let moveGestureRecognizer = MoveGestureRecognizer(target: self, action: #selector(moveControl(_:)))
+        //adding gesture
+        self.view.addGestureRecognizer(moveGestureRecognizer)
+        
         // create a new scene
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
         
@@ -99,6 +104,17 @@ class GameViewController: UIViewController {
             material.emission.contents = UIColor.red
             
             SCNTransaction.commit()
+        }
+    }
+    
+    @objc
+    func moveControl(_ gesture: MoveGestureRecognizer) {
+        if gesture.state == .ended {
+            print("soltou")
+        }
+        if gesture.state == .changed {
+            print("deslocamento: \(gesture.radius)")
+            print("angulo: \(gesture.angle)")
         }
     }
     
