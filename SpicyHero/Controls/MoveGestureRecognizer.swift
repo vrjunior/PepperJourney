@@ -26,6 +26,7 @@ class MoveGestureRecognizer : UIGestureRecognizer {
         if let loc = touches.first?.location(in: self.view) {
             self.center = loc
             self.state = .began
+            print("began: \(self.center)")
         }
     }
     
@@ -35,6 +36,8 @@ class MoveGestureRecognizer : UIGestureRecognizer {
         if let loc = touches.first?.location(in: self.view) {
             self.radius = self.distance(center, loc)
             self.angle = self.calculateAngle(center: center, finalPosition: loc)
+            
+            print("moved: \(loc)")
             
             self.state = .changed
         }
@@ -55,12 +58,12 @@ class MoveGestureRecognizer : UIGestureRecognizer {
     
     func calculateAngle(center: CGPoint, finalPosition: CGPoint) -> CGFloat {
         
-        let deltaX = finalPosition.x - center.x
-        let deltaY = finalPosition.y - center.y
+        let deltaX = Float(finalPosition.x - center.x)
+        let deltaY = Float(finalPosition.y - center.y)
         
-        let angle = atan(deltaY / deltaX)
+        let angle = atan2f(deltaX, deltaY)
         
-        return angle
+        return CGFloat(angle) * CGFloat(180.0 / Float.pi)
         
     }
     

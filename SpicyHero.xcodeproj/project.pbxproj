@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D228B6051F86BA8100B48738 /* TouchJoystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = D228B6041F86BA8100B48738 /* TouchJoystick.swift */; };
+		D25AD5A41F86D81D00F2093E /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AD5A31F86D81D00F2093E /* Overlay.swift */; };
 		D2EC857D1F83F1240093F009 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EC857C1F83F1240093F009 /* AppDelegate.swift */; };
 		D2EC857F1F83F1240093F009 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = D2EC857E1F83F1240093F009 /* art.scnassets */; };
 		D2EC85811F83F1240093F009 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EC85801F83F1240093F009 /* GameViewController.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D228B6041F86BA8100B48738 /* TouchJoystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchJoystick.swift; sourceTree = "<group>"; };
+		D25AD5A31F86D81D00F2093E /* Overlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overlay.swift; sourceTree = "<group>"; };
 		D2EC85791F83F1240093F009 /* SpicyHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpicyHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2EC857C1F83F1240093F009 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2EC857E1F83F1240093F009 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -77,9 +81,11 @@
 		D2EC85901F83F6D60093F009 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				D228B6041F86BA8100B48738 /* TouchJoystick.swift */,
 				D2EC85931F83FEA50093F009 /* CircleFit.swift */,
 				D2EC85911F83F7010093F009 /* CircleGestureRecognizer.swift */,
 				D2EC85951F8425A40093F009 /* MoveGestureRecognizer.swift */,
+				D25AD5A31F86D81D00F2093E /* Overlay.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -158,8 +164,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2EC85921F83F7010093F009 /* CircleGestureRecognizer.swift in Sources */,
+				D228B6051F86BA8100B48738 /* TouchJoystick.swift in Sources */,
 				D2EC85811F83F1240093F009 /* GameViewController.swift in Sources */,
 				D2EC857D1F83F1240093F009 /* AppDelegate.swift in Sources */,
+				D25AD5A41F86D81D00F2093E /* Overlay.swift in Sources */,
 				D2EC85961F8425A40093F009 /* MoveGestureRecognizer.swift in Sources */,
 				D2EC85941F83FEA50093F009 /* CircleFit.swift in Sources */,
 			);
