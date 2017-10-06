@@ -13,41 +13,25 @@ import SpriteKit
 
 class GameViewController: UIViewController {
 
+    var gameView: SCNView {
+        return view as! SCNView
+    }
+    
+    var gameController: GameController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setupScenes()
-    }
-
-    func setupScenes() {
+        // 1.3x on iPads
+       /* if UIDevice.current.userInterfaceIdiom == .pad {
+            self.gameView.contentScaleFactor = min(1.3, self.gameView.contentScaleFactor)
+            self.gameView.preferredFramesPerSecond = 60
+        } */
         
-        // create a new scene
-        let scene = SCNScene(named: "art.scnassets/level1.scn")!
+        gameController = GameController(scnView: gameView)
         
-        // retrieve the SCNView
-        let scnView = self.view as! SCNView
-        
-        if let overlay = SKScene(fileNamed: "art.scnassets/levels/overlay.sks") {
-            // Set the scale mode to scale to fit the window
-            overlay.scaleMode = .aspectFill
-            
-            //overlay.isUserInteractionEnabled = false
-            
-            scnView.overlaySKScene = overlay
-        }
-        
-        // set the scene to the view
-        scnView.scene = scene
-        
-        // allows the user to manipulate the camera
-        scnView.allowsCameraControl = false
-        
-        // show statistics such as fps and timing information
-        scnView.showsStatistics = true
-        
-        // configure the view
-        scnView.backgroundColor = UIColor.black
-        
+        // Configure the view
+        gameView.backgroundColor = UIColor.black
     }
     
     override var shouldAutorotate: Bool {
