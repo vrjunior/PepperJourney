@@ -78,6 +78,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         self.setupCamera()
         
+        scnView.scene = scene
 
         //select the point of view to use
         sceneRenderer!.pointOfView = self.cameraNode
@@ -87,22 +88,30 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     }
     
     
+    // MARK: - Update
+    
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        // update characters
+        character!.update(atTime: time, with: renderer)
+    }
+    
+    
 }
 
 extension GameController : PadOverlayDelegate {
     
     func padOverlayVirtualStickInteractionDidStart(_ padNode: PadOverlay) {
-        
+        characterDirection = float2(Float(padNode.stickPosition.x), -Float(padNode.stickPosition.y))
     }
     
     
     func padOverlayVirtualStickInteractionDidChange(_ padNode: PadOverlay) {
-        
+        characterDirection = float2(Float(padNode.stickPosition.x), -Float(padNode.stickPosition.y))
     }
     
     
     func padOverlayVirtualStickInteractionDidEnd(_ padNode: PadOverlay) {
-        
+        characterDirection = [0, 0]
     }
     
 }

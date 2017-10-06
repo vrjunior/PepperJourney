@@ -157,29 +157,8 @@ class Character: NSObject {
         //    SCNPhysicsWorld.TestOption.collisionBitMask: Bitmask.collision.rawValue,
         //    SCNPhysicsWorld.TestOption.searchMode: SCNPhysicsWorld.TestSearchMode.closest]
         while !stop {
-            var from = matrix_identity_float4x4
-            from.position = start
-            
-            var to: matrix_float4x4 = matrix_identity_float4x4
-            to.position = start + velocity
-            
-            let contacts = physicsWorld!.convexSweepTest(
-                with: characterCollisionShape!,
-                from: SCNMatrix4(from),//SCNMatrix4FromMat4(from),
-                to: SCNMatrix4(to),
-                options: nil)
-            if !contacts.isEmpty {
-                (velocity, start) = handleSlidingAtContact(contacts.first!, position: start, velocity: velocity)
-                iteration += 1
-                
-                if simd_length_squared(velocity) <= (10E-3 * 10E-3) || iteration >= maxSlideIteration {
-                    replacementPoint = start
-                    stop = true
-                }
-            } else {
-                replacementPoint = start + velocity
-                stop = true
-            }
+            replacementPoint = start + velocity
+            stop = true
         }
         characterNode!.simdWorldPosition = replacementPoint
     }
