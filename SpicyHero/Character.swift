@@ -145,14 +145,12 @@ class Character: NSObject {
     
     
     func slideInWorld(fromPosition start: float3, velocity: float3) {
-        let maxSlideIteration: Int = 4
-        var iteration = 0
         var stop: Bool = false
         
         var replacementPoint = start
         
-        var start = start
-        var velocity = velocity
+        let start = start
+        let velocity = velocity
        // let options: [SCNPhysicsWorld.TestOption: Any] = [
         //    SCNPhysicsWorld.TestOption.collisionBitMask: Bitmask.collision.rawValue,
         //    SCNPhysicsWorld.TestOption.searchMode: SCNPhysicsWorld.TestSearchMode.closest]
@@ -161,43 +159,5 @@ class Character: NSObject {
             stop = true
         }
         characterNode!.simdWorldPosition = replacementPoint
-    }
-    
-    private func handleSlidingAtContact(_ closestContact: SCNPhysicsContact, position start: float3, velocity: float3)
-        -> (computedVelocity: simd_float3, colliderPositionAtContact: simd_float3) {
-            let originalDistance: Float = simd_length(velocity)
-            
-            let colliderPositionAtContact = start + Float(closestContact.sweepTestFraction) * velocity
-            
-            // Compute the sliding plane.
-            let slidePlaneNormal = float3(closestContact.contactNormal)
-            let slidePlaneOrigin = float3(closestContact.contactPoint)
-            let centerOffset = slidePlaneOrigin - colliderPositionAtContact
-            
-            // Compute destination relative to the point of contact.
-            let destinationPoint = slidePlaneOrigin + velocity
-            
-            // We now project the destination point onto the sliding plane.
-            let distPlane = simd_dot(slidePlaneOrigin, slidePlaneNormal)
-            
-            // Project on plane.
-            var t = planeIntersect(planeNormal: slidePlaneNormal, planeDist: distPlane,
-                                   rayOrigin: destinationPoint, rayDirection: slidePlaneNormal)
-            
-            let normalizedVelocity = velocity * (1.0 / originalDistance)
-            let angle = simd_dot(slidePlaneNormal, normalizedVelocity)
-            
-            var frictionCoeff: Float = 0.3
-            if fabs(angle) < 0.9 {
-                t += 10E-3
-                frictionCoeff = 1.0
-            }
-            let newDestinationPoint = (destinationPoint + t * slidePlaneNormal) - centerOffset
-            
-            // Advance start position to nearest point without collision.
-            let computedVelocity = frictionCoeff * Float(1.0 - closestContact.sweepTestFraction)
-                * originalDistance * simd_normalize(newDestinationPoint - start)
-            
-            return (computedVelocity, colliderPositionAtContact)
     }
 }

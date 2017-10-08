@@ -67,7 +67,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         //scnView.showsStatistics = true
         
         // setup overlay
-        overlay = Overlay(size: scnView.bounds.size, controller: self)
+        overlay = Overlay(size: scnView.frame.size, controller: self)
         scnView.overlaySKScene = overlay
         
         //load the main scene

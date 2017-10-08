@@ -9,15 +9,14 @@
 import SpriteKit
 
 class ControlOverlay: SKNode {
-    
-    let buttonMargin = CGFloat( 25 )
-    
-    var directionPad = PadOverlay()
+        
+    var directionPad:PadOverlay!
     
     init(frame: CGRect) {
         super.init()
         
-        directionPad.position = CGPoint(x: CGFloat(20), y: CGFloat(40))
+        self.directionPad = PadOverlay(width: frame.width / 2, height: frame.height)
+        directionPad.position = CGPoint(x: CGFloat(0), y: CGFloat(0))
         addChild(directionPad)
         
     }
