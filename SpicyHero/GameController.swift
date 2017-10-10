@@ -83,8 +83,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         //select the point of view to use
         sceneRenderer!.pointOfView = self.cameraNode
         
-        //register ourself as the physics contact delegate to receive contact notifications
-        //sceneRenderer!.scene!.physicsWorld.contactDelegate = self
     }
     
     

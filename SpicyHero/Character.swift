@@ -80,6 +80,7 @@ class Character: NSObject {
     }
     
     func update(atTime time: TimeInterval, with renderer: SCNSceneRenderer) {
+        
         var characterVelocity = float3()
         
         let direction = characterDirection(withPointOfView:renderer.pointOfView)
@@ -94,14 +95,9 @@ class Character: NSObject {
         previousUpdateTime = time
         
         // move
-        if !direction.isEmpty {
+        if !direction.allZero() {
             characterVelocity = direction * Float(characterSpeed)
-            var runModifier = Float(1.0)
-            #if os(OSX)
-                if NSEvent.modifierFlags.contains(.shift) {
-                    runModifier = 2.0
-                }
-            #endif
+            let runModifier = Float(1.0)
             walkSpeed = CGFloat(runModifier * simd_length(direction))
             
             // move character
@@ -159,5 +155,9 @@ class Character: NSObject {
             stop = true
         }
         characterNode!.simdWorldPosition = replacementPoint
+    }
+
+    func resetCharacterPosition() {
+        characterNode.simdPosition = Character.initialPosition
     }
 }
