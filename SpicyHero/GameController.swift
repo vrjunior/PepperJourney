@@ -9,6 +9,7 @@
 import Foundation
 import GameController
 import SceneKit
+import SpriteKit
 
 
 class GameController: NSObject, SCNSceneRendererDelegate {
@@ -67,11 +68,16 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         //scnView.showsStatistics = true
         
         // setup overlay
-        overlay = Overlay(size: scnView.frame.size, controller: self)
-        scnView.overlaySKScene = overlay
+        //overlay = Overlay(size: scnView.frame.size, controller: self)
+        
         
         //load the main scene
         self.scene = SCNScene(named: "art.scnassets/level1.scn")
+        
+        let overlay = SKScene(fileNamed: "overlay.sks") as! Overlay
+        overlay.controller = self
+        overlay.size = CGSize(width: scnView.frame.width, height: scnView.frame.height)
+        scnView.overlaySKScene = overlay
         
         //load the character
         self.setupCharacter()

@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D23270991F8D5C5000BEA2BA /* overlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D23270981F8D5C5000BEA2BA /* overlay.sks */; };
 		D25AD5A61F87E1B100F2093E /* PadOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AD5A51F87E1B100F2093E /* PadOverlay.swift */; };
-		D25AD5A81F87E1C500F2093E /* ControlOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AD5A71F87E1C500F2093E /* ControlOverlay.swift */; };
 		D25AD5AA1F87E96A00F2093E /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AD5A91F87E96A00F2093E /* Overlay.swift */; };
 		D25AD5AC1F87EAC900F2093E /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AD5AB1F87EAC800F2093E /* GameController.swift */; };
 		D25AD5AE1F87ECF900F2093E /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AD5AD1F87ECF900F2093E /* Character.swift */; };
@@ -24,8 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D23270981F8D5C5000BEA2BA /* overlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = overlay.sks; sourceTree = "<group>"; };
 		D25AD5A51F87E1B100F2093E /* PadOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadOverlay.swift; sourceTree = "<group>"; };
-		D25AD5A71F87E1C500F2093E /* ControlOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlOverlay.swift; sourceTree = "<group>"; };
 		D25AD5A91F87E96A00F2093E /* Overlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overlay.swift; sourceTree = "<group>"; };
 		D25AD5AB1F87EAC800F2093E /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
 		D25AD5AD1F87ECF900F2093E /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
@@ -96,6 +96,7 @@
 				D2EC85851F83F1240093F009 /* Assets.xcassets */,
 				D2EC85871F83F1240093F009 /* LaunchScreen.storyboard */,
 				D2EC858A1F83F1240093F009 /* Info.plist */,
+				D23270981F8D5C5000BEA2BA /* overlay.sks */,
 			);
 			path = SpicyHero;
 			sourceTree = "<group>";
@@ -104,7 +105,6 @@
 			isa = PBXGroup;
 			children = (
 				D25AD5A51F87E1B100F2093E /* PadOverlay.swift */,
-				D25AD5A71F87E1C500F2093E /* ControlOverlay.swift */,
 			);
 			path = iOSControls;
 			sourceTree = "<group>";
@@ -170,6 +170,7 @@
 			files = (
 				D2EC857F1F83F1240093F009 /* art.scnassets in Resources */,
 				D2EC85891F83F1240093F009 /* LaunchScreen.storyboard in Resources */,
+				D23270991F8D5C5000BEA2BA /* overlay.sks in Resources */,
 				D2EC85861F83F1240093F009 /* Assets.xcassets in Resources */,
 				D2EC85841F83F1240093F009 /* Main.storyboard in Resources */,
 			);
@@ -188,7 +189,6 @@
 				D2EC857D1F83F1240093F009 /* AppDelegate.swift in Sources */,
 				D25AD5B51F88189E00F2093E /* SimdExtensions.swift in Sources */,
 				D25AD5A61F87E1B100F2093E /* PadOverlay.swift in Sources */,
-				D25AD5A81F87E1C500F2093E /* ControlOverlay.swift in Sources */,
 				D25AD5AA1F87E96A00F2093E /* Overlay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

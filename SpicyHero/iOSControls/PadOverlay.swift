@@ -6,6 +6,7 @@ Exposes D-Pad game controller type functionality with screen-rendered buttons.
 */
 
 import SpriteKit
+import UIKit.UIGestureRecognizerSubclass
 import simd
 
 protocol PadOverlayDelegate: NSObjectProtocol {
@@ -14,10 +15,10 @@ protocol PadOverlayDelegate: NSObjectProtocol {
     func padOverlayVirtualStickInteractionDidEnd(_ padNode: PadOverlay)
 }
 
-class PadOverlay: SKNode {
+class PadOverlay: SKSpriteNode {
     // Default 100, 100
     
-    var size = CGSize.zero
+    public weak var delegate: PadOverlayDelegate?
     
     var padSize = CGSize.zero {
         didSet {
@@ -35,57 +36,43 @@ class PadOverlay: SKNode {
             }
         }
     }
-    weak var delegate: PadOverlayDelegate?
-
+    
     private var trackingTouch: UITouch?
     private var startLocation = CGPoint.zero
+    private var startLocationCenter = CGPoint.zero
     private var stick: SKShapeNode!
-    private var padArea: SKShapeNode!
     
     private var background: SKShapeNode!
-
-    init(width: CGFloat, height: CGFloat) {
-        super.init()
+    
+    
+    required init?(coder aDecoder: NSCoder) {
         
-        self.padSize = CGSize(width: 150, height: 150)
+        super.init(coder: aDecoder)
         
-        
-        self.size = CGSize(width: width, height: height)
+        self.padSize = CGSize(width: 60, height: 60)
         
         alpha = 0.7
         isUserInteractionEnabled = true
-        self.buildPadArea()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func buildPadArea() {
-        
-        let padAreaRect = CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(self.size.width), height: CGFloat(self.size.height))
-        
-        self.padArea = SKShapeNode(rect: padAreaRect)
-        
-        self.padArea.lineWidth = 0
-        
-        //Uncomment to see the area
-        self.padArea.fillColor = SKColor.blue
-        
-        addChild(self.padArea)
     }
     
     func buildPad() {
+        
+        let center = CGRect(x: CGFloat(self.frame.width / 2 - 5), y: CGFloat(self.frame.height / 2 - 5), width: CGFloat(10), height: CGFloat(10))
+        let centerSK = SKShapeNode(rect: center)
+        centerSK.fillColor = SKColor.black
+        
+        self.addChild(centerSK)
+        
 
-        let backgroundRect = CGRect(x: CGFloat(self.startLocation.x), y: CGFloat(self.startLocation.y), width: CGFloat(padSize.width), height: CGFloat(padSize.height))
+        let backgroundRect = CGRect(x: CGFloat(self.startLocationCenter.x), y: CGFloat(self.startLocation.y), width: CGFloat(padSize.width), height: CGFloat(padSize.height))
         
         background = SKShapeNode()
         background.path = CGPath( ellipseIn: backgroundRect, transform: nil )
         background.strokeColor = SKColor.black
         background.lineWidth = 3.0
         
-        self.padArea.addChild(background)
-        var stickRect = CGRect(x: CGFloat(self.startLocation.x), y: CGFloat(self.startLocation.y), width: CGFloat(stickSize.width), height: CGFloat(stickSize.height))
+        self.addChild(background)
+        var stickRect = CGRect(x: CGFloat(self.startLocationCenter.x), y: CGFloat(self.startLocationCenter.y), width: CGFloat(stickSize.width), height: CGFloat(stickSize.height))
         stickRect.size = stickSize
         stick = SKShapeNode()
         stick.path = CGPath( ellipseIn: stickRect, transform: nil)
@@ -94,7 +81,7 @@ class PadOverlay: SKNode {
         stick.fillColor = SKColor.white
         //#endif
         stick.strokeColor = SKColor.black
-        self.padArea.addChild(stick)
+        self.addChild(stick)
         updateStickPosition()
     }
     
@@ -124,7 +111,7 @@ class PadOverlay: SKNode {
     }
 
     func updateStickPosition(forTouchLocation location: CGPoint) {
-        var l_vec = vector_float2( x: Float( location.x - startLocation.x ), y: Float( location.y - startLocation.y ) )
+        var l_vec = vector_float2( x: Float( location.x - startLocationCenter.x ), y: Float( location.y - startLocationCenter.y ) )
         l_vec.x = (l_vec.x / Float( padSize.width ) - 0.5) * 2.0
         l_vec.y = (l_vec.y / Float( padSize.height ) - 0.5) * 2.0
         if simd_length_squared(l_vec) > 1 {
@@ -132,29 +119,44 @@ class PadOverlay: SKNode {
         }
         stickPosition = CGPoint( x: CGFloat( l_vec.x ), y: CGFloat( l_vec.y ) )
     }
+    
+    func getAngle(p1:CGPoint, p2:CGPoint) -> CGFloat {
+        let deltaY = p2.y - p1.y
+        let deltaX = p2.x - p1.x
+        
+        let angle = Float(atan2(deltaY, deltaX))
+        
+        return CGFloat(angle * (180.0 / Float.pi))
+    }
 
     func resetInteraction() {
         stickPosition = CGPoint.zero
         trackingTouch = nil
         startLocation = CGPoint.zero
-        delegate!.padOverlayVirtualStickInteractionDidEnd(self)
+        delegate?.padOverlayVirtualStickInteractionDidEnd(self)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if(touches.count > 1) {
+            return
+        }
         trackingTouch = touches.first
         startLocation = trackingTouch!.location(in: self)
         // Center start location
-        startLocation.x -= padSize.width / 2.0
-        startLocation.y -= padSize.height / 2.0
+        self.startLocationCenter.x = startLocation.x - padSize.width / 2.0
+        self.startLocationCenter.y = startLocation.y - padSize.height / 2.0
         updateStickPosition(forTouchLocation: trackingTouch!.location(in: self))
         self.buildPad()
-        delegate!.padOverlayVirtualStickInteractionDidStart(self)
+        delegate?.padOverlayVirtualStickInteractionDidStart(self)
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if(touches.count > 1) {
+            return
+        }
         if touches.contains(trackingTouch!) {
             updateStickPosition(forTouchLocation: trackingTouch!.location(in: self))
-            delegate!.padOverlayVirtualStickInteractionDidChange(self)
+            delegate?.padOverlayVirtualStickInteractionDidChange(self)
         }
     }
 
