@@ -43,6 +43,11 @@ class PadOverlay: SKSpriteNode {
     
     private var padBackground: SKSpriteNode!
     
+    private var lowerXSafeArea: CGFloat!
+    private var lowerYSafeArea: CGFloat!
+    private var higherXSafeArea: CGFloat!
+    private var higherYSafeArea: CGFloat!
+    
     
     required init?(coder aDecoder: NSCoder) {
         
@@ -61,14 +66,45 @@ class PadOverlay: SKSpriteNode {
         self.stick = self.padBackground.childNode(withName: "stick") as! SKSpriteNode
         
         self.padSize = self.padBackground.size
+        
+        
+        self.lowerXSafeArea = self.padSize.width / 2
+        self.lowerYSafeArea = self.padSize.height / 2
+        self.higherXSafeArea = self.size.width - self.padSize.width
+        self.higherYSafeArea = self.size.height - self.padSize.height
+        
     }
     
     func buildPad() {
         
         self.padBackground.alpha = 1
-        self.padBackground.position = CGPoint(x: self.startLocation.x, y: self.startLocation.y)
+        
+        self.checkSafeAreaForPad()
+        
+        self.padBackground.position = CGPoint(x: startLocation.x, y: startLocation.y)
+        self.stick.position = CGPoint(x: self.startLocation.x, y: self.startLocation.y)
         
         updateStickPosition()
+    }
+    
+    func checkSafeAreaForPad() {
+        
+        if(self.startLocation.x < self.lowerXSafeArea) {
+            self.startLocation.x = self.lowerXSafeArea - self.padSize.width / 2
+        }
+        
+        if(self.startLocation.x > self.higherXSafeArea) {
+            startLocation.x = self.higherXSafeArea
+        }
+        
+        if(self.startLocation.y < self.lowerYSafeArea) {
+            self.startLocation.y = self.lowerYSafeArea - self.padSize.height / 2
+        }
+        
+        if(self.startLocation.y > self.higherYSafeArea) {
+            self.startLocation.y = self.higherYSafeArea
+        }
+        
     }
     
     func destroyPad() {
@@ -128,8 +164,8 @@ class PadOverlay: SKSpriteNode {
         startLocation = trackingTouch!.location(in: self)
         startLocation.x -= self.padSize.width / 2
         startLocation.y -= self.padSize.height / 2
-        updateStickPosition(forTouchLocation: trackingTouch!.location(in: self))
         self.buildPad()
+        updateStickPosition(forTouchLocation: trackingTouch!.location(in: self))
         delegate?.padOverlayVirtualStickInteractionDidStart(self)
     }
 
