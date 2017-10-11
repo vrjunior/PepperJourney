@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D207CFC51F8EA2D10084240E /* Dpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207CFC41F8EA2D10084240E /* Dpad.swift */; };
+		D207CFC71F8EA5370084240E /* Stick.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207CFC61F8EA5370084240E /* Stick.swift */; };
 		D23270991F8D5C5000BEA2BA /* overlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D23270981F8D5C5000BEA2BA /* overlay.sks */; };
 		D25AD5A61F87E1B100F2093E /* PadOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AD5A51F87E1B100F2093E /* PadOverlay.swift */; };
 		D25AD5AA1F87E96A00F2093E /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AD5A91F87E96A00F2093E /* Overlay.swift */; };
@@ -14,7 +16,7 @@
 		D25AD5AE1F87ECF900F2093E /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AD5AD1F87ECF900F2093E /* Character.swift */; };
 		D25AD5B11F8809DE00F2093E /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25AD5B01F8809DE00F2093E /* SceneKit.framework */; };
 		D25AD5B31F8809E500F2093E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25AD5B21F8809E500F2093E /* GameKit.framework */; };
-		D25AD5B51F88189E00F2093E /* SimdExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AD5B41F88189E00F2093E /* SimdExtensions.swift */; };
+		D291BB541F8E976A00B2D111 /* SimdExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291BB531F8E976A00B2D111 /* SimdExtensions.swift */; };
 		D2EC857D1F83F1240093F009 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EC857C1F83F1240093F009 /* AppDelegate.swift */; };
 		D2EC857F1F83F1240093F009 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = D2EC857E1F83F1240093F009 /* art.scnassets */; };
 		D2EC85811F83F1240093F009 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EC85801F83F1240093F009 /* GameViewController.swift */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D207CFC41F8EA2D10084240E /* Dpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dpad.swift; sourceTree = "<group>"; };
+		D207CFC61F8EA5370084240E /* Stick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stick.swift; sourceTree = "<group>"; };
 		D23270981F8D5C5000BEA2BA /* overlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = overlay.sks; sourceTree = "<group>"; };
 		D25AD5A51F87E1B100F2093E /* PadOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadOverlay.swift; sourceTree = "<group>"; };
 		D25AD5A91F87E96A00F2093E /* Overlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overlay.swift; sourceTree = "<group>"; };
@@ -31,7 +35,7 @@
 		D25AD5AD1F87ECF900F2093E /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		D25AD5B01F8809DE00F2093E /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		D25AD5B21F8809E500F2093E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
-		D25AD5B41F88189E00F2093E /* SimdExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SimdExtensions.swift; path = ../../../Downloads/Fox2/Swift/Shared/SimdExtensions.swift; sourceTree = "<group>"; };
+		D291BB531F8E976A00B2D111 /* SimdExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimdExtensions.swift; sourceTree = "<group>"; };
 		D2EC85791F83F1240093F009 /* SpicyHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpicyHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2EC857C1F83F1240093F009 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2EC857E1F83F1240093F009 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -85,7 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				D25AD5AD1F87ECF900F2093E /* Character.swift */,
-				D25AD5B41F88189E00F2093E /* SimdExtensions.swift */,
+				D291BB531F8E976A00B2D111 /* SimdExtensions.swift */,
 				D25AD5A91F87E96A00F2093E /* Overlay.swift */,
 				D25AD5AB1F87EAC800F2093E /* GameController.swift */,
 				D2EC85901F83F6D60093F009 /* iOSControls */,
@@ -105,6 +109,8 @@
 			isa = PBXGroup;
 			children = (
 				D25AD5A51F87E1B100F2093E /* PadOverlay.swift */,
+				D207CFC41F8EA2D10084240E /* Dpad.swift */,
+				D207CFC61F8EA5370084240E /* Stick.swift */,
 			);
 			path = iOSControls;
 			sourceTree = "<group>";
@@ -186,9 +192,11 @@
 				D2EC85811F83F1240093F009 /* GameViewController.swift in Sources */,
 				D25AD5AC1F87EAC900F2093E /* GameController.swift in Sources */,
 				D25AD5AE1F87ECF900F2093E /* Character.swift in Sources */,
+				D207CFC71F8EA5370084240E /* Stick.swift in Sources */,
 				D2EC857D1F83F1240093F009 /* AppDelegate.swift in Sources */,
-				D25AD5B51F88189E00F2093E /* SimdExtensions.swift in Sources */,
+				D291BB541F8E976A00B2D111 /* SimdExtensions.swift in Sources */,
 				D25AD5A61F87E1B100F2093E /* PadOverlay.swift in Sources */,
+				D207CFC51F8EA2D10084240E /* Dpad.swift in Sources */,
 				D25AD5AA1F87E96A00F2093E /* Overlay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -327,7 +335,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5W8YC8Y5Q7;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SpicyHero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vrmassoni.SpicyHero;
@@ -342,7 +350,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5W8YC8Y5Q7;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SpicyHero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vrmassoni.SpicyHero;

@@ -21,6 +21,9 @@ class Overlay: SKScene {
         
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        
+        self.scaleMode = .resizeFill
+        
         // The virtual D-pad
         #if os( iOS )
             self.padOverlay = self.childNode(withName: "padOverlay") as! PadOverlay

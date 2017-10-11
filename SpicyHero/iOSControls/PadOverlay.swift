@@ -39,49 +39,42 @@ class PadOverlay: SKSpriteNode {
     
     private var trackingTouch: UITouch?
     private var startLocation = CGPoint.zero
-    private var startLocationCenter = CGPoint.zero
-    private var stick: SKShapeNode!
+    private var stick: SKSpriteNode!
     
-    private var background: SKShapeNode!
+    private var padBackground: SKSpriteNode!
     
     
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
         
-        self.padSize = CGSize(width: 40, height: 40)
-        
         alpha = 0.7
         isUserInteractionEnabled = true
+        
+        self.setupPad()
+        print("padsize: \(self.padSize)")
     }
     
+    func setupPad() {
+        self.padBackground = self.childNode(withName: "padBackground") as! SKSpriteNode
+        
+        self.stick = self.padBackground.childNode(withName: "stick") as! SKSpriteNode
+        
+        self.padSize = self.padBackground.size
+    }
     
     func buildPad() {
         
-        let backgroundRect = CGRect(x: CGFloat(self.startLocationCenter.x), y: CGFloat(self.startLocationCenter.y), width: CGFloat(padSize.width), height: CGFloat(padSize.height))
+        self.padBackground.alpha = 1
+        self.padBackground.position = CGPoint(x: self.startLocation.x, y: self.startLocation.y)
         
-        background = SKShapeNode()
-        background.path = CGPath( ellipseIn: backgroundRect, transform: nil )
-        background.strokeColor = SKColor.black
-        background.lineWidth = 1
-        
-        self.addChild(background)
-        var stickRect = CGRect(x: CGFloat(self.startLocationCenter.x), y: CGFloat(self.startLocationCenter.y), width: CGFloat(stickSize.width), height: CGFloat(stickSize.height))
-        stickRect.size = stickSize
-        stick = SKShapeNode()
-        stick.path = CGPath( ellipseIn: stickRect, transform: nil)
-        stick.lineWidth = 0.75
-        //#if os( OSX )
-        stick.fillColor = SKColor.white
-        //#endif
-        stick.strokeColor = SKColor.black
-        self.addChild(stick)
         updateStickPosition()
     }
     
     func destroyPad() {
-        self.background.removeFromParent()
-        self.stick.removeFromParent()
+        
+        self.padBackground.alpha = 0
+        
     }
     
     var stickSize: CGSize {
@@ -89,12 +82,9 @@ class PadOverlay: SKSpriteNode {
     }
 
     func updateForSizeChange() {
-        guard let background = background else { return }
 
-        let backgroundRect = CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(padSize.width), height: CGFloat(padSize.height))
-        background.path = CGPath( ellipseIn: backgroundRect, transform: nil)
-        let stickRect = CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(padSize.width / 3.0), height: CGFloat(padSize.height / 3.0))
-        stick.path = CGPath( ellipseIn: stickRect, transform: nil)
+        stick.size = self.stickSize
+
     }
 
     func updateStickPosition() {
@@ -104,8 +94,10 @@ class PadOverlay: SKSpriteNode {
         stick.position = CGPoint(x: stickX, y: stickY)
     }
 
-    func updateStickPosition(forTouchLocation location: CGPoint) {
-        var l_vec = vector_float2( x: Float( location.x - startLocationCenter.x ), y: Float( location.y - startLocationCenter.y ) )
+    func updateStickPosition(forTouchLocation location: CGPoint)
+    {
+        var l_vec = vector_float2( x: Float( location.x - startLocation.x ), y: Float( location.y - startLocation.y ) )
+        
         l_vec.x = (l_vec.x / Float( padSize.width ) - 0.5) * 2.0
         l_vec.y = (l_vec.y / Float( padSize.height ) - 0.5) * 2.0
         if simd_length_squared(l_vec) > 1 {
@@ -131,14 +123,11 @@ class PadOverlay: SKSpriteNode {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if(touches.count != 1) {
-            return
-        }
+        
         trackingTouch = touches.first
         startLocation = trackingTouch!.location(in: self)
-        // Center start location
-        self.startLocationCenter.x = startLocation.x - padSize.width / 2.0
-        self.startLocationCenter.y = startLocation.y - padSize.height / 2.0
+        startLocation.x -= self.padSize.width / 2
+        startLocation.y -= self.padSize.height / 2
         updateStickPosition(forTouchLocation: trackingTouch!.location(in: self))
         self.buildPad()
         delegate?.padOverlayVirtualStickInteractionDidStart(self)
@@ -155,10 +144,8 @@ class PadOverlay: SKSpriteNode {
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if touches.contains(trackingTouch!) {
-            self.resetInteraction()
-            self.destroyPad()
-        }
+        self.destroyPad()
+        self.delegate?.padOverlayVirtualStickInteractionDidEnd(self)
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
