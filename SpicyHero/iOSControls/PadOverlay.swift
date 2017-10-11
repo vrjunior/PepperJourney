@@ -49,34 +49,28 @@ class PadOverlay: SKSpriteNode {
         
         super.init(coder: aDecoder)
         
-        self.padSize = CGSize(width: 60, height: 60)
+        self.padSize = CGSize(width: 40, height: 40)
         
         alpha = 0.7
         isUserInteractionEnabled = true
     }
     
+    
     func buildPad() {
         
-        let center = CGRect(x: CGFloat(self.frame.width / 2 - 5), y: CGFloat(self.frame.height / 2 - 5), width: CGFloat(10), height: CGFloat(10))
-        let centerSK = SKShapeNode(rect: center)
-        centerSK.fillColor = SKColor.black
-        
-        self.addChild(centerSK)
-        
-
-        let backgroundRect = CGRect(x: CGFloat(self.startLocationCenter.x), y: CGFloat(self.startLocation.y), width: CGFloat(padSize.width), height: CGFloat(padSize.height))
+        let backgroundRect = CGRect(x: CGFloat(self.startLocationCenter.x), y: CGFloat(self.startLocationCenter.y), width: CGFloat(padSize.width), height: CGFloat(padSize.height))
         
         background = SKShapeNode()
         background.path = CGPath( ellipseIn: backgroundRect, transform: nil )
         background.strokeColor = SKColor.black
-        background.lineWidth = 3.0
+        background.lineWidth = 1
         
         self.addChild(background)
         var stickRect = CGRect(x: CGFloat(self.startLocationCenter.x), y: CGFloat(self.startLocationCenter.y), width: CGFloat(stickSize.width), height: CGFloat(stickSize.height))
         stickRect.size = stickSize
         stick = SKShapeNode()
         stick.path = CGPath( ellipseIn: stickRect, transform: nil)
-        stick.lineWidth = 2.0
+        stick.lineWidth = 0.75
         //#if os( OSX )
         stick.fillColor = SKColor.white
         //#endif
@@ -137,7 +131,7 @@ class PadOverlay: SKSpriteNode {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if(touches.count > 1) {
+        if(touches.count != 1) {
             return
         }
         trackingTouch = touches.first

@@ -26,7 +26,7 @@ class Overlay: SKScene {
             self.padOverlay = self.childNode(withName: "padOverlay") as! PadOverlay
         #endif
         
-        self.padOverlay.size = CGSize(width: self.size.width / 2, height: self.size.height)
+       //self.padOverlay.size = CGSize(width: self.size.width / 2, height: self.size.height)
         
         // disable interation in scenekit
         self.isUserInteractionEnabled = false

@@ -76,7 +76,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         let overlay = SKScene(fileNamed: "overlay.sks") as! Overlay
         overlay.controller = self
-        overlay.size = CGSize(width: scnView.frame.width, height: scnView.frame.height)
+        overlay.scaleMode = .aspectFill
         scnView.overlaySKScene = overlay
         
         //load the character
