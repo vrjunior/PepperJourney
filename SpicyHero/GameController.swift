@@ -10,13 +10,15 @@ import Foundation
 import GameController
 import SceneKit
 import SpriteKit
+import GameplayKit
 
 
 class GameController: NSObject, SCNSceneRendererDelegate {
     
-    var character: Character?
+    var character: Character!
+    var characterStateMachine: GKStateMachine!
     
-    private var scene: SCNScene?
+    private var scene: SCNScene!
     private weak var sceneRenderer: SCNSceneRenderer?
     private var overlay: Overlay?
     
@@ -43,10 +45,13 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     
     func setupCharacter() {
         character = Character(scene: scene!)
+        characterStateMachine = GKStateMachine(states: [
+            StadingState(scene: scene, character: character),
+            RunningState(scene: scene, character: character),
+            JumpingState(scene: scene, character: character)
+            ])
         
-        // keep a pointer to the physicsWorld from the character because we will need it when updating the character's position
-        //character!.physicsWorld = scene!.physicsWorld
-        //scene!.rootNode.addChildNode(character!.characterNode)
+        characterStateMachine.enter(StadingState.self)
     }
     
     func setupCamera() {
@@ -110,18 +115,22 @@ extension GameController : PadOverlayDelegate {
     
     func padOverlayVirtualStickInteractionDidChange(_ padNode: PadOverlay) {
         characterDirection = float2(Float(padNode.stickPosition.x), -Float(padNode.stickPosition.y))
+        
+        self.characterStateMachine.enter(RunningState.self)
     }
     
     
     func padOverlayVirtualStickInteractionDidEnd(_ padNode: PadOverlay) {
         characterDirection = [0, 0]
+        
+        self.characterStateMachine.enter(RunningState.self)
     }
     
 }
 
 extension GameController : CharacterMovesDelegate {
     func jump() {
-        self.character?.jump()
+        self.characterStateMachine.enter(JumpingState.self)
     }
     
     func attack() {

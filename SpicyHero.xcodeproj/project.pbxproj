@@ -11,6 +11,11 @@
 		D207CFC51F8EA2D10084240E /* Dpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207CFC41F8EA2D10084240E /* Dpad.swift */; };
 		D207CFC71F8EA5370084240E /* Stick.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207CFC61F8EA5370084240E /* Stick.swift */; };
 		D23270991F8D5C5000BEA2BA /* overlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D23270981F8D5C5000BEA2BA /* overlay.sks */; };
+		D25160E51F93FA3400BF756A /* BaseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25160E41F93FA3400BF756A /* BaseState.swift */; };
+		D25160E81F93FB7F00BF756A /* RunningState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25160E71F93FB7F00BF756A /* RunningState.swift */; };
+		D25160EA1F94063400BF756A /* AnimationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25160E91F94063400BF756A /* AnimationUtils.swift */; };
+		D25160EC1F940ACF00BF756A /* StandingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25160EB1F940ACF00BF756A /* StandingState.swift */; };
+		D25160EE1F940B0C00BF756A /* JumpingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25160ED1F940B0C00BF756A /* JumpingState.swift */; };
 		D25AD5A61F87E1B100F2093E /* PadOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AD5A51F87E1B100F2093E /* PadOverlay.swift */; };
 		D25AD5AA1F87E96A00F2093E /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AD5A91F87E96A00F2093E /* Overlay.swift */; };
 		D25AD5AC1F87EAC900F2093E /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AD5AB1F87EAC800F2093E /* GameController.swift */; };
@@ -30,6 +35,11 @@
 		D207CFC41F8EA2D10084240E /* Dpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dpad.swift; sourceTree = "<group>"; };
 		D207CFC61F8EA5370084240E /* Stick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stick.swift; sourceTree = "<group>"; };
 		D23270981F8D5C5000BEA2BA /* overlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = overlay.sks; sourceTree = "<group>"; };
+		D25160E41F93FA3400BF756A /* BaseState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseState.swift; sourceTree = "<group>"; };
+		D25160E71F93FB7F00BF756A /* RunningState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningState.swift; sourceTree = "<group>"; };
+		D25160E91F94063400BF756A /* AnimationUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationUtils.swift; sourceTree = "<group>"; };
+		D25160EB1F940ACF00BF756A /* StandingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandingState.swift; sourceTree = "<group>"; };
+		D25160ED1F940B0C00BF756A /* JumpingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpingState.swift; sourceTree = "<group>"; };
 		D25AD5A51F87E1B100F2093E /* PadOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadOverlay.swift; sourceTree = "<group>"; };
 		D25AD5A91F87E96A00F2093E /* Overlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overlay.swift; sourceTree = "<group>"; };
 		D25AD5AB1F87EAC800F2093E /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
@@ -59,6 +69,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D25160E31F93FA0800BF756A /* Character */ = {
+			isa = PBXGroup;
+			children = (
+				D25AD5AD1F87ECF900F2093E /* Character.swift */,
+				D25160E61F93FB6A00BF756A /* States */,
+			);
+			path = Character;
+			sourceTree = "<group>";
+		};
+		D25160E61F93FB6A00BF756A /* States */ = {
+			isa = PBXGroup;
+			children = (
+				D25160E41F93FA3400BF756A /* BaseState.swift */,
+				D25160E71F93FB7F00BF756A /* RunningState.swift */,
+				D25160EB1F940ACF00BF756A /* StandingState.swift */,
+				D25160ED1F940B0C00BF756A /* JumpingState.swift */,
+			);
+			path = States;
+			sourceTree = "<group>";
+		};
 		D25AD5AF1F8809DD00F2093E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -88,8 +118,8 @@
 		D2EC857B1F83F1240093F009 /* SpicyHero */ = {
 			isa = PBXGroup;
 			children = (
+				D25160E31F93FA0800BF756A /* Character */,
 				9C6D3DEA1F93252500B8FA2A /* Game.scnassets */,
-				D25AD5AD1F87ECF900F2093E /* Character.swift */,
 				D291BB531F8E976A00B2D111 /* SimdExtensions.swift */,
 				D25AD5A91F87E96A00F2093E /* Overlay.swift */,
 				D25AD5AB1F87EAC800F2093E /* GameController.swift */,
@@ -101,6 +131,7 @@
 				D2EC85871F83F1240093F009 /* LaunchScreen.storyboard */,
 				D2EC858A1F83F1240093F009 /* Info.plist */,
 				D23270981F8D5C5000BEA2BA /* overlay.sks */,
+				D25160E91F94063400BF756A /* AnimationUtils.swift */,
 			);
 			path = SpicyHero;
 			sourceTree = "<group>";
@@ -191,12 +222,17 @@
 			files = (
 				D2EC85811F83F1240093F009 /* GameViewController.swift in Sources */,
 				D25AD5AC1F87EAC900F2093E /* GameController.swift in Sources */,
+				D25160EC1F940ACF00BF756A /* StandingState.swift in Sources */,
 				D25AD5AE1F87ECF900F2093E /* Character.swift in Sources */,
 				D207CFC71F8EA5370084240E /* Stick.swift in Sources */,
 				D2EC857D1F83F1240093F009 /* AppDelegate.swift in Sources */,
 				D291BB541F8E976A00B2D111 /* SimdExtensions.swift in Sources */,
 				D25AD5A61F87E1B100F2093E /* PadOverlay.swift in Sources */,
+				D25160E81F93FB7F00BF756A /* RunningState.swift in Sources */,
+				D25160EA1F94063400BF756A /* AnimationUtils.swift in Sources */,
+				D25160E51F93FA3400BF756A /* BaseState.swift in Sources */,
 				D207CFC51F8EA2D10084240E /* Dpad.swift in Sources */,
+				D25160EE1F940B0C00BF756A /* JumpingState.swift in Sources */,
 				D25AD5AA1F87E96A00F2093E /* Overlay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

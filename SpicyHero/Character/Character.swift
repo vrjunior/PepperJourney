@@ -47,7 +47,7 @@ class Character: NSObject {
         super.init()
         
         self.loadCharacter(scene: scene)
-        
+        self.loadAnimations()
     }
     
     private func loadCharacter(scene: SCNScene) {
@@ -55,6 +55,33 @@ class Character: NSObject {
         
         characterNode = scene.rootNode.childNode(withName: "character", recursively: true)
 
+    }
+    
+    private func loadAnimations() {
+        let runningAnimation = AnimationUtils.loadAnimation(fromSceneNamed: "Game.scnassets/character/running.scn")
+        runningAnimation.speed = 1.0
+        self.characterNode.addAnimationPlayer(runningAnimation, forKey: "running")
+        
+        let jumpingAnimation = AnimationUtils.loadAnimation(fromSceneNamed: "Game.scnassets/character/jumping.scn")
+        jumpingAnimation.speed = 1.0
+        self.characterNode.addAnimationPlayer(jumpingAnimation, forKey: "jumping")
+    }
+    
+    // MARK: Animatins Functins
+    func playJumpingAnimation() {
+        self.characterNode.animationPlayer(forKey: "jumping")?.play()
+    }
+    
+    func stopJumpingAnimation() {
+        self.characterNode.animationPlayer(forKey: "jumping")?.stop()
+    }
+    
+    func playRunningAnimation() {
+        self.characterNode.animationPlayer(forKey: "running")?.play()
+    }
+    
+    func stopRunninganimation() {
+        self.characterNode.animationPlayer(forKey: "running")?.stop()
     }
     
     
