@@ -35,16 +35,14 @@ class Character: NSObject {
     private var controllerDirection = float2()
     
     // Character handle
-    private var characterNode: SCNNode! // top level node
-    private var characterOrientation: SCNNode! // the node to rotate to orient the character
+    private(set) var characterNode: SCNNode! // top level node
+    //private var characterOrientation: SCNNode! // the node to rotate to orient the character
     private var model: SCNNode! // the model loaded from the character file
     
      private var characterCollisionShape: SCNPhysicsShape?
     
     
-    var node: SCNNode! {
-        return characterNode
-    }
+    
     
     // MARK: - Initialization
     init(scene: SCNScene) {
@@ -56,29 +54,29 @@ class Character: NSObject {
     
     private func loadCharacter(scene: SCNScene) {
         /// Load character from external file
-        let scene = SCNScene( named: "art.scnassets/character/ship.scn")!
-        self.model = scene.rootNode.childNode( withName: "shipRootNode", recursively: true)
-        self.model.simdPosition = Character.modelOffset
         
-        characterNode = SCNNode()
+        
+        //self.model.simdPosition = Character.modelOffset
+        
+        characterNode = scene.rootNode.childNode(withName: "PepperJumpNode", recursively: true)
         characterNode.name = "character"
-        characterNode.simdPosition = Character.initialPosition
-        characterNode.physicsBody = SCNPhysicsBody(type: .kinematic, shape: nil)
+       // characterNode.simdPosition = Character.initialPosition
+
         
-        characterOrientation = SCNNode()
-        characterNode.addChildNode(characterOrientation)
-        characterOrientation.addChildNode(model)
+       // characterOrientation = SCNNode()
+        //characterNode.addChildNode(characterOrientation)
+        //characterOrientation.addChildNode(model)
     }
     
     
     // MARK: - Controlling the character
     
-    private var directionAngle: CGFloat = 0.0 {
-        didSet {
-            characterOrientation.runAction(
-                SCNAction.rotateTo(x: 0.0, y: directionAngle, z: 0.0, duration: 0.1, usesShortestUnitArc:true))
-        }
-    }
+//    private var directionAngle: CGFloat = 0.0 {
+//        didSet {
+//            characterOrientation.runAction(
+//                SCNAction.rotateTo(x: 0.0, y: directionAngle, z: 0.0, duration: 0.1, usesShortestUnitArc:true))
+//        }
+//    }
     
     func update(atTime time: TimeInterval, with renderer: SCNSceneRenderer) {
         
@@ -102,7 +100,7 @@ class Character: NSObject {
             walkSpeed = CGFloat(runModifier * simd_length(direction))
             
             // move character
-            directionAngle = CGFloat(atan2f(direction.x, direction.z))
+           // directionAngle = CGFloat(atan2f(direction.x, direction.z))
             
             self.isWalking = true
         } else {
@@ -162,10 +160,14 @@ class Character: NSObject {
         characterNode.simdPosition = Character.initialPosition
     }
     
-    func jump() {
-        let currentPosition = self.node.presentation.position
-        let jumpDirection = currentPosition.y + jumpImpulse
-        let direction = SCNVector3(currentPosition.x, jumpDirection, currentPosition.z)
-        self.node.physicsBody?.applyForce(direction, asImpulse: true)
+    func jump()
+    {
+        print("jump")
+        let currentPosition = self.characterNode.presentation.position
+        print(currentPosition)
+        self.characterNode.position.y = currentPosition.y + 5
+        //let jumpDirection = currentPosition.y + jumpImpulse
+       // let direction = SCNVector3(currentPosition.x, jumpDirection, currentPosition.z)
+        //self.characterNode.physicsBody?.applyForce(direction, asImpulse: true)
     }
 }

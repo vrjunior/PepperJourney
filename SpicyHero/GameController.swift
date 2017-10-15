@@ -22,7 +22,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     
     // Camera and targets
     private var cameraNode = SCNNode()
-    
+    private var pepperNode: SCNNode!
     
     // MARK: - Controling the character
     
@@ -45,8 +45,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         character = Character(scene: scene!)
         
         // keep a pointer to the physicsWorld from the character because we will need it when updating the character's position
-        character!.physicsWorld = scene!.physicsWorld
-        scene!.rootNode.addChildNode(character!.node)
+        //character!.physicsWorld = scene!.physicsWorld
+        //scene!.rootNode.addChildNode(character!.characterNode)
     }
     
     func setupCamera() {
@@ -69,7 +69,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         
         //load the main scene
-        self.scene = SCNScene(named: "art.scnassets/level1.scn")
+        //
+        self.scene = SCNScene(named: "Game.scnassets/Level1.scn")
         
         let overlay = SKScene(fileNamed: "overlay.sks") as! Overlay
         overlay.padDelegate = self

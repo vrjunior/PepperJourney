@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C6D3DEA1F93252500B8FA2A /* Game.scnassets */; };
 		D207CFC51F8EA2D10084240E /* Dpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207CFC41F8EA2D10084240E /* Dpad.swift */; };
 		D207CFC71F8EA5370084240E /* Stick.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207CFC61F8EA5370084240E /* Stick.swift */; };
 		D23270991F8D5C5000BEA2BA /* overlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D23270981F8D5C5000BEA2BA /* overlay.sks */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9C6D3DEA1F93252500B8FA2A /* Game.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Game.scnassets; sourceTree = "<group>"; };
 		D207CFC41F8EA2D10084240E /* Dpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dpad.swift; sourceTree = "<group>"; };
 		D207CFC61F8EA5370084240E /* Stick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stick.swift; sourceTree = "<group>"; };
 		D23270981F8D5C5000BEA2BA /* overlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = overlay.sks; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 		D2EC857B1F83F1240093F009 /* SpicyHero */ = {
 			isa = PBXGroup;
 			children = (
+				9C6D3DEA1F93252500B8FA2A /* Game.scnassets */,
 				D25AD5AD1F87ECF900F2093E /* Character.swift */,
 				D291BB531F8E976A00B2D111 /* SimdExtensions.swift */,
 				D25AD5A91F87E96A00F2093E /* Overlay.swift */,
@@ -177,6 +180,7 @@
 				D2EC857F1F83F1240093F009 /* art.scnassets in Resources */,
 				D2EC85891F83F1240093F009 /* LaunchScreen.storyboard in Resources */,
 				D23270991F8D5C5000BEA2BA /* overlay.sks in Resources */,
+				9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */,
 				D2EC85861F83F1240093F009 /* Assets.xcassets in Resources */,
 				D2EC85841F83F1240093F009 /* Main.storyboard in Resources */,
 			);
