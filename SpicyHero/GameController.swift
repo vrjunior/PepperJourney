@@ -54,7 +54,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.scene?.rootNode.addChildNode(cameraNode)
         
         // place the camera
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 15)
+        cameraNode.position = SCNVector3(x: 0, y: 5, z: 15)
     }
     
     // MARK: Initializer
@@ -67,15 +67,13 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         // Uncomment to show statistics such as fps and timing information
         //scnView.showsStatistics = true
         
-        // setup overlay
-        //overlay = Overlay(size: scnView.frame.size, controller: self)
-        
         
         //load the main scene
         self.scene = SCNScene(named: "art.scnassets/level1.scn")
         
         let overlay = SKScene(fileNamed: "overlay.sks") as! Overlay
-        overlay.controller = self
+        overlay.padDelegate = self
+        overlay.movesDelegate = self
         overlay.scaleMode = .aspectFill
         scnView.overlaySKScene = overlay
         
@@ -118,6 +116,16 @@ extension GameController : PadOverlayDelegate {
         characterDirection = [0, 0]
     }
     
+}
+
+extension GameController : CharacterMovesDelegate {
+    func jump() {
+        self.character?.jump()
+    }
+    
+    func attack() {
+        
+    }
 }
 
 extension GameController : SCNPhysicsContactDelegate {

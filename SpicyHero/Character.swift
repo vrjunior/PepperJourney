@@ -21,10 +21,10 @@ class Character: NSObject {
     static private let speedFactor: CGFloat = 2.0
     static private let collisionMargin = Float(0.04)
     static private let modelOffset = float3(0, -collisionMargin, 0)
-    static private let initialPosition = float3(0, 0, 0)
+    static private let initialPosition = float3(0, 5, 0)
     
     // actions
-    var isJump: Bool = false
+    private let jumpImpulse = Float(1)
     var direction = float2()
     var physicsWorld: SCNPhysicsWorld?
     var walkSpeed: CGFloat = 1.0
@@ -50,11 +50,11 @@ class Character: NSObject {
     init(scene: SCNScene) {
         super.init()
         
-        self.loadCharacter()
+        self.loadCharacter(scene: scene)
         
     }
     
-    private func loadCharacter() {
+    private func loadCharacter(scene: SCNScene) {
         /// Load character from external file
         let scene = SCNScene( named: "art.scnassets/character/ship.scn")!
         self.model = scene.rootNode.childNode( withName: "shipRootNode", recursively: true)
@@ -63,6 +63,7 @@ class Character: NSObject {
         characterNode = SCNNode()
         characterNode.name = "character"
         characterNode.simdPosition = Character.initialPosition
+        characterNode.physicsBody = SCNPhysicsBody(type: .kinematic, shape: nil)
         
         characterOrientation = SCNNode()
         characterNode.addChildNode(characterOrientation)
@@ -159,5 +160,12 @@ class Character: NSObject {
 
     func resetCharacterPosition() {
         characterNode.simdPosition = Character.initialPosition
+    }
+    
+    func jump() {
+        let currentPosition = self.node.presentation.position
+        let jumpDirection = currentPosition.y + jumpImpulse
+        let direction = SCNVector3(currentPosition.x, jumpDirection, currentPosition.z)
+        self.node.physicsBody?.applyForce(direction, asImpulse: true)
     }
 }
