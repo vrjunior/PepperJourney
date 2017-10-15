@@ -70,7 +70,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         //load the main scene
         //
-        self.scene = SCNScene(named: "Game.scnassets/Level1.scn")
+        self.scene = SCNScene(named: "Game.scnassets/level1.scn")
         
         let overlay = SKScene(fileNamed: "overlay.sks") as! Overlay
         overlay.padDelegate = self

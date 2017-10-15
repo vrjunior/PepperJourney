@@ -20,11 +20,10 @@ class Character: NSObject {
     
     static private let speedFactor: CGFloat = 2.0
     static private let collisionMargin = Float(0.04)
-    static private let modelOffset = float3(0, -collisionMargin, 0)
     static private let initialPosition = float3(0, 5, 0)
     
     // actions
-    private let jumpImpulse = Float(1)
+    private let jumpImpulse:Float = 3.0
     var direction = float2()
     var physicsWorld: SCNPhysicsWorld?
     var walkSpeed: CGFloat = 1.0
@@ -36,8 +35,7 @@ class Character: NSObject {
     
     // Character handle
     private(set) var characterNode: SCNNode! // top level node
-    //private var characterOrientation: SCNNode! // the node to rotate to orient the character
-    private var model: SCNNode! // the model loaded from the character file
+
     
      private var characterCollisionShape: SCNPhysicsShape?
     
@@ -55,28 +53,19 @@ class Character: NSObject {
     private func loadCharacter(scene: SCNScene) {
         /// Load character from external file
         
-        
-        //self.model.simdPosition = Character.modelOffset
-        
-        characterNode = scene.rootNode.childNode(withName: "PepperJumpNode", recursively: true)
-        characterNode.name = "character"
-       // characterNode.simdPosition = Character.initialPosition
+        characterNode = scene.rootNode.childNode(withName: "character", recursively: true)
 
-        
-       // characterOrientation = SCNNode()
-        //characterNode.addChildNode(characterOrientation)
-        //characterOrientation.addChildNode(model)
     }
     
     
     // MARK: - Controlling the character
     
-//    private var directionAngle: CGFloat = 0.0 {
-//        didSet {
-//            characterOrientation.runAction(
-//                SCNAction.rotateTo(x: 0.0, y: directionAngle, z: 0.0, duration: 0.1, usesShortestUnitArc:true))
-//        }
-//    }
+    private var directionAngle: CGFloat = 0.0 {
+        didSet {
+            characterNode.runAction(
+                SCNAction.rotateTo(x: 0.0, y: directionAngle, z: 0.0, duration: 0.1, usesShortestUnitArc:true))
+       }
+    }
     
     func update(atTime time: TimeInterval, with renderer: SCNSceneRenderer) {
         
@@ -100,7 +89,7 @@ class Character: NSObject {
             walkSpeed = CGFloat(runModifier * simd_length(direction))
             
             // move character
-           // directionAngle = CGFloat(atan2f(direction.x, direction.z))
+            directionAngle = CGFloat(atan2f(direction.x, direction.z))
             
             self.isWalking = true
         } else {
@@ -164,10 +153,8 @@ class Character: NSObject {
     {
         print("jump")
         let currentPosition = self.characterNode.presentation.position
-        print(currentPosition)
-        self.characterNode.position.y = currentPosition.y + 5
-        //let jumpDirection = currentPosition.y + jumpImpulse
-       // let direction = SCNVector3(currentPosition.x, jumpDirection, currentPosition.z)
-        //self.characterNode.physicsBody?.applyForce(direction, asImpulse: true)
+        let jumpDirection = currentPosition.y + jumpImpulse
+        let direction = SCNVector3(0, jumpDirection, 0)
+        self.characterNode.physicsBody?.applyForce(direction, asImpulse: true)
     }
 }

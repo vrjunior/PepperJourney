@@ -19,7 +19,6 @@
 		D25AD5B31F8809E500F2093E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25AD5B21F8809E500F2093E /* GameKit.framework */; };
 		D291BB541F8E976A00B2D111 /* SimdExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291BB531F8E976A00B2D111 /* SimdExtensions.swift */; };
 		D2EC857D1F83F1240093F009 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EC857C1F83F1240093F009 /* AppDelegate.swift */; };
-		D2EC857F1F83F1240093F009 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = D2EC857E1F83F1240093F009 /* art.scnassets */; };
 		D2EC85811F83F1240093F009 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EC85801F83F1240093F009 /* GameViewController.swift */; };
 		D2EC85841F83F1240093F009 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2EC85821F83F1240093F009 /* Main.storyboard */; };
 		D2EC85861F83F1240093F009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2EC85851F83F1240093F009 /* Assets.xcassets */; };
@@ -40,7 +39,6 @@
 		D291BB531F8E976A00B2D111 /* SimdExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimdExtensions.swift; sourceTree = "<group>"; };
 		D2EC85791F83F1240093F009 /* SpicyHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpicyHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2EC857C1F83F1240093F009 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D2EC857E1F83F1240093F009 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		D2EC85801F83F1240093F009 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		D2EC85831F83F1240093F009 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D2EC85851F83F1240093F009 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -97,7 +95,6 @@
 				D25AD5AB1F87EAC800F2093E /* GameController.swift */,
 				D2EC85901F83F6D60093F009 /* iOSControls */,
 				D2EC857C1F83F1240093F009 /* AppDelegate.swift */,
-				D2EC857E1F83F1240093F009 /* art.scnassets */,
 				D2EC85801F83F1240093F009 /* GameViewController.swift */,
 				D2EC85821F83F1240093F009 /* Main.storyboard */,
 				D2EC85851F83F1240093F009 /* Assets.xcassets */,
@@ -177,7 +174,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2EC857F1F83F1240093F009 /* art.scnassets in Resources */,
 				D2EC85891F83F1240093F009 /* LaunchScreen.storyboard in Resources */,
 				D23270991F8D5C5000BEA2BA /* overlay.sks in Resources */,
 				9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */,
