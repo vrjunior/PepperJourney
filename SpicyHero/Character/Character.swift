@@ -60,10 +60,12 @@ class Character: NSObject {
     private func loadAnimations() {
         let runningAnimation = AnimationUtils.loadAnimation(fromSceneNamed: "Game.scnassets/character/running.scn")
         runningAnimation.speed = 1.0
+        runningAnimation.play()
         self.characterNode.addAnimationPlayer(runningAnimation, forKey: "running")
         
         let jumpingAnimation = AnimationUtils.loadAnimation(fromSceneNamed: "Game.scnassets/character/jumping.scn")
         jumpingAnimation.speed = 1.0
+        jumpingAnimation.play()
         self.characterNode.addAnimationPlayer(jumpingAnimation, forKey: "jumping")
     }
     
@@ -80,7 +82,7 @@ class Character: NSObject {
         self.characterNode.animationPlayer(forKey: "running")?.play()
     }
     
-    func stopRunninganimation() {
+    func stopRunningAnimation() {
         self.characterNode.animationPlayer(forKey: "running")?.stop()
     }
     

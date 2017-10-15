@@ -24,6 +24,5 @@ class AnimationUtils {
             }
         }
         return animationPlayer
-    }
-    
+    }    
 }

@@ -116,14 +116,17 @@ extension GameController : PadOverlayDelegate {
     func padOverlayVirtualStickInteractionDidChange(_ padNode: PadOverlay) {
         characterDirection = float2(Float(padNode.stickPosition.x), -Float(padNode.stickPosition.y))
         
-        self.characterStateMachine.enter(RunningState.self)
+        if let currentState = self.characterStateMachine.currentState, !(currentState is RunningState) {
+            self.characterStateMachine.enter(RunningState.self)
+        }
+        
     }
     
     
     func padOverlayVirtualStickInteractionDidEnd(_ padNode: PadOverlay) {
         characterDirection = [0, 0]
         
-        self.characterStateMachine.enter(RunningState.self)
+        self.characterStateMachine.enter(StadingState.self)
     }
     
 }
