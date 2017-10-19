@@ -151,13 +151,6 @@ class PadOverlay: SKSpriteNode {
         return CGFloat(angle * (180.0 / Float.pi))
     }
 
-    func resetInteraction() {
-        stickPosition = CGPoint.zero
-        trackingTouch = nil
-        startLocation = CGPoint.zero
-        delegate?.padOverlayVirtualStickInteractionDidEnd(self)
-    }
-
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         trackingTouch = touches.first
@@ -186,7 +179,6 @@ class PadOverlay: SKSpriteNode {
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         if touches.contains(trackingTouch!) {
-            self.resetInteraction()
             self.destroyPad()
         }
     }
