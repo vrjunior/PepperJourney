@@ -8,6 +8,7 @@
 
 import Foundation
 import SceneKit
+import GameKit
 import simd
 
 
@@ -22,7 +23,7 @@ enum AnimationType : String {
     case jumping = "jumping"
 }
 
-class Character: NSObject {
+class Character: GKEntity {
     
     //speed multiplier
     static private let speedFactor: CGFloat = 15.0
@@ -34,7 +35,6 @@ class Character: NSObject {
     var physicsWorld: SCNPhysicsWorld?
     var walkSpeed: CGFloat = 1.0
     var isWalking: Bool = false
-	var isRunning: Bool = false
 	static let walkRunPercentage: Float = 0.5
     
     // Direction
@@ -57,7 +57,13 @@ class Character: NSObject {
         
         self.loadCharacter(scene: scene)
         self.loadAnimations()
+        self.loadComponents()
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     private func loadCharacter(scene: SCNScene) {
         /// Load character from external file
@@ -77,6 +83,11 @@ class Character: NSObject {
             
             self.characterNode.addAnimationPlayer(animation, forKey: anim.rawValue)
         }
+    }
+    
+    private func loadComponents() {
+        let jumpComponent = JumpComponent(character: self.node, impulse: self.jumpImpulse)
+        self.addComponent(jumpComponent)
     }
     
     // MARK: Animatins Functins
@@ -135,12 +146,7 @@ class Character: NSObject {
 				isWalking = true
 			}else {
 				isWalking = false
-				isRunning = true
 			}
-			
-		}else {
-			isWalking = false
-			isRunning = false
 		}
         
         if simd_length_squared(characterVelocity) > 10E-4 * 10E-4 {
@@ -196,11 +202,4 @@ class Character: NSObject {
         node.simdPosition = Character.initialPosition
     }
     
-    func jump()
-    {
-        let currentPosition = self.node.presentation.position
-        let jumpDirection = currentPosition.y + jumpImpulse
-        let direction = SCNVector3(0, jumpDirection, 0)
-        self.node.physicsBody?.applyForce(direction, asImpulse: true)
-    }
 }

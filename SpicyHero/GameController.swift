@@ -116,6 +116,13 @@ extension GameController : PadOverlayDelegate {
     func padOverlayVirtualStickInteractionDidChange(_ padNode: PadOverlay) {
         characterDirection = float2(Float(padNode.stickPosition.x), -Float(padNode.stickPosition.y))
         
+        if(character.isWalking) {
+            //TODO: enter on walking state
+            print("walking")
+        }
+        else {
+            print("running")
+        }
         
         self.characterStateMachine.enter(RunningState.self)
         

@@ -23,6 +23,7 @@
 		D25AD5B11F8809DE00F2093E /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25AD5B01F8809DE00F2093E /* SceneKit.framework */; };
 		D25AD5B31F8809E500F2093E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25AD5B21F8809E500F2093E /* GameKit.framework */; };
 		D291BB541F8E976A00B2D111 /* SimdExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291BB531F8E976A00B2D111 /* SimdExtensions.swift */; };
+		D2E0A8981F993B5D00FCC255 /* JumpComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E0A8971F993B5D00FCC255 /* JumpComponent.swift */; };
 		D2EC857D1F83F1240093F009 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EC857C1F83F1240093F009 /* AppDelegate.swift */; };
 		D2EC85811F83F1240093F009 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EC85801F83F1240093F009 /* GameViewController.swift */; };
 		D2EC85841F83F1240093F009 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2EC85821F83F1240093F009 /* Main.storyboard */; };
@@ -47,6 +48,7 @@
 		D25AD5B01F8809DE00F2093E /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		D25AD5B21F8809E500F2093E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		D291BB531F8E976A00B2D111 /* SimdExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimdExtensions.swift; sourceTree = "<group>"; };
+		D2E0A8971F993B5D00FCC255 /* JumpComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpComponent.swift; sourceTree = "<group>"; };
 		D2EC85791F83F1240093F009 /* SpicyHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpicyHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2EC857C1F83F1240093F009 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2EC85801F83F1240093F009 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +100,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D2E0A8961F993B4800FCC255 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D2E0A8971F993B5D00FCC255 /* JumpComponent.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		D2EC85701F83F1240093F009 = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +128,7 @@
 		D2EC857B1F83F1240093F009 /* SpicyHero */ = {
 			isa = PBXGroup;
 			children = (
+				D2E0A8961F993B4800FCC255 /* Components */,
 				D25160E31F93FA0800BF756A /* Character */,
 				9C6D3DEA1F93252500B8FA2A /* Game.scnassets */,
 				D291BB531F8E976A00B2D111 /* SimdExtensions.swift */,
@@ -223,6 +234,7 @@
 				D2EC85811F83F1240093F009 /* GameViewController.swift in Sources */,
 				D25AD5AC1F87EAC900F2093E /* GameController.swift in Sources */,
 				D25160EC1F940ACF00BF756A /* StandingState.swift in Sources */,
+				D2E0A8981F993B5D00FCC255 /* JumpComponent.swift in Sources */,
 				D25AD5AE1F87ECF900F2093E /* Character.swift in Sources */,
 				D207CFC71F8EA5370084240E /* Stick.swift in Sources */,
 				D2EC857D1F83F1240093F009 /* AppDelegate.swift in Sources */,

@@ -13,7 +13,12 @@ class JumpingState: BaseState {
     
     override func didEnter(from previousState: GKState?) {
         character.playJumpingAnimation()
-        character.jump()
+        for comp in character.components {
+            if comp is JumpComponent {
+                let jumpComp = comp as! JumpComponent
+                jumpComp.jump()
+            }
+        }
     }
     
     override func willExit(to nextState: GKState) {
