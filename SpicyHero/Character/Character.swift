@@ -16,10 +16,16 @@ func planeIntersect(planeNormal: float3, planeDist: Float, rayOrigin: float3, ra
     return (planeDist - simd_dot(planeNormal, rayOrigin)) / simd_dot(planeNormal, rayDirection)
 }
 
+//Enum for name of animations
+enum AnimationType : String {
+    case running =  "running"
+    case jumping = "jumping"
+}
+
 class Character: NSObject {
     
-    static private let speedFactor: CGFloat = 2.0
-    static private let collisionMargin = Float(0.04)
+    //speed multiplier
+    static private let speedFactor: CGFloat = 15.0
     static private let initialPosition = float3(0, 5, 0)
     
     // actions
@@ -28,13 +34,16 @@ class Character: NSObject {
     var physicsWorld: SCNPhysicsWorld?
     var walkSpeed: CGFloat = 1.0
     var isWalking: Bool = false
+	var isRunning: Bool = false
+	static let walkRunPercentage: Float = 0.5
     
     // Direction
     private var previousUpdateTime: TimeInterval = 0
     private var controllerDirection = float2()
     
     // Character handle
-    private(set) var characterNode: SCNNode! // top level node
+    private(set) var node: SCNNode! // top level node
+    private(set) var characterNode: SCNNode!
 
     
      private var characterCollisionShape: SCNPhysicsShape?
@@ -52,38 +61,39 @@ class Character: NSObject {
     
     private func loadCharacter(scene: SCNScene) {
         /// Load character from external file
-        
-        characterNode = scene.rootNode.childNode(withName: "character", recursively: true)
-
+        node = scene.rootNode.childNode(withName: "character", recursively: false)
+        characterNode = node.childNode(withName: "characterNode", recursively: false)
+        //characterNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
     }
     
+    //Load all animation in character node
     private func loadAnimations() {
-        let runningAnimation = AnimationUtils.loadAnimation(fromSceneNamed: "Game.scnassets/character/running.scn")
-        runningAnimation.speed = 1.0
-        runningAnimation.play()
-        self.characterNode.addAnimationPlayer(runningAnimation, forKey: "running")
+        let animTypes:[AnimationType] = [.running, .jumping]
         
-        let jumpingAnimation = AnimationUtils.loadAnimation(fromSceneNamed: "Game.scnassets/character/jumping.scn")
-        jumpingAnimation.speed = 1.0
-        jumpingAnimation.play()
-        self.characterNode.addAnimationPlayer(jumpingAnimation, forKey: "jumping")
+        for anim in animTypes {
+            let animation = SCNAnimationPlayer.withScene(named: "Game.scnassets/character/\(anim.rawValue).dae")
+            
+            animation.stop()
+            
+            self.characterNode.addAnimationPlayer(animation, forKey: anim.rawValue)
+        }
     }
     
     // MARK: Animatins Functins
     func playJumpingAnimation() {
-        self.characterNode.animationPlayer(forKey: "jumping")?.play()
+        self.characterNode.animationPlayer(forKey: AnimationType.jumping.rawValue)?.play()
     }
     
     func stopJumpingAnimation() {
-        self.characterNode.animationPlayer(forKey: "jumping")?.stop()
+        self.characterNode.animationPlayer(forKey: AnimationType.jumping.rawValue)?.stop()
     }
     
     func playRunningAnimation() {
-        self.characterNode.animationPlayer(forKey: "running")?.play()
+        self.characterNode.animationPlayer(forKey: AnimationType.running.rawValue)?.play()
     }
     
     func stopRunningAnimation() {
-        self.characterNode.animationPlayer(forKey: "running")?.stop()
+        self.characterNode.animationPlayer(forKey: AnimationType.running.rawValue)?.stop()
     }
     
     
@@ -91,7 +101,7 @@ class Character: NSObject {
     
     private var directionAngle: CGFloat = 0.0 {
         didSet {
-            characterNode.runAction(
+            node.runAction(
                 SCNAction.rotateTo(x: 0.0, y: directionAngle, z: 0.0, duration: 0.1, usesShortestUnitArc:true))
        }
     }
@@ -111,22 +121,30 @@ class Character: NSObject {
         //let virtualFrameCount = Int(deltaTime / (1 / 60.0))
         previousUpdateTime = time
         
-        // move
+        // Move
         if !direction.allZero() {
             characterVelocity = direction * Float(characterSpeed)
             let runModifier = Float(1.0)
             walkSpeed = CGFloat(runModifier * simd_length(direction))
-            
+			
             // move character
             directionAngle = CGFloat(atan2f(direction.x, direction.z))
-            
-            self.isWalking = true
-        } else {
-            self.isWalking = false
-        }
+			
+			// moving type
+			if simd_length(direction) < Character.walkRunPercentage {
+				isWalking = true
+			}else {
+				isWalking = false
+				isRunning = true
+			}
+			
+		}else {
+			isWalking = false
+			isRunning = false
+		}
         
         if simd_length_squared(characterVelocity) > 10E-4 * 10E-4 {
-            let startPosition = characterNode!.presentation.simdWorldPosition
+            let startPosition = node.presentation.simdWorldPosition
             slideInWorld(fromPosition: startPosition, velocity: characterVelocity)
         }
         
@@ -171,19 +189,18 @@ class Character: NSObject {
             replacementPoint = start + velocity
             stop = true
         }
-        characterNode!.simdWorldPosition = replacementPoint
+        node.simdWorldPosition = replacementPoint
     }
 
     func resetCharacterPosition() {
-        characterNode.simdPosition = Character.initialPosition
+        node.simdPosition = Character.initialPosition
     }
     
     func jump()
     {
-        print("jump")
-        let currentPosition = self.characterNode.presentation.position
+        let currentPosition = self.node.presentation.position
         let jumpDirection = currentPosition.y + jumpImpulse
         let direction = SCNVector3(0, jumpDirection, 0)
-        self.characterNode.physicsBody?.applyForce(direction, asImpulse: true)
+        self.node.physicsBody?.applyForce(direction, asImpulse: true)
     }
 }
