@@ -133,7 +133,9 @@ extension GameController : PadOverlayDelegate {
 
 extension GameController : CharacterMovesDelegate {
     func jump() {
-        self.characterStateMachine.enter(JumpingState.self)
+        if(!self.characterStateMachine.currentState is JumpingState) {
+            self.characterStateMachine.enter(JumpingState.self)
+        }
     }
     
     func attack() {
