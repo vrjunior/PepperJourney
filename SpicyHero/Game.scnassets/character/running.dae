@@ -4,8 +4,8 @@
   <contributor>
    <authoring_tool>SceneKit Collada Exporter v1.0</authoring_tool>
   </contributor>
-  <created>2017-10-19T15:39:57Z</created>
-  <modified>2017-10-19T15:39:57Z</modified>
+  <created>2017-10-19T18:17:07Z</created>
+  <modified>2017-10-19T18:17:07Z</modified>
   <unit meter="1.000000"/>
   <up_axis>Z_UP</up_axis>
  </asset>
@@ -864,7 +864,6 @@
  <library_visual_scenes>
   <visual_scene id="scene191">
    <node id="Armature" name="Armature">
-    <matrix>1 0 0 0 0 1 0 0 0 0 1 -0.004957847 0 0 0 1 </matrix>
     <node id="RootBone" name="RootBone" sid="SID_31" type="JOINT">
      <matrix sid="SID_1">1 0 -8.881789e-16 0 -8.881789e-16 0 -1 0.118753 0 1 0 1.322792 0 0 0 1 </matrix>
      <node id="Spine_001" name="Spine_001" sid="SID_32" type="JOINT">

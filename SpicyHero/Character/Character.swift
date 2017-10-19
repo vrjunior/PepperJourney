@@ -40,7 +40,8 @@ class Character: NSObject {
     private var controllerDirection = float2()
     
     // Character handle
-    private(set) var characterNode: SCNNode! // top level node
+    private(set) var node: SCNNode! // top level node
+    private(set) var characterNode: SCNNode!
 
     
      private var characterCollisionShape: SCNPhysicsShape?
@@ -58,9 +59,9 @@ class Character: NSObject {
     
     private func loadCharacter(scene: SCNScene) {
         /// Load character from external file
-        
-        characterNode = scene.rootNode.childNode(withName: "character", recursively: true)
-
+        node = scene.rootNode.childNode(withName: "character", recursively: false)
+        characterNode = node.childNode(withName: "characterNode", recursively: false)
+        //characterNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
     }
     
     //Load all animation in character node
@@ -98,7 +99,7 @@ class Character: NSObject {
     
     private var directionAngle: CGFloat = 0.0 {
         didSet {
-            characterNode.runAction(
+            node.runAction(
                 SCNAction.rotateTo(x: 0.0, y: directionAngle, z: 0.0, duration: 0.1, usesShortestUnitArc:true))
        }
     }
@@ -133,7 +134,7 @@ class Character: NSObject {
         }
         
         if simd_length_squared(characterVelocity) > 10E-4 * 10E-4 {
-            let startPosition = characterNode!.presentation.simdWorldPosition
+            let startPosition = node.presentation.simdWorldPosition
             slideInWorld(fromPosition: startPosition, velocity: characterVelocity)
         }
         
@@ -178,18 +179,18 @@ class Character: NSObject {
             replacementPoint = start + velocity
             stop = true
         }
-        characterNode!.simdWorldPosition = replacementPoint
+        node.simdWorldPosition = replacementPoint
     }
 
     func resetCharacterPosition() {
-        characterNode.simdPosition = Character.initialPosition
+        node.simdPosition = Character.initialPosition
     }
     
     func jump()
     {
-        let currentPosition = self.characterNode.presentation.position
+        let currentPosition = self.node.presentation.position
         let jumpDirection = currentPosition.y + jumpImpulse
         let direction = SCNVector3(0, jumpDirection, 0)
-        self.characterNode.physicsBody?.applyForce(direction, asImpulse: true)
+        self.node.physicsBody?.applyForce(direction, asImpulse: true)
     }
 }
