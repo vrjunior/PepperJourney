@@ -44,12 +44,6 @@ class Character: GKEntity {
     // Character handle
     private(set) var node: SCNNode! // top level node
     private(set) var characterNode: SCNNode!
-
-    
-     private var characterCollisionShape: SCNPhysicsShape?
-    
-    
-    
     
     // MARK: - Initialization
     init(scene: SCNScene) {
@@ -179,7 +173,6 @@ class Character: GKEntity {
         }
         return directionWorld
     }
-    
     
     func slideInWorld(fromPosition start: float3, velocity: float3) {
         var stop: Bool = false
