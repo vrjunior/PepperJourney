@@ -25,7 +25,7 @@ enum AnimationType : String {
 class Character: NSObject {
     
     //speed multiplier
-    static private let speedFactor: CGFloat = 2.0
+    static private let speedFactor: CGFloat = 15.0
     static private let initialPosition = float3(0, 5, 0)
     
     // actions
@@ -34,6 +34,8 @@ class Character: NSObject {
     var physicsWorld: SCNPhysicsWorld?
     var walkSpeed: CGFloat = 1.0
     var isWalking: Bool = false
+	var isRunning: Bool = false
+	static let walkRunPercentage: Float = 0.5
     
     // Direction
     private var previousUpdateTime: TimeInterval = 0
@@ -119,19 +121,27 @@ class Character: NSObject {
         //let virtualFrameCount = Int(deltaTime / (1 / 60.0))
         previousUpdateTime = time
         
-        // move
+        // Move
         if !direction.allZero() {
             characterVelocity = direction * Float(characterSpeed)
             let runModifier = Float(1.0)
             walkSpeed = CGFloat(runModifier * simd_length(direction))
-            
+			
             // move character
             directionAngle = CGFloat(atan2f(direction.x, direction.z))
-            
-            self.isWalking = true
-        } else {
-            self.isWalking = false
-        }
+			
+			// moving type
+			if simd_length(direction) < Character.walkRunPercentage {
+				isWalking = true
+			}else {
+				isWalking = false
+				isRunning = true
+			}
+			
+		}else {
+			isWalking = false
+			isRunning = false
+		}
         
         if simd_length_squared(characterVelocity) > 10E-4 * 10E-4 {
             let startPosition = node.presentation.simdWorldPosition
