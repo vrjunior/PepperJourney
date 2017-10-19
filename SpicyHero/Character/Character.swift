@@ -16,10 +16,16 @@ func planeIntersect(planeNormal: float3, planeDist: Float, rayOrigin: float3, ra
     return (planeDist - simd_dot(planeNormal, rayOrigin)) / simd_dot(planeNormal, rayDirection)
 }
 
+//Enum for name of animations
+enum AnimationType : String {
+    case running =  "running"
+    case jumping = "jumping"
+}
+
 class Character: NSObject {
     
+    //speed multiplier
     static private let speedFactor: CGFloat = 2.0
-    static private let collisionMargin = Float(0.04)
     static private let initialPosition = float3(0, 5, 0)
     
     // actions
@@ -57,33 +63,34 @@ class Character: NSObject {
 
     }
     
+    //Load all animation in character node
     private func loadAnimations() {
-        let runningAnimation = AnimationUtils.loadAnimation(fromSceneNamed: "Game.scnassets/character/running.scn")
-        runningAnimation.speed = 1.0
-        runningAnimation.play()
-        self.characterNode.addAnimationPlayer(runningAnimation, forKey: "running")
+        let animTypes:[AnimationType] = [.running, .jumping]
         
-        let jumpingAnimation = AnimationUtils.loadAnimation(fromSceneNamed: "Game.scnassets/character/jumping.scn")
-        jumpingAnimation.speed = 1.0
-        jumpingAnimation.play()
-        self.characterNode.addAnimationPlayer(jumpingAnimation, forKey: "jumping")
+        for anim in animTypes {
+            let animation = SCNAnimationPlayer.withScene(named: "Game.scnassets/character/\(anim.rawValue).dae")
+            
+            animation.stop()
+            
+            self.characterNode.addAnimationPlayer(animation, forKey: anim.rawValue)
+        }
     }
     
     // MARK: Animatins Functins
     func playJumpingAnimation() {
-        self.characterNode.animationPlayer(forKey: "jumping")?.play()
+        self.characterNode.animationPlayer(forKey: AnimationType.jumping.rawValue)?.play()
     }
     
     func stopJumpingAnimation() {
-        self.characterNode.animationPlayer(forKey: "jumping")?.stop()
+        self.characterNode.animationPlayer(forKey: AnimationType.jumping.rawValue)?.stop()
     }
     
     func playRunningAnimation() {
-        self.characterNode.animationPlayer(forKey: "running")?.play()
+        self.characterNode.animationPlayer(forKey: AnimationType.running.rawValue)?.play()
     }
     
     func stopRunningAnimation() {
-        self.characterNode.animationPlayer(forKey: "running")?.stop()
+        self.characterNode.animationPlayer(forKey: AnimationType.running.rawValue)?.stop()
     }
     
     
@@ -180,7 +187,6 @@ class Character: NSObject {
     
     func jump()
     {
-        print("jump")
         let currentPosition = self.characterNode.presentation.position
         let jumpDirection = currentPosition.y + jumpImpulse
         let direction = SCNVector3(0, jumpDirection, 0)

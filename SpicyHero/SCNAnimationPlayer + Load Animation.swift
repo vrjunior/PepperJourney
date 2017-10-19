@@ -9,12 +9,12 @@
 import Foundation
 import SceneKit
 
-class AnimationUtils {
+extension SCNAnimationPlayer {
     
     // MARK: utils
     
-    class func loadAnimation(fromSceneNamed sceneName: String) -> SCNAnimationPlayer {
-        let scene = SCNScene( named: sceneName )!
+    class func withScene(named: String) -> SCNAnimationPlayer {
+        let scene = SCNScene( named: named )!
         // find top level animation
         var animationPlayer: SCNAnimationPlayer! = nil
         scene.rootNode.enumerateChildNodes { (child, stop) in
