@@ -19,6 +19,7 @@ class RunningState: BaseState {
     override func willExit(to nextState: GKState) {
         self.character.stopRunningAnimation()
     }
+    
         
     
 }
