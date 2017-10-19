@@ -20,4 +20,12 @@ class JumpingState: BaseState {
         character.stopJumpingAnimation()
     }
     
+    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
+        if stateClass == JumpingState.self {
+            return false
+        }
+        
+        return true
+    }
+    
 }

@@ -20,7 +20,12 @@ class RunningState: BaseState {
         self.character.stopRunningAnimation()
     }
     
-        
+    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
+        if stateClass == RunningState.self {
+            return false
+        }
+        return true 
+    }
     
 }
 

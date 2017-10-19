@@ -116,9 +116,8 @@ extension GameController : PadOverlayDelegate {
     func padOverlayVirtualStickInteractionDidChange(_ padNode: PadOverlay) {
         characterDirection = float2(Float(padNode.stickPosition.x), -Float(padNode.stickPosition.y))
         
-        if let currentState = self.characterStateMachine.currentState, !(currentState is RunningState) {
-            self.characterStateMachine.enter(RunningState.self)
-        }
+        
+        self.characterStateMachine.enter(RunningState.self)
         
     }
     
@@ -133,9 +132,7 @@ extension GameController : PadOverlayDelegate {
 
 extension GameController : CharacterMovesDelegate {
     func jump() {
-        if(!self.characterStateMachine.currentState is JumpingState) {
-            self.characterStateMachine.enter(JumpingState.self)
-        }
+        self.characterStateMachine.enter(JumpingState.self)
     }
     
     func attack() {
