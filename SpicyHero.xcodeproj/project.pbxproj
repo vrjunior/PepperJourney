@@ -31,6 +31,7 @@
 		D2EC85841F83F1240093F009 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2EC85821F83F1240093F009 /* Main.storyboard */; };
 		D2EC85861F83F1240093F009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2EC85851F83F1240093F009 /* Assets.xcassets */; };
 		D2EC85891F83F1240093F009 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2EC85871F83F1240093F009 /* LaunchScreen.storyboard */; };
+		D2F53D751F9A88FF00422F24 /* WalkingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F53D741F9A88FF00422F24 /* WalkingState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		D2EC85851F83F1240093F009 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2EC85881F83F1240093F009 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2EC858A1F83F1240093F009 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2F53D741F9A88FF00422F24 /* WalkingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkingState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				D25160E71F93FB7F00BF756A /* RunningState.swift */,
 				D25160EB1F940ACF00BF756A /* StandingState.swift */,
 				D25160ED1F940B0C00BF756A /* JumpingState.swift */,
+				D2F53D741F9A88FF00422F24 /* WalkingState.swift */,
 			);
 			path = States;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				D25AD5AE1F87ECF900F2093E /* Character.swift in Sources */,
 				D207CFC71F8EA5370084240E /* Stick.swift in Sources */,
 				9C03A2421F9A33DD008F191A /* EntityManager.swift in Sources */,
+				D2F53D751F9A88FF00422F24 /* WalkingState.swift in Sources */,
 				D2EC857D1F83F1240093F009 /* AppDelegate.swift in Sources */,
 				D291BB541F8E976A00B2D111 /* SimdExtensions.swift in Sources */,
 				D25AD5A61F87E1B100F2093E /* PadOverlay.swift in Sources */,

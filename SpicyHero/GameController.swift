@@ -47,6 +47,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         character = Character(scene: scene!)
         characterStateMachine = GKStateMachine(states: [
             StadingState(scene: scene, character: character),
+            WalkingState(scene: scene, character: character),
             RunningState(scene: scene, character: character),
             JumpingState(scene: scene, character: character)
             ])
@@ -118,14 +119,11 @@ extension GameController : PadOverlayDelegate {
         characterDirection = float2(Float(padNode.stickPosition.x), -Float(padNode.stickPosition.y))
         
         if(character.isWalking) {
-            //TODO: enter on walking state
-            print("walking")
+            self.characterStateMachine.enter(WalkingState.self)
         }
         else {
-            print("running")
+            self.characterStateMachine.enter(RunningState.self)
         }
-        
-        self.characterStateMachine.enter(RunningState.self)
         
     }
     

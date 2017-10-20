@@ -1,30 +1,30 @@
 //
-//  RunningState.swift
+//  WalkingState.swift
 //  SpicyHero
 //
-//  Created by Valmir Junior on 15/10/17.
+//  Created by Valmir Junior on 20/10/17.
 //  Copyright © 2017 Valmir Junior. All rights reserved.
 //
 
 import Foundation
-import GameplayKit
+import GameKit
 
-class RunningState: BaseState {
+class WalkingState: BaseState {
     
     // MARK: GK Overrides
     override func didEnter(from previousState: GKState?) {
-        self.character.playAnimation(type: .running)
+        self.character.playAnimation(type: .walking)
     }
     
     override func willExit(to nextState: GKState) {
-        self.character.stopAnimation(type: .running)
+        self.character.stopAnimation(type: .walking)
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
-        if stateClass == RunningState.self {
+        if stateClass == WalkingState.self {
             return false
         }
-        return true 
+        return true
     }
     
 }

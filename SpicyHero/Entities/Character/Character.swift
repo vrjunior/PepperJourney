@@ -19,6 +19,7 @@ func planeIntersect(planeNormal: float3, planeDist: Float, rayOrigin: float3, ra
 
 //Enum for name of animations
 enum AnimationType : String {
+    case walking = "walking"
     case running =  "running"
     case jumping = "jumping"
 }
@@ -69,7 +70,7 @@ class Character: GKEntity {
     
     //Load all animation in character node
     private func loadAnimations() {
-        let animTypes:[AnimationType] = [.running, .jumping]
+        let animTypes:[AnimationType] = [.walking, .running, .jumping]
         
         for anim in animTypes {
             let animation = SCNAnimationPlayer.withScene(named: "Game.scnassets/character/\(anim.rawValue).dae")
@@ -86,20 +87,12 @@ class Character: GKEntity {
     }
     
     // MARK: Animatins Functins
-    func playJumpingAnimation() {
-        self.characterNode.animationPlayer(forKey: AnimationType.jumping.rawValue)?.play()
+    func playAnimation(type: AnimationType) {
+        self.characterNode.animationPlayer(forKey: type.rawValue)?.play()
     }
     
-    func stopJumpingAnimation() {
-        self.characterNode.animationPlayer(forKey: AnimationType.jumping.rawValue)?.stop()
-    }
-    
-    func playRunningAnimation() {
-        self.characterNode.animationPlayer(forKey: AnimationType.running.rawValue)?.play()
-    }
-    
-    func stopRunningAnimation() {
-        self.characterNode.animationPlayer(forKey: AnimationType.running.rawValue)?.stop()
+    func stopAnimation(type: AnimationType) {
+        self.characterNode.animationPlayer(forKey: type.rawValue)?.stop()
     }
     
     
