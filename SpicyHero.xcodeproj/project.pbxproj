@@ -87,6 +87,7 @@
 		9CFDF86E1F9A36C6009385A7 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				D25160E31F93FA0800BF756A /* Character */,
 				9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */,
 			);
 			path = Entities;
@@ -152,12 +153,10 @@
 				9C03A2411F9A33DD008F191A /* EntityManager.swift */,
 				9CFDF86E1F9A36C6009385A7 /* Entities */,
 				D2E0A8961F993B4800FCC255 /* Components */,
-				D25160E31F93FA0800BF756A /* Character */,
 				9CFDF86D1F9A34E5009385A7 /* Utils */,
 				D2EC85901F83F6D60093F009 /* iOSControls */,
 				9C6D3DEA1F93252500B8FA2A /* Game.scnassets */,
 				D2EC85851F83F1240093F009 /* Assets.xcassets */,
-				D25AD5A91F87E96A00F2093E /* Overlay.swift */,
 				D25AD5AB1F87EAC800F2093E /* GameController.swift */,
 				D2EC857C1F83F1240093F009 /* AppDelegate.swift */,
 				D2EC85801F83F1240093F009 /* GameViewController.swift */,
@@ -172,6 +171,7 @@
 		D2EC85901F83F6D60093F009 /* iOSControls */ = {
 			isa = PBXGroup;
 			children = (
+				D25AD5A91F87E96A00F2093E /* Overlay.swift */,
 				D25AD5A51F87E1B100F2093E /* PadOverlay.swift */,
 				D207CFC41F8EA2D10084240E /* Dpad.swift */,
 				D207CFC61F8EA5370084240E /* Stick.swift */,
@@ -407,7 +407,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J5KQYDNX5E;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SpicyHero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vrmassoni.SpicyHero;
@@ -422,7 +422,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J5KQYDNX5E;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SpicyHero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vrmassoni.SpicyHero;

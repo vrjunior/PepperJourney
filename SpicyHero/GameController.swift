@@ -23,7 +23,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     private var overlay: Overlay?
     
     // Camera and targets
-    private var cameraNode = SCNNode()
+    private var cameraNode: SCNNode!
     private var pepperNode: SCNNode!
     
     // MARK: - Controling the character
@@ -55,11 +55,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     }
     
     func setupCamera() {
-        self.cameraNode.camera = SCNCamera()
-        self.scene?.rootNode.addChildNode(cameraNode)
+        self.cameraNode = self.scene.rootNode.childNode(withName: "camera", recursively: true)!
         
-        // place the camera
-        cameraNode.position = SCNVector3(x: 0, y: 5, z: 15)
     }
     
     // MARK: Initializer
@@ -91,11 +88,11 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         scnView.scene = scene
 
         //select the point of view to use
-        sceneRenderer!.pointOfView = self.cameraNode
+        //sceneRenderer!.pointOfView = self.cameraNode
         
-        var potato1  = PotatoEntity(model: .model1, scene: scene, position: SCNVector3(10,4,0))
-        var potato2  = PotatoEntity(model: .model2, scene: scene, position: SCNVector3(3,4,0))
-        var potato3  = PotatoEntity(model: .model2, scene: scene, position: SCNVector3(4,5,0))
+        let potato1  = PotatoEntity(model: .model1, scene: scene, position: SCNVector3(10,4,0))
+        let potato2  = PotatoEntity(model: .model2, scene: scene, position: SCNVector3(3,4,0))
+        let potato3  = PotatoEntity(model: .model2, scene: scene, position: SCNVector3(4,5,0))
         
     }
     

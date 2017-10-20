@@ -180,6 +180,7 @@ class PadOverlay: SKSpriteNode {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         if touches.contains(trackingTouch!) {
             self.destroyPad()
+            self.delegate?.padOverlayVirtualStickInteractionDidEnd(self)
         }
     }
 }

@@ -35,6 +35,7 @@ class Character: GKEntity {
     var physicsWorld: SCNPhysicsWorld?
     var walkSpeed: CGFloat = 1.0
     var isWalking: Bool = false
+    var touchesTheGround = false
 	static let walkRunPercentage: Float = 0.5
     
     // Direction
@@ -147,6 +148,7 @@ class Character: GKEntity {
             let startPosition = node.presentation.simdWorldPosition
             slideInWorld(fromPosition: startPosition, velocity: characterVelocity)
         }
+        
         
     }
     
