@@ -93,6 +93,10 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         //select the point of view to use
         sceneRenderer!.pointOfView = self.cameraNode
         
+        var potato1  = PotatoEntity(model: .model1, scene: scene, position: SCNVector3(10,4,0))
+        var potato2  = PotatoEntity(model: .model2, scene: scene, position: SCNVector3(3,4,0))
+        var potato3  = PotatoEntity(model: .model2, scene: scene, position: SCNVector3(4,5,0))
+        
     }
     
     
