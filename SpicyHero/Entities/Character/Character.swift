@@ -22,6 +22,8 @@ enum AnimationType : String {
     case walking = "walking"
     case running =  "running"
     case jumping = "jumping"
+    case standing1 = "standing1"
+    case standing2 = "standing2"
 }
 
 class Character: GKEntity {
@@ -70,7 +72,7 @@ class Character: GKEntity {
     
     //Load all animation in character node
     private func loadAnimations() {
-        let animTypes:[AnimationType] = [.walking, .running, .jumping]
+        let animTypes:[AnimationType] = [.walking, .running, .jumping, .standing1, .standing2]
         
         for anim in animTypes {
             let animation = SCNAnimationPlayer.withScene(named: "Game.scnassets/character/\(anim.rawValue).dae")
