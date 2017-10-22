@@ -58,10 +58,32 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     func setupCamera() {
         self.cameraNode = self.scene.rootNode.childNode(withName: "camera", recursively: true)!
         
+        guard let characterNode = self.character.node else
+        {
+            print("Error with the target of the follow camera")
+            return
+        }
+        var lookAtConstraint = SCNLookAtConstraint(target: characterNode)
+        lookAtConstraint.isGimbalLockEnabled = true
+        lookAtConstraint.influenceFactor = 0.5
+        
+        var distanceConstraint = SCNDistanceConstraint(target: characterNode)
+        
+        distanceConstraint.minimumDistance = 20
+        distanceConstraint.maximumDistance = 20
+        
+        let keepAltitude = SCNTransformConstraint.positionConstraint(inWorldSpace: true) { (node: SCNNode, position: SCNVector3) -> SCNVector3 in
+            var position = float3(position)
+            position.y = self.character.node.presentation.position.y + 10
+            return SCNVector3(position)
+        }
+        
+        self.cameraNode.constraints = [lookAtConstraint, distanceConstraint, keepAltitude]
     }
     
     // MARK: Initializer
-    init(scnView: SCNView) {
+    init(scnView: SCNView)
+    {
         super.init()
         
         sceneRenderer = scnView
@@ -92,17 +114,31 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         //sceneRenderer!.pointOfView = self.cameraNode
         
         let potato1  = PotatoEntity(model: .model1, scene: scene, position: SCNVector3(10,4,0))
-        let potato2  = PotatoEntity(model: .model2, scene: scene, position: SCNVector3(3,4,0))
-        let potato3  = PotatoEntity(model: .model2, scene: scene, position: SCNVector3(4,5,0))
+//        let potato2  = PotatoEntity(model: .model2, scene: scene, position: SCNVector3(3,4,0))
+//        let potato3  = PotatoEntity(model: .model2, scene: scene, position: SCNVector3(4,5,0))
+        
+    }
+    func updateCamera()
+    {
+        var position = self.character.node.presentation.position
+        
+        self.cameraNode.position.z = position.z - 15
+        self.cameraNode.position.x = position.x
+        self.cameraNode.position.y = position.y + 15
+        
+        //self.cameraNode.eulerAngles = self.character.node.presentation.eulerAngles
         
     }
     
     
     // MARK: - Update
     
-    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval)
+    {
         // update characters
         character!.update(atTime: time, with: renderer)
+       
+       // updateCamera()
     }
     
     

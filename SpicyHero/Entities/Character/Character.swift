@@ -100,7 +100,7 @@ class Character: GKEntity {
     
     // MARK: - Controlling the character
     
-    private var directionAngle: CGFloat = 0.0 {
+    private(set) var directionAngle: CGFloat = 0.0 {
         didSet {
             node.runAction(
                 SCNAction.rotateTo(x: 0.0, y: directionAngle, z: 0.0, duration: 0.1, usesShortestUnitArc:true))
