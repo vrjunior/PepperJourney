@@ -63,14 +63,14 @@ class GameController: NSObject, SCNSceneRendererDelegate {
             print("Error with the target of the follow camera")
             return
         }
-        var lookAtConstraint = SCNLookAtConstraint(target: characterNode)
+        var lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
         lookAtConstraint.isGimbalLockEnabled = true
         lookAtConstraint.influenceFactor = 0.5
         
         var distanceConstraint = SCNDistanceConstraint(target: characterNode)
         
-        distanceConstraint.minimumDistance = 20
-        distanceConstraint.maximumDistance = 20
+        distanceConstraint.minimumDistance = 15 
+        distanceConstraint.maximumDistance = 15
         
         let keepAltitude = SCNTransformConstraint.positionConstraint(inWorldSpace: true) { (node: SCNNode, position: SCNVector3) -> SCNVector3 in
             var position = float3(position)
@@ -118,17 +118,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
 //        let potato3  = PotatoEntity(model: .model2, scene: scene, position: SCNVector3(4,5,0))
         
     }
-    func updateCamera()
-    {
-        var position = self.character.node.presentation.position
-        
-        self.cameraNode.position.z = position.z - 15
-        self.cameraNode.position.x = position.x
-        self.cameraNode.position.y = position.y + 15
-        
-        //self.cameraNode.eulerAngles = self.character.node.presentation.eulerAngles
-        
-    }
     
     
     // MARK: - Update
@@ -137,8 +126,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     {
         // update characters
         character!.update(atTime: time, with: renderer)
-       
-       // updateCamera()
+
     }
     
     

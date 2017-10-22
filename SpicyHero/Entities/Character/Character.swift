@@ -49,6 +49,9 @@ class Character: GKEntity {
     private(set) var node: SCNNode! // top level node
     private(set) var characterNode: SCNNode!
     
+    // Camera
+    private(set) var visualTarget: SCNNode!
+    
     // MARK: - Initialization
     init(scene: SCNScene) {
         super.init()
@@ -67,6 +70,7 @@ class Character: GKEntity {
         /// Load character from external file
         node = scene.rootNode.childNode(withName: "character", recursively: false)
         characterNode = node.childNode(withName: "characterNode", recursively: false)
+        self.visualTarget = node.childNode(withName: "visualTarget", recursively: false)
         //characterNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
     }
     
