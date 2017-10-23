@@ -33,7 +33,7 @@ class Character: GKEntity {
     static private let initialPosition = float3(0, 5, 0)
     
     // actions
-    private let jumpImpulse:Float = 3.0
+    private let jumpImpulse:Float = 5.0
     var direction = float2()
     var physicsWorld: SCNPhysicsWorld?
     var walkSpeed: CGFloat = 1.0

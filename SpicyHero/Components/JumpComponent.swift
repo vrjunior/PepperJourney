@@ -29,8 +29,7 @@ class JumpComponent : GKComponent {
     
     func jump()
     {
-        let currentPosition = self.character.presentation.position
-        let jumpDirection = currentPosition.y + impulse
+        let jumpDirection = impulse
         let direction = SCNVector3(0, jumpDirection, 0)
         self.character.physicsBody?.applyForce(direction, asImpulse: true)
     }
