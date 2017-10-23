@@ -90,6 +90,9 @@ class Character: GKEntity {
     private func loadComponents() {
         let jumpComponent = JumpComponent(character: self.node, impulse: self.jumpImpulse)
         self.addComponent(jumpComponent)
+        
+        let trackingAgentComponent = GKAgent3D()
+        self.addComponent(trackingAgentComponent)
     }
     
     // MARK: Animatins Functins

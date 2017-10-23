@@ -19,7 +19,7 @@ class PotatoEntity: GKEntity
     
     private var assetsPath: String!
     
-    init(model: PotatoType, scene: SCNScene, position: SCNVector3)
+    init(model: PotatoType, scene: SCNScene, position: SCNVector3, trakingAgent: GKAgent3D)
     {
         super.init()
         
@@ -28,6 +28,8 @@ class PotatoEntity: GKEntity
         self.scene = scene
         
         self.loadPotato(position: position)
+        
+        self.addSeekBehavior(trackingAgent: trakingAgent)
         
         self.loadAnimations()
         
@@ -57,7 +59,10 @@ class PotatoEntity: GKEntity
         
     }
     
-    
+    private func addSeekBehavior(trackingAgent: GKAgent3D)
+    {
+        let seekComponent = SeekComponent(target: trackingAgent)
+    }
     //Load all animation of the Potato
     private func loadAnimations()
     {
@@ -69,4 +74,10 @@ class PotatoEntity: GKEntity
             
         
     }
+}
+extension PotatoEntity: GKAgentDelegate
+{
+//    func agentWillUpdate(_ agent: GKAgent) {
+//        <#code#>
+//    }
 }

@@ -9,7 +9,9 @@
 import Foundation
 import GameplayKit
 
-class JumpingState: BaseState {
+class JumpingState: BaseState
+{
+    var isJumping: Bool = false
     
     override func didEnter(from previousState: GKState?) {
         character.playAnimation(type: .jumping)

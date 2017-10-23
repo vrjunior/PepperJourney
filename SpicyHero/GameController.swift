@@ -113,7 +113,9 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         //select the point of view to use
         //sceneRenderer!.pointOfView = self.cameraNode
         
-        let potato1  = PotatoEntity(model: .model1, scene: scene, position: SCNVector3(10,4,0))
+        let trackingAgent = character.component(ofType: GKAgent3D.self)!
+        let potato1  = PotatoEntity(model: .model1, scene: scene, position: SCNVector3(10,4,0), trakingAgent: trackingAgent)
+        
 //        let potato2  = PotatoEntity(model: .model2, scene: scene, position: SCNVector3(3,4,0))
 //        let potato3  = PotatoEntity(model: .model2, scene: scene, position: SCNVector3(4,5,0))
         
