@@ -119,6 +119,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.setupNodes()
         
         scnView.scene = scene
+        
+        self.scene.physicsWorld.contactDelegate = self
 
         //select the point of view to use
         //sceneRenderer!.pointOfView = self.cameraNode
