@@ -17,6 +17,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     
     var character: Character!
     var characterStateMachine: GKStateMachine!
+    var potato: PotatoEntity!
     
     private var scene: SCNScene!
     private weak var sceneRenderer: SCNSceneRenderer?
@@ -65,7 +66,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         }
         var lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
         lookAtConstraint.isGimbalLockEnabled = true
-        lookAtConstraint.influenceFactor = 0.5
+        //lookAtConstraint.influenceFactor = 0.5
         
         var distanceConstraint = SCNDistanceConstraint(target: characterNode)
         
@@ -114,7 +115,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         //sceneRenderer!.pointOfView = self.cameraNode
         
         let trackingAgent = character.component(ofType: GKAgent3D.self)!
-        let potato1  = PotatoEntity(model: .model1, scene: scene, position: SCNVector3(10,4,0), trakingAgent: trackingAgent)
+        
+       // self.potato  = PotatoEntity(model: .model1, scene: scene, position: SCNVector3(4,3,40), trakingAgent: trackingAgent)
         
 //        let potato2  = PotatoEntity(model: .model2, scene: scene, position: SCNVector3(3,4,0))
 //        let potato3  = PotatoEntity(model: .model2, scene: scene, position: SCNVector3(4,5,0))
@@ -128,6 +130,13 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     {
         // update characters
         character!.update(atTime: time, with: renderer)
+        //let seekComponent = self.potato.component(ofType: SeekComponent.self)!
+        //seekComponent.update(deltaTime: time)
+        //self.potato.update(deltaTime: time)
+        
+        var component = self.character.component(ofType: GKAgent3D.self)!
+        component.position.x = self.character.node.presentation.position.x
+        component.position.z = self.character.node.presentation.position.z
 
     }
     

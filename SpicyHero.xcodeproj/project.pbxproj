@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9C03A2421F9A33DD008F191A /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C03A2411F9A33DD008F191A /* EntityManager.swift */; };
 		9C1B829D1F9E2FD300173FF3 /* SeekComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B829C1F9E2FD300173FF3 /* SeekComponent.swift */; };
+		9C1B829F1F9FADD300173FF3 /* ModelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */; };
 		9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C6D3DEA1F93252500B8FA2A /* Game.scnassets */; };
 		9CFDF8701F9A36F7009385A7 /* PotatoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */; };
 		D207CFC51F8EA2D10084240E /* Dpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207CFC41F8EA2D10084240E /* Dpad.swift */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		9C03A2411F9A33DD008F191A /* EntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
 		9C1B829C1F9E2FD300173FF3 /* SeekComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekComponent.swift; sourceTree = "<group>"; };
+		9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelComponent.swift; sourceTree = "<group>"; };
 		9C6D3DEA1F93252500B8FA2A /* Game.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Game.scnassets; sourceTree = "<group>"; };
 		9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotatoEntity.swift; sourceTree = "<group>"; };
 		D207CFC41F8EA2D10084240E /* Dpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dpad.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			children = (
 				D2E0A8971F993B5D00FCC255 /* JumpComponent.swift */,
 				9C1B829C1F9E2FD300173FF3 /* SeekComponent.swift */,
+				9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				D25AD5AE1F87ECF900F2093E /* Character.swift in Sources */,
 				D207CFC71F8EA5370084240E /* Stick.swift in Sources */,
 				9C03A2421F9A33DD008F191A /* EntityManager.swift in Sources */,
+				9C1B829F1F9FADD300173FF3 /* ModelComponent.swift in Sources */,
 				D2F53D751F9A88FF00422F24 /* WalkingState.swift in Sources */,
 				D2EC857D1F83F1240093F009 /* AppDelegate.swift in Sources */,
 				D291BB541F8E976A00B2D111 /* SimdExtensions.swift in Sources */,
