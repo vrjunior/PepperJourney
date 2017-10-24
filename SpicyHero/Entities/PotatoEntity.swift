@@ -12,7 +12,7 @@ import GameplayKit
 class PotatoEntity: GKEntity
 {
     // Reference to model of potato
-    private var potatoNode: SCNNode!
+    var potatoNode: SCNNode!
     
     // reference to main scene
     private var scene: SCNScene!
@@ -30,7 +30,6 @@ class PotatoEntity: GKEntity
         self.loadPotato(position: position)
         
         self.addSeekBehavior(trackingAgent: trakingAgent)
-        
         self.loadAnimations()
         
     }
@@ -62,6 +61,8 @@ class PotatoEntity: GKEntity
     private func addSeekBehavior(trackingAgent: GKAgent3D)
     {
         let seekComponent = SeekComponent(target: trackingAgent)
+        //seekComponent.delegate = self
+        self.addComponent(seekComponent)
     }
     //Load all animation of the Potato
     private func loadAnimations()
@@ -75,9 +76,4 @@ class PotatoEntity: GKEntity
         
     }
 }
-extension PotatoEntity: GKAgentDelegate
-{
-//    func agentWillUpdate(_ agent: GKAgent) {
-//        <#code#>
-//    }
-}
+

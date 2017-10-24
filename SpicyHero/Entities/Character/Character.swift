@@ -92,7 +92,10 @@ class Character: GKEntity {
         self.addComponent(jumpComponent)
         
         let trackingAgentComponent = GKAgent3D()
+        trackingAgentComponent.position = float3(self.node.presentation.position)
+        trackingAgentComponent.position.y = 3
         self.addComponent(trackingAgentComponent)
+        
     }
     
     // MARK: Animatins Functins
