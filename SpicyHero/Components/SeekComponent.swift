@@ -30,15 +30,18 @@ class SeekComponent: GKAgent3D, GKAgentDelegate
     
     func agentWillUpdate(_ agent: GKAgent)
     {
-        let entity = self.entity as! PotatoEntity
+        
+        guard let modelComponent = self.entity?.component(ofType: ModelComponent.self) else {return}
+        
 
-        position = float3(entity.potatoNode.presentation.position)
+        position = float3(modelComponent.modelNode.presentation.position)
         
     }
     func agentDidUpdate(_ agent: GKAgent) {
-        let entity = self.entity as! PotatoEntity
-        entity.potatoNode.position.x = position.x
-        entity.potatoNode.position.z = position.z
+        
+        guard let modelComponent = self.entity?.component(ofType: ModelComponent.self) else {return}
+        modelComponent.modelNode.position.x = position.x
+        modelComponent.modelNode.position.z = position.z
         
         print("speed: \(speed) | position: \(position)")
     }

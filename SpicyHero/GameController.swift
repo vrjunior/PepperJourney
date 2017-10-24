@@ -116,7 +116,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         let trackingAgent = character.component(ofType: GKAgent3D.self)!
         
-       // self.potato  = PotatoEntity(model: .model1, scene: scene, position: SCNVector3(4,3,40), trakingAgent: trackingAgent)
+        self.potato  = PotatoEntity(model: .model1, scene: scene, position: SCNVector3(4,3,40), trakingAgent: trackingAgent)
         
 //        let potato2  = PotatoEntity(model: .model2, scene: scene, position: SCNVector3(3,4,0))
 //        let potato3  = PotatoEntity(model: .model2, scene: scene, position: SCNVector3(4,5,0))
@@ -130,9 +130,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     {
         // update characters
         character!.update(atTime: time, with: renderer)
-        //let seekComponent = self.potato.component(ofType: SeekComponent.self)!
-        //seekComponent.update(deltaTime: time)
-        //self.potato.update(deltaTime: time)
+        let seekComponent = self.potato.component(ofType: SeekComponent.self)!
+        seekComponent.update(deltaTime: time)
         
         var component = self.character.component(ofType: GKAgent3D.self)!
         component.position.x = self.character.node.presentation.position.x

@@ -11,9 +11,6 @@ import GameplayKit
 
 class PotatoEntity: GKEntity
 {
-    // Reference to model of potato
-    var potatoNode: SCNNode!
-    
     // reference to main scene
     private var scene: SCNScene!
     
@@ -23,11 +20,11 @@ class PotatoEntity: GKEntity
     {
         super.init()
         
-        self.assetsPath = "Game.scnassets/Potatoes/\(model.rawValue)/"
+        let path = "Game.scnassets/Potato/Potato.scn"
+        let modelComponent = ModelComponent(modelPath: path, scene: scene, position: position)
+       
         
-        self.scene = scene
-        
-        self.loadPotato(position: position)
+       self.addComponent(modelComponent)
         
         self.addSeekBehavior(trackingAgent: trakingAgent)
         self.loadAnimations()
@@ -37,25 +34,6 @@ class PotatoEntity: GKEntity
     required init?(coder aDecoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func loadPotato(position: SCNVector3)
-    {
-        let potatoScene = SCNScene(named: (self.assetsPath + "model.scn"))!
-        
-        let name = "potatoNode"
-        
-        guard let potatoNode = potatoScene.rootNode.childNode(withName: name, recursively: false) else
-        {
-            fatalError("Making box with name \(name) failed because the GameScene scene file contains no nodes with that name.")
-        }
-        
-        self.potatoNode = potatoNode
-        
-        potatoNode.position = position
-        
-        self.scene.rootNode.addChildNode(self.potatoNode)
-        
     }
     
     private func addSeekBehavior(trackingAgent: GKAgent3D)
