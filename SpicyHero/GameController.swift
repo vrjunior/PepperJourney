@@ -67,11 +67,11 @@ class GameController: NSObject, SCNSceneRendererDelegate {
             print("Error with the target of the follow camera")
             return
         }
-        var lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
+        let lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
         lookAtConstraint.isGimbalLockEnabled = true
         //lookAtConstraint.influenceFactor = 0.5
         
-        var distanceConstraint = SCNDistanceConstraint(target: characterNode)
+        let distanceConstraint = SCNDistanceConstraint(target: characterNode)
         
         distanceConstraint.minimumDistance = 15 
         distanceConstraint.maximumDistance = 15
@@ -118,14 +118,14 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         self.setupNodes()
         
-        scnView.scene = scene
-        
         self.scene.physicsWorld.contactDelegate = self
+        
+        scnView.scene = scene
 
         //select the point of view to use
         //sceneRenderer!.pointOfView = self.cameraNode
         
-        let trackingAgent = character.component(ofType: GKAgent3D.self)!
+        _ = character.component(ofType: GKAgent3D.self)!
         
        // self.potato  = PotatoEntity(model: .model1, scene: scene, position: SCNVector3(4,3,40), trakingAgent: trackingAgent)
         
@@ -145,7 +145,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         //seekComponent.update(deltaTime: time)
         //self.potato.update(deltaTime: time)
         
-        var component = self.character.component(ofType: GKAgent3D.self)!
+        let component = self.character.component(ofType: GKAgent3D.self)!
         component.position.x = self.character.node.presentation.position.x
         component.position.z = self.character.node.presentation.position.z
 
@@ -205,7 +205,6 @@ extension GameController : JumpDelegate {
 extension GameController : SCNPhysicsContactDelegate {
 
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
-        
         
         if contact.nodeA.categoryBitMask == self.character.node.physicsBody?.categoryBitMask {
 

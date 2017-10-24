@@ -18,7 +18,7 @@ class ModelComponent: GKComponent
     {
         super.init()
         guard let modelScene = SCNScene(named: modelPath) else {return}
-        guard let model = modelScene.rootNode.childNode(withName: "model", recursively: false) else {return}
+        guard modelScene.rootNode.childNode(withName: "model", recursively: false) != nil else {return}
         
         
         
