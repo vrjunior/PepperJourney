@@ -9,14 +9,14 @@
 import Foundation
 import GameplayKit
 
-class StadingState: BaseState {
+class StandingState: BaseState {
 
     var timer:Timer = Timer()
     var standingType: AnimationType? = nil
     
     // MARK: GK Overrides
     override func didEnter(from previousState: GKState?) {
-        timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(StadingState.runStadingAnimation), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(StandingState.runStadingAnimation), userInfo: nil, repeats: true)
     }
     
     @objc func runStadingAnimation() {

@@ -19,6 +19,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     var characterStateMachine: GKStateMachine!
     var potato: PotatoEntity!
     
+    var floor: SCNNode!
+    
     private var scene: SCNScene!
     private weak var sceneRenderer: SCNSceneRenderer?
     private var overlay: Overlay?
@@ -45,15 +47,16 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     
     
     func setupCharacter() {
-        character = Character(scene: scene!)
+        character = Character(scene: scene!, jumpDelegate: self)
+        
         characterStateMachine = GKStateMachine(states: [
-            StadingState(scene: scene, character: character),
+            StandingState(scene: scene, character: character),
             WalkingState(scene: scene, character: character),
             RunningState(scene: scene, character: character),
             JumpingState(scene: scene, character: character)
             ])
         
-        characterStateMachine.enter(StadingState.self)
+        characterStateMachine.enter(StandingState.self)
     }
     
     func setupCamera() {
@@ -64,11 +67,11 @@ class GameController: NSObject, SCNSceneRendererDelegate {
             print("Error with the target of the follow camera")
             return
         }
-        var lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
+        let lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
         lookAtConstraint.isGimbalLockEnabled = true
         //lookAtConstraint.influenceFactor = 0.5
         
-        var distanceConstraint = SCNDistanceConstraint(target: characterNode)
+        let distanceConstraint = SCNDistanceConstraint(target: characterNode)
         
         distanceConstraint.minimumDistance = 15 
         distanceConstraint.maximumDistance = 15
@@ -80,6 +83,10 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         }
         
         self.cameraNode.constraints = [lookAtConstraint, distanceConstraint, keepAltitude]
+    }
+    
+    func setupNodes() {
+        self.floor = self.scene.rootNode.childNode(withName: "floor", recursively: false)
     }
     
     // MARK: Initializer
@@ -109,6 +116,10 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         self.setupCamera()
         
+        self.setupNodes()
+        
+        self.scene.physicsWorld.contactDelegate = self
+        
         scnView.scene = scene
 
         //select the point of view to use
@@ -133,7 +144,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         let seekComponent = self.potato.component(ofType: SeekComponent.self)!
         seekComponent.update(deltaTime: time)
         
-        var component = self.character.component(ofType: GKAgent3D.self)!
+        let component = self.character.component(ofType: GKAgent3D.self)!
         component.position.x = self.character.node.presentation.position.x
         component.position.z = self.character.node.presentation.position.z
 
@@ -165,7 +176,7 @@ extension GameController : PadOverlayDelegate {
     func padOverlayVirtualStickInteractionDidEnd(_ padNode: PadOverlay) {
         characterDirection = [0, 0]
         
-        self.characterStateMachine.enter(StadingState.self)
+        self.characterStateMachine.enter(StandingState.self)
     }
     
 }
@@ -180,6 +191,27 @@ extension GameController : CharacterMovesDelegate {
     }
 }
 
-extension GameController : SCNPhysicsContactDelegate {
+
+extension GameController : JumpDelegate {
     
+    func didJumpBegin(node: SCNNode) {
+        if(node == character.node) {
+            self.character.isJumping = true
+        }
+    }
+}
+
+extension GameController : SCNPhysicsContactDelegate {
+
+    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+        
+        if contact.nodeA.categoryBitMask == self.character.node.physicsBody?.categoryBitMask {
+
+            if(self.character.isJumping && contact.nodeB.categoryBitMask == self.floor.physicsBody?.categoryBitMask ) {
+                
+                self.characterStateMachine.enter(StandingState.self)
+            }
+        }
+
+    }
 }

@@ -15,7 +15,7 @@ class SeekComponent: GKAgent3D, GKAgentDelegate
     init(target: GKAgent3D)
     {
         super.init()
-        var goal = GKGoal(toSeekAgent: target)
+        let goal = GKGoal(toSeekAgent: target)
         
         self.behavior = GKBehavior(goal: goal, weight: 1)
         self.maxSpeed = 0.00002

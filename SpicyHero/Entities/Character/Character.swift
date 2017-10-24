@@ -38,7 +38,7 @@ class Character: GKEntity {
     var physicsWorld: SCNPhysicsWorld?
     var walkSpeed: CGFloat = 1.0
     var isWalking: Bool = false
-    var touchesTheGround = false
+    var isJumping: Bool = false
 	static let walkRunPercentage: Float = 0.5
     
     // Direction
@@ -52,13 +52,23 @@ class Character: GKEntity {
     // Camera
     private(set) var visualTarget: SCNNode!
     
+    
+    //delegates
+    var jumpDelegate: JumpDelegate?
+    
     // MARK: - Initialization
-    init(scene: SCNScene) {
+    init(scene: SCNScene, jumpDelegate: JumpDelegate?) {
         super.init()
+        
+        self.jumpDelegate = jumpDelegate
         
         self.loadCharacter(scene: scene)
         self.loadAnimations()
         self.loadComponents()
+    }
+    
+    convenience init(scene: SCNScene) {
+        self.init(scene: scene, jumpDelegate: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -89,6 +99,9 @@ class Character: GKEntity {
     
     private func loadComponents() {
         let jumpComponent = JumpComponent(character: self.node, impulse: self.jumpImpulse)
+        
+        //adding delgate to jump
+        jumpComponent.delegate = self.jumpDelegate
         self.addComponent(jumpComponent)
         
         let trackingAgentComponent = GKAgent3D()
@@ -117,6 +130,7 @@ class Character: GKEntity {
        }
     }
     
+    var num = 0
     func update(atTime time: TimeInterval, with renderer: SCNSceneRenderer) {
         
         var characterVelocity = float3()
@@ -153,7 +167,6 @@ class Character: GKEntity {
             let startPosition = node.presentation.simdWorldPosition
             slideInWorld(fromPosition: startPosition, velocity: characterVelocity)
         }
-        
         
     }
     
@@ -201,5 +214,6 @@ class Character: GKEntity {
     func resetCharacterPosition() {
         node.simdPosition = Character.initialPosition
     }
+    
     
 }

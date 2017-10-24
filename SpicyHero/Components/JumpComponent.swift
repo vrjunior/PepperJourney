@@ -10,10 +10,17 @@ import Foundation
 import GameKit
 import SceneKit
 
+
+protocol JumpDelegate {
+    func didJumpBegin(node:SCNNode)
+}
+
 class JumpComponent : GKComponent {
     var impulse: Float
     var character: SCNNode
     
+    //delegate is optional to set
+    var delegate: JumpDelegate?
     
     init(character: SCNNode, impulse: Float) {
         self.character = character
@@ -32,6 +39,9 @@ class JumpComponent : GKComponent {
         let jumpDirection = impulse
         let direction = SCNVector3(0, jumpDirection, 0)
         self.character.physicsBody?.applyForce(direction, asImpulse: true)
+        
+        self.delegate?.didJumpBegin(node: character)
+        
     }
     
 }
