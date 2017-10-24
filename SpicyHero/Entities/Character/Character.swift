@@ -38,7 +38,7 @@ class Character: GKEntity {
     var physicsWorld: SCNPhysicsWorld?
     var walkSpeed: CGFloat = 1.0
     var isWalking: Bool = false
-    var touchesTheGround = false
+    var isJumping: Bool = false
 	static let walkRunPercentage: Float = 0.5
     
     // Direction
@@ -52,13 +52,23 @@ class Character: GKEntity {
     // Camera
     private(set) var visualTarget: SCNNode!
     
+    
+    //delegates
+    var jumpDelegate: JumpDelegate?
+    
     // MARK: - Initialization
-    init(scene: SCNScene) {
+    init(scene: SCNScene, jumpDelegate: JumpDelegate?) {
         super.init()
+        
+        self.jumpDelegate = jumpDelegate
         
         self.loadCharacter(scene: scene)
         self.loadAnimations()
         self.loadComponents()
+    }
+    
+    convenience init(scene: SCNScene) {
+        self.init(scene: scene, jumpDelegate: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -89,6 +99,9 @@ class Character: GKEntity {
     
     private func loadComponents() {
         let jumpComponent = JumpComponent(character: self.node, impulse: self.jumpImpulse)
+        
+        //adding delgate to jump
+        jumpComponent.delegate = self.jumpDelegate
         self.addComponent(jumpComponent)
         
         let trackingAgentComponent = GKAgent3D()
@@ -155,31 +168,6 @@ class Character: GKEntity {
             slideInWorld(fromPosition: startPosition, velocity: characterVelocity)
         }
         
-        var position = characterNode.simdWorldPosition
-        let hitRange = Float(0.2)
-        
-        var p0 = position
-        var p1 = position
-        p0.y = position.y + 1 * hitRange
-        p1.y = position.y - 1 * hitRange
-        
-        let options: [String: Any] = [
-            SCNHitTestOption.backFaceCulling.rawValue: false,
-            SCNHitTestOption.categoryBitMask.rawValue: node.physicsBody!.categoryBitMask,
-            SCNHitTestOption.ignoreHiddenNodes.rawValue: false]
-        
-        let hitFrom = SCNVector3(p0) //SCNVector3FromFloat3(p0)
-        let hitTo = SCNVector3(p1)
-        
-        let hitResult = renderer.scene!.rootNode.hitTestWithSegment(from: hitFrom, to: hitTo, options: options).first
-        
-        self.touchesTheGround = false
-        
-        if let hit = hitResult {
-            print("true \(num)")
-            self.touchesTheGround = true
-            num += 1
-        }
     }
     
     
@@ -226,5 +214,6 @@ class Character: GKEntity {
     func resetCharacterPosition() {
         node.simdPosition = Character.initialPosition
     }
+    
     
 }

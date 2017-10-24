@@ -19,6 +19,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     var characterStateMachine: GKStateMachine!
     var potato: PotatoEntity!
     
+    var floor: SCNNode!
+    
     private var scene: SCNScene!
     private weak var sceneRenderer: SCNSceneRenderer?
     private var overlay: Overlay?
@@ -45,15 +47,16 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     
     
     func setupCharacter() {
-        character = Character(scene: scene!)
+        character = Character(scene: scene!, jumpDelegate: self)
+        
         characterStateMachine = GKStateMachine(states: [
-            StadingState(scene: scene, character: character),
+            StandingState(scene: scene, character: character),
             WalkingState(scene: scene, character: character),
             RunningState(scene: scene, character: character),
             JumpingState(scene: scene, character: character)
             ])
         
-        characterStateMachine.enter(StadingState.self)
+        characterStateMachine.enter(StandingState.self)
     }
     
     func setupCamera() {
@@ -82,6 +85,10 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.cameraNode.constraints = [lookAtConstraint, distanceConstraint, keepAltitude]
     }
     
+    func setupNodes() {
+        self.floor = self.scene.rootNode.childNode(withName: "floor", recursively: false)
+    }
+    
     // MARK: Initializer
     init(scnView: SCNView)
     {
@@ -108,6 +115,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.setupCharacter()
         
         self.setupCamera()
+        
+        self.setupNodes()
         
         scnView.scene = scene
 
@@ -166,7 +175,7 @@ extension GameController : PadOverlayDelegate {
     func padOverlayVirtualStickInteractionDidEnd(_ padNode: PadOverlay) {
         characterDirection = [0, 0]
         
-        self.characterStateMachine.enter(StadingState.self)
+        self.characterStateMachine.enter(StandingState.self)
     }
     
 }
@@ -181,6 +190,28 @@ extension GameController : CharacterMovesDelegate {
     }
 }
 
-extension GameController : SCNPhysicsContactDelegate {
+
+extension GameController : JumpDelegate {
     
+    func didJumpBegin(node: SCNNode) {
+        if(node == character.node) {
+            self.character.isJumping = true
+        }
+    }
+}
+
+extension GameController : SCNPhysicsContactDelegate {
+
+    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+        
+        
+        if contact.nodeA.categoryBitMask == self.character.node.physicsBody?.categoryBitMask {
+
+            if(self.character.isJumping && contact.nodeB.categoryBitMask == self.floor.physicsBody?.categoryBitMask ) {
+                
+                self.characterStateMachine.enter(StandingState.self)
+            }
+        }
+
+    }
 }
