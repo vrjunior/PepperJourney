@@ -209,6 +209,7 @@ extension GameController : SCNPhysicsContactDelegate {
 
             if(self.character.isJumping && contact.nodeB.categoryBitMask == self.floor.physicsBody?.categoryBitMask ) {
                 
+                self.character.isJumping = false
                 self.characterStateMachine.enter(StandingState.self)
             }
         }
