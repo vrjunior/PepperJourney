@@ -26,7 +26,6 @@ class Character: GKEntity {
     // actions
     private let jumpImpulse:Float = 400.0
     var direction = float2()
-    var physicsWorld: SCNPhysicsWorld?
     var walkSpeed: CGFloat = 1.0
     var isWalking: Bool = false
     var isJumping: Bool = false
@@ -192,9 +191,7 @@ class Character: GKEntity {
         
         let start = start
         let velocity = velocity
-       // let options: [SCNPhysicsWorld.TestOption: Any] = [
-        //    SCNPhysicsWorld.TestOption.collisionBitMask: Bitmask.collision.rawValue,
-        //    SCNPhysicsWorld.TestOption.searchMode: SCNPhysicsWorld.TestSearchMode.closest]
+
         while !stop {
             replacementPoint = start + velocity
             stop = true
