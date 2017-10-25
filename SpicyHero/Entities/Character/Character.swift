@@ -97,7 +97,7 @@ class Character: GKEntity {
         
         let trackingAgentComponent = GKAgent3D()
         trackingAgentComponent.position = float3(self.node.presentation.position)
-        trackingAgentComponent.position.y = 3
+        trackingAgentComponent.position.y = 0
         self.addComponent(trackingAgentComponent)
         
     }

@@ -74,12 +74,12 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         let distanceConstraint = SCNDistanceConstraint(target: characterNode)
         
-        distanceConstraint.minimumDistance = 15 
-        distanceConstraint.maximumDistance = 15
+        distanceConstraint.minimumDistance = 50//15
+        distanceConstraint.maximumDistance = 50//15
         
         let keepAltitude = SCNTransformConstraint.positionConstraint(inWorldSpace: true) { (node: SCNNode, position: SCNVector3) -> SCNVector3 in
             var position = float3(position)
-            position.y = self.character.node.presentation.position.y + 10
+            position.y = self.character.node.presentation.position.y + 30//10
             return SCNVector3(position)
         }
         
@@ -127,9 +127,9 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         //select the point of view to use
         //sceneRenderer!.pointOfView = self.cameraNode
         
-        _ = character.component(ofType: GKAgent3D.self)!
+        let trackingAgent = character.component(ofType: GKAgent3D.self)!
         
-       // self.potato  = PotatoEntity(model: .model1, scene: scene, position: SCNVector3(4,3,40), trakingAgent: trackingAgent)
+        self.potato  = PotatoEntity(model: .model1, scene: scene, position: SCNVector3(4,0,10), trakingAgent: trackingAgent)
         
 //        let potato2  = PotatoEntity(model: .model2, scene: scene, position: SCNVector3(3,4,0))
 //        let potato3  = PotatoEntity(model: .model2, scene: scene, position: SCNVector3(4,5,0))
@@ -143,13 +143,13 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     {
         // update characters
         character!.update(atTime: time, with: renderer)
-        //let seekComponent = self.potato.component(ofType: SeekComponent.self)!
-        //seekComponent.update(deltaTime: time)
-        //self.potato.update(deltaTime: time)
+        let seekComponent = self.potato.component(ofType: SeekComponent.self)!
+        seekComponent.update(deltaTime: time)
         
         let component = self.character.component(ofType: GKAgent3D.self)!
         component.position.x = self.character.node.presentation.position.x
         component.position.z = self.character.node.presentation.position.z
+       //print(component.rotation.columns.1)
 
     }
     

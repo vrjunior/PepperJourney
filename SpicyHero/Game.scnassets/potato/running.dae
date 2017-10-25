@@ -7,7 +7,7 @@
   <created>2017-10-25T15:40:48Z</created>
   <modified>2017-10-25T15:40:48Z</modified>
   <unit meter="1.000000"/>
-  <up_axis>Z_UP</up_axis>
+  <up_axis>Y_UP</up_axis>
  </asset>
  <library_animations>
   <animation id="unnamed_animation__63" name="unnamed_animation__63">

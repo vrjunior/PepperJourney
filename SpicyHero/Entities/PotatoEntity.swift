@@ -11,51 +11,32 @@ import GameplayKit
 
 class PotatoEntity: GKEntity
 {
-    // Reference to model of potato
-    var potatoNode: SCNNode!
-    
     // reference to main scene
     private var scene: SCNScene!
     
-    private var assetsPath: String!
+    private var potatoModel: ModelComponent!
     
     init(model: PotatoType, scene: SCNScene, position: SCNVector3, trakingAgent: GKAgent3D)
     {
         super.init()
         
-        self.assetsPath = "Game.scnassets/potato/\(model.rawValue)/"
-        
         self.scene = scene
+
+        let path = "Game.scnassets/potato/potato.scn"
+        self.potatoModel = ModelComponent(modelPath: path, scene: scene, position: position)
         
-        self.loadPotato(position: position)
+        self.addComponent(self.potatoModel)
         
         self.addSeekBehavior(trackingAgent: trakingAgent)
         self.loadAnimations()
+        
+        self.playAnimation(type: .running)
         
     }
     
     required init?(coder aDecoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func loadPotato(position: SCNVector3)
-    {
-        let potatoScene = SCNScene(named: (self.assetsPath + "model.scn"))!
-        
-        let name = "potatoNode"
-        
-        guard let potatoNode = potatoScene.rootNode.childNode(withName: name, recursively: false) else
-        {
-            fatalError("Making box with name \(name) failed because the GameScene scene file contains no nodes with that name.")
-        }
-        
-        self.potatoNode = potatoNode
-        
-        potatoNode.position = position
-        
-        self.scene.rootNode.addChildNode(self.potatoNode)
-        
     }
     
     private func addSeekBehavior(trackingAgent: GKAgent3D)
@@ -71,19 +52,19 @@ class PotatoEntity: GKEntity
         let animations:[AnimationType] = [.running]
         
         for anim in animations {
-            let animation = SCNAnimationPlayer.withScene(named: (self.assetsPath + anim.rawValue))
+            let animation = SCNAnimationPlayer.withScene(named: "Game.scnassets/potato/\(anim.rawValue).dae")
         
             animation.stop()
-            self.potatoNode.addAnimationPlayer(animation, forKey: anim.rawValue)
+            self.potatoModel.modelNode.addAnimationPlayer(animation, forKey: anim.rawValue)
         }
     }
     
     func playAnimation(type: AnimationType) {
-        self.potatoNode.animationPlayer(forKey: type.rawValue)?.play()
+        self.potatoModel.modelNode.animationPlayer(forKey: type.rawValue)?.play()
     }
     
     func stopAnimation(type: AnimationType) {
-        self.potatoNode.animationPlayer(forKey: type.rawValue)?.stop()
+        self.potatoModel.modelNode.animationPlayer(forKey: type.rawValue)?.stop()
     }
 }
 
