@@ -38,8 +38,6 @@ class SeekComponent: GKAgent3D, GKAgentDelegate
         self.position = float3(modelComponent.modelNode.presentation.position)
         self.position.y = 0
         
-//            float3(modelComponent.modelNode.presentation.eulerAngles))
-        
     }
     func agentDidUpdate(_ agent: GKAgent) {
         
@@ -47,8 +45,6 @@ class SeekComponent: GKAgent3D, GKAgentDelegate
         modelComponent.modelNode.position.x = position.x
         modelComponent.modelNode.position.z = position.z
         
-        
-    
         let xVelocity = self.velocity.x
         let zVelocity = self.velocity.z
         
@@ -67,25 +63,4 @@ class SeekComponent: GKAgent3D, GKAgentDelegate
         
     }
 }
-//extension matrix_float3x3
-//{
-//    var scnVector3: SCNVector3
-//    {
-//        get
-//        {
-//            return scnVector3
-//        }
-//        set
-//        {
-//            self.scnVector3 = newValue
-//        }
-//    }
-//    init(matrix_float3x3Value: matrix_float3x3)
-//    {
-//        var sceneVector3Value = SCNVector3()
-//
-//        //sceneVector3Value.x = matrix_float3x3Value.columns.0
-//    }
-//
-//}
 
