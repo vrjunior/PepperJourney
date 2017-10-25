@@ -17,15 +17,6 @@ func planeIntersect(planeNormal: float3, planeDist: Float, rayOrigin: float3, ra
     return (planeDist - simd_dot(planeNormal, rayOrigin)) / simd_dot(planeNormal, rayDirection)
 }
 
-//Enum for name of animations
-enum AnimationType : String {
-    case walking = "walking"
-    case running =  "running"
-    case jumping = "jumping"
-    case standing1 = "standing1"
-    case standing2 = "standing2"
-}
-
 class Character: GKEntity {
     
     //speed multiplier
@@ -33,7 +24,7 @@ class Character: GKEntity {
     static private let initialPosition = float3(0, 5, 0)
     
     // actions
-    private let jumpImpulse:Float = 5.0
+    private let jumpImpulse:Float = 400.0
     var direction = float2()
     var physicsWorld: SCNPhysicsWorld?
     var walkSpeed: CGFloat = 1.0

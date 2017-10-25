@@ -26,6 +26,7 @@
 		D25AD5AE1F87ECF900F2093E /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AD5AD1F87ECF900F2093E /* Character.swift */; };
 		D25AD5B11F8809DE00F2093E /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25AD5B01F8809DE00F2093E /* SceneKit.framework */; };
 		D25AD5B31F8809E500F2093E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25AD5B21F8809E500F2093E /* GameKit.framework */; };
+		D2719D901FA0EBDA00FCB61F /* AnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */; };
 		D291BB541F8E976A00B2D111 /* SimdExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291BB531F8E976A00B2D111 /* SimdExtensions.swift */; };
 		D2E0A8981F993B5D00FCC255 /* JumpComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E0A8971F993B5D00FCC255 /* JumpComponent.swift */; };
 		D2EC857D1F83F1240093F009 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EC857C1F83F1240093F009 /* AppDelegate.swift */; };
@@ -56,6 +57,7 @@
 		D25AD5AD1F87ECF900F2093E /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		D25AD5B01F8809DE00F2093E /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		D25AD5B21F8809E500F2093E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationType.swift; sourceTree = "<group>"; };
 		D291BB531F8E976A00B2D111 /* SimdExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimdExtensions.swift; sourceTree = "<group>"; };
 		D2E0A8971F993B5D00FCC255 /* JumpComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpComponent.swift; sourceTree = "<group>"; };
 		D2EC85791F83F1240093F009 /* SpicyHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpicyHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +97,7 @@
 			children = (
 				D25160E31F93FA0800BF756A /* Character */,
 				9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */,
+				D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				D25160EA1F94063400BF756A /* SCNAnimationPlayer + Load Animation.swift in Sources */,
 				D25160E51F93FA3400BF756A /* BaseState.swift in Sources */,
 				D207CFC51F8EA2D10084240E /* Dpad.swift in Sources */,
+				D2719D901FA0EBDA00FCB61F /* AnimationType.swift in Sources */,
 				D25160EE1F940B0C00BF756A /* JumpingState.swift in Sources */,
 				9CFDF8701F9A36F7009385A7 /* PotatoEntity.swift in Sources */,
 				D25AD5AA1F87E96A00F2093E /* Overlay.swift in Sources */,

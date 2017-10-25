@@ -48,6 +48,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     
     func setupCharacter() {
         character = Character(scene: scene!, jumpDelegate: self)
+        character.node.physicsBody?.categoryBitMask = 0b1
         
         characterStateMachine = GKStateMachine(states: [
             StandingState(scene: scene, character: character),
@@ -118,9 +119,10 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         self.setupNodes()
         
-        self.scene.physicsWorld.contactDelegate = self
-        
+    
         scnView.scene = scene
+        
+        scnView.scene?.physicsWorld.contactDelegate = self
 
         //select the point of view to use
         //sceneRenderer!.pointOfView = self.cameraNode
@@ -205,15 +207,6 @@ extension GameController : JumpDelegate {
 extension GameController : SCNPhysicsContactDelegate {
 
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
-        
-        if contact.nodeA.categoryBitMask == self.character.node.physicsBody?.categoryBitMask {
-
-            if(self.character.isJumping && contact.nodeB.categoryBitMask == self.floor.physicsBody?.categoryBitMask ) {
-                
-                self.character.isJumping = false
-                self.characterStateMachine.enter(StandingState.self)
-            }
-        }
-
+        print("contact")
     }
 }

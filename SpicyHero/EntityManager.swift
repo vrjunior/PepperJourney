@@ -12,8 +12,7 @@ import Foundation
 
 enum PotatoType: String
 {
-    case model1 = "Potato1"
-    case model2 = "Potato2"
+    case model1 = "potato"
 }
 
 class EntityManager

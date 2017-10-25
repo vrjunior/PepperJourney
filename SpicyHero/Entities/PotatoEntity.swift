@@ -23,7 +23,7 @@ class PotatoEntity: GKEntity
     {
         super.init()
         
-        self.assetsPath = "Game.scnassets/Potatoes/\(model.rawValue)/"
+        self.assetsPath = "Game.scnassets/potato/\(model.rawValue)/"
         
         self.scene = scene
         
@@ -64,16 +64,26 @@ class PotatoEntity: GKEntity
         //seekComponent.delegate = self
         self.addComponent(seekComponent)
     }
+    
     //Load all animation of the Potato
     private func loadAnimations()
     {
-
-//            let animation = SCNAnimationPlayer.withScene(named: (self.assetsPath + "jumping.scn"))
-//            
-//            animation.stop()
-//            self.potatoNode.addAnimationPlayer(animation, forKey: "jumping")
-            
+        let animations:[AnimationType] = [.running]
         
+        for anim in animations {
+            let animation = SCNAnimationPlayer.withScene(named: (self.assetsPath + anim.rawValue))
+        
+            animation.stop()
+            self.potatoNode.addAnimationPlayer(animation, forKey: anim.rawValue)
+        }
+    }
+    
+    func playAnimation(type: AnimationType) {
+        self.potatoNode.animationPlayer(forKey: type.rawValue)?.play()
+    }
+    
+    func stopAnimation(type: AnimationType) {
+        self.potatoNode.animationPlayer(forKey: type.rawValue)?.stop()
     }
 }
 
