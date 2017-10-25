@@ -24,6 +24,7 @@ class RunningState: BaseState {
         if stateClass == RunningState.self {
             return false
         }
+        
         return true 
     }
     

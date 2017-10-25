@@ -56,7 +56,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
             StandingState(scene: scene, character: character),
             WalkingState(scene: scene, character: character),
             RunningState(scene: scene, character: character),
-            JumpingState(scene: scene, character: character)
+            JumpingState(scene: scene, character: character),
+            JumpingMoveState(scene: scene, character: character)
             ])
         
         characterStateMachine.enter(StandingState.self)
@@ -122,9 +123,9 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         //select the point of view to use
         //sceneRenderer!.pointOfView = self.cameraNode
         
-        let trackingAgent = character.component(ofType: GKAgent3D.self)!
+        //let trackingAgent = character.component(ofType: GKAgent3D.self)!
         
-        self.potato  = PotatoEntity(model: .model1, scene: scene, position: SCNVector3(4,0,10), trakingAgent: trackingAgent)
+       // self.potato  = PotatoEntity(model: .model1, scene: scene, position: SCNVector3(4,0,10), trakingAgent: trackingAgent)
         
     }
     
@@ -135,12 +136,12 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     {
         // update characters
         character!.update(atTime: time, with: renderer)
-        let seekComponent = self.potato.component(ofType: SeekComponent.self)!
-        seekComponent.update(deltaTime: time)
-        
-        let component = self.character.component(ofType: GKAgent3D.self)!
-        component.position.x = self.character.node.presentation.position.x
-        component.position.z = self.character.node.presentation.position.z
+//        let seekComponent = self.potato.component(ofType: SeekComponent.self)!
+//        seekComponent.update(deltaTime: time)
+//        
+//        let component = self.character.component(ofType: GKAgent3D.self)!
+//        component.position.x = self.character.node.presentation.position.x
+//        component.position.z = self.character.node.presentation.position.z
        //print(component.rotation.columns.1)
 
     }
@@ -158,11 +159,16 @@ extension GameController : PadOverlayDelegate {
     func padOverlayVirtualStickInteractionDidChange(_ padNode: PadOverlay) {
         characterDirection = float2(Float(padNode.stickPosition.x), -Float(padNode.stickPosition.y))
         
-        if(character.isWalking) {
-            self.characterStateMachine.enter(WalkingState.self)
+        if(self.character.isJumping) {
+            self.characterStateMachine.enter(JumpingMoveState.self)
         }
         else {
-            self.characterStateMachine.enter(RunningState.self)
+            if(character.isWalking) {
+                self.characterStateMachine.enter(WalkingState.self)
+            }
+            else {
+                self.characterStateMachine.enter(RunningState.self)
+            }
         }
         
     }
@@ -204,7 +210,13 @@ extension GameController : SCNPhysicsContactDelegate {
             
             if(self.character.isJumping && contact.nodeB.physicsBody?.contactTestBitMask == ContactType.floor.rawValue) {
                 
+                //play animation
+                self.character.playAnimationOnce(type: .jumpingLanding)
+                
+                //set the jumping flag to false
                 self.character.isJumping = false
+                
+                //go to standing state mode
                 self.characterStateMachine.enter(StandingState.self)
             }
         }

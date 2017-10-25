@@ -28,6 +28,7 @@
 		D25AD5B11F8809DE00F2093E /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25AD5B01F8809DE00F2093E /* SceneKit.framework */; };
 		D25AD5B31F8809E500F2093E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25AD5B21F8809E500F2093E /* GameKit.framework */; };
 		D2719D901FA0EBDA00FCB61F /* AnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */; };
+		D2863F221FA14761004CCCDC /* JumpingMoveState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2863F211FA14761004CCCDC /* JumpingMoveState.swift */; };
 		D291BB541F8E976A00B2D111 /* SimdExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291BB531F8E976A00B2D111 /* SimdExtensions.swift */; };
 		D2E0A8981F993B5D00FCC255 /* JumpComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E0A8971F993B5D00FCC255 /* JumpComponent.swift */; };
 		D2EC857D1F83F1240093F009 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EC857C1F83F1240093F009 /* AppDelegate.swift */; };
@@ -60,6 +61,7 @@
 		D25AD5B01F8809DE00F2093E /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		D25AD5B21F8809E500F2093E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationType.swift; sourceTree = "<group>"; };
+		D2863F211FA14761004CCCDC /* JumpingMoveState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpingMoveState.swift; sourceTree = "<group>"; };
 		D291BB531F8E976A00B2D111 /* SimdExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimdExtensions.swift; sourceTree = "<group>"; };
 		D2E0A8971F993B5D00FCC255 /* JumpComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpComponent.swift; sourceTree = "<group>"; };
 		D2EC85791F83F1240093F009 /* SpicyHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpicyHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +124,7 @@
 				D25160EB1F940ACF00BF756A /* StandingState.swift */,
 				D25160ED1F940B0C00BF756A /* JumpingState.swift */,
 				D2F53D741F9A88FF00422F24 /* WalkingState.swift */,
+				D2863F211FA14761004CCCDC /* JumpingMoveState.swift */,
 			);
 			path = States;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2863F221FA14761004CCCDC /* JumpingMoveState.swift in Sources */,
 				D2EC85811F83F1240093F009 /* GameViewController.swift in Sources */,
 				D25AD5AC1F87EAC900F2093E /* GameController.swift in Sources */,
 				D25160EC1F940ACF00BF756A /* StandingState.swift in Sources */,
@@ -427,7 +431,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5W8YC8Y5Q7;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SpicyHero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vrmassoni.SpicyHero;
@@ -442,7 +446,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5W8YC8Y5Q7;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = SpicyHero/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vrmassoni.SpicyHero;
