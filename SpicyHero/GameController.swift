@@ -13,13 +13,15 @@ import SpriteKit
 import GameplayKit
 
 
+enum ContactType: Int {
+    case floor = 0b1 // 1
+}
+
 class GameController: NSObject, SCNSceneRendererDelegate {
     
     var character: Character!
     var characterStateMachine: GKStateMachine!
     var potato: PotatoEntity!
-    
-    var floor: SCNNode!
     
     private var scene: SCNScene!
     private weak var sceneRenderer: SCNSceneRenderer?
@@ -86,10 +88,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.cameraNode.constraints = [lookAtConstraint, distanceConstraint, keepAltitude]
     }
     
-    func setupNodes() {
-        self.floor = self.scene.rootNode.childNode(withName: "floor", recursively: false)
-    }
-    
     // MARK: Initializer
     init(scnView: SCNView)
     {
@@ -116,8 +114,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.setupCharacter()
         
         self.setupCamera()
-        
-        self.setupNodes()
         
         self.scene.physicsWorld.contactDelegate = self
     
@@ -206,7 +202,7 @@ extension GameController : SCNPhysicsContactDelegate {
         
         if contact.nodeA == self.character.node {
             
-            if(self.character.isJumping && contact.nodeB == self.floor) {
+            if(self.character.isJumping && contact.nodeB.physicsBody?.contactTestBitMask == ContactType.floor.rawValue) {
                 
                 self.character.isJumping = false
                 self.characterStateMachine.enter(StandingState.self)
