@@ -19,7 +19,7 @@ class SeekComponent: GKAgent3D, GKAgentDelegate
         let goal = GKGoal(toSeekAgent: target)
         
         self.behavior = GKBehavior(goal: goal, weight: 1)
-        self.maxSpeed = 0.000002//0.00001
+        self.maxSpeed = 0.00001
         self.maxAcceleration = 0.00000001
         self.mass = 30.0
         self.delegate = self
@@ -49,8 +49,6 @@ class SeekComponent: GKAgent3D, GKAgentDelegate
         let zVelocity = self.velocity.z
         
         let angle = -Float(atan2(zVelocity, xVelocity)) + Float.pi/2
-        
-        print (angle)
         
         modelComponent.modelNode.rotation = SCNVector4(0,1,0, angle)
         
