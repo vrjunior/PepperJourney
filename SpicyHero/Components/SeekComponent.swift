@@ -9,6 +9,7 @@
 import Foundation
 import GameplayKit
 import SceneKit
+import CoreGraphics
 
 class SeekComponent: GKAgent3D, GKAgentDelegate
 {
@@ -18,7 +19,7 @@ class SeekComponent: GKAgent3D, GKAgentDelegate
         let goal = GKGoal(toSeekAgent: target)
         
         self.behavior = GKBehavior(goal: goal, weight: 1)
-        self.maxSpeed = 0.00002
+        self.maxSpeed = 0.00001
         self.maxAcceleration = 0.00000001
         self.mass = 30.0
         self.delegate = self
@@ -34,7 +35,8 @@ class SeekComponent: GKAgent3D, GKAgentDelegate
         guard let modelComponent = self.entity?.component(ofType: ModelComponent.self) else {return}
         
 
-        position = float3(modelComponent.modelNode.presentation.position)
+        self.position = float3(modelComponent.modelNode.presentation.position)
+        self.position.y = 0
         
     }
     func agentDidUpdate(_ agent: GKAgent) {
@@ -43,7 +45,13 @@ class SeekComponent: GKAgent3D, GKAgentDelegate
         modelComponent.modelNode.position.x = position.x
         modelComponent.modelNode.position.z = position.z
         
-        print("speed: \(speed) | position: \(position)")
+        let xVelocity = self.velocity.x
+        let zVelocity = self.velocity.z
+        
+        let angle = -Float(atan2(zVelocity, xVelocity)) + Float.pi/2
+        
+        modelComponent.modelNode.rotation = SCNVector4(0,1,0, angle)
+        
     }
     
     override func update(deltaTime seconds: TimeInterval)
@@ -53,3 +61,4 @@ class SeekComponent: GKAgent3D, GKAgentDelegate
         
     }
 }
+

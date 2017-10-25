@@ -25,7 +25,7 @@ class ModelComponent: GKComponent
         
         self.modelNode = modelScene.rootNode.childNode(withName: "modelNode", recursively: false)
         
-        guard self.modelNode != nil else {return}
+        guard self.modelNode != nil else { return }
         
         self.modelNode.position = position
         

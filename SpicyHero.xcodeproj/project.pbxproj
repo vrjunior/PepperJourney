@@ -10,6 +10,7 @@
 		9C03A2421F9A33DD008F191A /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C03A2411F9A33DD008F191A /* EntityManager.swift */; };
 		9C1B829D1F9E2FD300173FF3 /* SeekComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B829C1F9E2FD300173FF3 /* SeekComponent.swift */; };
 		9C1B829F1F9FADD300173FF3 /* ModelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */; };
+		9C1B82A11FA0D09800173FF3 /* TrigonometryLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B82A01FA0D09600173FF3 /* TrigonometryLib.swift */; };
 		9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C6D3DEA1F93252500B8FA2A /* Game.scnassets */; };
 		9CFDF8701F9A36F7009385A7 /* PotatoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */; };
 		D207CFC51F8EA2D10084240E /* Dpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207CFC41F8EA2D10084240E /* Dpad.swift */; };
@@ -26,6 +27,7 @@
 		D25AD5AE1F87ECF900F2093E /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AD5AD1F87ECF900F2093E /* Character.swift */; };
 		D25AD5B11F8809DE00F2093E /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25AD5B01F8809DE00F2093E /* SceneKit.framework */; };
 		D25AD5B31F8809E500F2093E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25AD5B21F8809E500F2093E /* GameKit.framework */; };
+		D2719D901FA0EBDA00FCB61F /* AnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */; };
 		D291BB541F8E976A00B2D111 /* SimdExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291BB531F8E976A00B2D111 /* SimdExtensions.swift */; };
 		D2E0A8981F993B5D00FCC255 /* JumpComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E0A8971F993B5D00FCC255 /* JumpComponent.swift */; };
 		D2EC857D1F83F1240093F009 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EC857C1F83F1240093F009 /* AppDelegate.swift */; };
@@ -40,6 +42,7 @@
 		9C03A2411F9A33DD008F191A /* EntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
 		9C1B829C1F9E2FD300173FF3 /* SeekComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekComponent.swift; sourceTree = "<group>"; };
 		9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelComponent.swift; sourceTree = "<group>"; };
+		9C1B82A01FA0D09600173FF3 /* TrigonometryLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrigonometryLib.swift; sourceTree = "<group>"; };
 		9C6D3DEA1F93252500B8FA2A /* Game.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Game.scnassets; sourceTree = "<group>"; };
 		9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotatoEntity.swift; sourceTree = "<group>"; };
 		D207CFC41F8EA2D10084240E /* Dpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dpad.swift; sourceTree = "<group>"; };
@@ -56,6 +59,7 @@
 		D25AD5AD1F87ECF900F2093E /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		D25AD5B01F8809DE00F2093E /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		D25AD5B21F8809E500F2093E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationType.swift; sourceTree = "<group>"; };
 		D291BB531F8E976A00B2D111 /* SimdExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimdExtensions.swift; sourceTree = "<group>"; };
 		D2E0A8971F993B5D00FCC255 /* JumpComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpComponent.swift; sourceTree = "<group>"; };
 		D2EC85791F83F1240093F009 /* SpicyHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpicyHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +90,7 @@
 			children = (
 				D25160E91F94063400BF756A /* SCNAnimationPlayer + Load Animation.swift */,
 				D291BB531F8E976A00B2D111 /* SimdExtensions.swift */,
+				9C1B82A01FA0D09600173FF3 /* TrigonometryLib.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -95,6 +100,7 @@
 			children = (
 				D25160E31F93FA0800BF756A /* Character */,
 				9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */,
+				D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -268,6 +274,7 @@
 				D2E0A8981F993B5D00FCC255 /* JumpComponent.swift in Sources */,
 				D25AD5AE1F87ECF900F2093E /* Character.swift in Sources */,
 				D207CFC71F8EA5370084240E /* Stick.swift in Sources */,
+				9C1B82A11FA0D09800173FF3 /* TrigonometryLib.swift in Sources */,
 				9C03A2421F9A33DD008F191A /* EntityManager.swift in Sources */,
 				9C1B829F1F9FADD300173FF3 /* ModelComponent.swift in Sources */,
 				D2F53D751F9A88FF00422F24 /* WalkingState.swift in Sources */,
@@ -279,6 +286,7 @@
 				D25160EA1F94063400BF756A /* SCNAnimationPlayer + Load Animation.swift in Sources */,
 				D25160E51F93FA3400BF756A /* BaseState.swift in Sources */,
 				D207CFC51F8EA2D10084240E /* Dpad.swift in Sources */,
+				D2719D901FA0EBDA00FCB61F /* AnimationType.swift in Sources */,
 				D25160EE1F940B0C00BF756A /* JumpingState.swift in Sources */,
 				9CFDF8701F9A36F7009385A7 /* PotatoEntity.swift in Sources */,
 				D25AD5AA1F87E96A00F2093E /* Overlay.swift in Sources */,

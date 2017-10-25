@@ -14,20 +14,23 @@ class PotatoEntity: GKEntity
     // reference to main scene
     private var scene: SCNScene!
     
-    private var assetsPath: String!
+    private var potatoModel: ModelComponent!
     
     init(model: PotatoType, scene: SCNScene, position: SCNVector3, trakingAgent: GKAgent3D)
     {
         super.init()
         
-        let path = "Game.scnassets/Potato/Potato.scn"
-        let modelComponent = ModelComponent(modelPath: path, scene: scene, position: position)
-       
+        self.scene = scene
+
+        let path = "Game.scnassets/potato/potato.scn"
+        self.potatoModel = ModelComponent(modelPath: path, scene: scene, position: position)
         
-       self.addComponent(modelComponent)
+        self.addComponent(self.potatoModel)
         
         self.addSeekBehavior(trackingAgent: trakingAgent)
         self.loadAnimations()
+        
+        self.playAnimation(type: .running)
         
     }
     
@@ -42,16 +45,26 @@ class PotatoEntity: GKEntity
         //seekComponent.delegate = self
         self.addComponent(seekComponent)
     }
+    
     //Load all animation of the Potato
     private func loadAnimations()
     {
-
-//            let animation = SCNAnimationPlayer.withScene(named: (self.assetsPath + "jumping.scn"))
-//            
-//            animation.stop()
-//            self.potatoNode.addAnimationPlayer(animation, forKey: "jumping")
-            
+        let animations:[AnimationType] = [.running]
         
+        for anim in animations {
+            let animation = SCNAnimationPlayer.withScene(named: "Game.scnassets/potato/\(anim.rawValue).dae")
+        
+            animation.stop()
+            self.potatoModel.modelNode.addAnimationPlayer(animation, forKey: anim.rawValue)
+        }
+    }
+    
+    func playAnimation(type: AnimationType) {
+        self.potatoModel.modelNode.animationPlayer(forKey: type.rawValue)?.play()
+    }
+    
+    func stopAnimation(type: AnimationType) {
+        self.potatoModel.modelNode.animationPlayer(forKey: type.rawValue)?.stop()
     }
 }
 

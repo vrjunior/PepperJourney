@@ -40,7 +40,8 @@ class JumpComponent : GKComponent {
         let direction = SCNVector3(0, jumpDirection, 0)
         self.character.physicsBody?.applyForce(direction, asImpulse: true)
         
-        self.delegate?.didJumpBegin(node: character)
+        
+        self.delegate?.didJumpBegin(node: self.character)
         
     }
     
