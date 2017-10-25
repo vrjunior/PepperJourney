@@ -204,7 +204,7 @@ extension GameController : SCNPhysicsContactDelegate {
 
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         
-        if contact.nodeA.categoryBitMask == self.character.node.physicsBody?.categoryBitMask {
+        if contact.nodeA == self.character.node {
             
             if(self.character.isJumping && contact.nodeB == self.floor) {
                 
