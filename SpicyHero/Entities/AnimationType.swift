@@ -12,7 +12,8 @@ import Foundation
 enum AnimationType : String {
     case walking = "walking"
     case running =  "running"
-    case jumping = "jumping"
+    case jumpingImpulse = "jumpingImpulse"
+    case jumpingLanding = "jumpingLanding"
     case standing1 = "standing1"
     case standing2 = "standing2"
 }

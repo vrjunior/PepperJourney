@@ -13,13 +13,15 @@ import SpriteKit
 import GameplayKit
 
 
+enum ContactType: Int {
+    case floor = 0b1 // 1
+}
+
 class GameController: NSObject, SCNSceneRendererDelegate {
     
+    var entityManager: EntityManager!
     var character: Character!
     var characterStateMachine: GKStateMachine!
-    var potato: PotatoEntity!
-    
-    var floor: SCNNode!
     
     private var scene: SCNScene!
     private weak var sceneRenderer: SCNSceneRenderer?
@@ -54,7 +56,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
             StandingState(scene: scene, character: character),
             WalkingState(scene: scene, character: character),
             RunningState(scene: scene, character: character),
-            JumpingState(scene: scene, character: character)
+            JumpingState(scene: scene, character: character),
+            JumpingMoveState(scene: scene, character: character)
             ])
         
         characterStateMachine.enter(StandingState.self)
@@ -74,20 +77,16 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         let distanceConstraint = SCNDistanceConstraint(target: characterNode)
         
-        distanceConstraint.minimumDistance = 50//15
-        distanceConstraint.maximumDistance = 50//15
+        distanceConstraint.minimumDistance = 20
+        distanceConstraint.maximumDistance = 30
         
         let keepAltitude = SCNTransformConstraint.positionConstraint(inWorldSpace: true) { (node: SCNNode, position: SCNVector3) -> SCNVector3 in
             var position = float3(position)
-            position.y = self.character.node.presentation.position.y + 30//10
+            position.y = self.character.node.presentation.position.y + 15
             return SCNVector3(position)
         }
         
         self.cameraNode.constraints = [lookAtConstraint, distanceConstraint, keepAltitude]
-    }
-    
-    func setupNodes() {
-        self.floor = self.scene.rootNode.childNode(withName: "floor", recursively: false)
     }
     
     // MARK: Initializer
@@ -117,8 +116,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         self.setupCamera()
         
-        self.setupNodes()
-        
         self.scene.physicsWorld.contactDelegate = self
     
         scnView.scene = scene
@@ -126,10 +123,14 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         //select the point of view to use
         //sceneRenderer!.pointOfView = self.cameraNode
         
-        let trackingAgent = character.component(ofType: GKAgent3D.self)!
+        // Create the entity manager system
+        self.entityManager = EntityManager(scene: self.scene, chasedTarget: self.character)
         
-        self.potato  = PotatoEntity(model: .model1, scene: scene, position: SCNVector3(4,0,10), trakingAgent: trackingAgent)
-        
+        self.entityManager.createChasingPotato(position: SCNVector3(12,4,5))
+        self.entityManager.createChasingPotato(position: SCNVector3(22,4,52))
+        self.entityManager.createChasingPotato(position: SCNVector3(12,4,54))
+        self.entityManager.createChasingPotato(position: SCNVector3(12,4,54))
+        self.entityManager.createChasingPotato(position: SCNVector3(12,4,54))
     }
     
     
@@ -139,13 +140,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     {
         // update characters
         character!.update(atTime: time, with: renderer)
-        let seekComponent = self.potato.component(ofType: SeekComponent.self)!
-        seekComponent.update(deltaTime: time)
         
-        let component = self.character.component(ofType: GKAgent3D.self)!
-        component.position.x = self.character.node.presentation.position.x
-        component.position.z = self.character.node.presentation.position.z
-       //print(component.rotation.columns.1)
+        self.entityManager.update(deltaTime: time)
 
     }
     
@@ -162,11 +158,16 @@ extension GameController : PadOverlayDelegate {
     func padOverlayVirtualStickInteractionDidChange(_ padNode: PadOverlay) {
         characterDirection = float2(Float(padNode.stickPosition.x), -Float(padNode.stickPosition.y))
         
-        if(character.isWalking) {
-            self.characterStateMachine.enter(WalkingState.self)
+        if(self.character.isJumping) {
+            self.characterStateMachine.enter(JumpingMoveState.self)
         }
         else {
-            self.characterStateMachine.enter(RunningState.self)
+            if(character.isWalking) {
+                self.characterStateMachine.enter(WalkingState.self)
+            }
+            else {
+                self.characterStateMachine.enter(RunningState.self)
+            }
         }
         
     }
@@ -206,9 +207,15 @@ extension GameController : SCNPhysicsContactDelegate {
         
         if contact.nodeA == self.character.node {
             
-            if(self.character.isJumping && contact.nodeB == self.floor) {
+            if(self.character.isJumping && contact.nodeB.physicsBody?.contactTestBitMask == ContactType.floor.rawValue) {
                 
+                //play animation
+                self.character.playAnimationOnce(type: .jumpingLanding)
+                
+                //set the jumping flag to false
                 self.character.isJumping = false
+                
+                //go to standing state mode
                 self.characterStateMachine.enter(StandingState.self)
             }
         }

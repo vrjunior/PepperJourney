@@ -21,11 +21,6 @@ class StandingState: BaseState {
     
     @objc func runStadingAnimation() {
         
-        //check if there is a standing animation running before add another
-        if let standingType = self.standingType {
-            character.stopAnimation(type: standingType)
-        }
-    
         //get a random value 0 or 1
         let standing = Int(arc4random_uniform(2))
     
@@ -36,7 +31,7 @@ class StandingState: BaseState {
             standingType = .standing2
         }
         
-        character.playAnimation(type: standingType!)
+        character.playAnimationOnce(type: standingType!)
     }
     
     override func willExit(to nextState: GKState) {
