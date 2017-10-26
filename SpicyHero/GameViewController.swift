@@ -27,7 +27,7 @@ class GameViewController: UIViewController {
             self.gameView.contentScaleFactor = min(1.3, self.gameView.contentScaleFactor)
             self.gameView.preferredFramesPerSecond = 60
         } */
-        
+        gameView.showsStatistics = true
         gameController = GameController(scnView: gameView)
         
         // Configure the view

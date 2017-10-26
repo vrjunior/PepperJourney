@@ -103,8 +103,9 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         //load the main scene
         //
-        self.scene = SCNScene(named: "Game.scnassets/level1.scn")
-        
+//        self.scene = SCNScene(named: "Game.scnassets/level1.scn")
+		self.scene = SCNScene(named: "Game.scnassets/Scenario1.scn")
+		
         let overlay = SKScene(fileNamed: "overlay.sks") as! Overlay
         overlay.padDelegate = self
         overlay.movesDelegate = self
@@ -119,7 +120,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.scene.physicsWorld.contactDelegate = self
     
         scnView.scene = scene
-        
         //select the point of view to use
         //sceneRenderer!.pointOfView = self.cameraNode
         
