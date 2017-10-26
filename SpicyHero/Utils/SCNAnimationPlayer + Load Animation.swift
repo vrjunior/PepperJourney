@@ -13,6 +13,7 @@ extension SCNAnimationPlayer {
     
     // MARK: utils
     
+    // Search to first animation in nodes and parse it to animation player
     class func withScene(named: String) -> SCNAnimationPlayer {
         let scene = SCNScene( named: named )!
         // find top level animation

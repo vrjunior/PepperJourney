@@ -10,11 +10,6 @@ import GameplayKit
 import SceneKit
 import Foundation
 
-enum PotatoType: String
-{
-    case model1 = "potato"
-}
-
 class EntityManager
 {
     private var scene: SCNScene!
