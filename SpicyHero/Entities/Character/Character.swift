@@ -164,6 +164,10 @@ class Character: GKEntity {
             slideInWorld(fromPosition: startPosition, velocity: characterVelocity)
         }
         
+        let component = self.component(ofType: GKAgent3D.self)!
+        
+        component.position.x = self.node.presentation.position.x
+        component.position.z = self.node.presentation.position.z
     }
     
     
