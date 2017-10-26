@@ -18,20 +18,38 @@ enum PotatoType: String
 class EntityManager
 {
     private var scene: SCNScene!
+    private var chasedTargetAgent: GKAgent3D!
     
     // colocar aqui os components system
+    var seekComponentSystem = GKComponentSystem(componentClass: SeekComponent.self)
     
     // Game entities
-    var entities = [GKEntity]()
+    var potatoesEntities = [GKEntity]()
     
     /// Keeps track of the time for use in the update method.
     var previousUpdateTime: TimeInterval = 0
     
-    init (scene: SCNScene)
+    init (scene: SCNScene, chasedTarget: Character)
     {
         self.scene = scene
+        self.chasedTargetAgent = chasedTarget.component(ofType: GKAgent3D.self)
+        guard self.chasedTargetAgent != nil else { return }
         
     }
     
+    func createChasingPotato(position: SCNVector3)
+    {
+        let potato = PotatoEntity(model: PotatoType.model1 , scene: self.scene, position: position, trakingAgent: self.chasedTargetAgent)
+        
+        let seekComponent = potato.component(ofType: SeekComponent.self)!
+        
+        self.seekComponentSystem.addComponent(seekComponent)
+        
+        self.potatoesEntities.append(potato)
+    }
     
+    func update(deltaTime: TimeInterval)
+    {
+        self.seekComponentSystem.update(deltaTime: deltaTime)
+    }
 }

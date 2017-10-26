@@ -19,9 +19,9 @@ enum ContactType: Int {
 
 class GameController: NSObject, SCNSceneRendererDelegate {
     
+    var entityManager: EntityManager!
     var character: Character!
     var characterStateMachine: GKStateMachine!
-    var potato: PotatoEntity!
     
     private var scene: SCNScene!
     private weak var sceneRenderer: SCNSceneRenderer?
@@ -78,7 +78,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         let distanceConstraint = SCNDistanceConstraint(target: characterNode)
         
         distanceConstraint.minimumDistance = 20
-        distanceConstraint.maximumDistance = 20
+        distanceConstraint.maximumDistance = 30
         
         let keepAltitude = SCNTransformConstraint.positionConstraint(inWorldSpace: true) { (node: SCNNode, position: SCNVector3) -> SCNVector3 in
             var position = float3(position)
@@ -123,10 +123,14 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         //select the point of view to use
         //sceneRenderer!.pointOfView = self.cameraNode
         
-        let trackingAgent = character.component(ofType: GKAgent3D.self)!
+        // Create the entity manager system
+        self.entityManager = EntityManager(scene: self.scene, chasedTarget: self.character)
         
-        self.potato  = PotatoEntity(model: .model1, scene: scene, position: SCNVector3(4,0,10), trakingAgent: trackingAgent)
-        
+        self.entityManager.createChasingPotato(position: SCNVector3(12,4,5))
+        self.entityManager.createChasingPotato(position: SCNVector3(22,4,52))
+        self.entityManager.createChasingPotato(position: SCNVector3(12,4,54))
+        self.entityManager.createChasingPotato(position: SCNVector3(12,4,54))
+        self.entityManager.createChasingPotato(position: SCNVector3(12,4,54))
     }
     
     
@@ -137,8 +141,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         // update characters
         character!.update(atTime: time, with: renderer)
         
-        let seekComponent = self.potato.component(ofType: SeekComponent.self)!
-        seekComponent.update(deltaTime: time)
+        self.entityManager.update(deltaTime: time)
 
     }
     
