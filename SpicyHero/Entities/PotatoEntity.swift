@@ -9,6 +9,11 @@
 import Foundation
 import GameplayKit
 
+enum PotatoType: String
+{
+    case model1 = "potato"
+}
+
 class PotatoEntity: GKEntity
 {
     // reference to main scene

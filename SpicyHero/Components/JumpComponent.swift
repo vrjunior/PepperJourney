@@ -10,7 +10,7 @@ import Foundation
 import GameKit
 import SceneKit
 
-
+//Jump delegate to call when jump begins
 protocol JumpDelegate {
     func didJumpBegin(node:SCNNode)
 }
@@ -34,8 +34,7 @@ class JumpComponent : GKComponent {
     }
     
     
-    func jump()
-    {
+    func jump() {
         let jumpDirection = impulse
         let direction = SCNVector3(0, jumpDirection, 0)
         self.character.physicsBody?.applyForce(direction, asImpulse: true)

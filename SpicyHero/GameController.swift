@@ -136,8 +136,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     
     // MARK: - Update
     
-    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval)
-    {
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         // update characters
         character!.update(atTime: time, with: renderer)
         
