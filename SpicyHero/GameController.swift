@@ -125,12 +125,13 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         // Create the entity manager system
         self.entityManager = EntityManager(scene: self.scene, chasedTarget: self.character)
-        
-        self.entityManager.createChasingPotato(position: SCNVector3(12,4,5))
-        self.entityManager.createChasingPotato(position: SCNVector3(22,4,52))
-        self.entityManager.createChasingPotato(position: SCNVector3(12,4,54))
-        self.entityManager.createChasingPotato(position: SCNVector3(12,4,54))
-        self.entityManager.createChasingPotato(position: SCNVector3(12,4,54))
+		
+		let potatoSpawnPoint = SCNVector3(0,4,145)
+		var i = 40
+		while i > 0 {
+			self.entityManager.createChasingPotato(position: potatoSpawnPoint)
+			i -= 1
+		}
     }
     
     
