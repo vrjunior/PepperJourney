@@ -24,7 +24,7 @@ class Character: GKEntity {
     static private let initialPosition = float3(0, 5, 0)
     
     // actions
-    private let jumpImpulse:Float = 200.0
+    private let jumpImpulse:Float = 300.0
     var direction = float2()
     var walkSpeed: CGFloat = 1.0
     var isWalking: Bool = false
