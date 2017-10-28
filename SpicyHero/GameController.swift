@@ -13,8 +13,11 @@ import SpriteKit
 import GameplayKit
 
 
-enum ContactType: Int {
-    case floor = 0b1 // 1
+enum CategoryMaskType: Int {
+    case character = 0b1    // 1
+    case floor = 0b10      // 2
+    case potato = 0b100     // 4
+    case obstacle = 0b1000  // 8
 }
 
 class GameController: NSObject, SCNSceneRendererDelegate {
@@ -52,7 +55,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     
     func setupCharacter() {
         character = Character(scene: scene!, jumpDelegate: self)
-        character.node.physicsBody?.categoryBitMask = 0b1
         
         characterStateMachine = GKStateMachine(states: [
             StandingState(scene: scene, character: character),
@@ -172,7 +174,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         character!.update(atTime: time, with: renderer)
         
         self.entityManager.update(deltaTime: time)
-
+        
     }
 }
 
@@ -233,9 +235,14 @@ extension GameController : SCNPhysicsContactDelegate {
 
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         
-        if contact.nodeA == self.character.node {
+        if contact.nodeA == self.character.node
+        {
+            if contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue
+            {
+                self.setupTapToStart()
+            }
             
-            if(self.character.isJumping && contact.nodeB.physicsBody?.contactTestBitMask == ContactType.floor.rawValue) {
+            else if(self.character.isJumping && contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.floor.rawValue) {
                 
                 //play animation
                 self.character.playAnimationOnce(type: .jumpingLanding)
