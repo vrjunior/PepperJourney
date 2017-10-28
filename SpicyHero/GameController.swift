@@ -22,7 +22,9 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     var entityManager: EntityManager!
     var character: Character!
     var characterStateMachine: GKStateMachine!
+    var gameStateMachine: GKStateMachine!
     
+    private var scnView: SCNView!
     private var scene: SCNScene!
     private weak var sceneRenderer: SCNSceneRenderer?
     private var overlay: Overlay?
@@ -89,10 +91,19 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.cameraNode.constraints = [lookAtConstraint, distanceConstraint, keepAltitude]
     }
     
+    func setupGame() {
+        gameStateMachine = GKStateMachine(states: [
+            PauseState(scene: scene),
+            PlayState(scene: scene) ])
+    }
+    
     // MARK: Initializer
     init(scnView: SCNView)
     {
         super.init()
+        
+        //set scnView
+        self.scnView = scnView
         
         sceneRenderer = scnView
         sceneRenderer!.delegate = self
@@ -100,17 +111,11 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         // Uncomment to show statistics such as fps and timing information
         //scnView.showsStatistics = true
         
-        
         //load the main scene
-        //
-//        self.scene = SCNScene(named: "Game.scnassets/level1.scn")
 		self.scene = SCNScene(named: "Game.scnassets/Scenario1.scn")
-		
-        let overlay = SKScene(fileNamed: "overlay.sks") as! Overlay
-        overlay.padDelegate = self
-        overlay.movesDelegate = self
-        overlay.scaleMode = .aspectFill
-        scnView.overlaySKScene = overlay
+        
+        //setup game state machine
+        self.setupGame()
         
         //load the character
         self.setupCharacter()
@@ -132,8 +137,33 @@ class GameController: NSObject, SCNSceneRendererDelegate {
 			self.entityManager.createChasingPotato(position: potatoSpawnPoint)
 			i -= 1
 		}
+        
+        //setup tap to start
+        self.setupTapToStart()
     }
     
+    
+    func setupTapToStart() {
+        
+        let tapOverlay = SKScene(fileNamed: "StartOverlay.sks") as! StartOverlay
+        tapOverlay.tapDelegate = self
+        tapOverlay.scaleMode = .aspectFill
+        self.scnView.overlaySKScene = tapOverlay
+        
+        self.gameStateMachine.enter(PauseState.self)
+
+    }
+    
+    func startGame() {
+        
+        let overlay = SKScene(fileNamed: "ControlsOverlay.sks") as! Overlay
+        overlay.padDelegate = self
+        overlay.movesDelegate = self
+        overlay.scaleMode = .aspectFill
+        self.scnView.overlaySKScene = overlay
+        
+        self.gameStateMachine.enter(PlayState.self)
+    }
     
     // MARK: - Update
     
@@ -144,8 +174,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.entityManager.update(deltaTime: time)
 
     }
-    
-    
 }
 
 extension GameController : PadOverlayDelegate {
@@ -219,5 +247,11 @@ extension GameController : SCNPhysicsContactDelegate {
                 self.characterStateMachine.enter(StandingState.self)
             }
         }
+    }
+}
+
+extension GameController : TapToStartDelegate {
+    func didTap() {
+        self.startGame()
     }
 }
