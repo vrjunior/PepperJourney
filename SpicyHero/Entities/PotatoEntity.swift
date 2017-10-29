@@ -47,7 +47,6 @@ class PotatoEntity: GKEntity
     private func addSeekBehavior(trackingAgent: GKAgent3D)
     {
         let seekComponent = SeekComponent(target: trackingAgent)
-        //seekComponent.delegate = self
         self.addComponent(seekComponent)
     }
     
