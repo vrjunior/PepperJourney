@@ -108,10 +108,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         sceneRenderer = scnView
         sceneRenderer!.delegate = self
-        
-        // Uncomment to show statistics such as fps and timing information
-        //scnView.showsStatistics = true
-        
+                
         //load the main scene
 		self.scene = SCNScene(named: "Game.scnassets/Scenario1.scn")
         
@@ -126,8 +123,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.scene.physicsWorld.contactDelegate = self
     
         scnView.scene = scene
-        //select the point of view to use
-        //sceneRenderer!.pointOfView = self.cameraNode
         
         // Create the entity manager system
         self.entityManager = EntityManager(scene: self.scene, chasedTarget: self.character)
@@ -150,7 +145,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.entityManager.killAllPotatoes()
         
         let potatoSpawnPoint = SCNVector3(0,4,145)
-        var i = 40
+        var i = 20
         while i > 0 {
             self.entityManager.createChasingPotato(position: potatoSpawnPoint)
             i -= 1
