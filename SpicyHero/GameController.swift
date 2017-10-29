@@ -260,7 +260,10 @@ extension GameController : SCNPhysicsContactDelegate {
         {
             if contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue
             {
-                self.setupGameOver()
+                DispatchQueue.main.async { [unowned self] in
+                    self.setupGameOver()
+                }
+                
             }
             
             else if(self.character.isJumping && contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.floor.rawValue) {
