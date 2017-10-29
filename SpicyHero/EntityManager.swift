@@ -14,22 +14,42 @@ class EntityManager
 {
     private var scene: SCNScene!
     private var chasedTargetAgent: GKAgent3D!
+    weak var character: Character?
+    
     
     // colocar aqui os components system
     var seekComponentSystem = GKComponentSystem(componentClass: SeekComponent.self)
     
     // Game entities
     var potatoesEntities = [GKEntity]()
+    var potatoGeneratorSystem: PotatoGeneratorSystem?
     
     /// Keeps track of the time for use in the update method.
     var previousUpdateTime: TimeInterval = 0
     
-    init (scene: SCNScene, chasedTarget: Character)
+    init (scene: SCNScene, character: Character)
     {
         self.scene = scene
-        self.chasedTargetAgent = chasedTarget.component(ofType: GKAgent3D.self)
+        self.character = character
+        self.chasedTargetAgent = character.component(ofType: GKAgent3D.self)
         guard self.chasedTargetAgent != nil else { return }
         
+    }
+    
+    func setupGameInitialization()
+    {
+        guard let characterNode = self.character?.node else
+        {
+            fatalError("Error at find character node")
+        }
+        self.potatoGeneratorSystem = PotatoGeneratorSystem(scene: self.scene, characterNode: characterNode)
+        
+        let potatoSpawnPoint = SCNVector3(0,4,145)
+        var i = 10
+        while i > 0 {
+            self.createChasingPotato(position: potatoSpawnPoint)
+            i -= 1
+        }
     }
     
     func createChasingPotato(position: SCNVector3)
@@ -45,7 +65,21 @@ class EntityManager
     
     func update(deltaTime: TimeInterval)
     {
-        self.seekComponentSystem.update(deltaTime: deltaTime)
+        if seekComponentSystem.components.count > 0
+        {
+            self.seekComponentSystem.update(deltaTime: deltaTime)
+        }
+        // Verify the potato generator points
+        self.potatoGeneratorSystem?.update(deltaTime: deltaTime)
+        // Create points that are needed.
+        if let readyPotatoGenerators = self.potatoGeneratorSystem?.getReadyPotatoGenerators()
+        {
+            for potatoGenerator in readyPotatoGenerators
+            {
+                let creationPosition = potatoGenerator.position
+                self.createChasingPotato(position: creationPosition)
+            }
+        }
     }
     
     func killAllPotatoes ()

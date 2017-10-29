@@ -125,13 +125,12 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         scnView.scene = scene
         
         // Create the entity manager system
-        self.entityManager = EntityManager(scene: self.scene, chasedTarget: self.character)
-        
-        // Inittialize the game with the defaults settings.
-        self.initializeTheGame()
+        self.entityManager = EntityManager(scene: self.scene, character: self.character)
         
         //setup tap to start
         self.setupTapToStart()
+        
+        
     }
     
     func initializeTheGame () {
@@ -139,22 +138,18 @@ class GameController: NSObject, SCNSceneRendererDelegate {
 //        {
 //            fatalError("Character node not found")
 //        }
+        
+        // Show de character
+        self.character.node.isHidden = false
+
+        self.entityManager.setupGameInitialization()
+        
         self.character.node.position = SCNVector3(0,0,0)
         self.character.node.eulerAngles = SCNVector3(0,0,0)
-        
-        self.entityManager.killAllPotatoes()
-        
-        let potatoSpawnPoint = SCNVector3(0,4,145)
-        var i = 20
-        while i > 0 {
-            self.entityManager.createChasingPotato(position: potatoSpawnPoint)
-            i -= 1
-        }
-        
-        
     }
-    func setupTapToStart() {
-
+   
+    func setupTapToStart()
+    {
         let tapOverlay = SKScene(fileNamed: "StartOverlay.sks") as! StartOverlay
         tapOverlay.tapDelegate = self
         tapOverlay.scaleMode = .aspectFill
@@ -164,7 +159,11 @@ class GameController: NSObject, SCNSceneRendererDelegate {
 
     }
     
-    func setupGameOver() {
+    func setupGameOver()
+    {
+       
+        entityManager.killAllPotatoes()
+        self.character.node.isHidden = true
         let gameOverOverlay = SKScene(fileNamed: "GameOverOverlay.sks") as! GameOverOverlay
         gameOverOverlay.gameOverDelegate = self
         gameOverOverlay.scaleMode = .aspectFill
@@ -173,7 +172,10 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.gameStateMachine.enter(PauseState.self)
     }
     
-    func startGame() {
+    func startGame()
+    {
+        // Inittialize the game with the defaults settings.
+        self.initializeTheGame()
         
         let overlay = SKScene(fileNamed: "ControlsOverlay.sks") as! Overlay
         overlay.padDelegate = self
@@ -191,27 +193,35 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         character!.update(atTime: time, with: renderer)
         
         self.entityManager.update(deltaTime: time)
+        print(entityManager.potatoesEntities.count )
     }
 }
 
-extension GameController : PadOverlayDelegate {
+extension GameController : PadOverlayDelegate
+{
     
-    func padOverlayVirtualStickInteractionDidStart(_ padNode: PadOverlay) {
+    func padOverlayVirtualStickInteractionDidStart(_ padNode: PadOverlay)
+    {
         characterDirection = float2(Float(padNode.stickPosition.x), -Float(padNode.stickPosition.y))
     }
     
     
-    func padOverlayVirtualStickInteractionDidChange(_ padNode: PadOverlay) {
+    func padOverlayVirtualStickInteractionDidChange(_ padNode: PadOverlay)
+    {
         characterDirection = float2(Float(padNode.stickPosition.x), -Float(padNode.stickPosition.y))
         
-        if(self.character.isJumping) {
+        if(self.character.isJumping)
+        {
             self.characterStateMachine.enter(JumpingMoveState.self)
         }
-        else {
-            if(character.isWalking) {
+        else
+        {
+            if(character.isWalking)
+            {
                 self.characterStateMachine.enter(WalkingState.self)
             }
-            else {
+            else
+            {
                 self.characterStateMachine.enter(RunningState.self)
             }
         }
@@ -219,7 +229,8 @@ extension GameController : PadOverlayDelegate {
     }
     
     
-    func padOverlayVirtualStickInteractionDidEnd(_ padNode: PadOverlay) {
+    func padOverlayVirtualStickInteractionDidEnd(_ padNode: PadOverlay)
+    {
         characterDirection = [0, 0]
         
         self.characterStateMachine.enter(StandingState.self)
@@ -227,29 +238,37 @@ extension GameController : PadOverlayDelegate {
     
 }
 
-extension GameController : CharacterMovesDelegate {
-    func jump() {
+extension GameController : CharacterMovesDelegate
+{
+    func jump()
+    {
         self.characterStateMachine.enter(JumpingState.self)
     }
     
-    func attack() {
+    func attack()
+    {
         
     }
 }
 
 
-extension GameController : JumpDelegate {
+extension GameController : JumpDelegate
+{
     
-    func didJumpBegin(node: SCNNode) {
-        if(node == character.node) {
+    func didJumpBegin(node: SCNNode)
+    {
+        if(node == character.node)
+        {
             self.character.isJumping = true
         }
     }
 }
 
-extension GameController : SCNPhysicsContactDelegate {
+extension GameController : SCNPhysicsContactDelegate
+{
 
-    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact)
+    {
         
         if contact.nodeA == self.character.node
         {
@@ -261,7 +280,8 @@ extension GameController : SCNPhysicsContactDelegate {
                 
             }
             
-            else if(self.character.isJumping && contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.floor.rawValue) {
+            else if(self.character.isJumping && contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.floor.rawValue)
+            {
                 
                 //play animation
                 self.character.playAnimationOnce(type: .jumpingLanding)
@@ -276,18 +296,18 @@ extension GameController : SCNPhysicsContactDelegate {
     }
 }
 
-extension GameController : TapToStartDelegate {
-    func didTap() {
+extension GameController : TapToStartDelegate
+{
+    func didTap()
+    {
         self.startGame()
     }
 }
 
-extension GameController : GameOverDelegate {
+extension GameController : GameOverDelegate
+{
     func didTapToRestart()
     {
-        // Inittialize the game with the defaults settings.
-        self.initializeTheGame()
-        
         self.startGame()
     }
 }
