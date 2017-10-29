@@ -14,10 +14,10 @@ import GameplayKit
 
 
 enum CategoryMaskType: Int {
-    case character = 0b1    // 1
-    case floor = 0b10      // 2
-    case potato = 0b100     // 4
-    case obstacle = 0b1000  // 8
+    case character  = 0b1       // 1
+    case floor      = 0b10      // 2
+    case potato     = 0b100     // 4
+    case obstacle   = 0b1000    // 8
 }
 
 class GameController: NSObject, SCNSceneRendererDelegate {
@@ -100,8 +100,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     }
     
     // MARK: Initializer
-    init(scnView: SCNView)
-    {
+    init(scnView: SCNView) {
         super.init()
         
         //set scnView
@@ -140,8 +139,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.setupTapToStart()
     }
     
-    func initializeTheGame ()
-    {
+    func initializeTheGame () {
 //        guard let node = character.component(ofType: ModelComponent.self)?.modelNode else
 //        {
 //            fatalError("Character node not found")
@@ -171,8 +169,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
 
     }
     
-    func setupGameOver()
-    {
+    func setupGameOver() {
         let gameOverOverlay = SKScene(fileNamed: "GameOverOverlay.sks") as! GameOverOverlay
         gameOverOverlay.gameOverDelegate = self
         gameOverOverlay.scaleMode = .aspectFill
@@ -199,8 +196,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         character!.update(atTime: time, with: renderer)
         
         self.entityManager.update(deltaTime: time)
-        print (entityManager.potatoesEntities.count )
-        
     }
 }
 
@@ -288,8 +283,8 @@ extension GameController : TapToStartDelegate {
         self.startGame()
     }
 }
-extension GameController : GameOverDelegate
-{
+
+extension GameController : GameOverDelegate {
     func didTapToRestart()
     {
         // Inittialize the game with the defaults settings.
