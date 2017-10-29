@@ -33,6 +33,10 @@ class ModelComponent: GKComponent
 
         
     }
+    func removeModel()
+    {
+        self.modelNode.removeFromParentNode()
+    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -11,6 +11,8 @@
 		9C1B829D1F9E2FD300173FF3 /* SeekComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B829C1F9E2FD300173FF3 /* SeekComponent.swift */; };
 		9C1B829F1F9FADD300173FF3 /* ModelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */; };
 		9C1B82A11FA0D09800173FF3 /* TrigonometryLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B82A01FA0D09600173FF3 /* TrigonometryLib.swift */; };
+		9C4A656D1FA54B7700293460 /* GameOverOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C4A656C1FA54B7700293460 /* GameOverOverlay.sks */; };
+		9C4A656F1FA54D1F00293460 /* GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4A656E1FA54D1F00293460 /* GameOverOverlay.swift */; };
 		9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C6D3DEA1F93252500B8FA2A /* Game.scnassets */; };
 		9CFDF8701F9A36F7009385A7 /* PotatoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */; };
 		D207CFC51F8EA2D10084240E /* Dpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207CFC41F8EA2D10084240E /* Dpad.swift */; };
@@ -49,6 +51,8 @@
 		9C1B829C1F9E2FD300173FF3 /* SeekComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekComponent.swift; sourceTree = "<group>"; };
 		9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelComponent.swift; sourceTree = "<group>"; };
 		9C1B82A01FA0D09600173FF3 /* TrigonometryLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrigonometryLib.swift; sourceTree = "<group>"; };
+		9C4A656C1FA54B7700293460 /* GameOverOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverOverlay.sks; sourceTree = "<group>"; };
+		9C4A656E1FA54D1F00293460 /* GameOverOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverOverlay.swift; sourceTree = "<group>"; };
 		9C6D3DEA1F93252500B8FA2A /* Game.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Game.scnassets; sourceTree = "<group>"; };
 		9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotatoEntity.swift; sourceTree = "<group>"; };
 		D207CFC41F8EA2D10084240E /* Dpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dpad.swift; sourceTree = "<group>"; };
@@ -204,6 +208,8 @@
 				D2EC858A1F83F1240093F009 /* Info.plist */,
 				D28623B11FA3ADE700691E83 /* StartOverlay.sks */,
 				D28623BA1FA3B17000691E83 /* StartOverlay.swift */,
+				9C4A656C1FA54B7700293460 /* GameOverOverlay.sks */,
+				9C4A656E1FA54D1F00293460 /* GameOverOverlay.swift */,
 			);
 			path = SpicyHero;
 			sourceTree = "<group>";
@@ -279,6 +285,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C4A656D1FA54B7700293460 /* GameOverOverlay.sks in Resources */,
 				D2EC85891F83F1240093F009 /* LaunchScreen.storyboard in Resources */,
 				D28623B21FA3ADE700691E83 /* StartOverlay.sks in Resources */,
 				D23270991F8D5C5000BEA2BA /* ControlsOverlay.sks in Resources */,
@@ -307,6 +314,7 @@
 				9C1B829F1F9FADD300173FF3 /* ModelComponent.swift in Sources */,
 				D2F53D751F9A88FF00422F24 /* WalkingState.swift in Sources */,
 				D2EC857D1F83F1240093F009 /* AppDelegate.swift in Sources */,
+				9C4A656F1FA54D1F00293460 /* GameOverOverlay.swift in Sources */,
 				D291BB541F8E976A00B2D111 /* SimdExtensions.swift in Sources */,
 				D25AD5A61F87E1B100F2093E /* PadOverlay.swift in Sources */,
 				D25160E81F93FB7F00BF756A /* RunningState.swift in Sources */,

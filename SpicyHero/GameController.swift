@@ -132,21 +132,36 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         // Create the entity manager system
         self.entityManager = EntityManager(scene: self.scene, chasedTarget: self.character)
-		
-		let potatoSpawnPoint = SCNVector3(0,4,145)
-		var i = 40
-		while i > 0 {
-			self.entityManager.createChasingPotato(position: potatoSpawnPoint)
-			i -= 1
-		}
+        
+        // Inittialize the game with the defaults settings.
+        self.initializeTheGame()
         
         //setup tap to start
         self.setupTapToStart()
     }
     
-    
-    func setupTapToStart() {
+    func initializeTheGame ()
+    {
+//        guard let node = character.component(ofType: ModelComponent.self)?.modelNode else
+//        {
+//            fatalError("Character node not found")
+//        }
+        self.character.node.position = SCNVector3(0,0,0)
+        self.character.node.eulerAngles = SCNVector3(0,0,0)
         
+        self.entityManager.killAllPotatoes()
+        
+        let potatoSpawnPoint = SCNVector3(0,4,145)
+        var i = 40
+        while i > 0 {
+            self.entityManager.createChasingPotato(position: potatoSpawnPoint)
+            i -= 1
+        }
+        
+        
+    }
+    func setupTapToStart() {
+
         let tapOverlay = SKScene(fileNamed: "StartOverlay.sks") as! StartOverlay
         tapOverlay.tapDelegate = self
         tapOverlay.scaleMode = .aspectFill
@@ -154,6 +169,16 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         self.gameStateMachine.enter(PauseState.self)
 
+    }
+    
+    func setupGameOver()
+    {
+        let gameOverOverlay = SKScene(fileNamed: "GameOverOverlay.sks") as! GameOverOverlay
+        gameOverOverlay.gameOverDelegate = self
+        gameOverOverlay.scaleMode = .aspectFill
+        self.scnView.overlaySKScene = gameOverOverlay
+        
+        self.gameStateMachine.enter(PauseState.self)
     }
     
     func startGame() {
@@ -174,6 +199,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         character!.update(atTime: time, with: renderer)
         
         self.entityManager.update(deltaTime: time)
+        print (entityManager.potatoesEntities.count )
         
     }
 }
@@ -239,7 +265,7 @@ extension GameController : SCNPhysicsContactDelegate {
         {
             if contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue
             {
-                self.setupTapToStart()
+                self.setupGameOver()
             }
             
             else if(self.character.isJumping && contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.floor.rawValue) {
@@ -259,6 +285,16 @@ extension GameController : SCNPhysicsContactDelegate {
 
 extension GameController : TapToStartDelegate {
     func didTap() {
+        self.startGame()
+    }
+}
+extension GameController : GameOverDelegate
+{
+    func didTapToRestart()
+    {
+        // Inittialize the game with the defaults settings.
+        self.initializeTheGame()
+        
         self.startGame()
     }
 }

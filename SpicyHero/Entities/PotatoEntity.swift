@@ -64,6 +64,11 @@ class PotatoEntity: GKEntity
         }
     }
     
+    func removeModelNodeFromScene()
+    {
+        self.potatoModel.removeModel()
+    }
+    
     func playAnimation(type: AnimationType) {
         self.potatoModel.modelNode.animationPlayer(forKey: type.rawValue)?.play()
     }

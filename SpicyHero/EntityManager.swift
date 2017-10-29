@@ -47,4 +47,15 @@ class EntityManager
     {
         self.seekComponentSystem.update(deltaTime: deltaTime)
     }
+    
+    func killAllPotatoes ()
+    {
+        for potato in self.potatoesEntities
+        {
+            let potato = potato as! PotatoEntity
+            potato.removeModelNodeFromScene()
+        }
+        
+        self.potatoesEntities.removeAll()
+    }
 }
