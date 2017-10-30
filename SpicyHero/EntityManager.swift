@@ -42,7 +42,7 @@ class EntityManager
         {
             fatalError("Error at find character node")
         }
-        //self.potatoGeneratorSystem = PotatoGeneratorSystem(scene: self.scene, characterNode: characterNode)
+        self.potatoGeneratorSystem = PotatoGeneratorSystem(scene: self.scene, characterNode: characterNode)
         
         let potatoSpawnPoint = SCNVector3(0,4,145)
         var i = 10
