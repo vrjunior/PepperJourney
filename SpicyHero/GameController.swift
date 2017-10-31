@@ -64,7 +64,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
             JumpingMoveState(scene: scene, character: character)
             ])
         
-        characterStateMachine.enter(StandingState.self)
     }
     
     func setupCamera() {
@@ -170,6 +169,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.scnView.overlaySKScene = gameOverOverlay
         
         self.gameStateMachine.enter(PauseState.self)
+        
     }
     
     func startGame()
@@ -184,6 +184,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.scnView.overlaySKScene = overlay
         
         self.gameStateMachine.enter(PlayState.self)
+        
+        characterStateMachine.enter(StandingState.self)
     }
     
     // MARK: - Update
@@ -282,8 +284,10 @@ extension GameController : SCNPhysicsContactDelegate
             
             else if(self.character.isJumping && contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.floor.rawValue)
             {
+                //stop impulse animation
+                character.stopAnimation(type: .jumpingImpulse)
                 
-                //play animation
+                //play landing animation
                 self.character.playAnimationOnce(type: .jumpingLanding)
                 
                 //set the jumping flag to false

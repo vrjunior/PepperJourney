@@ -43,4 +43,12 @@ class StandingState: BaseState {
         }
     }
     
+    override func isValidNextState(_ stateClass: AnyClass) -> Bool {
+        if stateClass == StandingState.self {
+            return false
+        }
+        
+        return true
+    }
+    
 }
