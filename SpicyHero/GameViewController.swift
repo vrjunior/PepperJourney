@@ -2,7 +2,7 @@
 //  GameViewController.swift
 //  SpicyHero
 //
-//  Created by Valmir Junior on 03/10/17.
+//  Created by Valmi//.././r Junior on 03/10/17.
 //  Copyright © 2017 Valmir Junior. All rights reserved.
 //
 
@@ -12,7 +12,7 @@ import SceneKit
 import SpriteKit
 
 class GameViewController: UIViewController {
-
+	
     var gameView: SCNView {
         return view as! SCNView
     }
@@ -32,6 +32,7 @@ class GameViewController: UIViewController {
         
         // Configure the view
         gameView.backgroundColor = UIColor.black
+		
     }
     
     override var shouldAutorotate: Bool {

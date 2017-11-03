@@ -21,7 +21,7 @@ class Character: GKEntity {
     
     //speed multiplier
     static private let speedFactor: CGFloat = 100.0
-    static private let initialPosition = float3(0, 5, 0)
+    static public var initialPosition = float3(900, 0, 1260)
     
     // actions
     private let jumpImpulse:Float = 300.0
@@ -69,8 +69,9 @@ class Character: GKEntity {
     private func loadCharacter(scene: SCNScene) {
         /// Load character from external file
         node = scene.rootNode.childNode(withName: "character", recursively: false)
-        characterNode = node.childNode(withName: "characterNode", recursively: false)
+		characterNode = node.childNode(withName: "characterNode", recursively: false)
         self.visualTarget = node.childNode(withName: "visualTarget", recursively: false)
+		
         //characterNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
     }
     

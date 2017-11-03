@@ -35,7 +35,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     // Camera and targets
     private var cameraNode: SCNNode!
     private var pepperNode: SCNNode!
-    
+	
     // MARK: - Controling the character
     
     var characterDirection: vector_float2 {
@@ -110,7 +110,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         sceneRenderer!.delegate = self
                 
         //load the main scene
-		self.scene = SCNScene(named: "Game.scnassets/Scenario1.scn")
+		self.scene = SCNScene(named: "Game.scnassets/Fase1_Runner.scn")
         
         //setup game state machine
         self.setupGame()
@@ -129,8 +129,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         //setup tap to start
         self.setupTapToStart()
-        
-        
+		
     }
     
     func initializeTheGame () {
@@ -144,7 +143,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
 
         self.entityManager.setupGameInitialization()
         
-        self.character.node.position = SCNVector3(0,0,0)
+        self.character.node.position = SCNVector3(Character.initialPosition)
         self.character.node.eulerAngles = SCNVector3(0,0,0)
     }
    
@@ -271,7 +270,7 @@ extension GameController : SCNPhysicsContactDelegate
     {
         
         if contact.nodeA == self.character.node
-        {
+		{
             if contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue
             {
                 DispatchQueue.main.async { [unowned self] in
@@ -292,7 +291,30 @@ extension GameController : SCNPhysicsContactDelegate
                 //go to standing state mode
                 self.characterStateMachine.enter(StandingState.self)
             }
-        }
+			
+		}else if contact.nodeB == self.character.node
+		{
+			if contact.nodeA.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue
+			{
+				DispatchQueue.main.async { [unowned self] in
+					self.setupGameOver()
+				}
+				
+			}
+				
+			else if(self.character.isJumping && contact.nodeA.physicsBody?.categoryBitMask == CategoryMaskType.floor.rawValue)
+			{
+				
+				//play animation
+				self.character.playAnimationOnce(type: .jumpingLanding)
+				
+				//set the jumping flag to false
+				self.character.isJumping = false
+				
+				//go to standing state mode
+				self.characterStateMachine.enter(StandingState.self)
+			}
+		}
     }
 }
 
