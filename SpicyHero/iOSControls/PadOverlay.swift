@@ -79,7 +79,7 @@ class PadOverlay: SKSpriteNode {
         
         self.padBackground.alpha = 1
         
-        self.checkSafeAreaForPad()
+        self.startLocation = checkSafeArea(position: startLocation)
         
         self.padBackground.position = CGPoint(x: startLocation.x, y: startLocation.y)
         self.stick.position = CGPoint(x: self.startLocation.x, y: self.startLocation.y)
@@ -87,24 +87,27 @@ class PadOverlay: SKSpriteNode {
         updateStickPosition()
     }
     
-    func checkSafeAreaForPad() {
+    func checkSafeArea(position: CGPoint) -> CGPoint {
+        var positionSafe = position
+        let margin: CGFloat = 20
         
-        if(self.startLocation.x < self.lowerXSafeArea) {
-            self.startLocation.x = self.lowerXSafeArea - self.padSize.width / 2
+        if(position.x < self.lowerXSafeArea) {
+            positionSafe.x = (self.lowerXSafeArea - self.padSize.width / 2) + margin
         }
         
-        if(self.startLocation.x > self.higherXSafeArea) {
-            startLocation.x = self.higherXSafeArea
+        if(position.x > self.higherXSafeArea) {
+            positionSafe.x = self.higherXSafeArea
         }
         
-        if(self.startLocation.y < self.lowerYSafeArea) {
-            self.startLocation.y = self.lowerYSafeArea - self.padSize.height / 2
+        if(position.y < self.lowerYSafeArea) {
+            positionSafe.y = (self.lowerYSafeArea - self.padSize.height / 2) + margin
         }
         
-        if(self.startLocation.y > self.higherYSafeArea) {
-            self.startLocation.y = self.higherYSafeArea
+        if(position.y > self.higherYSafeArea) {
+            positionSafe.y = self.higherYSafeArea - margin
         }
         
+        return positionSafe
     }
     
     func destroyPad() {
@@ -150,6 +153,33 @@ class PadOverlay: SKSpriteNode {
         
         return CGFloat(angle * (180.0 / Float.pi))
     }
+    
+    func updatePadPosition(to point: CGPoint) {
+        
+        let padPosition = self.padBackground.position
+        var newPosition = CGPoint()
+        
+        if point.x > padPosition.x + padSize.width {
+            newPosition.x = point.x - padSize.width
+        }
+        else {
+            newPosition.x = point.x
+        }
+        
+        if point.y > padPosition.y + padSize.height {
+            newPosition.y = point.y - padSize.height
+        }
+        else {
+            newPosition.y = point.y
+        }
+        
+        startLocation = checkSafeArea(position: newPosition)
+        
+        //let moveAnimation = SKAction.move(to: startLocation, duration: 0.1)
+        //self.padBackground.run(moveAnimation)
+        
+        self.padBackground.position = startLocation
+    }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -167,8 +197,15 @@ class PadOverlay: SKSpriteNode {
             return
         }
         if touches.contains(trackingTouch!) {
-            updateStickPosition(forTouchLocation: trackingTouch!.location(in: self))
+            let location = trackingTouch!.location(in: self)
+            updateStickPosition(forTouchLocation: location)
             delegate?.padOverlayVirtualStickInteractionDidChange(self)
+            
+            
+            //TODO
+            if !self.padBackground.contains(location) {
+               // self.updatePadPosition(to: location)
+            }
         }
     }
 

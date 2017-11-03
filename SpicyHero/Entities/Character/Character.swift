@@ -77,7 +77,7 @@ class Character: GKEntity {
     
     //Load all animation in character node
     private func loadAnimations() {
-        let animTypes:[AnimationType] = [.walking, .running, .jumpingImpulse, .jumpingLanding, .standing1, .standing2]
+        let animTypes:[AnimationType] = [.walking, .running, .jumpingLanding, .jumpingImpulse, .standing1, .standing2]
         
         for anim in animTypes {
             let animation = SCNAnimationPlayer.withScene(named: "Game.scnassets/character/\(anim.rawValue).dae")
@@ -111,6 +111,12 @@ class Character: GKEntity {
         let animationPlayer = self.characterNode.animationPlayer(forKey: type.rawValue)
         animationPlayer?.play()
         animationPlayer?.stop(withBlendOutDuration: (animationPlayer?.animation.duration)!)
+    }
+    
+    func playOne(type: AnimationType) {
+        let animationPlayer = self.characterNode.animationPlayer(forKey: type.rawValue)
+        animationPlayer?.animation.repeatCount = 1
+        animationPlayer?.play()
     }
     
     func stopAnimation(type: AnimationType) {

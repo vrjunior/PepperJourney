@@ -20,7 +20,7 @@ class SeekComponent: GKAgent3D, GKAgentDelegate
         
         self.behavior = GKBehavior(goal: goal, weight: 1)
         // Default value = 10ˆ-5
-        self.maxSpeed = 0.00001
+        self.maxSpeed = 0.000001
         // Default value = 10ˆ-6
         self.maxAcceleration = 0.000001
         self.mass = 30.0

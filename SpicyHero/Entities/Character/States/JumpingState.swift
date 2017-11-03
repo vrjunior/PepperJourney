@@ -15,7 +15,7 @@ class JumpingState: BaseState
     
     override func didEnter(from previousState: GKState?) {
         
-        character.playAnimationOnce(type: .jumpingImpulse)
+        character.playAnimation(type: .jumpingImpulse)
         
         for comp in character.components {
             if comp is JumpComponent {
