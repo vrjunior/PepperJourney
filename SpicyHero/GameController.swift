@@ -300,16 +300,14 @@ extension GameController : SCNPhysicsContactDelegate
     }
 }
 
-extension GameController : TapToStartDelegate
-{
+extension GameController : TapToStartDelegate {
     func didTap()
     {
         self.startGame()
     }
 }
 
-extension GameController : GameOverDelegate
-{
+extension GameController : GameOverDelegate {
     func didTapToRestart()
     {
         self.startGame()
