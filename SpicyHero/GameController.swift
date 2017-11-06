@@ -108,7 +108,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         sceneRenderer!.delegate = self
                 
         //load the main scene
-		self.scene = SCNScene(named: "Game.scnassets/Fase1_Runner.scn")
+		self.scene = SCNScene(named: "Game.scnassets/Fase1Runner.scn")
         
         //setup game state machine
         self.setupGame()
