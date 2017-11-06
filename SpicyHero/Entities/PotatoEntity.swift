@@ -18,8 +18,12 @@ class PotatoEntity: GKEntity
 {
     // reference to main scene
     private var scene: SCNScene!
-    
+    // reference to potatoModel
     private var potatoModel: ModelComponent!
+    
+    //seek component params for potatoes
+    private let maxSpeed: Float = 0.000019
+    private let maxAcceleration: Float = 0.00001
     
     init(model: PotatoType, scene: SCNScene, position: SCNVector3, trakingAgent: GKAgent3D)
     {
@@ -46,7 +50,12 @@ class PotatoEntity: GKEntity
     
     private func addSeekBehavior(trackingAgent: GKAgent3D)
     {
-        let seekComponent = SeekComponent(target: trackingAgent)
+        guard let mass = self.potatoModel.modelNode.physicsBody?.mass else {
+            print("Could not get potato mass")
+            return
+        }
+        
+        let seekComponent = SeekComponent(target: trackingAgent, maxSpeed: maxSpeed, maxAcceleration: maxAcceleration, mass: Float(mass))
         self.addComponent(seekComponent)
     }
     

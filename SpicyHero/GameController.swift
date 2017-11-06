@@ -191,7 +191,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         character!.update(atTime: time, with: renderer)
         
         self.entityManager.update(deltaTime: time)
-        print(entityManager.potatoesEntities.count )
     }
 }
 
