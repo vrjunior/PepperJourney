@@ -69,8 +69,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     func setupCamera() {
         self.cameraNode = self.scene.rootNode.childNode(withName: "camera", recursively: true)!
         
-        guard let characterNode = self.character.node else
-        {
+        guard let characterNode = self.character.node else {
             print("Error with the target of the follow camera")
             return
         }
@@ -146,8 +145,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.character.node.eulerAngles = SCNVector3(0,0,0)
     }
    
-    func setupTapToStart()
-    {
+    func setupTapToStart() {
         let tapOverlay = SKScene(fileNamed: "StartOverlay.sks") as! StartOverlay
         tapOverlay.tapDelegate = self
         tapOverlay.scaleMode = .aspectFill
@@ -157,8 +155,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
 
     }
     
-    func setupGameOver()
-    {
+    func setupGameOver() {
        
         entityManager.killAllPotatoes()
         self.character.node.isHidden = true
@@ -171,14 +168,13 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
     }
     
-    func startGame()
-    {
+    func startGame() {
         // Inittialize the game with the defaults settings.
         self.initializeTheGame()
         
         let overlay = SKScene(fileNamed: "ControlsOverlay.sks") as! Overlay
         overlay.padDelegate = self
-        overlay.movesDelegate = self
+        overlay.controlsDelegate = self
         overlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = overlay
         
@@ -194,12 +190,10 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         character!.update(atTime: time, with: renderer)
         
         self.entityManager.update(deltaTime: time)
-        print(entityManager.potatoesEntities.count )
     }
 }
 
-extension GameController : PadOverlayDelegate
-{
+extension GameController : PadOverlayDelegate {
     
     func padOverlayVirtualStickInteractionDidStart(_ padNode: PadOverlay)
     {
@@ -207,22 +201,17 @@ extension GameController : PadOverlayDelegate
     }
     
     
-    func padOverlayVirtualStickInteractionDidChange(_ padNode: PadOverlay)
-    {
+    func padOverlayVirtualStickInteractionDidChange(_ padNode: PadOverlay) {
         characterDirection = float2(Float(padNode.stickPosition.x), -Float(padNode.stickPosition.y))
         
-        if(self.character.isJumping)
-        {
+        if(self.character.isJumping) {
             self.characterStateMachine.enter(JumpingMoveState.self)
         }
-        else
-        {
-            if(character.isWalking)
-            {
+        else {
+            if(character.isWalking) {
                 self.characterStateMachine.enter(WalkingState.self)
             }
-            else
-            {
+            else {
                 self.characterStateMachine.enter(RunningState.self)
             }
         }
@@ -230,8 +219,7 @@ extension GameController : PadOverlayDelegate
     }
     
     
-    func padOverlayVirtualStickInteractionDidEnd(_ padNode: PadOverlay)
-    {
+    func padOverlayVirtualStickInteractionDidEnd(_ padNode: PadOverlay) {
         characterDirection = [0, 0]
         
         self.characterStateMachine.enter(StandingState.self)
@@ -239,50 +227,45 @@ extension GameController : PadOverlayDelegate
     
 }
 
-extension GameController : CharacterMovesDelegate
-{
-    func jump()
-    {
+extension GameController : Controls {
+    func jump() {
         self.characterStateMachine.enter(JumpingState.self)
     }
     
-    func attack()
-    {
+    func attack() {
         
+    }
+    
+    func pause() {
+        print("pause pressed")
+        //self.gameStateMachine.enter(PauseState.self)
     }
 }
 
 
-extension GameController : JumpDelegate
-{
+extension GameController : JumpDelegate {
     
-    func didJumpBegin(node: SCNNode)
-    {
-        if(node == character.node)
-        {
+    func didJumpBegin(node: SCNNode) {
+        if(node == character.node) {
             self.character.isJumping = true
         }
     }
 }
 
-extension GameController : SCNPhysicsContactDelegate
-{
+extension GameController : SCNPhysicsContactDelegate {
 
-    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact)
-    {
-        
-        if contact.nodeA == self.character.node
-		{
-            if contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue
-            {
+    func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+		
+        if contact.nodeA == self.character.node {
+            if contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue {
                 DispatchQueue.main.async { [unowned self] in
                     self.setupGameOver()
                 }
                 
             }
             
-            else if(self.character.isJumping && contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.floor.rawValue)
-            {
+            else if(self.character.isJumping && contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.floor.rawValue) {
+                
                 //stop impulse animation
                 character.stopAnimation(type: .jumpingImpulse)
                 
@@ -323,15 +306,13 @@ extension GameController : SCNPhysicsContactDelegate
 }
 
 extension GameController : TapToStartDelegate {
-    func didTap()
-    {
+    func didTap() {
         self.startGame()
     }
 }
 
 extension GameController : GameOverDelegate {
-    func didTapToRestart()
-    {
+    func didTapToRestart() {
         self.startGame()
     }
 }

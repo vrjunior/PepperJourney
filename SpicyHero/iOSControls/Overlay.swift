@@ -10,6 +10,14 @@ import Foundation
 import SceneKit
 import SpriteKit
 
+// MARK: Controls Protocol
+
+protocol Controls {
+    func jump()
+    func attack()
+    func pause()
+}
+
 class Overlay: SKScene {
     
     var padDelegate:PadOverlayDelegate? {
@@ -18,8 +26,9 @@ class Overlay: SKScene {
         }
     }
     var padOverlay: PadOverlay!
+    var pauseButton: SKSpriteNode!
     var movesOverlay: SKSpriteNode!
-    var movesDelegate: CharacterMovesDelegate?
+    var controlsDelegate: Controls?
         
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -30,9 +39,8 @@ class Overlay: SKScene {
         #if os( iOS )
             self.padOverlay = self.childNode(withName: "padOverlay") as! PadOverlay
             self.movesOverlay = self.childNode(withName: "movesOverlay") as! SKSpriteNode
+            self.pauseButton = self.childNode(withName: "pauseButton") as! SKSpriteNode
         #endif
-        
-       //self.padOverlay.size = CGSize(width: self.size.width / 2, height: self.size.height)
         
         // disable interation in scenekit
         self.isUserInteractionEnabled = false
@@ -40,26 +48,26 @@ class Overlay: SKScene {
     
 }
 
-
-// MARK: Character Moves
-
-protocol CharacterMovesDelegate {
-    func jump()
-    func attack()
-}
-
 extension Overlay {
     
     override func didMove(to view: SKView) {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(Overlay.handleTap(_:)))
+        
         view.addGestureRecognizer(tapGesture)
         
     }
     
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
-        if(isMovesSide(location: gesture.location(in: self.view))) {
-            self.movesDelegate?.jump()
+        
+        var location = gesture.location(in: self.view)
+        location.y = (self.view?.frame.height)! - location.y
+        
+        if pauseButton.contains(location) {
+            self.controlsDelegate?.pause()
+        }
+        else if(isMovesSide(location: location)) {
+            self.controlsDelegate?.jump()
         }
     }
     

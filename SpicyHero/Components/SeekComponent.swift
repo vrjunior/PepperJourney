@@ -13,17 +13,17 @@ import CoreGraphics
 
 class SeekComponent: GKAgent3D, GKAgentDelegate
 {
-    init(target: GKAgent3D)
+    init(target: GKAgent3D, maxSpeed: Float, maxAcceleration: Float, mass: Float)
     {
         super.init()
         let goal = GKGoal(toSeekAgent: target)
         
         self.behavior = GKBehavior(goal: goal, weight: 1)
         // Default value = 10ˆ-5
-        self.maxSpeed = 0.000001
+        self.maxSpeed = maxSpeed
         // Default value = 10ˆ-6
-        self.maxAcceleration = 0.000001
-        self.mass = 30.0
+        self.maxAcceleration = maxAcceleration
+        self.mass = mass
         self.delegate = self
     }
     

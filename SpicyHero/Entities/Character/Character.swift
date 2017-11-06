@@ -22,6 +22,7 @@ class Character: GKEntity {
     //speed multiplier
     static private let speedFactor: CGFloat = 100.0
     static public var initialPosition = float3(900, 0, 1260)
+
     
     // actions
     private let jumpImpulse:Float = 300.0
@@ -29,7 +30,7 @@ class Character: GKEntity {
     var walkSpeed: CGFloat = 1.0
     var isWalking: Bool = false
     var isJumping: Bool = false
-	static let walkRunPercentage: Float = 0.5
+	static let walkRunPercentage: Float = 0.7
     
     // Direction
     private var previousUpdateTime: TimeInterval = 0
