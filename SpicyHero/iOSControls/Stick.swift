@@ -19,11 +19,12 @@ import SpriteKit
         let lineWidth:CGFloat = 2.0
         
         let stickRect = CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(self.size.width), height: CGFloat(self.size.height))
+    
         let stick = SKShapeNode()
         stick.path = CGPath( ellipseIn: stickRect, transform: nil)
         stick.lineWidth = lineWidth
-        stick.fillColor = SKColor.white
         stick.strokeColor = SKColor.black
+        stick.fillColor = SKColor.white
         
         self.addChild(stick)
     }
