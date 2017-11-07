@@ -20,12 +20,12 @@ func planeIntersect(planeNormal: float3, planeDist: Float, rayOrigin: float3, ra
 class Character: GKEntity {
     
     //speed multiplier
-    static private let speedFactor: CGFloat = 100.0
+    static private let speedFactor: CGFloat = 100
     static public var initialPosition = float3(900, 0, 1260)
 
     
     // actions
-    private let jumpImpulse:Float = 300.0
+    private let jumpImpulse:Float = 800
     var direction = float2()
     var walkSpeed: CGFloat = 1.0
     var isWalking: Bool = false
