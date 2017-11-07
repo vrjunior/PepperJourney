@@ -108,7 +108,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         sceneRenderer!.delegate = self
                 
         //load the main scene
-		self.scene = SCNScene(named: "Game.scnassets/Fase1_Runner.scn")
+		self.scene = SCNScene(named: "Game.scnassets/Fase1Runner.scn")
         
         //setup game state machine
         self.setupGame()
@@ -256,52 +256,43 @@ extension GameController : SCNPhysicsContactDelegate {
 
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
 		
+        var characterNode: SCNNode?
+        var anotherNode: SCNNode?
+        
         if contact.nodeA == self.character.node {
-            if contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue {
+            
+            characterNode = contact.nodeA
+            anotherNode = contact.nodeB
+        
+        } else if contact.nodeB == self.character.node {
+            characterNode = contact.nodeB
+            anotherNode = contact.nodeA
+		}
+    
+        if characterNode != nil {
+            if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue {
+                
                 DispatchQueue.main.async { [unowned self] in
                     self.setupGameOver()
                 }
-                
+        
             }
-            
-            else if(self.character.isJumping && contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.floor.rawValue) {
-                
-                //stop impulse animation
-                character.stopAnimation(type: .jumpingImpulse)
-                
-                //play landing animation
-                self.character.playAnimationOnce(type: .jumpingLanding)
-                
-                //set the jumping flag to false
-                self.character.isJumping = false
-                
-                //go to standing state mode
-                self.characterStateMachine.enter(StandingState.self)
+        
+            else if(self.character.isJumping && anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.floor.rawValue) {
+        
+            //stop impulse animation
+            self.character.stopAnimation(type: .jumpingImpulse)
+        
+            //play landing animation
+            self.character.playAnimationOnce(type: .jumpingLanding)
+        
+            //set the jumping flag to false
+            self.character.isJumping = false
+        
+            //go to standing state mode
+            self.characterStateMachine.enter(StandingState.self)
             }
-			
-		}else if contact.nodeB == self.character.node
-		{
-			if contact.nodeA.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue
-			{
-				DispatchQueue.main.async { [unowned self] in
-					self.setupGameOver()
-				}
-				
-			}
-				
-			else if(self.character.isJumping && contact.nodeA.physicsBody?.categoryBitMask == CategoryMaskType.floor.rawValue)
-			{
-				
-				//play animation
-				self.character.playAnimationOnce(type: .jumpingLanding)
-				
-				//set the jumping flag to false
-				self.character.isJumping = false
-				
-				//go to standing state mode
-				self.characterStateMachine.enter(StandingState.self)
-			}
-		}
+        }
     }
 }
 

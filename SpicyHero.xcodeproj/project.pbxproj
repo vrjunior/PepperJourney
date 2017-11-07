@@ -18,14 +18,11 @@
 		9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C6D3DEA1F93252500B8FA2A /* Game.scnassets */; };
 		9CFDF8701F9A36F7009385A7 /* PotatoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */; };
 		B0FDBAE91FA9F35600D4B08D /* pixelate.metal in Sources */ = {isa = PBXBuildFile; fileRef = B0FDBAE01FA9F35600D4B08D /* pixelate.metal */; };
-		B0FDBAEA1FA9F35600D4B08D /* toon.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0FDBAE11FA9F35600D4B08D /* toon.plist */; };
 		B0FDBAEB1FA9F35600D4B08D /* lines.fsh in Resources */ = {isa = PBXBuildFile; fileRef = B0FDBAE21FA9F35600D4B08D /* lines.fsh */; };
 		B0FDBAEC1FA9F35600D4B08D /* prep.vsh in Resources */ = {isa = PBXBuildFile; fileRef = B0FDBAE31FA9F35600D4B08D /* prep.vsh */; };
 		B0FDBAED1FA9F35600D4B08D /* lines.vsh in Resources */ = {isa = PBXBuildFile; fileRef = B0FDBAE41FA9F35600D4B08D /* lines.vsh */; };
-		B0FDBAEE1FA9F35600D4B08D /* lines.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0FDBAE51FA9F35600D4B08D /* lines.plist */; };
 		B0FDBAEF1FA9F35600D4B08D /* prep.fsh in Resources */ = {isa = PBXBuildFile; fileRef = B0FDBAE61FA9F35600D4B08D /* prep.fsh */; };
 		B0FDBAF01FA9F35600D4B08D /* toon.metal in Sources */ = {isa = PBXBuildFile; fileRef = B0FDBAE71FA9F35600D4B08D /* toon.metal */; };
-		B0FDBAF11FA9F35600D4B08D /* pixelate.plist in Resources */ = {isa = PBXBuildFile; fileRef = B0FDBAE81FA9F35600D4B08D /* pixelate.plist */; };
 		D207CFC51F8EA2D10084240E /* Dpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207CFC41F8EA2D10084240E /* Dpad.swift */; };
 		D207CFC71F8EA5370084240E /* Stick.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207CFC61F8EA5370084240E /* Stick.swift */; };
 		D23270991F8D5C5000BEA2BA /* ControlsOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D23270981F8D5C5000BEA2BA /* ControlsOverlay.sks */; };
@@ -69,14 +66,11 @@
 		9C6D3DEA1F93252500B8FA2A /* Game.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Game.scnassets; sourceTree = "<group>"; };
 		9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotatoEntity.swift; sourceTree = "<group>"; };
 		B0FDBAE01FA9F35600D4B08D /* pixelate.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = pixelate.metal; path = SpicyHero/Shaders/pixelate.metal; sourceTree = SOURCE_ROOT; };
-		B0FDBAE11FA9F35600D4B08D /* toon.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = toon.plist; path = SpicyHero/Shaders/toon.plist; sourceTree = SOURCE_ROOT; };
 		B0FDBAE21FA9F35600D4B08D /* lines.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = lines.fsh; path = SpicyHero/Shaders/lines.fsh; sourceTree = SOURCE_ROOT; };
 		B0FDBAE31FA9F35600D4B08D /* prep.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = prep.vsh; path = SpicyHero/Shaders/prep.vsh; sourceTree = SOURCE_ROOT; };
 		B0FDBAE41FA9F35600D4B08D /* lines.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = lines.vsh; path = SpicyHero/Shaders/lines.vsh; sourceTree = SOURCE_ROOT; };
-		B0FDBAE51FA9F35600D4B08D /* lines.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = lines.plist; path = SpicyHero/Shaders/lines.plist; sourceTree = SOURCE_ROOT; };
 		B0FDBAE61FA9F35600D4B08D /* prep.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = prep.fsh; path = SpicyHero/Shaders/prep.fsh; sourceTree = SOURCE_ROOT; };
 		B0FDBAE71FA9F35600D4B08D /* toon.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = toon.metal; path = SpicyHero/Shaders/toon.metal; sourceTree = SOURCE_ROOT; };
-		B0FDBAE81FA9F35600D4B08D /* pixelate.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = pixelate.plist; path = SpicyHero/Shaders/pixelate.plist; sourceTree = SOURCE_ROOT; };
 		D207CFC41F8EA2D10084240E /* Dpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dpad.swift; sourceTree = "<group>"; };
 		D207CFC61F8EA5370084240E /* Stick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stick.swift; sourceTree = "<group>"; };
 		D23270981F8D5C5000BEA2BA /* ControlsOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ControlsOverlay.sks; sourceTree = "<group>"; };
@@ -148,14 +142,11 @@
 			isa = PBXGroup;
 			children = (
 				B0FDBAE21FA9F35600D4B08D /* lines.fsh */,
-				B0FDBAE51FA9F35600D4B08D /* lines.plist */,
 				B0FDBAE41FA9F35600D4B08D /* lines.vsh */,
 				B0FDBAE01FA9F35600D4B08D /* pixelate.metal */,
-				B0FDBAE81FA9F35600D4B08D /* pixelate.plist */,
 				B0FDBAE61FA9F35600D4B08D /* prep.fsh */,
 				B0FDBAE31FA9F35600D4B08D /* prep.vsh */,
 				B0FDBAE71FA9F35600D4B08D /* toon.metal */,
-				B0FDBAE11FA9F35600D4B08D /* toon.plist */,
 			);
 			name = Shaders;
 			path = "New Group1";
@@ -327,16 +318,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0FDBAEE1FA9F35600D4B08D /* lines.plist in Resources */,
 				9C4A656D1FA54B7700293460 /* GameOverOverlay.sks in Resources */,
 				D2EC85891F83F1240093F009 /* LaunchScreen.storyboard in Resources */,
 				B0FDBAEB1FA9F35600D4B08D /* lines.fsh in Resources */,
-				B0FDBAF11FA9F35600D4B08D /* pixelate.plist in Resources */,
 				B0FDBAED1FA9F35600D4B08D /* lines.vsh in Resources */,
 				D28623B21FA3ADE700691E83 /* StartOverlay.sks in Resources */,
 				D23270991F8D5C5000BEA2BA /* ControlsOverlay.sks in Resources */,
 				B0FDBAEF1FA9F35600D4B08D /* prep.fsh in Resources */,
-				B0FDBAEA1FA9F35600D4B08D /* toon.plist in Resources */,
 				B0FDBAEC1FA9F35600D4B08D /* prep.vsh in Resources */,
 				9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */,
 				D2EC85861F83F1240093F009 /* Assets.xcassets in Resources */,
