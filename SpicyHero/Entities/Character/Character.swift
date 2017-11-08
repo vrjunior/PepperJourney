@@ -21,7 +21,7 @@ class Character: GKEntity {
     
     //speed multiplier
     static private let speedFactor: CGFloat = 100
-    static public var initialPosition = float3(900, 0, 1260)
+    public var initialPosition = float3(0, 0, 0)
 
     
     // actions
@@ -73,7 +73,7 @@ class Character: GKEntity {
 		characterNode = node.childNode(withName: "characterNode", recursively: false)
         self.visualTarget = node.childNode(withName: "visualTarget", recursively: false)
 		
-        //characterNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+        self.initialPosition = float3(node.position)
     }
     
     //Load all animation in character node
@@ -218,7 +218,7 @@ class Character: GKEntity {
     }
 
     func resetCharacterPosition() {
-        node.simdPosition = Character.initialPosition
+        node.simdPosition = self.initialPosition
     }
     
     

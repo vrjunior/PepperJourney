@@ -141,7 +141,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
 
         self.entityManager.setupGameInitialization()
         
-        self.character.node.position = SCNVector3(Character.initialPosition)
         self.character.node.eulerAngles = SCNVector3(0,0,0)
     }
    
