@@ -40,8 +40,11 @@ class JumpComponent : GKComponent {
         self.character.physicsBody?.applyForce(direction, asImpulse: true)
         
         
-        self.delegate?.didJumpBegin(node: self.character)
-        
+        //yeahhhh, gambiarra a gente aceita, o que a gente não aceita é a derrota
+        let when = DispatchTime.now() + 0.1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.delegate?.didJumpBegin(node: self.character)
+        }
     }
     
 }

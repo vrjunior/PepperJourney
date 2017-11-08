@@ -25,6 +25,10 @@ class RunningState: BaseState {
             return false
         }
         
+        if character.isJumping {
+            return false
+        }
+        
         return true 
     }
     

@@ -277,16 +277,17 @@ extension GameController : SCNPhysicsContactDelegate {
         
             }
         
-            else if(self.character.isJumping && anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.floor.rawValue) {
+            else if self.character.isJumping && anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.floor.rawValue {
+                
+            //set the jumping flag to false
+            self.character.isJumping = false
         
             //stop impulse animation
             self.character.stopAnimation(type: .jumpingImpulse)
         
             //play landing animation
             self.character.playAnimationOnce(type: .jumpingLanding)
-        
-            //set the jumping flag to false
-            self.character.isJumping = false
+    
         
             //go to standing state mode
             self.characterStateMachine.enter(StandingState.self)
