@@ -108,7 +108,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         sceneRenderer!.delegate = self
                 
         //load the main scene
-		self.scene = SCNScene(named: "Game.scnassets/Fase1Runner.scn")
+		self.scene = SCNScene(named: "Game.scnassets/Scenario1.scn")
         
         //setup game state machine
         self.setupGame()
@@ -158,6 +158,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
        
         entityManager.killAllPotatoes()
         self.character.node.isHidden = true
+        self.character.node.position = SCNVector3(self.character.initialPosition)
         let gameOverOverlay = SKScene(fileNamed: "GameOverOverlay.sks") as! GameOverOverlay
         gameOverOverlay.gameOverDelegate = self
         gameOverOverlay.scaleMode = .aspectFill
