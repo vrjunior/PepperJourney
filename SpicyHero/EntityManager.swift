@@ -44,7 +44,7 @@ class EntityManager
         }
         self.potatoGeneratorSystem = PotatoGeneratorSystem(scene: self.scene, characterNode: characterNode)
         
-        let potatoSpawnPoint = SCNVector3(0,4,145)
+        let potatoSpawnPoint = SCNVector3(0,50,145)
         var i = 10
         while i > 0 {
             self.createChasingPotato(position: potatoSpawnPoint)
