@@ -117,7 +117,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.setupCharacter()
         
         self.setupCamera()
-		//self.scnView.debugOptions = SCNDebugOptions.showPhysicsShapes
+		self.scnView.debugOptions = SCNDebugOptions.showPhysicsShapes
         self.scene.physicsWorld.contactDelegate = self
     
         scnView.scene = scene
