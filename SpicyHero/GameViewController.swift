@@ -29,7 +29,6 @@ class GameViewController: UIViewController {
         } */
         gameView.showsStatistics = true
         gameController = GameController(scnView: gameView)
-        
         // Configure the view
         gameView.backgroundColor = UIColor.black
 		

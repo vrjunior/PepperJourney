@@ -108,7 +108,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         sceneRenderer!.delegate = self
                 
         //load the main scene
-		self.scene = SCNScene(named: "Game.scnassets/Scenario1.scn")
+		self.scene = SCNScene(named: "Game.scnassets/Fase1.scn")
         
         //setup game state machine
         self.setupGame()
@@ -117,7 +117,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.setupCharacter()
         
         self.setupCamera()
-        
+		self.scnView.debugOptions = SCNDebugOptions.showPhysicsShapes
         self.scene.physicsWorld.contactDelegate = self
     
         scnView.scene = scene
