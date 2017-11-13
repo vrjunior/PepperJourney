@@ -29,6 +29,11 @@ class Overlay: SKScene {
     var pauseButton: SKSpriteNode!
     var movesOverlay: SKSpriteNode!
     var controlsDelegate: Controls?
+    public var isPausedControl:Bool = false {
+        didSet {
+            self.padOverlay.isPausedControl = self.isPausedControl
+        }
+    }
         
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -66,9 +71,13 @@ extension Overlay {
         if pauseButton.contains(location) {
             self.controlsDelegate?.pause()
         }
-        else if(isMovesSide(location: location)) {
-            self.controlsDelegate?.jump()
+        
+        if !isPausedControl {
+            if(isMovesSide(location: location)) {
+                self.controlsDelegate?.jump()
+            }
         }
+        
     }
     
     func isMovesSide(location: CGPoint) -> Bool{

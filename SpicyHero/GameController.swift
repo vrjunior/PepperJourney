@@ -173,10 +173,10 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         // Inittialize the game with the defaults settings.
         self.initializeTheGame()
         
-        let overlay = SKScene(fileNamed: "ControlsOverlay.sks") as! Overlay
-        overlay.padDelegate = self
-        overlay.controlsDelegate = self
-        overlay.scaleMode = .aspectFill
+        overlay = SKScene(fileNamed: "ControlsOverlay.sks") as? Overlay
+        overlay?.padDelegate = self
+        overlay?.controlsDelegate = self
+        overlay?.scaleMode = .aspectFill
         self.scnView.overlaySKScene = overlay
         
         self.gameStateMachine.enter(PlayState.self)
@@ -191,6 +191,20 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         character!.update(atTime: time, with: renderer)
         
         self.entityManager.update(deltaTime: time)
+    }
+    
+    func pauseGame() {
+        self.gameStateMachine.enter(PauseState.self)
+        
+        //pause controls
+        self.overlay?.isPausedControl = true
+    }
+    
+    func unpauseGame() {
+        self.gameStateMachine.enter(PlayState.self)
+        
+        //unpause controls
+        self.overlay?.isPausedControl = false
     }
 }
 
@@ -238,8 +252,12 @@ extension GameController : Controls {
     }
     
     func pause() {
-        print("pause pressed")
-        //self.gameStateMachine.enter(PauseState.self)
+        if self.scene.isPaused {
+            self.unpauseGame()
+        }
+        else {
+            self.pauseGame()
+        }
     }
 }
 

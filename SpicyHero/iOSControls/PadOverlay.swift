@@ -49,6 +49,15 @@ class PadOverlay: SKSpriteNode {
     private var higherYSafeArea: CGFloat!
     
     
+    public var isPausedControl = false {
+        didSet {
+            if isPausedControl == true {
+                self.destroyPad()
+            }
+        }
+    }
+    
+    
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
@@ -182,14 +191,15 @@ class PadOverlay: SKSpriteNode {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        trackingTouch = touches.first
-        startLocation = trackingTouch!.location(in: self)
-        startLocation.x -= self.padSize.width / 2
-        startLocation.y -= self.padSize.height / 2
-        self.buildPad()
-        updateStickPosition(forTouchLocation: trackingTouch!.location(in: self))
-        delegate?.padOverlayVirtualStickInteractionDidStart(self)
+        if !isPausedControl {
+            trackingTouch = touches.first
+            startLocation = trackingTouch!.location(in: self)
+            startLocation.x -= self.padSize.width / 2
+            startLocation.y -= self.padSize.height / 2
+            self.buildPad()
+            updateStickPosition(forTouchLocation: trackingTouch!.location(in: self))
+            delegate?.padOverlayVirtualStickInteractionDidStart(self)
+        }
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
