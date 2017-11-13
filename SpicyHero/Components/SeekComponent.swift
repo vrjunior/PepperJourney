@@ -55,7 +55,7 @@ class SeekComponent: GKAgent3D, GKAgentDelegate
         modelComponent.modelNode.rotation = SCNVector4(0,1,0, angle)
         
     }
-    
+
     override func update(deltaTime seconds: TimeInterval)
     {
         // It calls agentWillUpdate before and agentDidUpdate after

@@ -15,7 +15,6 @@ import SpriteKit
 protocol Controls {
     func jump()
     func attack()
-    func pause()
 }
 
 class Overlay: SKScene {
@@ -29,6 +28,8 @@ class Overlay: SKScene {
     var pauseButton: SKSpriteNode!
     var movesOverlay: SKSpriteNode!
     var controlsDelegate: Controls?
+    var gameOptionsDelegate: GameOptions?
+    
     public var isPausedControl:Bool = false {
         didSet {
             self.padOverlay.isPausedControl = self.isPausedControl
@@ -69,13 +70,11 @@ extension Overlay {
         location.y = (self.view?.frame.height)! - location.y
         
         if pauseButton.contains(location) {
-            self.controlsDelegate?.pause()
+            self.gameOptionsDelegate?.pause()
         }
         
-        if !isPausedControl {
-            if(isMovesSide(location: location)) {
-                self.controlsDelegate?.jump()
-            }
+        else if(isMovesSide(location: location)) {
+            self.controlsDelegate?.jump()
         }
         
     }

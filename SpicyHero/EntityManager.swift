@@ -80,6 +80,7 @@ class EntityManager
                 self.createChasingPotato(position: creationPosition)
             }
         }
+        self.previousUpdateTime = deltaTime
     }
     
     func killAllPotatoes ()

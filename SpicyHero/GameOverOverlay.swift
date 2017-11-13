@@ -8,14 +8,10 @@
 import Foundation
 import SpriteKit
 
-protocol GameOverDelegate
-{
-    func didTapToRestart()
-}
 
 class GameOverOverlay: SKScene
 {
-    var gameOverDelegate: GameOverDelegate?
+    var gameOptionsDelegate: GameOptions?
     
     override func sceneDidLoad()
     {
@@ -32,6 +28,6 @@ class GameOverOverlay: SKScene
     
     @objc func handleTap(_ gesture: UITapGestureRecognizer)
     {
-        gameOverDelegate?.didTapToRestart()
+        gameOptionsDelegate?.restart()
     }
 }

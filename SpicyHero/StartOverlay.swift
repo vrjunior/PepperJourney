@@ -9,13 +9,10 @@
 import Foundation
 import SpriteKit
 
-protocol TapToStartDelegate {
-    func didTap()
-}
 
 class StartOverlay: SKScene {
     
-    var tapDelegate:TapToStartDelegate?
+    var gameOptionsDelegate:GameOptions?
     
     override func sceneDidLoad() {
         
@@ -29,6 +26,6 @@ class StartOverlay: SKScene {
     }
     
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
-        tapDelegate?.didTap()
+        gameOptionsDelegate?.start()
     }
 }

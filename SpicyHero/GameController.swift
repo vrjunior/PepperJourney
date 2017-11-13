@@ -31,7 +31,10 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     private var scnView: SCNView!
     private var scene: SCNScene!
     private weak var sceneRenderer: SCNSceneRenderer?
-    private var overlay: Overlay?
+    
+    //overlays
+    private var controlsOverlay: Overlay?
+    private var pauseOverlay: PauseOverlay?
     
     // Camera and targets
     private var cameraNode: SCNNode!
@@ -147,7 +150,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
    
     func setupTapToStart() {
         let tapOverlay = SKScene(fileNamed: "StartOverlay.sks") as! StartOverlay
-        tapOverlay.tapDelegate = self
+        tapOverlay.gameOptionsDelegate = self
         tapOverlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = tapOverlay
         
@@ -161,7 +164,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.character.node.isHidden = true
         self.character.node.position = SCNVector3(self.character.initialPosition)
         let gameOverOverlay = SKScene(fileNamed: "GameOverOverlay.sks") as! GameOverOverlay
-        gameOverOverlay.gameOverDelegate = self
+        gameOverOverlay.gameOptionsDelegate = self
         gameOverOverlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = gameOverOverlay
         
@@ -173,11 +176,12 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         // Inittialize the game with the defaults settings.
         self.initializeTheGame()
         
-        overlay = SKScene(fileNamed: "ControlsOverlay.sks") as? Overlay
-        overlay?.padDelegate = self
-        overlay?.controlsDelegate = self
-        overlay?.scaleMode = .aspectFill
-        self.scnView.overlaySKScene = overlay
+        controlsOverlay = SKScene(fileNamed: "ControlsOverlay.sks") as? Overlay
+        controlsOverlay?.padDelegate = self
+        controlsOverlay?.controlsDelegate = self
+        controlsOverlay?.gameOptionsDelegate = self
+        controlsOverlay?.scaleMode = .aspectFill
+        self.scnView.overlaySKScene = controlsOverlay
         
         self.gameStateMachine.enter(PlayState.self)
         
@@ -193,19 +197,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.entityManager.update(deltaTime: time)
     }
     
-    func pauseGame() {
-        self.gameStateMachine.enter(PauseState.self)
-        
-        //pause controls
-        self.overlay?.isPausedControl = true
-    }
-    
-    func unpauseGame() {
-        self.gameStateMachine.enter(PlayState.self)
-        
-        //unpause controls
-        self.overlay?.isPausedControl = false
-    }
 }
 
 extension GameController : PadOverlayDelegate {
@@ -250,15 +241,7 @@ extension GameController : Controls {
     func attack() {
         
     }
-    
-    func pause() {
-        if self.scene.isPaused {
-            self.unpauseGame()
-        }
-        else {
-            self.pauseGame()
-        }
-    }
+
 }
 
 
@@ -326,14 +309,41 @@ extension GameController : SCNPhysicsContactDelegate {
     }
 }
 
-extension GameController : TapToStartDelegate {
-    func didTap() {
+extension GameController : GameOptions {
+    
+    func start() {
         self.startGame()
     }
+    
+    func restart() {
+        self.startGame()
+    }
+    
+    func resume() {
+        self.gameStateMachine.enter(PlayState.self)
+        
+        //unpause controls
+        self.controlsOverlay?.isPausedControl = false
+        
+        self.scnView.overlaySKScene = controlsOverlay
+    }
+    
+    func pause() {
+        
+        if(!self.scene.isPaused){
+            if self.pauseOverlay == nil {
+                self.pauseOverlay = SKScene(fileNamed: "PauseOverlay.sks") as? PauseOverlay
+                self.pauseOverlay?.gameOptionsDelegate = self
+            }
+            
+            self.scnView.overlaySKScene = self.pauseOverlay
+            self.gameStateMachine.enter(PauseState.self)
+            
+            //pause controls
+            self.controlsOverlay?.isPausedControl = true
+        }
+        
+    }
+    
 }
 
-extension GameController : GameOverDelegate {
-    func didTapToRestart() {
-        self.startGame()
-    }
-}
