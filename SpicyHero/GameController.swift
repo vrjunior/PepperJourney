@@ -18,6 +18,7 @@ enum CategoryMaskType: Int {
     case floor      = 0b10      // 2
     case potato     = 0b100     // 4
     case obstacle   = 0b1000    // 8
+    case river      = 0b10000   // 16
 }
 
 class GameController: NSObject, SCNSceneRendererDelegate {
@@ -277,6 +278,16 @@ extension GameController : SCNPhysicsContactDelegate {
                 }
         
             }
+            
+        
+            else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.river.rawValue {
+                
+                DispatchQueue.main.async { [unowned self] in
+                    self.setupGameOver()
+                }
+                
+            }
+
         
             else if self.character.isJumping && anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.floor.rawValue {
                 
