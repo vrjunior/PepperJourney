@@ -203,18 +203,21 @@ class PadOverlay: SKSpriteNode {
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if(touches.count > 1) {
-            return
-        }
-        if touches.contains(trackingTouch!) {
-            let location = trackingTouch!.location(in: self)
-            updateStickPosition(forTouchLocation: location)
-            delegate?.padOverlayVirtualStickInteractionDidChange(self)
-            
-            
-            //TODO
-            if !self.padBackground.contains(location) {
-               // self.updatePadPosition(to: location)
+        
+        if !isPausedControl {
+            if(touches.count > 1) {
+                return
+            }
+            if touches.contains(trackingTouch!) {
+                let location = trackingTouch!.location(in: self)
+                updateStickPosition(forTouchLocation: location)
+                delegate?.padOverlayVirtualStickInteractionDidChange(self)
+                
+                
+                //TODO
+                if !self.padBackground.contains(location) {
+                   // self.updatePadPosition(to: location)
+                }
             }
         }
     }
