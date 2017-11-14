@@ -38,14 +38,16 @@ class SeekComponent: GKAgent3D, GKAgentDelegate
         
 
         self.position = float3(modelComponent.modelNode.presentation.position)
-        self.position.y = 0
+        
         
     }
     func agentDidUpdate(_ agent: GKAgent) {
         
         guard let modelComponent = self.entity?.component(ofType: ModelComponent.self) else {return}
+        
         modelComponent.modelNode.position.x = position.x
         modelComponent.modelNode.position.z = position.z
+        modelComponent.modelNode.position.y = position.y
         
         let xVelocity = self.velocity.x
         let zVelocity = self.velocity.z
