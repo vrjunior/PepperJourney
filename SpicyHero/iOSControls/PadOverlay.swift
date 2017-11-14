@@ -124,6 +124,7 @@ class PadOverlay: SKSpriteNode {
         self.padBackground.alpha = 0
         self.delegate?.padOverlayVirtualStickInteractionDidEnd(self)
         
+        self.delegate?.padOverlayVirtualStickInteractionDidEnd(self)
     }
     
     var stickSize: CGSize {

@@ -11,15 +11,15 @@ import SpriteKit
 
 class PauseOverlay: SKScene {
     
-    private var resumeButton: SKLabelNode!
-    private var restartButton: SKLabelNode!
+    private var resumeButton: SKSpriteNode!
+    private var restartButton: SKSpriteNode!
     public var gameOptionsDelegate: GameOptions?
     
     override func sceneDidLoad() {
         
         //setup nodes
-        self.resumeButton = self.childNode(withName: "resumeButton") as! SKLabelNode
-        self.restartButton = self.childNode(withName: "restartButton") as! SKLabelNode
+        self.resumeButton = self.childNode(withName: "resumeButton") as! SKSpriteNode
+        self.restartButton = self.childNode(withName: "restartButton") as! SKSpriteNode
         
     }
     
