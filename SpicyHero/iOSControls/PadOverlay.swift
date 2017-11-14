@@ -123,6 +123,7 @@ class PadOverlay: SKSpriteNode {
         
         self.padBackground.alpha = 0
         
+        self.delegate?.padOverlayVirtualStickInteractionDidEnd(self)
     }
     
     var stickSize: CGSize {
@@ -224,7 +225,6 @@ class PadOverlay: SKSpriteNode {
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.destroyPad()
-        self.delegate?.padOverlayVirtualStickInteractionDidEnd(self)
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
