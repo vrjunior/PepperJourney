@@ -93,4 +93,24 @@ class EntityManager
         
         self.potatoesEntities.removeAll()
     }
+    func killAPotato(node: SCNNode)
+    {
+        
+        for index in 0 ..< self.potatoesEntities.count
+        {
+            let potato = self.potatoesEntities[index] as! PotatoEntity
+            guard let potatoNode = potato.component(ofType: ModelComponent.self)?.modelNode else
+            {
+                return
+            }
+            
+            if node == potatoNode
+            {
+                potato.removeModelNodeFromScene()
+                potatoesEntities.remove(at: index)
+                break
+            }
+            
+        }
+    }
 }

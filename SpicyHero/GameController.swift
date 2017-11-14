@@ -82,12 +82,12 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         let distanceConstraint = SCNDistanceConstraint(target: characterNode)
         
-        distanceConstraint.minimumDistance = 20
-        distanceConstraint.maximumDistance = 30
+        distanceConstraint.minimumDistance = 70
+        distanceConstraint.maximumDistance = 70
         
         let keepAltitude = SCNTransformConstraint.positionConstraint(inWorldSpace: true) { (node: SCNNode, position: SCNVector3) -> SCNVector3 in
             var position = float3(position)
-            position.y = self.character.node.presentation.position.y + 15
+            position.y = self.character.node.presentation.position.y + 50
             return SCNVector3(position)
         }
         
@@ -198,6 +198,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         character!.update(atTime: time, with: renderer)
         
         self.entityManager.update(deltaTime: time)
+        print(self.entityManager.potatoesEntities.count)
     }
     
 }
@@ -279,49 +280,67 @@ extension GameController : SCNPhysicsContactDelegate {
             anotherNode = contact.nodeA
         }
         
-        guard characterNode != nil else
+        if characterNode != nil
         {
-            fatalError("Error in contact masks")
-        }
-        
-        if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue {
-            
-            DispatchQueue.main.async { [unowned self] in
-                self.setupGameOver()
-            }
-    
-        }
-        
-        else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.lake.rawValue {
-            
-            if anotherNode?.name == "lakeBottom"
-            {
+            if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue {
+                
                 DispatchQueue.main.async { [unowned self] in
                     self.setupGameOver()
                 }
+                
             }
-            else if anotherNode?.name == "lakeSurface"
-            {
-                //characterNode?.physicsBody?.velocityFactor.y = 0.00000001
-                characterNode?.physicsBody?.damping = 0.99999
+                
+            else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.lake.rawValue {
+                
+                if anotherNode?.name == "lakeBottom"
+                {
+                    DispatchQueue.main.async { [unowned self] in
+                        self.setupGameOver()
+                    }
+                }
+                else if anotherNode?.name == "lakeSurface"
+                {
+                    characterNode?.physicsBody?.damping = 0.99999
+                    
+                    //pause controls
+                    self.controlsOverlay?.isPausedControl = true
+                }
+            }
+                
+                
+            else if self.character.isJumping && anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.solidSurface.rawValue {
+                
+                //set the jumping flag to false
+                self.character.isJumping = false
+                
+                //stop impulse animation
+                self.character.stopAnimation(type: .jumpingImpulse)
+                
+                //play landing animation
+                self.character.playAnimationOnce(type: .jumpingLanding)
+                
+                
+                //go to standing state mode
+                self.characterStateMachine.enter(StandingState.self)
             }
         }
-
         
-        else if self.character.isJumping && anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.solidSurface.rawValue {
-                
-            //set the jumping flag to false
-            self.character.isJumping = false
-        
-            //stop impulse animation
-            self.character.stopAnimation(type: .jumpingImpulse)
-        
-            //play landing animation
-            self.character.playAnimationOnce(type: .jumpingLanding)
-    
-        
-            //go to standing state mode
-            self.characterStateMachine.enter(StandingState.self)
+        else if contact.nodeA.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue &&
+            contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.lake.rawValue
+        {
+            if contact.nodeB.name == "lakeBottom"
+            {
+                self.entityManager.killAPotato(node: contact.nodeA)
+            }
+        }
+        else if contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue &&
+            contact.nodeA.physicsBody?.categoryBitMask == CategoryMaskType.lake.rawValue
+        {
+            if contact.nodeA.name == "lakeBottom"
+            {
+                self.entityManager.killAPotato(node: contact.nodeB)
+            }
+            
         }
     }
 }

@@ -22,8 +22,9 @@ class PotatoEntity: GKEntity
     private var potatoModel: ModelComponent!
     
     //seek component params for potatoes
-    private let maxSpeed: Float = 0.00003
-    private let maxAcceleration: Float = 1
+
+    private let maxSpeed: Float = 0.000009//0.00002
+    private let maxAcceleration: Float = 0.000001 
     
     init(model: PotatoType, scene: SCNScene, position: SCNVector3, trakingAgent: GKAgent3D)
     {
@@ -83,6 +84,11 @@ class PotatoEntity: GKEntity
     
     func stopAnimation(type: AnimationType) {
         self.potatoModel.modelNode.animationPlayer(forKey: type.rawValue)?.stop()
+    }
+    
+    func getPosition() -> SCNVector3
+    {
+        return self.potatoModel.modelNode.presentation.position
     }
 }
 
