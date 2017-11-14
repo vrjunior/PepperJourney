@@ -13,6 +13,7 @@ class PauseState: GameBaseState {
     
     override func didEnter(from previousState: GKState?) {
         self.scene.isPaused = true
+        self.scene.rootNode.isPaused = true
     }
     
 }

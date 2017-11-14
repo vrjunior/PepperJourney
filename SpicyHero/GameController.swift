@@ -381,7 +381,7 @@ extension GameController : GameOptions {
             self.gameStateMachine.enter(PauseState.self)
             
             //pause controls
-            self.controlsOverlay?.isPausedControl = true
+           self.controlsOverlay?.isPausedControl = true
         }
         
     }

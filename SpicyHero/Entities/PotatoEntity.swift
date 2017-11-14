@@ -58,6 +58,8 @@ class PotatoEntity: GKEntity
         
         let seekComponent = SeekComponent(target: trackingAgent, maxSpeed: maxSpeed, maxAcceleration: maxAcceleration, mass: Float(mass))
         self.addComponent(seekComponent)
+        
+    
     }
     
     //Load all animation of the Potato
@@ -89,6 +91,10 @@ class PotatoEntity: GKEntity
     func getPosition() -> SCNVector3
     {
         return self.potatoModel.modelNode.presentation.position
+    }
+    
+    func pauseNode() {
+        self.potatoModel.modelNode.isPaused = true
     }
 }
 

@@ -45,21 +45,30 @@ class SeekComponent: GKAgent3D, GKAgentDelegate
         
         guard let modelComponent = self.entity?.component(ofType: ModelComponent.self) else {return}
         
-        modelComponent.modelNode.position.x = position.x
-        modelComponent.modelNode.position.z = position.z
-        modelComponent.modelNode.position.y = position.y
+        if !modelComponent.modelNode.isPaused {
         
-        let xVelocity = self.velocity.x
-        let zVelocity = self.velocity.z
-        
-        let angle = -Float(atan2(zVelocity, xVelocity)) + Float.pi/2
-        
-        modelComponent.modelNode.rotation = SCNVector4(0,1,0, angle)
+            modelComponent.modelNode.position.x = position.x
+            modelComponent.modelNode.position.z = position.z
+            modelComponent.modelNode.position.y = position.y
+            
+            let xVelocity = self.velocity.x
+            let zVelocity = self.velocity.z
+            
+            let angle = -Float(atan2(zVelocity, xVelocity)) + Float.pi/2
+            
+            modelComponent.modelNode.rotation = SCNVector4(0,1,0, angle)
+            
+        }
         
     }
 
     override func update(deltaTime seconds: TimeInterval)
     {
+        
+        if let modelComponent = self.entity?.component(ofType: ModelComponent.self)  {
+            if (modelComponent.modelNode.parent?.isPaused)!  {return}
+        }
+        
         // It calls agentWillUpdate before and agentDidUpdate after
         super.update(deltaTime: seconds)
         
