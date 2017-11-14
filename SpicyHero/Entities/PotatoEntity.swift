@@ -23,7 +23,7 @@ class PotatoEntity: GKEntity
     
     //seek component params for potatoes
     private let maxSpeed: Float = 0.00003
-    private let maxAcceleration: Float = 0.000001
+    private let maxAcceleration: Float = 1
     
     init(model: PotatoType, scene: SCNScene, position: SCNVector3, trakingAgent: GKAgent3D)
     {
