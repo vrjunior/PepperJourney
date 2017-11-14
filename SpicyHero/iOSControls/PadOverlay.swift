@@ -122,6 +122,7 @@ class PadOverlay: SKSpriteNode {
     func destroyPad() {
         
         self.padBackground.alpha = 0
+        self.delegate?.padOverlayVirtualStickInteractionDidEnd(self)
         
     }
     
@@ -224,13 +225,11 @@ class PadOverlay: SKSpriteNode {
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.destroyPad()
-        self.delegate?.padOverlayVirtualStickInteractionDidEnd(self)
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         if touches.contains(trackingTouch!) {
             self.destroyPad()
-            self.delegate?.padOverlayVirtualStickInteractionDidEnd(self)
         }
     }
 }

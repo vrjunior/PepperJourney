@@ -95,6 +95,7 @@ class EntityManager
     }
     func killAPotato(node: SCNNode)
     {
+        
         for index in 0 ..< self.potatoesEntities.count
         {
             let potato = self.potatoesEntities[index] as! PotatoEntity
@@ -103,11 +104,11 @@ class EntityManager
                 return
             }
             
-            if potato == potatoNode
+            if node == potatoNode
             {
                 potato.removeModelNodeFromScene()
                 potatoesEntities.remove(at: index)
-                
+                break
             }
             
         }
