@@ -164,7 +164,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
        
         entityManager.killAllPotatoes()
         self.character.node.isHidden = true
-        self.character.node.position = SCNVector3(self.character.initialPosition)
         let gameOverOverlay = SKScene(fileNamed: "GameOverOverlay.sks") as! GameOverOverlay
         gameOverOverlay.gameOptionsDelegate = self
         gameOverOverlay.scaleMode = .aspectFill
