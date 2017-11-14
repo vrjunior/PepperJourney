@@ -178,15 +178,17 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         // Inittialize the game with the defaults settings.
         self.initializeTheGame()
         
-        controlsOverlay = SKScene(fileNamed: "ControlsOverlay.sks") as? Overlay
-        controlsOverlay?.padDelegate = self
-        controlsOverlay?.controlsDelegate = self
-        controlsOverlay?.gameOptionsDelegate = self
-        controlsOverlay?.scaleMode = .aspectFill
+        if controlsOverlay == nil {
+            controlsOverlay = SKScene(fileNamed: "ControlsOverlay.sks") as? Overlay
+            controlsOverlay?.padDelegate = self
+            controlsOverlay?.controlsDelegate = self
+            controlsOverlay?.gameOptionsDelegate = self
+            controlsOverlay?.scaleMode = .aspectFill
+        }
+        
         self.scnView.overlaySKScene = controlsOverlay
         
-        self.gameStateMachine.enter(PlayState.self)
-        
+        gameStateMachine.enter(PlayState.self)
         characterStateMachine.enter(StandingState.self)
     }
     
@@ -333,6 +335,11 @@ extension GameController : GameOptions {
     }
     
     func restart() {
+        self.entityManager.killAllPotatoes()
+        
+        //unpause controls
+        self.controlsOverlay?.isPausedControl = false
+        
         self.startGame()
     }
     
