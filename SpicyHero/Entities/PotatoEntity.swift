@@ -84,5 +84,10 @@ class PotatoEntity: GKEntity
     func stopAnimation(type: AnimationType) {
         self.potatoModel.modelNode.animationPlayer(forKey: type.rawValue)?.stop()
     }
+    
+    func getPosition() -> SCNVector3
+    {
+        return self.potatoModel.modelNode.presentation.position
+    }
 }
 

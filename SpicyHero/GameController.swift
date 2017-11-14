@@ -301,8 +301,9 @@ extension GameController : SCNPhysicsContactDelegate {
             }
             else if anotherNode?.name == "lakeSurface"
             {
-                //characterNode?.physicsBody?.velocityFactor.y = 0.00000001
                 characterNode?.physicsBody?.damping = 0.99999
+                //pause controls
+                self.controlsOverlay?.isPausedControl = true
             }
         }
 
