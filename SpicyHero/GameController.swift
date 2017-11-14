@@ -14,11 +14,10 @@ import GameplayKit
 
 
 enum CategoryMaskType: Int {
-    case character  = 0b1       // 1
-    case floor      = 0b10      // 2
-    case potato     = 0b100     // 4
-    case obstacle   = 0b1000    // 8
-    case river      = 0b10000   // 16
+    case character    = 0b1       // 1
+    case solidSurface = 0b10      // 2
+    case potato       = 0b100     // 4
+    case lake         = 0b1000   // 8
 }
 
 class GameController: NSObject, SCNSceneRendererDelegate {
@@ -146,6 +145,9 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.entityManager.setupGameInitialization()
         
         self.character.node.eulerAngles = SCNVector3(0,0,0)
+        self.character.node.position = SCNVector3(0, 50, 160)
+        self.character.node.physicsBody?.velocityFactor = SCNVector3(1, 1, 1)
+        self.character.node.physicsBody?.damping = 0.1
     }
    
     func setupTapToStart() {
@@ -261,36 +263,51 @@ extension GameController : SCNPhysicsContactDelegate {
         var characterNode: SCNNode?
         var anotherNode: SCNNode?
         
+       
         if contact.nodeA == self.character.node {
             
             characterNode = contact.nodeA
-            anotherNode = contact.nodeB
-        
-        } else if contact.nodeB == self.character.node {
-            characterNode = contact.nodeB
-            anotherNode = contact.nodeA
-		}
-    
-        if characterNode != nil {
-            if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue {
-                
-                DispatchQueue.main.async { [unowned self] in
-                    self.setupGameOver()
-                }
-        
-            }
             
+            anotherNode = contact.nodeB
+        }
+            
+        else if contact.nodeB == self.character.node
+        {
+            characterNode = contact.nodeB
+            
+            anotherNode = contact.nodeA
+        }
         
-            else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.river.rawValue {
-                
+        guard characterNode != nil else
+        {
+            fatalError("Error in contact masks")
+        }
+        
+        if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue {
+            
+            DispatchQueue.main.async { [unowned self] in
+                self.setupGameOver()
+            }
+    
+        }
+        
+        else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.lake.rawValue {
+            
+            if anotherNode?.name == "lakeBottom"
+            {
                 DispatchQueue.main.async { [unowned self] in
                     self.setupGameOver()
                 }
-                
             }
+            else if anotherNode?.name == "lakeSurface"
+            {
+                //characterNode?.physicsBody?.velocityFactor.y = 0.00000001
+                characterNode?.physicsBody?.damping = 0.99999
+            }
+        }
 
         
-            else if self.character.isJumping && anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.floor.rawValue {
+        else if self.character.isJumping && anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.solidSurface.rawValue {
                 
             //set the jumping flag to false
             self.character.isJumping = false
@@ -304,7 +321,6 @@ extension GameController : SCNPhysicsContactDelegate {
         
             //go to standing state mode
             self.characterStateMachine.enter(StandingState.self)
-            }
         }
     }
 }
