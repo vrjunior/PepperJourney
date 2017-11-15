@@ -16,7 +16,6 @@ class EntityManager
     private var chasedTargetAgent: GKAgent3D!
     weak var character: Character?
     
-    
     // colocar aqui os components system
     var seekComponentSystem = GKComponentSystem(componentClass: SeekComponent.self)
     
@@ -63,8 +62,14 @@ class EntityManager
         self.potatoesEntities.append(potato)
     }
     
-    func update(deltaTime: TimeInterval)
+    func update(atTime time: TimeInterval)
     {
+        if previousUpdateTime == 0.0 {
+            previousUpdateTime = time
+        }
+        
+        let deltaTime = time - previousUpdateTime
+        
         if seekComponentSystem.components.count > 0
         {
             self.seekComponentSystem.update(deltaTime: deltaTime)
@@ -80,7 +85,7 @@ class EntityManager
                 self.createChasingPotato(position: creationPosition)
             }
         }
-        self.previousUpdateTime = deltaTime
+        self.previousUpdateTime = time
     }
     
     func killAllPotatoes ()

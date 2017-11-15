@@ -13,6 +13,7 @@ import CoreGraphics
 
 class SeekComponent: GKAgent3D, GKAgentDelegate
 {
+    
     init(target: GKAgent3D, maxSpeed: Float, maxAcceleration: Float, mass: Float)
     {
         super.init()
@@ -63,7 +64,7 @@ class SeekComponent: GKAgent3D, GKAgentDelegate
     {
         
         if let modelComponent = self.entity?.component(ofType: ModelComponent.self)  {
-            if (modelComponent.modelNode.parent?.isPaused)!  {return}
+            if (modelComponent.modelNode.parent?.isPaused)!  { return }
         }
         
         // It calls agentWillUpdate before and agentDidUpdate after
