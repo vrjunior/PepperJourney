@@ -47,8 +47,6 @@ class Character: GKEntity {
     //delegates
     var jumpDelegate: JumpDelegate?
     
-    var trackingAgentComponent: GKAgent3D!
-    
     // MARK: - Initialization
     init(scene: SCNScene, jumpDelegate: JumpDelegate?) {
         super.init()
@@ -98,8 +96,9 @@ class Character: GKEntity {
         jumpComponent.delegate = self.jumpDelegate
         self.addComponent(jumpComponent)
         
-        trackingAgentComponent = GKAgent3D()
+        let trackingAgentComponent = GKAgent3D()
         trackingAgentComponent.position = float3(self.node.presentation.position)
+        trackingAgentComponent.position.y = 0
         self.addComponent(trackingAgentComponent)
         
     }
@@ -173,7 +172,10 @@ class Character: GKEntity {
             slideInWorld(fromPosition: startPosition, velocity: characterVelocity)
         }
         
-        trackingAgentComponent.position = float3(self.node.presentation.position)
+        let component = self.component(ofType: GKAgent3D.self)!
+        
+        component.position.x = self.node.presentation.position.x
+        component.position.z = self.node.presentation.position.z
     }
     
     
