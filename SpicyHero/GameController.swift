@@ -14,11 +14,14 @@ import GameplayKit
 
 
 enum CategoryMaskType: Int {
-    case character    = 0b1       // 1
-    case solidSurface = 0b10      // 2
-    case potato       = 0b100     // 4
-    case lake         = 0b1000   // 8
+    case character    = 0b1         // 1
+    case solidSurface = 0b10        // 2
+    case potato       = 0b100       // 4
+    case lake         = 0b1000      // 8
+    case obstacle     = 0b10000     // 16
+    case finalLevel   = 0b100000    // 32
 }
+
 
 class GameController: NSObject, SCNSceneRendererDelegate {
     
@@ -32,7 +35,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     private weak var sceneRenderer: SCNSceneRenderer?
     
     //overlays
-    private var controlsOverlay: Overlay?
+    private var controlsOverlay: ControlsOverlay?
     private var pauseOverlay: PauseOverlay?
     
     // Camera and targets
@@ -176,12 +179,23 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
     }
     
+    func setupFinishLevel() {
+        entityManager.killAllPotatoes()
+        self.character.node.isHidden = true
+        
+        let finishLevelOverlay = SKScene(fileNamed: "GameOverOverlay.sks")
+        finishLevelOverlay?.scaleMode = .aspectFill
+        self.scnView.overlaySKScene = finishLevelOverlay
+        
+        self.gameStateMachine.enter(PauseState.self)
+    }
+    
     func startGame() {
         // Inittialize the game with the defaults settings.
         self.initializeTheGame()
         
         if controlsOverlay == nil {
-            controlsOverlay = SKScene(fileNamed: "ControlsOverlay.sks") as? Overlay
+            controlsOverlay = SKScene(fileNamed: "ControlsOverlay.sks") as? ControlsOverlay
             controlsOverlay?.padDelegate = self
             controlsOverlay?.controlsDelegate = self
             controlsOverlay?.gameOptionsDelegate = self
@@ -285,7 +299,25 @@ extension GameController : SCNPhysicsContactDelegate {
         
         if characterNode != nil
         {
-            if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue {
+            
+                
+            if self.character.isJumping && anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.solidSurface.rawValue {
+                
+                //set the jumping flag to false
+                self.character.isJumping = false
+                
+                //stop impulse animation
+                self.character.stopAnimation(type: .jumpingImpulse)
+                
+                //play landing animation
+                self.character.playAnimationOnce(type: .jumpingLanding)
+                
+                
+                //go to standing state mode
+                self.characterStateMachine.enter(StandingState.self)
+            }
+            
+            else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue {
                 
                 DispatchQueue.main.async { [unowned self] in
                     self.setupGameOver()
@@ -309,22 +341,13 @@ extension GameController : SCNPhysicsContactDelegate {
                     self.controlsOverlay?.isPausedControl = true
                 }
             }
+            
+            else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.finalLevel.rawValue {
                 
+                DispatchQueue.main.async { [unowned self] in
+                    self.setupFinishLevel()
+                }
                 
-            else if self.character.isJumping && anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.solidSurface.rawValue {
-                
-                //set the jumping flag to false
-                self.character.isJumping = false
-                
-                //stop impulse animation
-                self.character.stopAnimation(type: .jumpingImpulse)
-                
-                //play landing animation
-                self.character.playAnimationOnce(type: .jumpingLanding)
-                
-                
-                //go to standing state mode
-                self.characterStateMachine.enter(StandingState.self)
             }
         }
         
