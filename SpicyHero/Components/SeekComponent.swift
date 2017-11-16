@@ -14,17 +14,21 @@ import CoreGraphics
 class SeekComponent: GKAgent3D, GKAgentDelegate
 {
     
-    init(target: GKAgent3D, maxSpeed: Float, maxAcceleration: Float, mass: Float)
+    init(target: GKAgent3D, maxSpeed: Float, maxAcceleration: Float)
     {
         super.init()
         let goal = GKGoal(toSeekAgent: target)
         
-        self.behavior = GKBehavior(goal: goal, weight: 1)
-        // Default value = 10ˆ-5
+        self.behavior = GKBehavior(goal: goal, weight: 1.0)
+
         self.maxSpeed = maxSpeed
-        // Default value = 10ˆ-6
+
         self.maxAcceleration = maxAcceleration
-        self.mass = mass
+        
+        //mass is the resistance of the agent to changes in speed or direction.
+        self.mass = 0.01
+        
+        
         self.delegate = self
     }
     
@@ -37,9 +41,8 @@ class SeekComponent: GKAgent3D, GKAgentDelegate
         
         guard let modelComponent = self.entity?.component(ofType: ModelComponent.self) else {return}
         
-
-        self.position = float3(modelComponent.modelNode.presentation.position)
         
+        self.position = float3(modelComponent.modelNode.presentation.position)
         
     }
     func agentDidUpdate(_ agent: GKAgent) {
@@ -47,9 +50,7 @@ class SeekComponent: GKAgent3D, GKAgentDelegate
         guard let modelComponent = self.entity?.component(ofType: ModelComponent.self) else {return}
         
         
-        modelComponent.modelNode.position.x = position.x
-        modelComponent.modelNode.position.z = position.z
-        modelComponent.modelNode.position.y = position.y
+        modelComponent.modelNode.position = SCNVector3(self.position)
         
         let xVelocity = self.velocity.x
         let zVelocity = self.velocity.z

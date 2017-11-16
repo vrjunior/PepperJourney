@@ -86,6 +86,7 @@ class EntityManager
             }
         }
         self.previousUpdateTime = time
+        
     }
     
     func killAllPotatoes ()
