@@ -183,7 +183,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         entityManager.killAllPotatoes()
         self.character.node.isHidden = true
         
-        let finishLevelOverlay = SKScene(fileNamed: "GameOverOverlay.sks")
+        let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks")
         finishLevelOverlay?.scaleMode = .aspectFill
         self.scnView.overlaySKScene = finishLevelOverlay
         
