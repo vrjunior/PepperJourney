@@ -54,11 +54,11 @@ class ControlsOverlay: SKScene {
     
 }
 
-extension Overlay {
+extension ControlsOverlay {
     
     override func didMove(to view: SKView) {
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(Overlay.handleTap(_:)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ControlsOverlay.handleTap(_:)))
         
         view.addGestureRecognizer(tapGesture)
         
