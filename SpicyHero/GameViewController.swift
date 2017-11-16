@@ -23,11 +23,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         // 1.3x on iPads
-       /* if UIDevice.current.userInterfaceIdiom == .pad {
-            self.gameView.contentScaleFactor = min(1.3, self.gameView.contentScaleFactor)
-            self.gameView.preferredFramesPerSecond = 60
-        } */
-        gameView.showsStatistics = true
+        
         gameController = GameController(scnView: gameView)
         // Configure the view
         gameView.backgroundColor = UIColor.black
