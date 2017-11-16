@@ -17,7 +17,7 @@ protocol Controls {
     func attack()
 }
 
-class Overlay: SKScene {
+class ControlsOverlay: SKScene {
     
     var padDelegate:PadOverlayDelegate? {
         didSet {
