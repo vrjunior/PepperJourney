@@ -78,7 +78,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         }
         let lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
         lookAtConstraint.isGimbalLockEnabled = true
-        //lookAtConstraint.influenceFactor = 0.5
+        lookAtConstraint.influenceFactor = 1
         
         let distanceConstraint = SCNDistanceConstraint(target: characterNode)
         
