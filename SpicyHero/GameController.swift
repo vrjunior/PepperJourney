@@ -151,7 +151,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.entityManager.setupGameInitialization()
         
         self.character.node.eulerAngles = SCNVector3(0,0,0)
-        self.character.node.position = SCNVector3(0, 50, 160)
+        self.character.node.position = SCNVector3(self.character.initialPosition)
         self.character.node.physicsBody?.velocityFactor = SCNVector3(1, 1, 1)
         self.character.node.physicsBody?.damping = 0.1
     }
