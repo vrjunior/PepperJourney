@@ -25,7 +25,7 @@ class Character: GKEntity {
 
     
     // actions
-    private let jumpImpulse:Float = 1200
+    private let jumpImpulse:Float = 800
     var direction = float2()
     var walkSpeed: CGFloat = 1.0
     var isWalking: Bool = false
