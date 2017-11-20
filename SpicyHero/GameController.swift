@@ -129,7 +129,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         scnView.scene = scene
         
         //self.scnView.debugOptions = SCNDebugOptions.showPhysicsShapes
-        //gameView.showsStatistics = true
+//        self.scnView.showsStatistics = true
         
         // Create the entity manager system
         self.entityManager = EntityManager(scene: self.scene, character: self.character)
