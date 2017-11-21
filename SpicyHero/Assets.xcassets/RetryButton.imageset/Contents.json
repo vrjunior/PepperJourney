@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Restart.png",
+      "filename" : "RetryButton.png",
       "scale" : "1x"
     },
     {
