@@ -42,6 +42,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     private var cameraNode: SCNNode!
     private var pepperNode: SCNNode!
 	
+	// Sound Player
+	
     // MARK: - Controling the character
     
     var characterDirection: vector_float2 {
@@ -57,7 +59,10 @@ class GameController: NSObject, SCNSceneRendererDelegate {
             character!.direction = direction
         }
     }
-    
+	
+	func setupSounds(){
+		
+	}
     
     func setupCharacter() {
         character = Character(scene: scene!, jumpDelegate: self)
@@ -215,7 +220,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         character!.update(atTime: time, with: renderer)
         
         self.entityManager.update(atTime: time)
-        print(self.entityManager.potatoesEntities.count)
+//        print(self.entityManager.potatoesEntities.count)
     }
     
 }

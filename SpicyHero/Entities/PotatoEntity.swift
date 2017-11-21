@@ -41,6 +41,9 @@ class PotatoEntity: GKEntity
         self.loadAnimations()
         
         self.playAnimation(type: .running)
+		
+		let soundRandomComponent = SoundRandomComponent(soundPath: "potatoSound.wav", entity: self)
+		self.addComponent(soundRandomComponent)
         
     }
     

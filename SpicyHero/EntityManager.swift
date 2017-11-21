@@ -18,6 +18,7 @@ class EntityManager
     
     // colocar aqui os components system
     var seekComponentSystem = GKComponentSystem(componentClass: SeekComponent.self)
+	var soundRandomComponentSystem = GKComponentSystem(componentClass: SoundRandomComponent.self)
     
     // Game entities
     var potatoesEntities = [GKEntity]()
@@ -56,8 +57,10 @@ class EntityManager
         let potato = PotatoEntity(model: PotatoType.model1 , scene: self.scene, position: position, trakingAgent: self.chasedTargetAgent)
         
         let seekComponent = potato.component(ofType: SeekComponent.self)!
-        
         self.seekComponentSystem.addComponent(seekComponent)
+		
+		let soundRandomComponent = potato.component(ofType: SoundRandomComponent.self)!
+		self.soundRandomComponentSystem.addComponent(soundRandomComponent)
         
         self.potatoesEntities.append(potato)
     }
@@ -69,11 +72,20 @@ class EntityManager
         }
         
         let deltaTime = time - previousUpdateTime
-        
+		
+		//Seek Component
         if seekComponentSystem.components.count > 0
         {
             self.seekComponentSystem.update(deltaTime: deltaTime)
         }
+		
+		//Sound Comoponent
+		if soundRandomComponentSystem.components.count > 0
+		{
+			self.soundRandomComponentSystem.update(deltaTime: deltaTime)
+		}
+		
+		
         // Verify the potato generator points
         self.potatoGeneratorSystem?.update(deltaTime: deltaTime)
         // Create points that are needed.
@@ -85,6 +97,7 @@ class EntityManager
                 self.createChasingPotato(position: creationPosition)
             }
         }
+		
         self.previousUpdateTime = time
         
     }

@@ -15,6 +15,8 @@
 		9C4A65731FA67ED700293460 /* PotatoGeneratorSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4A65721FA67ED700293460 /* PotatoGeneratorSystem.swift */; };
 		9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C6D3DEA1F93252500B8FA2A /* Game.scnassets */; };
 		9CFDF8701F9A36F7009385A7 /* PotatoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */; };
+		B0465F0D1FC444A2002B8FE8 /* SoundRandomComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0465F0B1FC444A1002B8FE8 /* SoundRandomComponent.swift */; };
+		B0465F161FC47879002B8FE8 /* potatoSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = B0465F151FC47879002B8FE8 /* potatoSound.wav */; };
 		B0FDBAE91FA9F35600D4B08D /* pixelate.metal in Sources */ = {isa = PBXBuildFile; fileRef = B0FDBAE01FA9F35600D4B08D /* pixelate.metal */; };
 		B0FDBAEB1FA9F35600D4B08D /* lines.fsh in Resources */ = {isa = PBXBuildFile; fileRef = B0FDBAE21FA9F35600D4B08D /* lines.fsh */; };
 		B0FDBAEC1FA9F35600D4B08D /* prep.vsh in Resources */ = {isa = PBXBuildFile; fileRef = B0FDBAE31FA9F35600D4B08D /* prep.vsh */; };
@@ -68,6 +70,8 @@
 		9C4A65721FA67ED700293460 /* PotatoGeneratorSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotatoGeneratorSystem.swift; sourceTree = "<group>"; };
 		9C6D3DEA1F93252500B8FA2A /* Game.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Game.scnassets; sourceTree = "<group>"; };
 		9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotatoEntity.swift; sourceTree = "<group>"; };
+		B0465F0B1FC444A1002B8FE8 /* SoundRandomComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundRandomComponent.swift; sourceTree = "<group>"; };
+		B0465F151FC47879002B8FE8 /* potatoSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = potatoSound.wav; sourceTree = "<group>"; };
 		B0FDBAE01FA9F35600D4B08D /* pixelate.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = pixelate.metal; path = SpicyHero/Shaders/pixelate.metal; sourceTree = SOURCE_ROOT; };
 		B0FDBAE21FA9F35600D4B08D /* lines.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = lines.fsh; path = SpicyHero/Shaders/lines.fsh; sourceTree = SOURCE_ROOT; };
 		B0FDBAE31FA9F35600D4B08D /* prep.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = prep.vsh; path = SpicyHero/Shaders/prep.vsh; sourceTree = SOURCE_ROOT; };
@@ -140,6 +144,7 @@
 		9CFDF86E1F9A36C6009385A7 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				B0465F151FC47879002B8FE8 /* potatoSound.wav */,
 				D25160E31F93FA0800BF756A /* Character */,
 				9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */,
 				D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */,
@@ -231,6 +236,7 @@
 		D2E0A8961F993B4800FCC255 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				B0465F0B1FC444A1002B8FE8 /* SoundRandomComponent.swift */,
 				D2E0A8971F993B5D00FCC255 /* JumpComponent.swift */,
 				9C1B829C1F9E2FD300173FF3 /* SeekComponent.swift */,
 				9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */,
@@ -357,6 +363,7 @@
 				B0FDBAEF1FA9F35600D4B08D /* prep.fsh in Resources */,
 				B0FDBAEC1FA9F35600D4B08D /* prep.vsh in Resources */,
 				9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */,
+				B0465F161FC47879002B8FE8 /* potatoSound.wav in Resources */,
 				D20108911FBE11D9007660E3 /* StartOverlay.sks in Resources */,
 				D201088E1FBE11D9007660E3 /* PauseOverlay.sks in Resources */,
 				D2EC85861F83F1240093F009 /* Assets.xcassets in Resources */,
@@ -388,6 +395,7 @@
 				9C4A65731FA67ED700293460 /* PotatoGeneratorSystem.swift in Sources */,
 				B0FDBAE91FA9F35600D4B08D /* pixelate.metal in Sources */,
 				B0FDBAF01FA9F35600D4B08D /* toon.metal in Sources */,
+				B0465F0D1FC444A2002B8FE8 /* SoundRandomComponent.swift in Sources */,
 				9C1B829F1F9FADD300173FF3 /* ModelComponent.swift in Sources */,
 				D2F53D751F9A88FF00422F24 /* WalkingState.swift in Sources */,
 				D2EC857D1F83F1240093F009 /* AppDelegate.swift in Sources */,

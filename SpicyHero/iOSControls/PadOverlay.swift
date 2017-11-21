@@ -66,7 +66,7 @@ class PadOverlay: SKSpriteNode {
         isUserInteractionEnabled = true
         
         self.setupPad()
-        print("padsize: \(self.padSize)")
+//        print("padsize: \(self.padSize)")
     }
     
     func setupPad() {
