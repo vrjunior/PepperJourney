@@ -37,9 +37,9 @@ class SoundRandomComponent: GKComponent
 	}
 	public func playMusic(){
 		
-		self.audioSource.volume = 0.1
+		self.audioSource.volume = 1
 		self.audioSource.loops = false
-		self.audioSource.shouldStream = false
+		self.audioSource.shouldStream = true
 		self.audioSource.isPositional = true
 		
 		if let node = self.entity?.component(ofType: ModelComponent.self) {
@@ -69,7 +69,7 @@ class SoundRandomComponent: GKComponent
 			self.tryPlaySound = false
 		}
 	}
-
+	
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
