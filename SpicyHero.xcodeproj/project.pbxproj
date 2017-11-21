@@ -144,13 +144,20 @@
 		9CFDF86E1F9A36C6009385A7 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				B0465F151FC47879002B8FE8 /* potatoSound.wav */,
 				D25160E31F93FA0800BF756A /* Character */,
 				9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */,
 				D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */,
 				9C4A65721FA67ED700293460 /* PotatoGeneratorSystem.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		B0465F171FC4C743002B8FE8 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				B0465F151FC47879002B8FE8 /* potatoSound.wav */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		B0FDBADF1FA9F33F00D4B08D /* Shaders */ = {
@@ -265,6 +272,7 @@
 		D2EC857B1F83F1240093F009 /* SpicyHero */ = {
 			isa = PBXGroup;
 			children = (
+				B0465F171FC4C743002B8FE8 /* Sounds */,
 				D20108841FBE11BE007660E3 /* Overlays */,
 				D2B8BBB61FBB648B0042F873 /* Fonts */,
 				B0FDBADF1FA9F33F00D4B08D /* Shaders */,
