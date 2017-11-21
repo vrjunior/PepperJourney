@@ -39,7 +39,7 @@ class ControlsOverlay: SKScene {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        self.scaleMode = .resizeFill
+        self.scaleMode = .aspectFill
         
         // The virtual D-pad
         #if os( iOS )
