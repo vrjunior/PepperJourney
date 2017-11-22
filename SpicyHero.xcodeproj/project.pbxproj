@@ -48,6 +48,9 @@
 		D25AD5AE1F87ECF900F2093E /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AD5AD1F87ECF900F2093E /* Character.swift */; };
 		D25AD5B11F8809DE00F2093E /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25AD5B01F8809DE00F2093E /* SceneKit.framework */; };
 		D25AD5B31F8809E500F2093E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25AD5B21F8809E500F2093E /* GameKit.framework */; };
+		D25BAE221FC60443000ED0EC /* SettingsOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D25BAE211FC60443000ED0EC /* SettingsOverlay.sks */; };
+		D25BAE261FC60864000ED0EC /* SettingsOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BAE251FC60864000ED0EC /* SettingsOverlay.swift */; };
+		D25BAE281FC60C0F000ED0EC /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BAE271FC60C0F000ED0EC /* SettingsController.swift */; };
 		D2719D901FA0EBDA00FCB61F /* AnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */; };
 		D28623B51FA3AF5F00691E83 /* GameBaseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28623B41FA3AF5F00691E83 /* GameBaseState.swift */; };
 		D28623B71FA3AFB600691E83 /* PauseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28623B61FA3AFB600691E83 /* PauseState.swift */; };
@@ -107,6 +110,9 @@
 		D25AD5AD1F87ECF900F2093E /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		D25AD5B01F8809DE00F2093E /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		D25AD5B21F8809E500F2093E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		D25BAE211FC60443000ED0EC /* SettingsOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = SettingsOverlay.sks; path = SpicyHero/Overlays/SettingsOverlay.sks; sourceTree = SOURCE_ROOT; };
+		D25BAE251FC60864000ED0EC /* SettingsOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOverlay.swift; sourceTree = "<group>"; };
+		D25BAE271FC60C0F000ED0EC /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationType.swift; sourceTree = "<group>"; };
 		D28623B41FA3AF5F00691E83 /* GameBaseState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBaseState.swift; sourceTree = "<group>"; };
 		D28623B61FA3AFB600691E83 /* PauseState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseState.swift; sourceTree = "<group>"; };
@@ -192,11 +198,13 @@
 				D20108851FBE11D8007660E3 /* ControlsOverlay.sks */,
 				D20108871FBE11D9007660E3 /* ControlsOverlay.swift */,
 				D201088B1FBE11D9007660E3 /* GameOverOverlay.sks */,
+				D25BAE211FC60443000ED0EC /* SettingsOverlay.sks */,
 				D20108881FBE11D9007660E3 /* GameOverOverlay.swift */,
 				D20108861FBE11D9007660E3 /* PauseOverlay.sks */,
 				D201088A1FBE11D9007660E3 /* PauseOverlay.swift */,
 				D20108891FBE11D9007660E3 /* StartOverlay.sks */,
 				D201088C1FBE11D9007660E3 /* StartOverlay.swift */,
+				D25BAE251FC60864000ED0EC /* SettingsOverlay.swift */,
 			);
 			name = Overlays;
 			path = "New Group";
@@ -299,6 +307,7 @@
 				D25AD5AB1F87EAC800F2093E /* GameController.swift */,
 				D2EC857C1F83F1240093F009 /* AppDelegate.swift */,
 				D2DDAD511FBA2913009FA2B0 /* GameOptions.swift */,
+				D25BAE271FC60C0F000ED0EC /* SettingsController.swift */,
 				D2EC85801F83F1240093F009 /* GameViewController.swift */,
 				D2EC85821F83F1240093F009 /* Main.storyboard */,
 				D2EC85871F83F1240093F009 /* LaunchScreen.storyboard */,
@@ -392,6 +401,7 @@
 				D2EC85861F83F1240093F009 /* Assets.xcassets in Resources */,
 				D2EC85841F83F1240093F009 /* Main.storyboard in Resources */,
 				D20108931FBE11D9007660E3 /* GameOverOverlay.sks in Resources */,
+				D25BAE221FC60443000ED0EC /* SettingsOverlay.sks in Resources */,
 				D2B8BBB81FBB64D70042F873 /* Burrito.TTF in Resources */,
 				D20108961FBE11FC007660E3 /* FinishOverlay.sks in Resources */,
 			);
@@ -417,6 +427,7 @@
 				9C1B82A11FA0D09800173FF3 /* TrigonometryLib.swift in Sources */,
 				9C03A2421F9A33DD008F191A /* EntityManager.swift in Sources */,
 				9C4A65731FA67ED700293460 /* PotatoGeneratorSystem.swift in Sources */,
+				D25BAE261FC60864000ED0EC /* SettingsOverlay.swift in Sources */,
 				B0FDBAE91FA9F35600D4B08D /* pixelate.metal in Sources */,
 				B0FDBAF01FA9F35600D4B08D /* toon.metal in Sources */,
 				B0465F0D1FC444A2002B8FE8 /* SoundRandomComponent.swift in Sources */,
@@ -437,6 +448,7 @@
 				D2719D901FA0EBDA00FCB61F /* AnimationType.swift in Sources */,
 				D28623B51FA3AF5F00691E83 /* GameBaseState.swift in Sources */,
 				D28623B71FA3AFB600691E83 /* PauseState.swift in Sources */,
+				D25BAE281FC60C0F000ED0EC /* SettingsController.swift in Sources */,
 				D20108921FBE11D9007660E3 /* PauseOverlay.swift in Sources */,
 				D25160EE1F940B0C00BF756A /* JumpingState.swift in Sources */,
 				9CFDF8701F9A36F7009385A7 /* PotatoEntity.swift in Sources */,

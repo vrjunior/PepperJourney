@@ -5,6 +5,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Burrito.TTF</string>
+		<string>HiraginoSans.otf</string>
 	</array>
 	<key>CFBundleDisplayName</key>
 	<string></string>
