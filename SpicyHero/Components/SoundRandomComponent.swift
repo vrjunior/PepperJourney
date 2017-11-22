@@ -59,13 +59,11 @@ class SoundRandomComponent: GKComponent
 		}
 
 		if self.deltaTimeInterval > self.nextPlayTime {
-			print("Delta: \(self.deltaTimeInterval)")
 			self.deltaTimeInterval = 0
 			self.tryPlaySound = true
 			self.nextPlayTime = TimeInterval(arc4random_uniform(waitTime))
 		}else {
 			self.deltaTimeInterval = self.deltaTimeInterval + seconds
-//			print("Delta: \(self.deltaTimeInterval)")
 			self.tryPlaySound = false
 		}
 	}

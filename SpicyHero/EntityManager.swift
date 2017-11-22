@@ -19,6 +19,7 @@ class EntityManager
     // colocar aqui os components system
     var seekComponentSystem = GKComponentSystem(componentClass: SeekComponent.self)
 	var soundRandomComponentSystem = GKComponentSystem(componentClass: SoundRandomComponent.self)
+	var soundDistanceComponentSystem = GKComponentSystem(componentClass: SoundDistanceComponent.self)
     
     // Game entities
     var potatoesEntities = [GKEntity]()
@@ -33,7 +34,7 @@ class EntityManager
         self.character = character
         self.chasedTargetAgent = character.component(ofType: GKAgent3D.self)
         guard self.chasedTargetAgent != nil else { return }
-        
+		
     }
     
     func setupGameInitialization()
@@ -50,6 +51,8 @@ class EntityManager
             self.createChasingPotato(position: potatoSpawnPoint)
             i -= 1
         }
+		
+		addPepperSoundPoints()
     }
     
     func createChasingPotato(position: SCNVector3)
@@ -79,10 +82,16 @@ class EntityManager
             self.seekComponentSystem.update(deltaTime: deltaTime)
         }
 		
-		//Sound Comoponent
+		//Sound Random Comoponent
 		if soundRandomComponentSystem.components.count > 0
 		{
 			self.soundRandomComponentSystem.update(deltaTime: deltaTime)
+		}
+		
+		//Sound Distance Comoponent
+		if soundDistanceComponentSystem.components.count > 0
+		{
+			self.soundDistanceComponentSystem.update(deltaTime: deltaTime)
 		}
 		
 		
@@ -132,4 +141,11 @@ class EntityManager
             
         }
     }
+	
+	//Add sounds here
+	public func addPepperSoundPoints(){
+		let soundDistanceComponent = SoundDistanceComponent(soundPath: "PepperPointSound1.mp3", entity: self.character!, actionPoint: CGPoint(x:6,y:-166), minRadius: 100, node: (character?.characterNode)!)
+		self.character?.addComponent(soundDistanceComponent)
+		soundDistanceComponentSystem.addComponent(soundDistanceComponent)
+	}
 }
