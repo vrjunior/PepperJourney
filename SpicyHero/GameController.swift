@@ -39,6 +39,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     private var pauseOverlay: PauseOverlay?
     
     // Camera and targets
+    private var cameraInitialPosition: SCNVector3!
     private var cameraNode: SCNNode!
     private var pepperNode: SCNNode!
 	
@@ -79,11 +80,12 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     
     func setupCamera() {
         self.cameraNode = self.scene.rootNode.childNode(withName: "camera", recursively: true)!
+        self.cameraInitialPosition = cameraNode.presentation.position
         
         guard let characterNode = self.character.node else {
-            print("Error with the target of the follow camera")
-            return
+            fatalError("Error with the target of the follow camera")
         }
+        
         let lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
         lookAtConstraint.isGimbalLockEnabled = true
         lookAtConstraint.influenceFactor = 1
@@ -155,8 +157,10 @@ class GameController: NSObject, SCNSceneRendererDelegate {
 
         self.entityManager.setupGameInitialization()
         
-        self.character.node.eulerAngles = SCNVector3(0,0,0)
         self.character.node.position = SCNVector3(self.character.initialPosition)
+        self.cameraNode.position = self.cameraInitialPosition
+        print(self.character.node.position)
+        // reset do que foi alterado ao cair na agua
         self.character.node.physicsBody?.velocityFactor = SCNVector3(1, 1, 1)
         self.character.node.physicsBody?.damping = 0.1
         
