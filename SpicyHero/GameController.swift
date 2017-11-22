@@ -159,6 +159,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.character.node.position = SCNVector3(self.character.initialPosition)
         self.character.node.physicsBody?.velocityFactor = SCNVector3(1, 1, 1)
         self.character.node.physicsBody?.damping = 0.1
+        
+       // setEndSinalization()
     }
    
     func setupTapToStart() {
@@ -221,6 +223,14 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         self.entityManager.update(atTime: time)
 //        print(self.entityManager.potatoesEntities.count)
+    }
+    
+    func setEndSinalization() {
+        guard let lastDoorNode = self.scene.rootNode.childNode(withName: "LastDoor", recursively: true) else { fatalError("Error at get LastDoor") }
+        
+        guard let particleSystem = SCNParticleSystem(named: "endSinalization", inDirectory: nil) else { fatalError("Error at get Particle System") }
+        
+        lastDoorNode.addParticleSystem(particleSystem)
     }
     
 }
