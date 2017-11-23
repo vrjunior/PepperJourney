@@ -25,13 +25,13 @@ class SoundRandomComponent: GKComponent
 	init (soundPath: String, entity: GKEntity)
 	{
 		super.init()
-		guard let audioSource = SCNAudioSource(fileNamed: soundPath) else
-		{
-			fatalError("The audio file (\(soundPath)) could not be found.")
-		}
-		self.audioSource = audioSource
-		self.didFinishedPlaying = false
-		self.nextPlayTime = TimeInterval(arc4random_uniform(waitTime))
+//        guard let audioSource = SCNAudioSource(fileNamed: soundPath) else
+//        {
+//            fatalError("The audio file (\(soundPath)) could not be found.")
+//        }
+//        self.audioSource = audioSource
+//        self.didFinishedPlaying = false
+//        self.nextPlayTime = TimeInterval(arc4random_uniform(waitTime))
 		
 		
 	}
@@ -47,26 +47,26 @@ class SoundRandomComponent: GKComponent
 			node.modelNode.addAudioPlayer(self.audioPlayer)
 		}
 	}
-	override func update(deltaTime seconds: TimeInterval) {
-		
-		
-		if !isPlaying && tryPlaySound {
-			self.playMusic()
-			self.isPlaying = true
-			self.audioPlayer.didFinishPlayback = {
-				self.isPlaying = false
-			}
-		}
-
-		if self.deltaTimeInterval > self.nextPlayTime {
-			self.deltaTimeInterval = 0
-			self.tryPlaySound = true
-			self.nextPlayTime = TimeInterval(arc4random_uniform(waitTime))
-		}else {
-			self.deltaTimeInterval = self.deltaTimeInterval + seconds
-			self.tryPlaySound = false
-		}
-	}
+//    override func update(deltaTime seconds: TimeInterval) {
+//        
+//        
+//        if !isPlaying && tryPlaySound {
+//            self.playMusic()
+//            self.isPlaying = true
+//            self.audioPlayer.didFinishPlayback = {
+//                self.isPlaying = false
+//            }
+//        }
+//
+//        if self.deltaTimeInterval > self.nextPlayTime {
+//            self.deltaTimeInterval = 0
+//            self.tryPlaySound = true
+//            self.nextPlayTime = TimeInterval(arc4random_uniform(waitTime))
+//        }else {
+//            self.deltaTimeInterval = self.deltaTimeInterval + seconds
+//            self.tryPlaySound = false
+//        }
+//    }
 	
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")

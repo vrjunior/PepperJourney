@@ -44,7 +44,6 @@
 		D25160EC1F940ACF00BF756A /* StandingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25160EB1F940ACF00BF756A /* StandingState.swift */; };
 		D25160EE1F940B0C00BF756A /* JumpingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25160ED1F940B0C00BF756A /* JumpingState.swift */; };
 		D25AD5A61F87E1B100F2093E /* PadOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AD5A51F87E1B100F2093E /* PadOverlay.swift */; };
-		D25AD5AC1F87EAC900F2093E /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AD5AB1F87EAC800F2093E /* GameController.swift */; };
 		D25AD5AE1F87ECF900F2093E /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AD5AD1F87ECF900F2093E /* Character.swift */; };
 		D25AD5B11F8809DE00F2093E /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25AD5B01F8809DE00F2093E /* SceneKit.framework */; };
 		D25AD5B31F8809E500F2093E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25AD5B21F8809E500F2093E /* GameKit.framework */; };
@@ -60,6 +59,7 @@
 		D2B8BBB81FBB64D70042F873 /* Burrito.TTF in Resources */ = {isa = PBXBuildFile; fileRef = D2B8BBB71FBB64D70042F873 /* Burrito.TTF */; };
 		D2DDAD521FBA2913009FA2B0 /* GameOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DDAD511FBA2913009FA2B0 /* GameOptions.swift */; };
 		D2E0A8981F993B5D00FCC255 /* JumpComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E0A8971F993B5D00FCC255 /* JumpComponent.swift */; };
+		D2E594B21FC758880050D5D5 /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AD5AB1F87EAC800F2093E /* GameController.swift */; };
 		D2EC857D1F83F1240093F009 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EC857C1F83F1240093F009 /* AppDelegate.swift */; };
 		D2EC85811F83F1240093F009 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2EC85801F83F1240093F009 /* GameViewController.swift */; };
 		D2EC85841F83F1240093F009 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2EC85821F83F1240093F009 /* Main.storyboard */; };
@@ -83,21 +83,21 @@
 		B08B911D1FC4CABD00304E46 /* gameBackground.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameBackground.mp3; sourceTree = "<group>"; };
 		B08B91201FC4CCBE00304E46 /* SoundDistanceComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundDistanceComponent.swift; sourceTree = "<group>"; };
 		B08B91221FC4FFB400304E46 /* PepperPointSound1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = PepperPointSound1.mp3; sourceTree = "<group>"; };
-		B0FDBAE01FA9F35600D4B08D /* pixelate.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = pixelate.metal; path = SpicyHero/Shaders/pixelate.metal; sourceTree = SOURCE_ROOT; };
-		B0FDBAE21FA9F35600D4B08D /* lines.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = lines.fsh; path = SpicyHero/Shaders/lines.fsh; sourceTree = SOURCE_ROOT; };
-		B0FDBAE31FA9F35600D4B08D /* prep.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = prep.vsh; path = SpicyHero/Shaders/prep.vsh; sourceTree = SOURCE_ROOT; };
-		B0FDBAE41FA9F35600D4B08D /* lines.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = lines.vsh; path = SpicyHero/Shaders/lines.vsh; sourceTree = SOURCE_ROOT; };
-		B0FDBAE61FA9F35600D4B08D /* prep.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = prep.fsh; path = SpicyHero/Shaders/prep.fsh; sourceTree = SOURCE_ROOT; };
-		B0FDBAE71FA9F35600D4B08D /* toon.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = toon.metal; path = SpicyHero/Shaders/toon.metal; sourceTree = SOURCE_ROOT; };
-		D20108851FBE11D8007660E3 /* ControlsOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = ControlsOverlay.sks; path = SpicyHero/Overlays/ControlsOverlay.sks; sourceTree = SOURCE_ROOT; };
-		D20108861FBE11D9007660E3 /* PauseOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = PauseOverlay.sks; path = SpicyHero/Overlays/PauseOverlay.sks; sourceTree = SOURCE_ROOT; };
-		D20108871FBE11D9007660E3 /* ControlsOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControlsOverlay.swift; path = SpicyHero/Overlays/ControlsOverlay.swift; sourceTree = SOURCE_ROOT; };
-		D20108881FBE11D9007660E3 /* GameOverOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameOverOverlay.swift; path = SpicyHero/Overlays/GameOverOverlay.swift; sourceTree = SOURCE_ROOT; };
-		D20108891FBE11D9007660E3 /* StartOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = StartOverlay.sks; path = SpicyHero/Overlays/StartOverlay.sks; sourceTree = SOURCE_ROOT; };
-		D201088A1FBE11D9007660E3 /* PauseOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PauseOverlay.swift; path = SpicyHero/Overlays/PauseOverlay.swift; sourceTree = SOURCE_ROOT; };
-		D201088B1FBE11D9007660E3 /* GameOverOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = GameOverOverlay.sks; path = SpicyHero/Overlays/GameOverOverlay.sks; sourceTree = SOURCE_ROOT; };
-		D201088C1FBE11D9007660E3 /* StartOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StartOverlay.swift; path = SpicyHero/Overlays/StartOverlay.swift; sourceTree = SOURCE_ROOT; };
-		D20108951FBE11FC007660E3 /* FinishOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = FinishOverlay.sks; path = SpicyHero/Overlays/FinishOverlay.sks; sourceTree = SOURCE_ROOT; };
+		B0FDBAE01FA9F35600D4B08D /* pixelate.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = pixelate.metal; path = PepperJourney/Shaders/pixelate.metal; sourceTree = SOURCE_ROOT; };
+		B0FDBAE21FA9F35600D4B08D /* lines.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = lines.fsh; path = PepperJourney/Shaders/lines.fsh; sourceTree = SOURCE_ROOT; };
+		B0FDBAE31FA9F35600D4B08D /* prep.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = prep.vsh; path = PepperJourney/Shaders/prep.vsh; sourceTree = SOURCE_ROOT; };
+		B0FDBAE41FA9F35600D4B08D /* lines.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = lines.vsh; path = PepperJourney/Shaders/lines.vsh; sourceTree = SOURCE_ROOT; };
+		B0FDBAE61FA9F35600D4B08D /* prep.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = prep.fsh; path = PepperJourney/Shaders/prep.fsh; sourceTree = SOURCE_ROOT; };
+		B0FDBAE71FA9F35600D4B08D /* toon.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = toon.metal; path = PepperJourney/Shaders/toon.metal; sourceTree = SOURCE_ROOT; };
+		D20108851FBE11D8007660E3 /* ControlsOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = ControlsOverlay.sks; path = PepperJourney/Overlays/ControlsOverlay.sks; sourceTree = SOURCE_ROOT; };
+		D20108861FBE11D9007660E3 /* PauseOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = PauseOverlay.sks; path = PepperJourney/Overlays/PauseOverlay.sks; sourceTree = SOURCE_ROOT; };
+		D20108871FBE11D9007660E3 /* ControlsOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControlsOverlay.swift; path = PepperJourney/Overlays/ControlsOverlay.swift; sourceTree = SOURCE_ROOT; };
+		D20108881FBE11D9007660E3 /* GameOverOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameOverOverlay.swift; path = PepperJourney/Overlays/GameOverOverlay.swift; sourceTree = SOURCE_ROOT; };
+		D20108891FBE11D9007660E3 /* StartOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = StartOverlay.sks; path = PepperJourney/Overlays/StartOverlay.sks; sourceTree = SOURCE_ROOT; };
+		D201088A1FBE11D9007660E3 /* PauseOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PauseOverlay.swift; path = PepperJourney/Overlays/PauseOverlay.swift; sourceTree = SOURCE_ROOT; };
+		D201088B1FBE11D9007660E3 /* GameOverOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = GameOverOverlay.sks; path = PepperJourney/Overlays/GameOverOverlay.sks; sourceTree = SOURCE_ROOT; };
+		D201088C1FBE11D9007660E3 /* StartOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StartOverlay.swift; path = PepperJourney/Overlays/StartOverlay.swift; sourceTree = SOURCE_ROOT; };
+		D20108951FBE11FC007660E3 /* FinishOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = FinishOverlay.sks; path = PepperJourney/Overlays/FinishOverlay.sks; sourceTree = SOURCE_ROOT; };
 		D207CFC41F8EA2D10084240E /* Dpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dpad.swift; sourceTree = "<group>"; };
 		D207CFC61F8EA5370084240E /* Stick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stick.swift; sourceTree = "<group>"; };
 		D25160E41F93FA3400BF756A /* BaseState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseState.swift; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 		D25AD5AD1F87ECF900F2093E /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		D25AD5B01F8809DE00F2093E /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		D25AD5B21F8809E500F2093E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
-		D25BAE211FC60443000ED0EC /* SettingsOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = SettingsOverlay.sks; path = SpicyHero/Overlays/SettingsOverlay.sks; sourceTree = SOURCE_ROOT; };
+		D25BAE211FC60443000ED0EC /* SettingsOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = SettingsOverlay.sks; path = PepperJourney/Overlays/SettingsOverlay.sks; sourceTree = SOURCE_ROOT; };
 		D25BAE251FC60864000ED0EC /* SettingsOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOverlay.swift; sourceTree = "<group>"; };
 		D25BAE271FC60C0F000ED0EC /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationType.swift; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 		D2B8BBB71FBB64D70042F873 /* Burrito.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = Burrito.TTF; sourceTree = "<group>"; };
 		D2DDAD511FBA2913009FA2B0 /* GameOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOptions.swift; sourceTree = "<group>"; };
 		D2E0A8971F993B5D00FCC255 /* JumpComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpComponent.swift; sourceTree = "<group>"; };
-		D2EC85791F83F1240093F009 /* SpicyHero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpicyHero.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2EC85791F83F1240093F009 /* PepperJourney.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PepperJourney.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2EC857C1F83F1240093F009 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2EC85801F83F1240093F009 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		D2EC85831F83F1240093F009 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -275,7 +275,7 @@
 		D2EC85701F83F1240093F009 = {
 			isa = PBXGroup;
 			children = (
-				D2EC857B1F83F1240093F009 /* SpicyHero */,
+				D2EC857B1F83F1240093F009 /* PepperJourney */,
 				D2EC857A1F83F1240093F009 /* Products */,
 				D25AD5AF1F8809DD00F2093E /* Frameworks */,
 			);
@@ -284,12 +284,12 @@
 		D2EC857A1F83F1240093F009 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2EC85791F83F1240093F009 /* SpicyHero.app */,
+				D2EC85791F83F1240093F009 /* PepperJourney.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D2EC857B1F83F1240093F009 /* SpicyHero */ = {
+		D2EC857B1F83F1240093F009 /* PepperJourney */ = {
 			isa = PBXGroup;
 			children = (
 				B0465F171FC4C743002B8FE8 /* Sounds */,
@@ -313,7 +313,7 @@
 				D2EC85871F83F1240093F009 /* LaunchScreen.storyboard */,
 				D2EC858A1F83F1240093F009 /* Info.plist */,
 			);
-			path = SpicyHero;
+			path = PepperJourney;
 			sourceTree = "<group>";
 		};
 		D2EC85901F83F6D60093F009 /* iOSControls */ = {
@@ -329,9 +329,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D2EC85781F83F1240093F009 /* SpicyHero */ = {
+		D2EC85781F83F1240093F009 /* PepperJourney */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D2EC858D1F83F1240093F009 /* Build configuration list for PBXNativeTarget "SpicyHero" */;
+			buildConfigurationList = D2EC858D1F83F1240093F009 /* Build configuration list for PBXNativeTarget "PepperJourney" */;
 			buildPhases = (
 				D2EC85751F83F1240093F009 /* Sources */,
 				D2EC85761F83F1240093F009 /* Frameworks */,
@@ -341,9 +341,9 @@
 			);
 			dependencies = (
 			);
-			name = SpicyHero;
-			productName = SpicyHero;
-			productReference = D2EC85791F83F1240093F009 /* SpicyHero.app */;
+			name = PepperJourney;
+			productName = PepperJourney;
+			productReference = D2EC85791F83F1240093F009 /* PepperJourney.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -362,7 +362,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D2EC85741F83F1240093F009 /* Build configuration list for PBXProject "SpicyHero" */;
+			buildConfigurationList = D2EC85741F83F1240093F009 /* Build configuration list for PBXProject "PepperJourney" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -375,7 +375,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D2EC85781F83F1240093F009 /* SpicyHero */,
+				D2EC85781F83F1240093F009 /* PepperJourney */,
 			);
 		};
 /* End PBXProject section */
@@ -415,10 +415,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2DDAD521FBA2913009FA2B0 /* GameOptions.swift in Sources */,
+				D2E594B21FC758880050D5D5 /* GameController.swift in Sources */,
 				D2863F221FA14761004CCCDC /* JumpingMoveState.swift in Sources */,
 				B08B91211FC4CCBE00304E46 /* SoundDistanceComponent.swift in Sources */,
 				D2EC85811F83F1240093F009 /* GameViewController.swift in Sources */,
-				D25AD5AC1F87EAC900F2093E /* GameController.swift in Sources */,
 				D25160EC1F940ACF00BF756A /* StandingState.swift in Sources */,
 				D2E0A8981F993B5D00FCC255 /* JumpComponent.swift in Sources */,
 				D25AD5AE1F87ECF900F2093E /* Character.swift in Sources */,
@@ -589,10 +589,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J5KQYDNX5E;
-				INFOPLIST_FILE = SpicyHero/Info.plist;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = PepperJourney/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vrmassoni.SpicyHero;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vrmassoni.PepperJourney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -604,10 +604,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J5KQYDNX5E;
-				INFOPLIST_FILE = SpicyHero/Info.plist;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = PepperJourney/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vrmassoni.SpicyHero;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vrmassoni.PepperJourney;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -617,7 +617,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D2EC85741F83F1240093F009 /* Build configuration list for PBXProject "SpicyHero" */ = {
+		D2EC85741F83F1240093F009 /* Build configuration list for PBXProject "PepperJourney" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D2EC858B1F83F1240093F009 /* Debug */,
@@ -626,7 +626,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D2EC858D1F83F1240093F009 /* Build configuration list for PBXNativeTarget "SpicyHero" */ = {
+		D2EC858D1F83F1240093F009 /* Build configuration list for PBXNativeTarget "PepperJourney" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D2EC858E1F83F1240093F009 /* Debug */,
