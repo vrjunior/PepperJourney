@@ -44,6 +44,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     private var pepperNode: SCNNode!
 	
 	// Sound Player
+    var backgroundMusic: SoundComponent!
+
 	
     // MARK: - Controling the character
     
@@ -61,9 +63,16 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         }
     }
 	
-	func setupSounds(){
-		
-	}
+    func resetSounds()
+    {
+        // Clean all the sounds
+        self.character.node.removeAllAudioPlayers()
+        
+        // Restart the background music
+        self.backgroundMusic = SoundComponent(fileName: "ImmigrantSong.mp3", node: self.character.node, volume: 0.01)
+        self.backgroundMusic.playSound(loops: true)
+        
+    }
     
     func setupCharacter() {
         character = Character(scene: scene!, jumpDelegate: self)
@@ -157,6 +166,9 @@ class GameController: NSObject, SCNSceneRendererDelegate {
 
         self.entityManager.setupGameInitialization()
         
+        // Reset of all the sounds
+        self.resetSounds()
+        
         self.character.node.position = SCNVector3(self.character.initialPosition)
         self.cameraNode.position = self.cameraInitialPosition
         print(self.character.node.position)
@@ -164,7 +176,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.character.node.physicsBody?.velocityFactor = SCNVector3(1, 1, 1)
         self.character.node.physicsBody?.damping = 0.1
         
-       // setEndSinalization()
+       
     }
    
     func setupTapToStart() {
@@ -226,17 +238,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         character!.update(atTime: time, with: renderer)
         
         self.entityManager.update(atTime: time)
-//        print(self.entityManager.potatoesEntities.count)
     }
-    
-    func setEndSinalization() {
-        guard let lastDoorNode = self.scene.rootNode.childNode(withName: "LastDoor", recursively: true) else { fatalError("Error at get LastDoor") }
-        
-        guard let particleSystem = SCNParticleSystem(named: "endSinalization", inDirectory: nil) else { fatalError("Error at get Particle System") }
-        
-        lastDoorNode.addParticleSystem(particleSystem)
-    }
-    
 }
 
 extension GameController : PadOverlayDelegate {
