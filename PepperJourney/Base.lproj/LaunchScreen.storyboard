@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pepper Journey" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tL6-si-fPf">
-                                <rect key="frame" x="141.5" y="9" width="384.5" height="60"/>
+                                <rect key="frame" x="121.5" y="9" width="424.5" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Mym-62-dhA"/>
                                 </constraints>
@@ -32,7 +32,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="launchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="sp3-ti-Dlw">
-                                <rect key="frame" x="153" y="38" width="360" height="298"/>
+                                <rect key="frame" x="153" y="77" width="360" height="298"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="360" id="2z0-V2-RWw"/>
                                     <constraint firstAttribute="height" constant="298" id="bWG-Mo-vjq"/>
@@ -43,8 +43,9 @@
                         <constraints>
                             <constraint firstItem="sp3-ti-Dlw" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="3tk-Ec-Bdo"/>
                             <constraint firstItem="tL6-si-fPf" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="8de-Rr-rje"/>
+                            <constraint firstItem="sp3-ti-Dlw" firstAttribute="top" secondItem="tL6-si-fPf" secondAttribute="bottom" constant="8" id="Any-iu-xTh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sp3-ti-Dlw" secondAttribute="bottom" id="bPi-qt-0c3"/>
                             <constraint firstItem="tL6-si-fPf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="9" id="u2H-Q7-mzE"/>
-                            <constraint firstItem="sp3-ti-Dlw" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="ybj-be-K5N"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
