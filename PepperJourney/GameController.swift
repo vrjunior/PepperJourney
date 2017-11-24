@@ -101,7 +101,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.soundController.loadSound(fileName: "splashingWater.wav", soundName: "casa")
         
         //setup character sounds
-        self.soundController.loadSound(fileName: "jump.wav", soundName: "jump", volume: 2.0)
+        self.soundController.loadSound(fileName: "jump.wav", soundName: "jump", volume: 5.0)
         
     }
     

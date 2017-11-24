@@ -67,7 +67,7 @@ class SoundController
         }
         print("tocou: \(soundName)")
         sound.loops = loops
-        node.runAction(SCNAction.playAudio(sound, waitForCompletion: true))
+        node.runAction(SCNAction.playAudio(sound, waitForCompletion: false))
     }
     
     func playSoundEffect(soundName: String, loops: Bool, node: SCNNode)
