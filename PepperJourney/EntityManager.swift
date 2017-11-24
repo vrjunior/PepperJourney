@@ -64,7 +64,7 @@ class EntityManager
         let seekComponent = potato.component(ofType: SeekComponent.self)!
         self.seekComponentSystem.addComponent(seekComponent)
         
-        self.soundController.loadSound(fileName: "SplashingWater.wav", soundName: potato.description, volume: soundController.defaultSoudEffectVolume)
+       // self.soundController.loadSound(fileName: "SplashingWater.wav", soundName: potato.description, volume: soundController.defaultSoudEffectVolume)
 		
 		let soundRandomComponent = potato.component(ofType: SoundRandomComponent.self)!
 		self.soundRandomComponentSystem.addComponent(soundRandomComponent)
