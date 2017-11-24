@@ -405,7 +405,7 @@ extension GameController : SCNPhysicsContactDelegate {
         {
             if lakeNode.name == "lakeBottom"
             {
-                self.entityManager.killAPotato(node: potatoNode)
+                //self.entityManager.killAPotato(node: potatoNode)
             }
             else if lakeNode.name == "lakeSurface"
             {
@@ -414,7 +414,7 @@ extension GameController : SCNPhysicsContactDelegate {
                 }
                 
                 let soundName = potatoEntity.description
-                self.soundController.playSoundEffect(soundName: soundName, loops: false, node: potatoNode)
+                //self.soundController.playSoundEffect(soundName: soundName, loops: false, node: potatoNode)
                 
             }
         }

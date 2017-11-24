@@ -21,11 +21,9 @@
 		9CE0FF4B1FC85B67004AF735 /* SinkingInWaterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE0FF4A1FC85B67004AF735 /* SinkingInWaterComponent.swift */; };
 		9CFDF8701F9A36F7009385A7 /* PotatoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */; };
 		B0465F0D1FC444A2002B8FE8 /* SoundRandomComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0465F0B1FC444A1002B8FE8 /* SoundRandomComponent.swift */; };
-		B0465F161FC47879002B8FE8 /* potatoSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = B0465F151FC47879002B8FE8 /* potatoSound.wav */; };
 		B08B911E1FC4CABD00304E46 /* drawPepper.wav in Resources */ = {isa = PBXBuildFile; fileRef = B08B911C1FC4CABD00304E46 /* drawPepper.wav */; };
 		B08B911F1FC4CABD00304E46 /* gameBackground.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B08B911D1FC4CABD00304E46 /* gameBackground.mp3 */; };
 		B08B91211FC4CCBE00304E46 /* SoundDistanceComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08B91201FC4CCBE00304E46 /* SoundDistanceComponent.swift */; };
-		B08B91231FC4FFB400304E46 /* _PepperPointSound1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B08B91221FC4FFB400304E46 /* _PepperPointSound1.mp3 */; };
 		B0FDBAE91FA9F35600D4B08D /* pixelate.metal in Sources */ = {isa = PBXBuildFile; fileRef = B0FDBAE01FA9F35600D4B08D /* pixelate.metal */; };
 		B0FDBAEB1FA9F35600D4B08D /* lines.fsh in Resources */ = {isa = PBXBuildFile; fileRef = B0FDBAE21FA9F35600D4B08D /* lines.fsh */; };
 		B0FDBAEC1FA9F35600D4B08D /* prep.vsh in Resources */ = {isa = PBXBuildFile; fileRef = B0FDBAE31FA9F35600D4B08D /* prep.vsh */; };
@@ -88,11 +86,9 @@
 		9CE0FF4A1FC85B67004AF735 /* SinkingInWaterComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinkingInWaterComponent.swift; sourceTree = "<group>"; };
 		9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotatoEntity.swift; sourceTree = "<group>"; };
 		B0465F0B1FC444A1002B8FE8 /* SoundRandomComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundRandomComponent.swift; sourceTree = "<group>"; };
-		B0465F151FC47879002B8FE8 /* potatoSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = potatoSound.wav; sourceTree = "<group>"; };
 		B08B911C1FC4CABD00304E46 /* drawPepper.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = drawPepper.wav; sourceTree = "<group>"; };
 		B08B911D1FC4CABD00304E46 /* gameBackground.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameBackground.mp3; sourceTree = "<group>"; };
 		B08B91201FC4CCBE00304E46 /* SoundDistanceComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundDistanceComponent.swift; sourceTree = "<group>"; };
-		B08B91221FC4FFB400304E46 /* _PepperPointSound1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = _PepperPointSound1.mp3; sourceTree = "<group>"; };
 		B0FDBAE01FA9F35600D4B08D /* pixelate.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = pixelate.metal; path = PepperJourney/Shaders/pixelate.metal; sourceTree = SOURCE_ROOT; };
 		B0FDBAE21FA9F35600D4B08D /* lines.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = lines.fsh; path = PepperJourney/Shaders/lines.fsh; sourceTree = SOURCE_ROOT; };
 		B0FDBAE31FA9F35600D4B08D /* prep.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = prep.vsh; path = PepperJourney/Shaders/prep.vsh; sourceTree = SOURCE_ROOT; };
@@ -192,10 +188,8 @@
 			children = (
 				9CE0FF481FC854B1004AF735 /* SplashingWater.wav */,
 				9CE0FF441FC773D3004AF735 /* ImmigrantSong.mp3 */,
-				B08B91221FC4FFB400304E46 /* _PepperPointSound1.mp3 */,
 				B08B911C1FC4CABD00304E46 /* drawPepper.wav */,
 				B08B911D1FC4CABD00304E46 /* gameBackground.mp3 */,
-				B0465F151FC47879002B8FE8 /* potatoSound.wav */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -411,13 +405,11 @@
 				D201088D1FBE11D9007660E3 /* ControlsOverlay.sks in Resources */,
 				D2EC85891F83F1240093F009 /* LaunchScreen.storyboard in Resources */,
 				B0FDBAEB1FA9F35600D4B08D /* lines.fsh in Resources */,
-				B08B91231FC4FFB400304E46 /* _PepperPointSound1.mp3 in Resources */,
 				B0FDBAED1FA9F35600D4B08D /* lines.vsh in Resources */,
 				B08B911E1FC4CABD00304E46 /* drawPepper.wav in Resources */,
 				B0FDBAEF1FA9F35600D4B08D /* prep.fsh in Resources */,
 				B0FDBAEC1FA9F35600D4B08D /* prep.vsh in Resources */,
 				9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */,
-				B0465F161FC47879002B8FE8 /* potatoSound.wav in Resources */,
 				D20108911FBE11D9007660E3 /* StartOverlay.sks in Resources */,
 				D201088E1FBE11D9007660E3 /* PauseOverlay.sks in Resources */,
 				B08B911F1FC4CABD00304E46 /* gameBackground.mp3 in Resources */,
