@@ -67,6 +67,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     {
         // Restart the background music
         self.soundController.playbackgroundMusic(soundName: "backgroundMusic", loops: true, node: self.cameraNode)
+        
     }
     
     func stopSounds()
@@ -86,6 +87,21 @@ class GameController: NSObject, SCNSceneRendererDelegate {
             JumpingState(scene: scene, character: character),
             JumpingMoveState(scene: scene, character: character)
             ])
+        
+    }
+    
+    
+    func setupSounds() {
+        
+        self.soundController.loadSound(fileName: "gameBackground.mp3", soundName: "backgroundMusic", volume: 0.1)
+        
+        self.soundController.loadSound(fileName: "pepperPointSound1.mp3", soundName: "gameOverSound")
+       self.soundController.loadSound(fileName: "splashingWater.wav", soundName: "splashingWater")
+        self.soundController.loadSound(fileName: "splashingWater.wav", soundName: "casa")
+        self.soundController.loadSound(fileName: "splashingWater.wav", soundName: "casa")
+        
+        //setup character sounds
+        self.soundController.loadSound(fileName: "jump.wav", soundName: "jump", volume: 2.0)
         
     }
     
@@ -156,7 +172,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.setupTapToStart()
         
         // Pre-load all the audios of the game in the memory
-        self.soundController.loadFase1Sounds()
+        self.setupSounds()
 		
     }
     
@@ -301,6 +317,7 @@ extension GameController : JumpDelegate {
     
     func didJumpBegin(node: SCNNode) {
         if(node == character.node) {
+            self.soundController.playSoundEffect(soundName: "jump", loops: false, node: character.node)
             self.character.isJumping = true
         }
     }

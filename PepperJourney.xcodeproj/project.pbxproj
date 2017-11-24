@@ -15,15 +15,16 @@
 		9C4A65731FA67ED700293460 /* PotatoGeneratorSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4A65721FA67ED700293460 /* PotatoGeneratorSystem.swift */; };
 		9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C6D3DEA1F93252500B8FA2A /* Game.scnassets */; };
 		9CE0FF431FC765B9004AF735 /* SoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE0FF421FC765B9004AF735 /* SoundController.swift */; };
-		9CE0FF451FC773D3004AF735 /* ImmigrantSong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9CE0FF441FC773D3004AF735 /* ImmigrantSong.mp3 */; };
+		9CE0FF451FC773D3004AF735 /* immigrantSong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9CE0FF441FC773D3004AF735 /* immigrantSong.mp3 */; };
 		9CE0FF471FC7776F004AF735 /* GameSoundsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE0FF461FC7776F004AF735 /* GameSoundsEntity.swift */; };
-		9CE0FF491FC854B2004AF735 /* SplashingWater.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9CE0FF481FC854B1004AF735 /* SplashingWater.wav */; };
+		9CE0FF491FC854B2004AF735 /* splashingWater.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9CE0FF481FC854B1004AF735 /* splashingWater.wav */; };
 		9CE0FF4B1FC85B67004AF735 /* SinkingInWaterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE0FF4A1FC85B67004AF735 /* SinkingInWaterComponent.swift */; };
 		9CFDF8701F9A36F7009385A7 /* PotatoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */; };
 		B0465F0D1FC444A2002B8FE8 /* SoundRandomComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0465F0B1FC444A1002B8FE8 /* SoundRandomComponent.swift */; };
 		B08B911E1FC4CABD00304E46 /* drawPepper.wav in Resources */ = {isa = PBXBuildFile; fileRef = B08B911C1FC4CABD00304E46 /* drawPepper.wav */; };
 		B08B911F1FC4CABD00304E46 /* gameBackground.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B08B911D1FC4CABD00304E46 /* gameBackground.mp3 */; };
 		B08B91211FC4CCBE00304E46 /* SoundDistanceComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08B91201FC4CCBE00304E46 /* SoundDistanceComponent.swift */; };
+		B08B91231FC4FFB400304E46 /* pepperPointSound1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B08B91221FC4FFB400304E46 /* pepperPointSound1.mp3 */; };
 		B0FDBAE91FA9F35600D4B08D /* pixelate.metal in Sources */ = {isa = PBXBuildFile; fileRef = B0FDBAE01FA9F35600D4B08D /* pixelate.metal */; };
 		B0FDBAEB1FA9F35600D4B08D /* lines.fsh in Resources */ = {isa = PBXBuildFile; fileRef = B0FDBAE21FA9F35600D4B08D /* lines.fsh */; };
 		B0FDBAEC1FA9F35600D4B08D /* prep.vsh in Resources */ = {isa = PBXBuildFile; fileRef = B0FDBAE31FA9F35600D4B08D /* prep.vsh */; };
@@ -53,6 +54,7 @@
 		D25BAE221FC60443000ED0EC /* SettingsOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D25BAE211FC60443000ED0EC /* SettingsOverlay.sks */; };
 		D25BAE261FC60864000ED0EC /* SettingsOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BAE251FC60864000ED0EC /* SettingsOverlay.swift */; };
 		D25BAE281FC60C0F000ED0EC /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BAE271FC60C0F000ED0EC /* SettingsController.swift */; };
+		D26FCCFC1FC87E5D003EBFDF /* jump.wav in Resources */ = {isa = PBXBuildFile; fileRef = D26FCCFB1FC87E5D003EBFDF /* jump.wav */; };
 		D2719D901FA0EBDA00FCB61F /* AnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */; };
 		D28623B51FA3AF5F00691E83 /* GameBaseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28623B41FA3AF5F00691E83 /* GameBaseState.swift */; };
 		D28623B71FA3AFB600691E83 /* PauseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28623B61FA3AFB600691E83 /* PauseState.swift */; };
@@ -80,15 +82,16 @@
 		9C4A65721FA67ED700293460 /* PotatoGeneratorSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotatoGeneratorSystem.swift; sourceTree = "<group>"; };
 		9C6D3DEA1F93252500B8FA2A /* Game.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Game.scnassets; sourceTree = "<group>"; };
 		9CE0FF421FC765B9004AF735 /* SoundController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
-		9CE0FF441FC773D3004AF735 /* ImmigrantSong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ImmigrantSong.mp3; sourceTree = "<group>"; };
+		9CE0FF441FC773D3004AF735 /* immigrantSong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = immigrantSong.mp3; sourceTree = "<group>"; };
 		9CE0FF461FC7776F004AF735 /* GameSoundsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSoundsEntity.swift; sourceTree = "<group>"; };
-		9CE0FF481FC854B1004AF735 /* SplashingWater.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SplashingWater.wav; sourceTree = "<group>"; };
+		9CE0FF481FC854B1004AF735 /* splashingWater.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splashingWater.wav; sourceTree = "<group>"; };
 		9CE0FF4A1FC85B67004AF735 /* SinkingInWaterComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinkingInWaterComponent.swift; sourceTree = "<group>"; };
 		9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotatoEntity.swift; sourceTree = "<group>"; };
 		B0465F0B1FC444A1002B8FE8 /* SoundRandomComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundRandomComponent.swift; sourceTree = "<group>"; };
 		B08B911C1FC4CABD00304E46 /* drawPepper.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = drawPepper.wav; sourceTree = "<group>"; };
 		B08B911D1FC4CABD00304E46 /* gameBackground.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameBackground.mp3; sourceTree = "<group>"; };
 		B08B91201FC4CCBE00304E46 /* SoundDistanceComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundDistanceComponent.swift; sourceTree = "<group>"; };
+		B08B91221FC4FFB400304E46 /* pepperPointSound1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = pepperPointSound1.mp3; sourceTree = "<group>"; };
 		B0FDBAE01FA9F35600D4B08D /* pixelate.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = pixelate.metal; path = PepperJourney/Shaders/pixelate.metal; sourceTree = SOURCE_ROOT; };
 		B0FDBAE21FA9F35600D4B08D /* lines.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = lines.fsh; path = PepperJourney/Shaders/lines.fsh; sourceTree = SOURCE_ROOT; };
 		B0FDBAE31FA9F35600D4B08D /* prep.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = prep.vsh; path = PepperJourney/Shaders/prep.vsh; sourceTree = SOURCE_ROOT; };
@@ -119,6 +122,7 @@
 		D25BAE211FC60443000ED0EC /* SettingsOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = SettingsOverlay.sks; path = PepperJourney/Overlays/SettingsOverlay.sks; sourceTree = SOURCE_ROOT; };
 		D25BAE251FC60864000ED0EC /* SettingsOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOverlay.swift; sourceTree = "<group>"; };
 		D25BAE271FC60C0F000ED0EC /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		D26FCCFB1FC87E5D003EBFDF /* jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = jump.wav; path = ../../../sounds/jump.wav; sourceTree = "<group>"; };
 		D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationType.swift; sourceTree = "<group>"; };
 		D28623B41FA3AF5F00691E83 /* GameBaseState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBaseState.swift; sourceTree = "<group>"; };
 		D28623B61FA3AFB600691E83 /* PauseState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseState.swift; sourceTree = "<group>"; };
@@ -186,8 +190,10 @@
 		B0465F171FC4C743002B8FE8 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				9CE0FF481FC854B1004AF735 /* SplashingWater.wav */,
-				9CE0FF441FC773D3004AF735 /* ImmigrantSong.mp3 */,
+				9CE0FF481FC854B1004AF735 /* splashingWater.wav */,
+				9CE0FF441FC773D3004AF735 /* immigrantSong.mp3 */,
+				D26FCCFB1FC87E5D003EBFDF /* jump.wav */,
+				B08B91221FC4FFB400304E46 /* pepperPointSound1.mp3 */,
 				B08B911C1FC4CABD00304E46 /* drawPepper.wav */,
 				B08B911D1FC4CABD00304E46 /* gameBackground.mp3 */,
 			);
@@ -402,9 +408,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D26FCCFC1FC87E5D003EBFDF /* jump.wav in Resources */,
 				D201088D1FBE11D9007660E3 /* ControlsOverlay.sks in Resources */,
 				D2EC85891F83F1240093F009 /* LaunchScreen.storyboard in Resources */,
 				B0FDBAEB1FA9F35600D4B08D /* lines.fsh in Resources */,
+				B08B91231FC4FFB400304E46 /* pepperPointSound1.mp3 in Resources */,
 				B0FDBAED1FA9F35600D4B08D /* lines.vsh in Resources */,
 				B08B911E1FC4CABD00304E46 /* drawPepper.wav in Resources */,
 				B0FDBAEF1FA9F35600D4B08D /* prep.fsh in Resources */,
@@ -414,13 +422,13 @@
 				D201088E1FBE11D9007660E3 /* PauseOverlay.sks in Resources */,
 				B08B911F1FC4CABD00304E46 /* gameBackground.mp3 in Resources */,
 				D2EC85861F83F1240093F009 /* Assets.xcassets in Resources */,
-				9CE0FF451FC773D3004AF735 /* ImmigrantSong.mp3 in Resources */,
+				9CE0FF451FC773D3004AF735 /* immigrantSong.mp3 in Resources */,
 				D2EC85841F83F1240093F009 /* Main.storyboard in Resources */,
 				D20108931FBE11D9007660E3 /* GameOverOverlay.sks in Resources */,
 				D25BAE221FC60443000ED0EC /* SettingsOverlay.sks in Resources */,
 				D2B8BBB81FBB64D70042F873 /* Burrito.TTF in Resources */,
 				D20108961FBE11FC007660E3 /* FinishOverlay.sks in Resources */,
-				9CE0FF491FC854B2004AF735 /* SplashingWater.wav in Resources */,
+				9CE0FF491FC854B2004AF735 /* splashingWater.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
