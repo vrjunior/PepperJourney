@@ -12,7 +12,7 @@ import AVFoundation
 
 class SoundController
 {
-    var AreSoundEffectsMute: Bool
+    var areSoundEffectsMute: Bool
     var isBackgroundMusicMute: Bool
     var defaultSoudEffectVolume: Float = 1
   
@@ -21,7 +21,7 @@ class SoundController
     private var sounds: [String: SCNAudioSource] = [:]
     
     private init() {
-        self.AreSoundEffectsMute = false
+        self.areSoundEffectsMute = false
         self.isBackgroundMusicMute = false
     }
     
@@ -30,17 +30,7 @@ class SoundController
         // pega do sistema
         // verifica botoes internos
     }
-    
-    func loadFase1Sounds()
-    {
-        self.defaultSoudEffectVolume = 1
-        
-        self.loadSound(fileName: "gameBackground.mp3", soundName: "backgroundMusic", volume: 0.1)
-        self.loadSound(fileName: "_PepperPointSound1.mp3", soundName: "gameOverSound", volume: defaultSoudEffectVolume)
-        self.loadSound(fileName: "SplashingWater.wav", soundName: "splashingWater", volume: defaultSoudEffectVolume)
-        self.loadSound(fileName: "SplashingWater.wav", soundName: "casa", volume: defaultSoudEffectVolume)
-        self.loadSound(fileName: "SplashingWater.wav", soundName: "casa", volume: defaultSoudEffectVolume)
-    }
+
     
     func loadSound (fileName: String, soundName: String, volume: Float) {
         
@@ -64,6 +54,10 @@ class SoundController
         self.sounds[soundName] = audioSource
     }
     
+    func loadSound(fileName: String, soundName: String) {
+        self.loadSound(fileName: fileName, soundName: soundName, volume: self.defaultSoudEffectVolume)
+    }
+    
     private func playGenericSound(soundName: String, loops: Bool, node: SCNNode)
     {
         guard let sound = self.sounds[soundName] else
@@ -78,7 +72,7 @@ class SoundController
     
     func playSoundEffect(soundName: String, loops: Bool, node: SCNNode)
     {
-        if !AreSoundEffectsMute
+        if !areSoundEffectsMute
         {
             playGenericSound(soundName: soundName, loops: loops, node: node)
         }
