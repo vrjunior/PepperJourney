@@ -26,12 +26,13 @@ class PotatoEntity: GKEntity
     private let maxSpeed: Float = 150  //0.00002
     private let maxAcceleration: Float = 50
     
+    
+    
     init(model: PotatoType, scene: SCNScene, position: SCNVector3, trakingAgent: GKAgent3D)
     {
         super.init()
         
         self.scene = scene
-
         let path = "Game.scnassets/potato/potato.scn"
         
         self.potatoModel = ModelComponent(modelPath: path, scene: scene, position: position)

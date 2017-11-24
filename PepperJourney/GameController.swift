@@ -44,7 +44,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     private var pepperNode: SCNNode!
 	
 	// Sound Player
-    var backgroundMusic: SoundComponent!
+    let soundController = SoundController.sharedInstance
 
 	
     // MARK: - Controling the character
@@ -65,13 +65,15 @@ class GameController: NSObject, SCNSceneRendererDelegate {
 	
     func resetSounds()
     {
-        // Clean all the sounds
-        self.character.node.removeAllAudioPlayers()
-        
         // Restart the background music
-        self.backgroundMusic = SoundComponent(fileName: "ImmigrantSong.mp3", node: self.character.node, volume: 0.01)
-        self.backgroundMusic.playSound(loops: true)
-        
+        self.soundController.playbackgroundMusic(soundName: "backgroundMusic", loops: true, node: self.cameraNode)
+    }
+    
+    func stopSounds()
+    {
+        // Clean all the sounds
+        soundController.stopSoundsFromNode(node: self.cameraNode)
+        soundController.stopSoundsFromNode(node: self.character.node)
     }
     
     func setupCharacter() {
@@ -148,10 +150,13 @@ class GameController: NSObject, SCNSceneRendererDelegate {
 //        self.scnView.showsStatistics = true
         
         // Create the entity manager system
-        self.entityManager = EntityManager(scene: self.scene, character: self.character)
+        self.entityManager = EntityManager(scene: self.scene, character: self.character, soundController: self.soundController)
         
         //setup tap to start
         self.setupTapToStart()
+        
+        // Pre-load all the audios of the game in the memory
+        self.soundController.loadFase1Sounds()
 		
     }
     
@@ -190,7 +195,12 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     }
     
     func setupGameOver() {
-       
+        // Stop sounds of the game
+        self.stopSounds()
+        
+        self.soundController.playSoundEffect(soundName: "gameOverSound", loops: false, node: character.node)
+        
+        
         entityManager.killAllPotatoes()
         self.character.node.isHidden = true
         let gameOverOverlay = SKScene(fileNamed: "GameOverOverlay.sks") as! GameOverOverlay
@@ -356,6 +366,7 @@ extension GameController : SCNPhysicsContactDelegate {
                 }
                 else if anotherNode?.name == "lakeSurface"
                 {
+                    self.soundController.playSoundEffect(soundName: "splashingWater", loops: false, node: self.character.node)
                     characterNode?.physicsBody?.damping = 0.99999
                     
                     //pause controls
@@ -370,24 +381,42 @@ extension GameController : SCNPhysicsContactDelegate {
                 }
                 
             }
+            // ja resolveu o que tinha que fazer aqui com o character
+            return
         }
+        var potatoNode: SCNNode?
+        var lakeNode: SCNNode?
         
-        else if contact.nodeA.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue &&
+        // batata na agua
+        if contact.nodeA.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue &&
             contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.lake.rawValue
         {
-            if contact.nodeB.name == "lakeBottom"
-            {
-                self.entityManager.killAPotato(node: contact.nodeA)
-            }
+            potatoNode = contact.nodeA
+            lakeNode = contact.nodeB
         }
         else if contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue &&
             contact.nodeA.physicsBody?.categoryBitMask == CategoryMaskType.lake.rawValue
         {
-            if contact.nodeA.name == "lakeBottom"
+            potatoNode = contact.nodeB
+            lakeNode = contact.nodeA
+        }
+        
+        if let potatoNode = potatoNode, let lakeNode = lakeNode
+        {
+            if lakeNode.name == "lakeBottom"
             {
-                self.entityManager.killAPotato(node: contact.nodeB)
+                self.entityManager.killAPotato(node: potatoNode)
             }
-            
+            else if lakeNode.name == "lakeSurface"
+            {
+                guard let potatoEntity = self.entityManager.killAPotato2(node: potatoNode) else {
+                    fatalError("Error at get the Potato Entity")
+                }
+                
+                let soundName = potatoEntity.description
+                self.soundController.playSoundEffect(soundName: soundName, loops: false, node: potatoNode)
+                
+            }
         }
     }
 }

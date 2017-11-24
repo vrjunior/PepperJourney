@@ -1,0 +1,126 @@
+//
+//  simpleSoundComponent.swift
+//  SpicyHero
+//
+//  Created by Marcelo Martimiano Junior on 22/11/17.
+//  Copyright © 2017 Valmir Junior. All rights reserved.
+//
+
+import Foundation
+import GameplayKit
+import AVFoundation
+
+class SoundController
+{
+    var AreSoundEffectsMute: Bool
+    var isBackgroundMusicMute: Bool
+    var defaultSoudEffectVolume: Float = 1
+  
+    static let sharedInstance = SoundController()
+    
+    private var sounds: [String: SCNAudioSource] = [:]
+    
+    private init() {
+        self.AreSoundEffectsMute = false
+        self.isBackgroundMusicMute = false
+    }
+    
+    func updateSoundStatus()
+    {
+        // pega do sistema
+        // verifica botoes internos
+    }
+    
+    func loadFase1Sounds()
+    {
+        self.defaultSoudEffectVolume = 1
+        
+        self.loadSound(fileName: "gameBackground.mp3", soundName: "backgroundMusic", volume: 0.1)
+        self.loadSound(fileName: "_PepperPointSound1.mp3", soundName: "gameOverSound", volume: defaultSoudEffectVolume)
+        self.loadSound(fileName: "SplashingWater.wav", soundName: "splashingWater", volume: defaultSoudEffectVolume)
+        self.loadSound(fileName: "SplashingWater.wav", soundName: "casa", volume: defaultSoudEffectVolume)
+        self.loadSound(fileName: "SplashingWater.wav", soundName: "casa", volume: defaultSoudEffectVolume)
+    }
+    
+    func loadSound (fileName: String, soundName: String, volume: Float) {
+        
+        guard let audioSource = SCNAudioSource(fileNamed: fileName) else {
+            fatalError("Error in find the sound \(fileName)")
+        }
+        
+        // Volume default de reprodução
+        audioSource.volume = volume
+        
+        // Varia com a posição
+        audioSource.isPositional = true
+        
+        // Não vai precisar pq vai fazer pro-load na memória
+        audioSource.shouldStream = false
+        
+        // Carrega o audio na memoria
+        audioSource.load()
+        
+        // Adiciona o audioSource ao dicionário
+        self.sounds[soundName] = audioSource
+    }
+    
+    private func playGenericSound(soundName: String, loops: Bool, node: SCNNode)
+    {
+        guard let sound = self.sounds[soundName] else
+        {
+            fatalError("Error at get the audio source \(soundName)")
+            
+        }
+        print("tocou: \(soundName)")
+        sound.loops = loops
+        node.runAction(SCNAction.playAudio(sound, waitForCompletion: true))
+    }
+    
+    func playSoundEffect(soundName: String, loops: Bool, node: SCNNode)
+    {
+        if !AreSoundEffectsMute
+        {
+            playGenericSound(soundName: soundName, loops: loops, node: node)
+        }
+    }
+    
+    func playbackgroundMusic(soundName: String, loops: Bool, node: SCNNode)
+    {
+        if !isBackgroundMusicMute
+        {
+            self.playGenericSound(soundName: soundName, loops: loops, node: node)
+        }
+    }
+    
+    func stopSoundsFromNode(node: SCNNode)
+    {
+        node.removeAllAudioPlayers()
+    }
+    
+    func removeSoundFromMemory(soundName: String)
+    {
+        self.sounds.removeValue(forKey: soundName)
+    }
+    
+    //===================================================================================
+//    func muteSound() {
+//        var player: AVAudioNode
+//        
+//        player = AVAudioPlayerNode()
+//        self.audioPlayer = SCNAudioPlayer(source: audioSource)
+//        self.audioPlayer.audioNode!.engine?.attach(player)
+//        self.audioPlayer.audioNode!.engine?.mainMixerNode.outputVolume = 0
+//    }
+//    
+//    func unmuteSound()
+//    {
+//        self.audioSource.volume = self.volume
+//    }
+//    
+//   
+//    func stopSound()
+//    {
+//        self.node.removeAudioPlayer(self.audioPlayer)
+//    }
+    
+}
