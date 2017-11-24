@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pepper Journey" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tL6-si-fPf">
-                                <rect key="frame" x="121.5" y="9" width="424.5" height="60"/>
+                                <rect key="frame" x="141.5" y="9" width="384.5" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Mym-62-dhA"/>
                                 </constraints>
