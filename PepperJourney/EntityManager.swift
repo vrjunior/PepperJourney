@@ -13,6 +13,7 @@ import Foundation
 class EntityManager
 {
     private var scene: SCNScene!
+    private weak var soundController: SoundController!
     private var chasedTargetAgent: GKAgent3D!
     weak var character: Character?
     
@@ -28,9 +29,10 @@ class EntityManager
     /// Keeps track of the time for use in the update method.
     var previousUpdateTime: TimeInterval = 0
     
-    init (scene: SCNScene, character: Character)
+    init (scene: SCNScene, character: Character, soundController: SoundController)
     {
         self.scene = scene
+        self.soundController = soundController
         self.character = character
         self.chasedTargetAgent = character.component(ofType: GKAgent3D.self)
         guard self.chasedTargetAgent != nil else { return }
@@ -61,6 +63,8 @@ class EntityManager
         
         let seekComponent = potato.component(ofType: SeekComponent.self)!
         self.seekComponentSystem.addComponent(seekComponent)
+        
+        self.soundController.loadSound(fileName: "SplashingWater.wav", soundName: potato.description, volume: soundController.defaultSoudEffectVolume)
 		
 		let soundRandomComponent = potato.component(ofType: SoundRandomComponent.self)!
 		self.soundRandomComponentSystem.addComponent(soundRandomComponent)
@@ -116,10 +120,41 @@ class EntityManager
         for potato in self.potatoesEntities
         {
             let potato = potato as! PotatoEntity
+            
+            // remove da memoria o som carregado de queda na agua
+            self.soundController.removeSoundFromMemory(soundName: potato.description)
             potato.removeModelNodeFromScene()
         }
         
         self.potatoesEntities.removeAll()
+    }
+    func killAPotato2(node: SCNNode) -> PotatoEntity?
+    {
+        
+        for index in 0 ..< self.potatoesEntities.count
+        {
+            let potato = self.potatoesEntities[index] as! PotatoEntity
+            guard let potatoNode = potato.component(ofType: ModelComponent.self)?.modelNode else
+            {
+                return nil
+            }
+            
+            if node == potatoNode
+            {
+                
+                let potato = self.potatoesEntities[index] as! PotatoEntity
+                return potato
+                /*
+                potato.removeModelNodeFromScene()
+               / let potato = potatoesEntities.remove(at: index)
+                
+                // remove da memoria o som carregado de queda na agua
+                self.soundController.removeSoundFromMemory(soundName: potato.description)
+                break*/
+            }
+            
+        }
+        return nil
     }
     func killAPotato(node: SCNNode)
     {
@@ -134,12 +169,38 @@ class EntityManager
             
             if node == potatoNode
             {
+                
                 potato.removeModelNodeFromScene()
-                potatoesEntities.remove(at: index)
+                let potato = potatoesEntities.remove(at: index)
+                
+                // remove da memoria o som carregado de queda na agua
+                self.soundController.removeSoundFromMemory(soundName: potato.description)
                 break
             }
             
         }
+    }
+    
+    func getPotatoEntity(node: SCNNode) -> PotatoEntity?
+    {
+        
+        for index in 0 ..< self.potatoesEntities.count
+        {
+            let potato = self.potatoesEntities[index] as! PotatoEntity
+            guard let potatoNode = potato.component(ofType: ModelComponent.self)?.modelNode else
+            {
+                return nil
+            }
+            
+            if node == potatoNode
+            {
+                
+                let potato = self.potatoesEntities[index] as! PotatoEntity
+                return potato
+                
+            }
+        }
+        return nil
     }
 	
 	//Add sounds here

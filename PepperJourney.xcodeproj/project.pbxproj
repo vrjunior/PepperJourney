@@ -14,8 +14,11 @@
 		9C4A65711FA6784800293460 /* PotatoGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4A65701FA6784800293460 /* PotatoGenerator.swift */; };
 		9C4A65731FA67ED700293460 /* PotatoGeneratorSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4A65721FA67ED700293460 /* PotatoGeneratorSystem.swift */; };
 		9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C6D3DEA1F93252500B8FA2A /* Game.scnassets */; };
-		9CE0FF431FC765B9004AF735 /* SoundComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE0FF421FC765B9004AF735 /* SoundComponent.swift */; };
+		9CE0FF431FC765B9004AF735 /* SoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE0FF421FC765B9004AF735 /* SoundController.swift */; };
 		9CE0FF451FC773D3004AF735 /* ImmigrantSong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9CE0FF441FC773D3004AF735 /* ImmigrantSong.mp3 */; };
+		9CE0FF471FC7776F004AF735 /* GameSoundsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE0FF461FC7776F004AF735 /* GameSoundsEntity.swift */; };
+		9CE0FF491FC854B2004AF735 /* SplashingWater.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9CE0FF481FC854B1004AF735 /* SplashingWater.wav */; };
+		9CE0FF4B1FC85B67004AF735 /* SinkingInWaterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE0FF4A1FC85B67004AF735 /* SinkingInWaterComponent.swift */; };
 		9CFDF8701F9A36F7009385A7 /* PotatoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */; };
 		B0465F0D1FC444A2002B8FE8 /* SoundRandomComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0465F0B1FC444A1002B8FE8 /* SoundRandomComponent.swift */; };
 		B0465F161FC47879002B8FE8 /* potatoSound.wav in Resources */ = {isa = PBXBuildFile; fileRef = B0465F151FC47879002B8FE8 /* potatoSound.wav */; };
@@ -78,8 +81,11 @@
 		9C4A65701FA6784800293460 /* PotatoGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotatoGenerator.swift; sourceTree = "<group>"; };
 		9C4A65721FA67ED700293460 /* PotatoGeneratorSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotatoGeneratorSystem.swift; sourceTree = "<group>"; };
 		9C6D3DEA1F93252500B8FA2A /* Game.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Game.scnassets; sourceTree = "<group>"; };
-		9CE0FF421FC765B9004AF735 /* SoundComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundComponent.swift; sourceTree = "<group>"; };
+		9CE0FF421FC765B9004AF735 /* SoundController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
 		9CE0FF441FC773D3004AF735 /* ImmigrantSong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ImmigrantSong.mp3; sourceTree = "<group>"; };
+		9CE0FF461FC7776F004AF735 /* GameSoundsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSoundsEntity.swift; sourceTree = "<group>"; };
+		9CE0FF481FC854B1004AF735 /* SplashingWater.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SplashingWater.wav; sourceTree = "<group>"; };
+		9CE0FF4A1FC85B67004AF735 /* SinkingInWaterComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinkingInWaterComponent.swift; sourceTree = "<group>"; };
 		9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotatoEntity.swift; sourceTree = "<group>"; };
 		B0465F0B1FC444A1002B8FE8 /* SoundRandomComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundRandomComponent.swift; sourceTree = "<group>"; };
 		B0465F151FC47879002B8FE8 /* potatoSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = potatoSound.wav; sourceTree = "<group>"; };
@@ -152,9 +158,9 @@
 		9CE0FF411FC7656E004AF735 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				9CE0FF421FC765B9004AF735 /* SoundComponent.swift */,
 				B0465F0B1FC444A1002B8FE8 /* SoundRandomComponent.swift */,
 				B08B91201FC4CCBE00304E46 /* SoundDistanceComponent.swift */,
+				9CE0FF4A1FC85B67004AF735 /* SinkingInWaterComponent.swift */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -172,10 +178,11 @@
 		9CFDF86E1F9A36C6009385A7 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */,
 				D25160E31F93FA0800BF756A /* Character */,
 				9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */,
-				D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */,
 				9C4A65721FA67ED700293460 /* PotatoGeneratorSystem.swift */,
+				9CE0FF461FC7776F004AF735 /* GameSoundsEntity.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -183,6 +190,7 @@
 		B0465F171FC4C743002B8FE8 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				9CE0FF481FC854B1004AF735 /* SplashingWater.wav */,
 				9CE0FF441FC773D3004AF735 /* ImmigrantSong.mp3 */,
 				B08B91221FC4FFB400304E46 /* _PepperPointSound1.mp3 */,
 				B08B911C1FC4CABD00304E46 /* drawPepper.wav */,
@@ -319,6 +327,7 @@
 				9C6D3DEA1F93252500B8FA2A /* Game.scnassets */,
 				D2EC85851F83F1240093F009 /* Assets.xcassets */,
 				D25AD5AB1F87EAC800F2093E /* GameController.swift */,
+				9CE0FF421FC765B9004AF735 /* SoundController.swift */,
 				D2EC857C1F83F1240093F009 /* AppDelegate.swift */,
 				D2DDAD511FBA2913009FA2B0 /* GameOptions.swift */,
 				D25BAE271FC60C0F000ED0EC /* SettingsController.swift */,
@@ -419,6 +428,7 @@
 				D25BAE221FC60443000ED0EC /* SettingsOverlay.sks in Resources */,
 				D2B8BBB81FBB64D70042F873 /* Burrito.TTF in Resources */,
 				D20108961FBE11FC007660E3 /* FinishOverlay.sks in Resources */,
+				9CE0FF491FC854B2004AF735 /* SplashingWater.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +451,7 @@
 				D20108901FBE11D9007660E3 /* GameOverOverlay.swift in Sources */,
 				9C1B82A11FA0D09800173FF3 /* TrigonometryLib.swift in Sources */,
 				9C03A2421F9A33DD008F191A /* EntityManager.swift in Sources */,
+				9CE0FF4B1FC85B67004AF735 /* SinkingInWaterComponent.swift in Sources */,
 				9C4A65731FA67ED700293460 /* PotatoGeneratorSystem.swift in Sources */,
 				D25BAE261FC60864000ED0EC /* SettingsOverlay.swift in Sources */,
 				B0FDBAE91FA9F35600D4B08D /* pixelate.metal in Sources */,
@@ -457,13 +468,14 @@
 				9C1B829D1F9E2FD300173FF3 /* SeekComponent.swift in Sources */,
 				D25160EA1F94063400BF756A /* SCNAnimationPlayer + Load Animation.swift in Sources */,
 				D25160E51F93FA3400BF756A /* BaseState.swift in Sources */,
+				9CE0FF471FC7776F004AF735 /* GameSoundsEntity.swift in Sources */,
 				D207CFC51F8EA2D10084240E /* Dpad.swift in Sources */,
 				D28623B91FA3B00200691E83 /* PlayState.swift in Sources */,
 				9C4A65711FA6784800293460 /* PotatoGenerator.swift in Sources */,
 				D2719D901FA0EBDA00FCB61F /* AnimationType.swift in Sources */,
 				D28623B51FA3AF5F00691E83 /* GameBaseState.swift in Sources */,
 				D28623B71FA3AFB600691E83 /* PauseState.swift in Sources */,
-				9CE0FF431FC765B9004AF735 /* SoundComponent.swift in Sources */,
+				9CE0FF431FC765B9004AF735 /* SoundController.swift in Sources */,
 				D25BAE281FC60C0F000ED0EC /* SettingsController.swift in Sources */,
 				D20108921FBE11D9007660E3 /* PauseOverlay.swift in Sources */,
 				D25160EE1F940B0C00BF756A /* JumpingState.swift in Sources */,
