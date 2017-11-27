@@ -23,7 +23,7 @@ class PotatoEntity: GKEntity
     
     //seek component params for potatoes
 
-    private let maxSpeed: Float = 150  //0.00002
+    private let maxSpeed: Float = 150  
     private let maxAcceleration: Float = 50
     
     

@@ -15,60 +15,92 @@ class EntityManager
     private var scene: SCNScene!
     private weak var soundController: SoundController!
     private var chasedTargetAgent: GKAgent3D!
-    weak var character: Character?
+    
     
     // colocar aqui os components system
     var seekComponentSystem = GKComponentSystem(componentClass: SeekComponent.self)
 	var soundRandomComponentSystem = GKComponentSystem(componentClass: SoundRandomComponent.self)
 	var soundDistanceComponentSystem = GKComponentSystem(componentClass: SoundDistanceComponent.self)
+    var sinkComponentSystem = GKComponentSystem(componentClass: SinkComponent.self)
     
     // Game entities
-    var potatoesEntities = [GKEntity]()
-    var potatoGeneratorSystem: PotatoGeneratorSystem?
+    private(set) var character: Character!
+    private(set) var potatoesEntities = [GKEntity]()
+    private(set) var potatoGeneratorSystem: PotatoGeneratorSystem!
     
     /// Keeps track of the time for use in the update method.
     var previousUpdateTime: TimeInterval = 0
     
-    init (scene: SCNScene, character: Character, soundController: SoundController)
+    init (scene: SCNScene, gameController: GameController, soundController: SoundController)
     {
         self.scene = scene
         self.soundController = soundController
-        self.character = character
+        
+        // Create the character entity
+        self.character = Character(scene: self.scene, jumpDelegate: gameController, soundController: self.soundController)
+        
+        // Add the sinkComponent to a component system
+        guard let sinkCompnent = self.character.component(ofType: SinkComponent.self) else
+        {
+            fatalError("Error getting Character sinkComponent")
+        }
+        self.sinkComponentSystem.addComponent(sinkCompnent)
+        
         self.chasedTargetAgent = character.component(ofType: GKAgent3D.self)
         guard self.chasedTargetAgent != nil else { return }
+        
+        // Create a Entity that coordinate the potato creation
+        self.potatoGeneratorSystem = PotatoGeneratorSystem(scene: self.scene, characterNode: self.character.node)
 		
     }
     
+    // Use this function ever in game initialization or restart
     func setupGameInitialization()
     {
-        guard let characterNode = self.character?.node else
-        {
-            fatalError("Error at find character node")
-        }
-        self.potatoGeneratorSystem = PotatoGeneratorSystem(scene: self.scene, characterNode: characterNode)
-        
+        // Create new potatoes
         let potatoSpawnPoint = SCNVector3(2,50, 285)
         var i = 10
         while i > 0 {
             self.createChasingPotato(position: potatoSpawnPoint)
             i -= 1
         }
-		
+        
+        // Configuration of the potato generator system
+        self.potatoGeneratorSystem.setupPotatoGeneratorSystem()
+        
+        // SystemCompent of SinkComponent
+        for sinkComponent in self.sinkComponentSystem.components {
+            let sinkComponent = sinkComponent as! SinkComponent
+            sinkComponent.resetComponent()
+        }
+        
+        // Reset componentSounds
 		addPepperSoundPoints()
     }
     
+    // Creates a potato chasing Pepper
     func createChasingPotato(position: SCNVector3)
     {
+        // create a new potato entity
         let potato = PotatoEntity(model: PotatoType.model1 , scene: self.scene, position: position, trakingAgent: self.chasedTargetAgent)
         
+        // Create a seek component
         let seekComponent = potato.component(ofType: SeekComponent.self)!
         self.seekComponentSystem.addComponent(seekComponent)
-        
-       // self.soundController.loadSound(fileName: "SplashingWater.wav", soundName: potato.description, volume: soundController.defaultSoudEffectVolume)
 		
 		let soundRandomComponent = potato.component(ofType: SoundRandomComponent.self)!
 		self.soundRandomComponentSystem.addComponent(soundRandomComponent)
         
+        // Add the component that enable the potato sink in water
+        guard let potatoNode = potato.component(ofType: ModelComponent.self)?.modelNode else {fatalError("Error getting the node")}
+    
+        let sinkComponent = SinkComponent(soundController: self.soundController, node: potatoNode, entity: potato)
+        potato.addComponent(sinkComponent)
+        
+        // add the sinkComponent to ComponentSystem
+        self.sinkComponentSystem.addComponent(sinkComponent)
+        
+        // Add the potato entity to array of potatoes
         self.potatoesEntities.append(potato)
     }
     
@@ -100,19 +132,26 @@ class EntityManager
 		
 		
         // Verify the potato generator points
-        self.potatoGeneratorSystem?.update(deltaTime: deltaTime)
+        self.potatoGeneratorSystem.update(deltaTime: deltaTime)
+        
         // Create points that are needed.
-        if let readyPotatoGenerators = self.potatoGeneratorSystem?.getReadyPotatoGenerators()
+        let readyPotatoes = self.potatoGeneratorSystem.getReadyPotatoes()
+        for potatoPosition in readyPotatoes
         {
-            for potatoGenerator in readyPotatoGenerators
-            {
-                let creationPosition = potatoGenerator.position
-                self.createChasingPotato(position: creationPosition)
-            }
+            self.createChasingPotato(position: potatoPosition)
         }
-		
+
         self.previousUpdateTime = time
         
+    }
+    
+    func getComponent(entity: GKEntity, ofType: GKComponent.Type) -> GKComponent
+    {
+        guard let component = entity.component(ofType: ofType) else
+        {
+            fatalError("Error getting component \(ofType)")
+        }
+        return component
     }
     
     func killAllPotatoes ()
@@ -128,15 +167,15 @@ class EntityManager
         
         self.potatoesEntities.removeAll()
     }
-    func killAPotato2(node: SCNNode) -> PotatoEntity?
+    
+    func getPotatoEntity(node: SCNNode) -> PotatoEntity?
     {
-        
         for index in 0 ..< self.potatoesEntities.count
         {
             let potato = self.potatoesEntities[index] as! PotatoEntity
             guard let potatoNode = potato.component(ofType: ModelComponent.self)?.modelNode else
             {
-                return nil
+                fatalError("Error getting modelComponent from \(potato.description)")
             }
             
             if node == potatoNode
@@ -144,18 +183,12 @@ class EntityManager
                 
                 let potato = self.potatoesEntities[index] as! PotatoEntity
                 return potato
-                /*
-                potato.removeModelNodeFromScene()
-               / let potato = potatoesEntities.remove(at: index)
-                
-                // remove da memoria o som carregado de queda na agua
-                self.soundController.removeSoundFromMemory(soundName: potato.description)
-                break*/
             }
             
         }
         return nil
     }
+    
     func killAPotato(node: SCNNode)
     {
         
@@ -179,28 +212,6 @@ class EntityManager
             }
             
         }
-    }
-    
-    func getPotatoEntity(node: SCNNode) -> PotatoEntity?
-    {
-        
-        for index in 0 ..< self.potatoesEntities.count
-        {
-            let potato = self.potatoesEntities[index] as! PotatoEntity
-            guard let potatoNode = potato.component(ofType: ModelComponent.self)?.modelNode else
-            {
-                return nil
-            }
-            
-            if node == potatoNode
-            {
-                
-                let potato = self.potatoesEntities[index] as! PotatoEntity
-                return potato
-                
-            }
-        }
-        return nil
     }
 	
 	//Add sounds here

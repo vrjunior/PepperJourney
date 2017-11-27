@@ -23,6 +23,8 @@ class Character: GKEntity {
     static private let speedFactor: CGFloat = 100
     public var initialPosition = float3(0, 0, 0)
 
+    // Sound
+    
     
     // actions
     private let jumpImpulse:Float = 800
@@ -50,19 +52,19 @@ class Character: GKEntity {
     var trackingAgentComponent: GKAgent3D!
     
     // MARK: - Initialization
-    init(scene: SCNScene, jumpDelegate: JumpDelegate?) {
+    init(scene: SCNScene, jumpDelegate: JumpDelegate?, soundController: SoundController) {
         super.init()
         
         self.jumpDelegate = jumpDelegate
         
         self.loadCharacter(scene: scene)
         self.loadAnimations()
-        self.loadComponents()
+        self.loadComponents(soundController: soundController)
     }
     
-    convenience init(scene: SCNScene) {
-        self.init(scene: scene, jumpDelegate: nil)
-    }
+//    convenience init(scene: SCNScene) {
+//        self.init(scene: scene, jumpDelegate: nil, soundController: soun)
+//    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -91,7 +93,7 @@ class Character: GKEntity {
         }
     }
     
-    private func loadComponents() {
+    private func loadComponents(soundController: SoundController) {
         let jumpComponent = JumpComponent(character: self.node, impulse: self.jumpImpulse)
         
         //adding delgate to jump
@@ -102,6 +104,8 @@ class Character: GKEntity {
         trackingAgentComponent.position = float3(self.node.presentation.position)
         self.addComponent(trackingAgentComponent)
         
+        let sinkComponent = SinkComponent(soundController: soundController, node: self.node, entity: self)
+        self.addComponent(sinkComponent)
     }
     
     // MARK: Animatins Functins

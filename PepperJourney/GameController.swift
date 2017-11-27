@@ -76,9 +76,19 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         soundController.stopSoundsFromNode(node: self.cameraNode)
         soundController.stopSoundsFromNode(node: self.character.node)
     }
-    
+    func setupSounds() {
+        
+        self.soundController.loadSound(fileName: "gameBackground.mp3", soundName: "backgroundMusic", volume: 0.5)
+        
+        self.soundController.loadSound(fileName: "jump.wav", soundName: "gameOverSound")
+        
+        //setup character sounds
+        self.soundController.loadSound(fileName: "jump.wav", soundName: "jump", volume: 1.0)
+        
+    }
     func setupCharacter() {
-        character = Character(scene: scene!, jumpDelegate: self)
+        // create the character with your components
+       self.character = self.entityManager.character
         
         characterStateMachine = GKStateMachine(states: [
             StandingState(scene: scene, character: character),
@@ -87,21 +97,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
             JumpingState(scene: scene, character: character),
             JumpingMoveState(scene: scene, character: character)
             ])
-        
-    }
-    
-    
-    func setupSounds() {
-        
-        self.soundController.loadSound(fileName: "gameBackground.mp3", soundName: "backgroundMusic", volume: 0.1)
-        
-        self.soundController.loadSound(fileName: "pepperPointSound1.mp3", soundName: "gameOverSound")
-       self.soundController.loadSound(fileName: "splashingWater.wav", soundName: "splashingWater")
-        self.soundController.loadSound(fileName: "splashingWater.wav", soundName: "casa")
-        self.soundController.loadSound(fileName: "splashingWater.wav", soundName: "casa")
-        
-        //setup character sounds
-        self.soundController.loadSound(fileName: "jump.wav", soundName: "jump", volume: 5.0)
         
     }
     
@@ -153,10 +148,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         //setup game state machine
         self.setupGame()
         
-        //load the character
-        self.setupCharacter()
-        
-        self.setupCamera()
+       
         
         self.scene.physicsWorld.contactDelegate = self
     
@@ -166,7 +158,12 @@ class GameController: NSObject, SCNSceneRendererDelegate {
 //        self.scnView.showsStatistics = true
         
         // Create the entity manager system
-        self.entityManager = EntityManager(scene: self.scene, character: self.character, soundController: self.soundController)
+        self.entityManager = EntityManager(scene: self.scene, gameController: self, soundController: self.soundController)
+        
+        //load the character
+        self.setupCharacter()
+        
+         self.setupCamera()
         
         //setup tap to start
         self.setupTapToStart()
@@ -192,45 +189,48 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         self.character.node.position = SCNVector3(self.character.initialPosition)
         self.cameraNode.position = self.cameraInitialPosition
-        print(self.character.node.position)
-        // reset do que foi alterado ao cair na agua
-        self.character.node.physicsBody?.velocityFactor = SCNVector3(1, 1, 1)
-        self.character.node.physicsBody?.damping = 0.1
         
-       
     }
    
     func setupTapToStart() {
+        
+        // Do the setup to restart the game
+        self.prepereToStartGame()
+        
         let tapOverlay = SKScene(fileNamed: "StartOverlay.sks") as! StartOverlay
         tapOverlay.gameOptionsDelegate = self
         tapOverlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = tapOverlay
         
+    }
+    func prepereToStartGame()
+    {
+        self.stopSounds()
+        
+        entityManager.killAllPotatoes()
+        
+        self.character.node.isHidden = true
+        
         self.gameStateMachine.enter(PauseState.self)
-
+        
     }
     
     func setupGameOver() {
-        // Stop sounds of the game
-        self.stopSounds()
+        
+        // Do the setup to restart the game
+        self.prepereToStartGame()
         
         self.soundController.playSoundEffect(soundName: "gameOverSound", loops: false, node: character.node)
         
-        
-        entityManager.killAllPotatoes()
-        self.character.node.isHidden = true
         let gameOverOverlay = SKScene(fileNamed: "GameOverOverlay.sks") as! GameOverOverlay
         gameOverOverlay.gameOptionsDelegate = self
         gameOverOverlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = gameOverOverlay
         
-        self.gameStateMachine.enter(PauseState.self)
-        
     }
     
     func setupFinishLevel() {
-        entityManager.killAllPotatoes()
-        self.character.node.isHidden = true
+        self.prepereToStartGame()
         
         let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks")
         finishLevelOverlay?.scaleMode = .aspectFill
@@ -381,10 +381,11 @@ extension GameController : SCNPhysicsContactDelegate {
                         self.setupGameOver()
                     }
                 }
+                // When the character thouches the lake surface
                 else if anotherNode?.name == "lakeSurface"
                 {
-                    self.soundController.playSoundEffect(soundName: "splashingWater", loops: false, node: self.character.node)
-                    characterNode?.physicsBody?.damping = 0.99999
+                    let sinkComponent = self.entityManager.getComponent(entity: self.character, ofType: SinkComponent.self) as! SinkComponent
+                    sinkComponent.sinkInWater()
                     
                     //pause controls
                     self.controlsOverlay?.isPausedControl = true
@@ -422,17 +423,16 @@ extension GameController : SCNPhysicsContactDelegate {
         {
             if lakeNode.name == "lakeBottom"
             {
-                //self.entityManager.killAPotato(node: potatoNode)
+                self.entityManager.killAPotato(node: potatoNode)
             }
             else if lakeNode.name == "lakeSurface"
             {
-                guard let potatoEntity = self.entityManager.killAPotato2(node: potatoNode) else {
-                    fatalError("Error at get the Potato Entity")
+                // If the potato yet exists it will be found
+                if let potatoEntity = self.entityManager.getPotatoEntity(node: potatoNode) {
+                    let sinkComponent = self.entityManager.getComponent(entity: potatoEntity, ofType: SinkComponent.self) as! SinkComponent
+                    sinkComponent.sinkInWater()
+                    potatoEntity.removeComponent(ofType: SeekComponent.self)
                 }
-                
-                let soundName = potatoEntity.description
-                //self.soundController.playSoundEffect(soundName: soundName, loops: false, node: potatoNode)
-                
             }
         }
     }
@@ -445,7 +445,8 @@ extension GameController : GameOptions {
     }
     
     func restart() {
-        self.entityManager.killAllPotatoes()
+        // Do the setup to restart the game
+        self.prepereToStartGame()
         
         //unpause controls
         self.controlsOverlay?.isPausedControl = false
@@ -463,7 +464,7 @@ extension GameController : GameOptions {
     }
     
     func pause() {
-        
+        self.soundController.playSoundEffect(soundName: "gameOverSound", loops: false, node: self.character.node)
         if(!self.scene.isPaused){
             if self.pauseOverlay == nil {
                 self.pauseOverlay = SKScene(fileNamed: "PauseOverlay.sks") as? PauseOverlay

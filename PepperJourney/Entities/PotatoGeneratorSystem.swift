@@ -12,11 +12,12 @@ import GameplayKit
 
 class PotatoGeneratorSystem: GKEntity
 {
-    var potatoGenerators = [PotatoGenerator]()
-    var readyPotatoGenerator = [PotatoGenerator]()
+    var originalPotatoList = [SCNVector3]()
+    var potatoesPositionsToGenerate = [SCNVector3]()
+    var readyPotatoes = [SCNVector3]()
     
-    let distanceToGenerate:Float = 10
-    weak var characterNode: SCNNode?
+    let distanceToGenerate:Float = 100
+    weak var characterNode: SCNNode!
     
     init(scene: SCNScene, characterNode: SCNNode)
     {
@@ -33,10 +34,7 @@ class PotatoGeneratorSystem: GKEntity
         for generationPoint in generationPoints
         {
             let position = generationPoint.position
-            let potatoGenerator  = PotatoGenerator(position: position, distanceToCreate: self.distanceToGenerate)
-            
-            self.potatoGenerators.append(potatoGenerator)
-            
+            self.originalPotatoList.append(position)
         }
     }
     
@@ -44,38 +42,57 @@ class PotatoGeneratorSystem: GKEntity
         fatalError("init(coder:) has not been implemented")
     }
     
+    // Use this function to reset the points of creation
+    func setupPotatoGeneratorSystem() {
+        self.potatoesPositionsToGenerate = self.originalPotatoList
+    }
+    
     override func update(deltaTime seconds: TimeInterval)
     {
-        guard let characterPosition = self.characterNode?.presentation.position else
+        let characterPosition = self.characterNode.presentation.position
+        
+        self.readyPotatoes.removeAll()
+        
+        var index = 0
+        while index < self.potatoesPositionsToGenerate.count
         {
-            fatalError("Error at find character node in Potato Generator System")
-        }
-        var removeList = [Int]()
-        for index in 0 ..< self.potatoGenerators.count
-        {
+            let potatoPosition = self.potatoesPositionsToGenerate[index]
             
-            if potatoGenerators[index].isReady(characterPosition: characterPosition)
+            if self.potatoIsReady(characterPosition: characterPosition, potatoPosition: potatoPosition)
             {
-                removeList.append(index)
+                let readyPotato = self.potatoesPositionsToGenerate.remove(at: index)
+                
+                self.readyPotatoes.append(readyPotato)
+            }
+            else
+            {
+                index += 1
             }
         }
-        
-        // Remove and add
-        for index in removeList
-        {
-            let removed = potatoGenerators.remove(at: index)
-            self.readyPotatoGenerator.append(removed)
-        }
     }
-    func getReadyPotatoGenerators() -> [PotatoGenerator]
+    
+    func getReadyPotatoes() -> [SCNVector3]
     {
-        var removedElements = [PotatoGenerator]()
+        return self.readyPotatoes
+    }
+    
+    func potatoIsReady(characterPosition: SCNVector3, potatoPosition: SCNVector3) -> Bool
+    {
+    
+        let deltaX = characterPosition.x - potatoPosition.x
+        let deltaY = characterPosition.y - potatoPosition.y
+        let deltaZ = characterPosition.z - potatoPosition.z
+    
+        let distance = sqrt((deltaX * deltaX) + (deltaY * deltaY) + (deltaZ * deltaZ))
         
-        while self.readyPotatoGenerator.count > 0
+        if distance < self.distanceToGenerate
         {
-            removedElements.append(self.readyPotatoGenerator.remove(at: 0))
+            return true
         }
-        
-        return removedElements
+        else
+        {
+            return false
+        }
     }
 }
+

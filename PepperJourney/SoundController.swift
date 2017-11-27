@@ -31,7 +31,6 @@ class SoundController
         // verifica botoes internos
     }
 
-    
     func loadSound (fileName: String, soundName: String, volume: Float) {
         
         guard let audioSource = SCNAudioSource(fileNamed: fileName) else {
@@ -58,6 +57,13 @@ class SoundController
         self.loadSound(fileName: fileName, soundName: soundName, volume: self.defaultSoudEffectVolume)
     }
     
+    func removeAudioSource(soundName: String)
+    {
+        guard self.sounds.removeValue(forKey: soundName) != nil else
+        {
+            fatalError("Error getting sound \(soundName)")
+        }
+    }
     private func playGenericSound(soundName: String, loops: Bool, node: SCNNode)
     {
         guard let sound = self.sounds[soundName] else

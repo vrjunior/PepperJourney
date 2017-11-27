@@ -65,7 +65,10 @@ class SeekComponent: GKAgent3D, GKAgentDelegate
     {
         
         if let modelComponent = self.entity?.component(ofType: ModelComponent.self)  {
-            if (modelComponent.modelNode.parent?.isPaused)!  { return }
+            let isPaused = modelComponent.modelNode.parent?.isPaused ?? true
+            if isPaused  {
+                return
+            }
         }
         
         // It calls agentWillUpdate before and agentDidUpdate after
