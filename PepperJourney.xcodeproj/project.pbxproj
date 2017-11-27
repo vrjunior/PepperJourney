@@ -12,8 +12,16 @@
 		9C1B829F1F9FADD300173FF3 /* ModelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */; };
 		9C1B82A11FA0D09800173FF3 /* TrigonometryLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B82A01FA0D09600173FF3 /* TrigonometryLib.swift */; };
 		9C4806811FC88A2700168571 /* SinkComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4806801FC88A2700168571 /* SinkComponent.swift */; };
+		9C4806851FCC505000168571 /* splashingWater2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C4806841FCC504F00168571 /* splashingWater2.wav */; };
 		9C4A65731FA67ED700293460 /* PotatoGeneratorSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4A65721FA67ED700293460 /* PotatoGeneratorSystem.swift */; };
 		9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C6D3DEA1F93252500B8FA2A /* Game.scnassets */; };
+		9C991DA51FCC530C00DEE3D6 /* jump2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C991DA41FCC530C00DEE3D6 /* jump2.wav */; };
+		9C991DA91FCC588B00DEE3D6 /* GameOver-Get Over Here.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C991DA61FCC588A00DEE3D6 /* GameOver-Get Over Here.wav */; };
+		9C991DAA1FCC588B00DEE3D6 /* GameOver-Game_over.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C991DA71FCC588A00DEE3D6 /* GameOver-Game_over.wav */; };
+		9C991DAB1FCC588B00DEE3D6 /* GameOver-Level Failed.aif in Resources */ = {isa = PBXBuildFile; fileRef = 9C991DA81FCC588A00DEE3D6 /* GameOver-Level Failed.aif */; };
+		9C991DAF1FCC5CB600DEE3D6 /* FinishLevel-jingle-win-00.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C991DAC1FCC5CB500DEE3D6 /* FinishLevel-jingle-win-00.wav */; };
+		9C991DB01FCC5CB600DEE3D6 /* FinishLevel-piglevelwin2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9C991DAD1FCC5CB500DEE3D6 /* FinishLevel-piglevelwin2.mp3 */; };
+		9C991DB11FCC5CB600DEE3D6 /* FinishLevel-success-loop-1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C991DAE1FCC5CB600DEE3D6 /* FinishLevel-success-loop-1.wav */; };
 		9CE0FF431FC765B9004AF735 /* SoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE0FF421FC765B9004AF735 /* SoundController.swift */; };
 		9CE0FF451FC773D3004AF735 /* immigrantSong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9CE0FF441FC773D3004AF735 /* immigrantSong.mp3 */; };
 		9CE0FF491FC854B2004AF735 /* splashingWater.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9CE0FF481FC854B1004AF735 /* splashingWater.wav */; };
@@ -76,8 +84,16 @@
 		9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelComponent.swift; sourceTree = "<group>"; };
 		9C1B82A01FA0D09600173FF3 /* TrigonometryLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrigonometryLib.swift; sourceTree = "<group>"; };
 		9C4806801FC88A2700168571 /* SinkComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinkComponent.swift; sourceTree = "<group>"; };
+		9C4806841FCC504F00168571 /* splashingWater2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splashingWater2.wav; sourceTree = "<group>"; };
 		9C4A65721FA67ED700293460 /* PotatoGeneratorSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotatoGeneratorSystem.swift; sourceTree = "<group>"; };
 		9C6D3DEA1F93252500B8FA2A /* Game.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Game.scnassets; sourceTree = "<group>"; };
+		9C991DA41FCC530C00DEE3D6 /* jump2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump2.wav; sourceTree = "<group>"; };
+		9C991DA61FCC588A00DEE3D6 /* GameOver-Get Over Here.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "GameOver-Get Over Here.wav"; sourceTree = "<group>"; };
+		9C991DA71FCC588A00DEE3D6 /* GameOver-Game_over.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "GameOver-Game_over.wav"; sourceTree = "<group>"; };
+		9C991DA81FCC588A00DEE3D6 /* GameOver-Level Failed.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GameOver-Level Failed.aif"; sourceTree = "<group>"; };
+		9C991DAC1FCC5CB500DEE3D6 /* FinishLevel-jingle-win-00.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "FinishLevel-jingle-win-00.wav"; sourceTree = "<group>"; };
+		9C991DAD1FCC5CB500DEE3D6 /* FinishLevel-piglevelwin2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "FinishLevel-piglevelwin2.mp3"; sourceTree = "<group>"; };
+		9C991DAE1FCC5CB600DEE3D6 /* FinishLevel-success-loop-1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "FinishLevel-success-loop-1.wav"; sourceTree = "<group>"; };
 		9CE0FF421FC765B9004AF735 /* SoundController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
 		9CE0FF441FC773D3004AF735 /* immigrantSong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = immigrantSong.mp3; sourceTree = "<group>"; };
 		9CE0FF481FC854B1004AF735 /* splashingWater.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splashingWater.wav; sourceTree = "<group>"; };
@@ -183,8 +199,16 @@
 		B0465F171FC4C743002B8FE8 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				9C991DAC1FCC5CB500DEE3D6 /* FinishLevel-jingle-win-00.wav */,
+				9C991DAD1FCC5CB500DEE3D6 /* FinishLevel-piglevelwin2.mp3 */,
+				9C991DAE1FCC5CB600DEE3D6 /* FinishLevel-success-loop-1.wav */,
+				9C991DA71FCC588A00DEE3D6 /* GameOver-Game_over.wav */,
+				9C991DA61FCC588A00DEE3D6 /* GameOver-Get Over Here.wav */,
+				9C991DA81FCC588A00DEE3D6 /* GameOver-Level Failed.aif */,
 				9CE0FF481FC854B1004AF735 /* splashingWater.wav */,
 				9CE0FF441FC773D3004AF735 /* immigrantSong.mp3 */,
+				9C4806841FCC504F00168571 /* splashingWater2.wav */,
+				9C991DA41FCC530C00DEE3D6 /* jump2.wav */,
 				D26FCCFD1FC88640003EBFDF /* jump.wav */,
 				B08B911D1FC4CABD00304E46 /* gameBackground.mp3 */,
 			);
@@ -404,20 +428,28 @@
 				B0FDBAEB1FA9F35600D4B08D /* lines.fsh in Resources */,
 				D26FCCFE1FC88640003EBFDF /* jump.wav in Resources */,
 				B0FDBAED1FA9F35600D4B08D /* lines.vsh in Resources */,
+				9C991DB11FCC5CB600DEE3D6 /* FinishLevel-success-loop-1.wav in Resources */,
 				B0FDBAEF1FA9F35600D4B08D /* prep.fsh in Resources */,
 				B0FDBAEC1FA9F35600D4B08D /* prep.vsh in Resources */,
+				9C991DAA1FCC588B00DEE3D6 /* GameOver-Game_over.wav in Resources */,
 				9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */,
 				D20108911FBE11D9007660E3 /* StartOverlay.sks in Resources */,
 				D201088E1FBE11D9007660E3 /* PauseOverlay.sks in Resources */,
 				B08B911F1FC4CABD00304E46 /* gameBackground.mp3 in Resources */,
+				9C991DAF1FCC5CB600DEE3D6 /* FinishLevel-jingle-win-00.wav in Resources */,
+				9C991DA91FCC588B00DEE3D6 /* GameOver-Get Over Here.wav in Resources */,
 				D2EC85861F83F1240093F009 /* Assets.xcassets in Resources */,
 				9CE0FF451FC773D3004AF735 /* immigrantSong.mp3 in Resources */,
+				9C991DA51FCC530C00DEE3D6 /* jump2.wav in Resources */,
 				D2EC85841F83F1240093F009 /* Main.storyboard in Resources */,
 				D20108931FBE11D9007660E3 /* GameOverOverlay.sks in Resources */,
 				D25BAE221FC60443000ED0EC /* SettingsOverlay.sks in Resources */,
 				D2B8BBB81FBB64D70042F873 /* Burrito.TTF in Resources */,
 				D20108961FBE11FC007660E3 /* FinishOverlay.sks in Resources */,
+				9C4806851FCC505000168571 /* splashingWater2.wav in Resources */,
+				9C991DB01FCC5CB600DEE3D6 /* FinishLevel-piglevelwin2.mp3 in Resources */,
 				9CE0FF491FC854B2004AF735 /* splashingWater.wav in Resources */,
+				9C991DAB1FCC588B00DEE3D6 /* GameOver-Level Failed.aif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -80,7 +80,14 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         self.soundController.loadSound(fileName: "gameBackground.mp3", soundName: "backgroundMusic", volume: 0.5)
         
-        self.soundController.loadSound(fileName: "jump.wav", soundName: "gameOverSound")
+        //self.soundController.loadSound(fileName: "GameOver-Level Failed.aif", soundName: "gameOverSound", volume: 0.5)
+        //self.soundController.loadSound(fileName: "GameOver-Game_over.wav", soundName: "gameOverSound", volume: 0.5)
+        self.soundController.loadSound(fileName: "GameOver-Get Over Here.wav", soundName: "gameOverSound", volume: 0.5)
+        
+        // Finish Level sound
+        self.soundController.loadSound(fileName: "FinishLevel-jingle-win-00.wav", soundName: "FinishLevelSound", volume: 0.5)
+        //self.soundController.loadSound(fileName: "FinishLevel-piglevelwin2.mp3", soundName: "FinishLevelSound", volume: 0.5)
+        //self.soundController.loadSound(fileName: "FinishLevel-success-loop-1.wav", soundName: "FinishLevelSound", volume: 0.5)
         
         //setup character sounds
         self.soundController.loadSound(fileName: "jump.wav", soundName: "jump", volume: 1.0)
@@ -210,33 +217,32 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         entityManager.killAllPotatoes()
         
         self.character.node.isHidden = true
-        
-        self.gameStateMachine.enter(PauseState.self)
-        
     }
     
     func setupGameOver() {
         
         // Do the setup to restart the game
         self.prepereToStartGame()
-        
-        self.soundController.playSoundEffect(soundName: "gameOverSound", loops: false, node: character.node)
+       
+        self.soundController.playSoundEffect(soundName: "gameOverSound", loops: false, node: self.cameraNode)
         
         let gameOverOverlay = SKScene(fileNamed: "GameOverOverlay.sks") as! GameOverOverlay
         gameOverOverlay.gameOptionsDelegate = self
         gameOverOverlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = gameOverOverlay
         
+         //self.gameStateMachine.enter(PauseState.self)
+        
     }
     
     func setupFinishLevel() {
         self.prepereToStartGame()
-        
+        self.soundController.playSoundEffect(soundName: "FinishLevelSound", loops: false, node: self.cameraNode)
         let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks")
         finishLevelOverlay?.scaleMode = .aspectFill
         self.scnView.overlaySKScene = finishLevelOverlay
         
-        self.gameStateMachine.enter(PauseState.self)
+        //self.gameStateMachine.enter(PauseState.self)
     }
     
     func startGame() {
@@ -364,9 +370,8 @@ extension GameController : SCNPhysicsContactDelegate {
                 //go to standing state mode
                 self.characterStateMachine.enter(StandingState.self)
             }
-            
+            // foi pego por uma batata
             else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue {
-                
                 DispatchQueue.main.async { [unowned self] in
                     self.setupGameOver()
                 }
@@ -392,8 +397,9 @@ extension GameController : SCNPhysicsContactDelegate {
                 }
             }
             
+            // venceu a fase
             else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.finalLevel.rawValue {
-                
+    
                 DispatchQueue.main.async { [unowned self] in
                     self.setupFinishLevel()
                 }
@@ -464,7 +470,6 @@ extension GameController : GameOptions {
     }
     
     func pause() {
-        self.soundController.playSoundEffect(soundName: "gameOverSound", loops: false, node: self.character.node)
         if(!self.scene.isPaused){
             if self.pauseOverlay == nil {
                 self.pauseOverlay = SKScene(fileNamed: "PauseOverlay.sks") as? PauseOverlay
