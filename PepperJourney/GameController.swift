@@ -80,14 +80,12 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         self.soundController.loadSound(fileName: "gameBackground.mp3", soundName: "backgroundMusic", volume: 0.5)
         
-        //self.soundController.loadSound(fileName: "GameOver-Level Failed.aif", soundName: "gameOverSound", volume: 0.5)
-        //self.soundController.loadSound(fileName: "GameOver-Game_over.wav", soundName: "gameOverSound", volume: 0.5)
-        self.soundController.loadSound(fileName: "GameOver-Get Over Here.wav", soundName: "gameOverSound", volume: 0.5)
+        
+        self.soundController.loadSound(fileName: "GameOver-Game_over.wav", soundName: "gameOverSound", volume: 0.5)
         
         // Finish Level sound
         self.soundController.loadSound(fileName: "FinishLevel-jingle-win-00.wav", soundName: "FinishLevelSound", volume: 0.5)
-        //self.soundController.loadSound(fileName: "FinishLevel-piglevelwin2.mp3", soundName: "FinishLevelSound", volume: 0.5)
-        //self.soundController.loadSound(fileName: "FinishLevel-success-loop-1.wav", soundName: "FinishLevelSound", volume: 0.5)
+        
         
         //setup character sounds
         self.soundController.loadSound(fileName: "jump.wav", soundName: "jump", volume: 1.0)
