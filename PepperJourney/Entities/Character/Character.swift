@@ -59,7 +59,7 @@ class Character: GKEntity {
         
         self.loadCharacter(scene: scene)
         self.loadAnimations()
-        self.loadComponents(soundController: soundController)
+        self.loadComponents(scene: scene, soundController: soundController)
     }
     
 //    convenience init(scene: SCNScene) {
@@ -93,7 +93,7 @@ class Character: GKEntity {
         }
     }
     
-    private func loadComponents(soundController: SoundController) {
+    private func loadComponents(scene: SCNScene, soundController: SoundController) {
         let jumpComponent = JumpComponent(character: self.node, impulse: self.jumpImpulse)
         
         //adding delgate to jump
@@ -106,6 +106,10 @@ class Character: GKEntity {
         
         let sinkComponent = SinkComponent(soundController: soundController, node: self.node, entity: self)
         self.addComponent(sinkComponent)
+        
+        // Attack component
+        let attackComponet = AttackComponent(scene: scene)
+        self.addComponent(attackComponet)
     }
     
     // MARK: Animatins Functins

@@ -307,11 +307,22 @@ extension GameController : PadOverlayDelegate {
 
 extension GameController : Controls {
     func jump() {
-        self.characterStateMachine.enter(JumpingState.self)
+        //self.characterStateMachine.enter(JumpingState.self)
+       
+        self.attack()
     }
     
     func attack() {
         
+        guard let attackComponent = self.character.component(ofType: AttackComponent.self) else
+        {
+            fatalError("Error getting attack component")
+        }
+        
+        var lauchPosition = self.character.node.presentation.position
+        lauchPosition.y = 60
+        
+        attackComponent.atack(launchPosition: lauchPosition, direction: self.characterDirection)
     }
 
 }
