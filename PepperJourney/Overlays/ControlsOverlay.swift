@@ -26,13 +26,23 @@ class ControlsOverlay: SKScene {
     }
     var padOverlay: PadOverlay!
     var pauseButton: SKSpriteNode!
-    var movesOverlay: SKSpriteNode!
     var controlsDelegate: Controls?
-    var gameOptionsDelegate: GameOptions?
+    
+    var gameOptionsDelegate: GameOptions? {
+        didSet {
+            self.attackButton.delegate = controlsDelegate
+            self.jumpButton.delegate = controlsDelegate
+        }
+    }
+    
+    var jumpButton: JumpButton!
+    var attackButton: AttackButton!
     
     public var isPausedControl:Bool = false {
         didSet {
             self.padOverlay.isPausedControl = self.isPausedControl
+            self.jumpButton.isPausedControls = self.isPausedControl
+            self.attackButton.isPausedControls = self.isPausedControl
         }
     }
         
@@ -41,12 +51,11 @@ class ControlsOverlay: SKScene {
         
         self.scaleMode = .aspectFill
         
-        // The virtual D-pad
-        #if os( iOS )
-            self.padOverlay = self.childNode(withName: "padOverlay") as! PadOverlay
-            self.movesOverlay = self.childNode(withName: "movesOverlay") as! SKSpriteNode
-            self.pauseButton = self.childNode(withName: "pauseButton") as! SKSpriteNode
-        #endif
+        
+        self.padOverlay = self.childNode(withName: "padOverlay") as! PadOverlay
+        self.jumpButton = self.childNode(withName: "jumpButton") as! JumpButton
+        self.attackButton = self.childNode(withName: "attackButton") as! AttackButton
+        self.pauseButton = self.childNode(withName: "pauseButton") as! SKSpriteNode
         
         // disable interation in scenekit
         self.isUserInteractionEnabled = false
@@ -73,17 +82,7 @@ extension ControlsOverlay {
             self.gameOptionsDelegate?.pause()
         }
         
-        else if(isMovesSide(location: location)) {
-            self.controlsDelegate?.jump()
-        }
-        
     }
     
-    func isMovesSide(location: CGPoint) -> Bool{
-        if(self.movesOverlay.frame.contains(location)) {
-            return true
-        }
-        return false
-    }
     
 }

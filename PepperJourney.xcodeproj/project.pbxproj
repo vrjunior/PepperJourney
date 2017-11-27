@@ -45,6 +45,8 @@
 		D20108931FBE11D9007660E3 /* GameOverOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D201088B1FBE11D9007660E3 /* GameOverOverlay.sks */; };
 		D20108941FBE11D9007660E3 /* StartOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D201088C1FBE11D9007660E3 /* StartOverlay.swift */; };
 		D20108961FBE11FC007660E3 /* FinishOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D20108951FBE11FC007660E3 /* FinishOverlay.sks */; };
+		D2050A7D1FCC99D9001EC7FE /* JumpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2050A7C1FCC99D9001EC7FE /* JumpButton.swift */; };
+		D2050A7F1FCC9BD1001EC7FE /* AttackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2050A7E1FCC9BD1001EC7FE /* AttackButton.swift */; };
 		D207CFC51F8EA2D10084240E /* Dpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207CFC41F8EA2D10084240E /* Dpad.swift */; };
 		D207CFC71F8EA5370084240E /* Stick.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207CFC61F8EA5370084240E /* Stick.swift */; };
 		D25160E51F93FA3400BF756A /* BaseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25160E41F93FA3400BF756A /* BaseState.swift */; };
@@ -117,6 +119,8 @@
 		D201088B1FBE11D9007660E3 /* GameOverOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = GameOverOverlay.sks; path = PepperJourney/Overlays/GameOverOverlay.sks; sourceTree = SOURCE_ROOT; };
 		D201088C1FBE11D9007660E3 /* StartOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StartOverlay.swift; path = PepperJourney/Overlays/StartOverlay.swift; sourceTree = SOURCE_ROOT; };
 		D20108951FBE11FC007660E3 /* FinishOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = FinishOverlay.sks; path = PepperJourney/Overlays/FinishOverlay.sks; sourceTree = SOURCE_ROOT; };
+		D2050A7C1FCC99D9001EC7FE /* JumpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpButton.swift; sourceTree = "<group>"; };
+		D2050A7E1FCC9BD1001EC7FE /* AttackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackButton.swift; sourceTree = "<group>"; };
 		D207CFC41F8EA2D10084240E /* Dpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dpad.swift; sourceTree = "<group>"; };
 		D207CFC61F8EA5370084240E /* Stick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stick.swift; sourceTree = "<group>"; };
 		D25160E41F93FA3400BF756A /* BaseState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseState.swift; sourceTree = "<group>"; };
@@ -360,6 +364,8 @@
 				D25AD5A51F87E1B100F2093E /* PadOverlay.swift */,
 				D207CFC41F8EA2D10084240E /* Dpad.swift */,
 				D207CFC61F8EA5370084240E /* Stick.swift */,
+				D2050A7C1FCC99D9001EC7FE /* JumpButton.swift */,
+				D2050A7E1FCC9BD1001EC7FE /* AttackButton.swift */,
 			);
 			path = iOSControls;
 			sourceTree = "<group>";
@@ -467,6 +473,7 @@
 				D25160EC1F940ACF00BF756A /* StandingState.swift in Sources */,
 				D2E0A8981F993B5D00FCC255 /* JumpComponent.swift in Sources */,
 				D25AD5AE1F87ECF900F2093E /* Character.swift in Sources */,
+				D2050A7D1FCC99D9001EC7FE /* JumpButton.swift in Sources */,
 				D207CFC71F8EA5370084240E /* Stick.swift in Sources */,
 				D20108901FBE11D9007660E3 /* GameOverOverlay.swift in Sources */,
 				9C1B82A11FA0D09800173FF3 /* TrigonometryLib.swift in Sources */,
@@ -492,6 +499,7 @@
 				D25160E51F93FA3400BF756A /* BaseState.swift in Sources */,
 				D207CFC51F8EA2D10084240E /* Dpad.swift in Sources */,
 				D28623B91FA3B00200691E83 /* PlayState.swift in Sources */,
+				D2050A7F1FCC9BD1001EC7FE /* AttackButton.swift in Sources */,
 				D2719D901FA0EBDA00FCB61F /* AnimationType.swift in Sources */,
 				D28623B51FA3AF5F00691E83 /* GameBaseState.swift in Sources */,
 				D28623B71FA3AFB600691E83 /* PauseState.swift in Sources */,
