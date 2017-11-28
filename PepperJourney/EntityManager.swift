@@ -50,7 +50,7 @@ class EntityManager
         guard self.chasedTargetAgent != nil else { return }
         
         // Create a Entity that coordinate the potato creation
-        self.potatoGeneratorSystem = PotatoGeneratorSystem(scene: self.scene, characterNode: self.character.node)
+        self.potatoGeneratorSystem = PotatoGeneratorSystem(scene: self.scene, characterNode: self.character.characterNode)
 		
     }
     
@@ -59,7 +59,7 @@ class EntityManager
     {
         // Create new potatoes
         let potatoSpawnPoint = SCNVector3(2,50, 285)
-        var i = 10
+        var i = 0
         while i > 0 {
             self.createChasingPotato(position: potatoSpawnPoint)
             i -= 1
@@ -143,6 +143,10 @@ class EntityManager
 
         self.previousUpdateTime = time
         
+        /* Character update */
+        guard let attackComponent = self.character.component(ofType: AttackComponent.self)else{fatalError()}
+        attackComponent.update(deltaTime: deltaTime)
+        
     }
     
     func getComponent(entity: GKEntity, ofType: GKComponent.Type) -> GKComponent
@@ -205,9 +209,6 @@ class EntityManager
                 
                 potato.removeModelNodeFromScene()
                 let potato = potatoesEntities.remove(at: index)
-                
-                // remove da memoria o som carregado de queda na agua
-                self.soundController.removeSoundFromMemory(soundName: potato.description)
                 break
             }
             

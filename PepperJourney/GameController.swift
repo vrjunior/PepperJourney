@@ -20,6 +20,7 @@ enum CategoryMaskType: Int {
     case lake         = 0b1000      // 8
     case obstacle     = 0b10000     // 16
     case finalLevel   = 0b100000    // 32
+    case fireBall     = 0b1000000   // 64
 }
 
 
@@ -74,7 +75,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     {
         // Clean all the sounds
         soundController.stopSoundsFromNode(node: self.cameraNode)
-        soundController.stopSoundsFromNode(node: self.character.node)
+        soundController.stopSoundsFromNode(node: self.character.characterNode)
     }
     func setupSounds() {
         
@@ -85,7 +86,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         // Finish Level sound
         self.soundController.loadSound(fileName: "FinishLevel-jingle-win-00.wav", soundName: "FinishLevelSound", volume: 0.5)
-        
+        // Potato Yell
+        self.soundController.loadSound(fileName: "Yell - small-fairy-hit-moan.wav", soundName: "PotatoYell")
         
         //setup character sounds
         self.soundController.loadSound(fileName: "jump.wav", soundName: "jump", volume: 1.0)
@@ -109,7 +111,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.cameraNode = self.scene.rootNode.childNode(withName: "camera", recursively: true)!
         self.cameraInitialPosition = cameraNode.presentation.position
         
-        guard let characterNode = self.character.node else {
+        guard let characterNode = self.character.characterNode else {
             fatalError("Error with the target of the follow camera")
         }
         
@@ -124,7 +126,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         let keepAltitude = SCNTransformConstraint.positionConstraint(inWorldSpace: true) { (node: SCNNode, position: SCNVector3) -> SCNVector3 in
             var position = float3(position)
-            position.y = self.character.node.presentation.position.y + 20
+            position.y = self.character.characterNode.presentation.position.y + 20
             return SCNVector3(position)
         }
         
@@ -137,6 +139,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
             PlayState(scene: scene) ])
     }
     
+    var APAGAR: SCNNode!
     // MARK: Initializer
     init(scnView: SCNView) {
         super.init()
@@ -154,7 +157,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.setupGame()
         
        
-        
+        self.APAGAR = scene.rootNode.childNode(withName: "ref", recursively: false)
         self.scene.physicsWorld.contactDelegate = self
     
         scnView.scene = scene
@@ -185,14 +188,14 @@ class GameController: NSObject, SCNSceneRendererDelegate {
 //        }
         
         // Show de character
-        self.character.node.isHidden = false
+        self.character.characterNode.isHidden = false
 
         self.entityManager.setupGameInitialization()
         
         // Reset of all the sounds
         self.resetSounds()
         
-        self.character.node.position = SCNVector3(self.character.initialPosition)
+        self.character.characterNode.position = SCNVector3(self.character.initialPosition)
         self.cameraNode.position = self.cameraInitialPosition
         
     }
@@ -214,7 +217,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         entityManager.killAllPotatoes()
         
-        self.character.node.isHidden = true
+        self.character.characterNode.isHidden = true
     }
     
     func setupGameOver() {
@@ -266,7 +269,9 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         // update characters
         character!.update(atTime: time, with: renderer)
-        
+      //  print(character.characterNode.presentation.eulerAngles.y)
+        //print(character.characterNode.presentation.eulerAngles.y * 360 / Float(Double.pi))
+        //print(self.APAGAR.presentation.eulerAngles.y)
         self.entityManager.update(atTime: time)
     }
 }
@@ -307,9 +312,7 @@ extension GameController : PadOverlayDelegate {
 
 extension GameController : Controls {
     func jump() {
-        //self.characterStateMachine.enter(JumpingState.self)
-       
-        self.attack()
+        self.characterStateMachine.enter(JumpingState.self)
     }
     
     func attack() {
@@ -319,10 +322,11 @@ extension GameController : Controls {
             fatalError("Error getting attack component")
         }
         
-        var lauchPosition = self.character.node.presentation.position
+        var lauchPosition = self.character.characterNode.presentation.position
         lauchPosition.y = 60
         
-        attackComponent.atack(launchPosition: lauchPosition, direction: self.characterDirection)
+        
+        attackComponent.atack(launchPosition: lauchPosition, eulerAngle: self.character.characterNode.presentation.eulerAngles.y)
     }
 
 }
@@ -331,8 +335,8 @@ extension GameController : Controls {
 extension GameController : JumpDelegate {
     
     func didJumpBegin(node: SCNNode) {
-        if(node == character.node) {
-            self.soundController.playSoundEffect(soundName: "jump", loops: false, node: character.node)
+        if(node == character.characterNode) {
+            self.soundController.playSoundEffect(soundName: "jump", loops: false, node: character.characterNode)
             self.character.isJumping = true
         }
     }
@@ -344,16 +348,17 @@ extension GameController : SCNPhysicsContactDelegate {
 		
         var characterNode: SCNNode?
         var anotherNode: SCNNode?
+        var potatoNode: SCNNode?
         
        
-        if contact.nodeA == self.character.node {
+        if contact.nodeA == self.character.characterNode {
             
             characterNode = contact.nodeA
             
             anotherNode = contact.nodeB
         }
             
-        else if contact.nodeB == self.character.node
+        else if contact.nodeB == self.character.characterNode
         {
             characterNode = contact.nodeB
             
@@ -417,25 +422,23 @@ extension GameController : SCNPhysicsContactDelegate {
             // ja resolveu o que tinha que fazer aqui com o character
             return
         }
-        var potatoNode: SCNNode?
-        var lakeNode: SCNNode?
         
-        // batata na agua
-        if contact.nodeA.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue &&
-            contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.lake.rawValue
+        // Found potato
+        if contact.nodeA.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue
         {
             potatoNode = contact.nodeA
-            lakeNode = contact.nodeB
+            anotherNode = contact.nodeB
         }
-        else if contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue &&
-            contact.nodeA.physicsBody?.categoryBitMask == CategoryMaskType.lake.rawValue
+        else if contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue
         {
             potatoNode = contact.nodeB
-            lakeNode = contact.nodeA
+            anotherNode = contact.nodeA
         }
         
-        if let potatoNode = potatoNode, let lakeNode = lakeNode
+        if let potatoNode = potatoNode, anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.lake.rawValue
         {
+            let lakeNode = anotherNode!
+            
             if lakeNode.name == "lakeBottom"
             {
                 self.entityManager.killAPotato(node: potatoNode)
@@ -449,6 +452,12 @@ extension GameController : SCNPhysicsContactDelegate {
                     potatoEntity.removeComponent(ofType: SeekComponent.self)
                 }
             }
+        }
+        else if let potatoNode = potatoNode, anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.fireBall.rawValue
+        {
+            self.soundController.playSoundEffect(soundName: "PotatoYell", loops: false, node: self.cameraNode)
+            self.entityManager.killAPotato(node: potatoNode)
+            
         }
     }
 }

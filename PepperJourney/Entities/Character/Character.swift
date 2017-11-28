@@ -39,7 +39,6 @@ class Character: GKEntity {
     private var controllerDirection = float2()
     
     // Character handle
-    private(set) var node: SCNNode! // top level node
     private(set) var characterNode: SCNNode!
     
     // Camera
@@ -73,11 +72,10 @@ class Character: GKEntity {
     
     private func loadCharacter(scene: SCNScene) {
         /// Load character from external file
-        node = scene.rootNode.childNode(withName: "character", recursively: false)
-		characterNode = node.childNode(withName: "characterNode", recursively: false)
-        self.visualTarget = node.childNode(withName: "visualTarget", recursively: false)
+        self.characterNode = scene.rootNode.childNode(withName: "character", recursively: false)
+        self.visualTarget = self.characterNode.childNode(withName: "visualTarget", recursively: false)
 		
-        self.initialPosition = float3(node.position)
+        self.initialPosition = float3(self.characterNode.position)
     }
     
     //Load all animation in character node
@@ -94,17 +92,17 @@ class Character: GKEntity {
     }
     
     private func loadComponents(scene: SCNScene, soundController: SoundController) {
-        let jumpComponent = JumpComponent(character: self.node, impulse: self.jumpImpulse)
+        let jumpComponent = JumpComponent(character: self.characterNode, impulse: self.jumpImpulse)
         
         //adding delgate to jump
         jumpComponent.delegate = self.jumpDelegate
         self.addComponent(jumpComponent)
         
         trackingAgentComponent = GKAgent3D()
-        trackingAgentComponent.position = float3(self.node.presentation.position)
+        trackingAgentComponent.position = float3(self.characterNode.presentation.position)
         self.addComponent(trackingAgentComponent)
         
-        let sinkComponent = SinkComponent(soundController: soundController, node: self.node, entity: self)
+        let sinkComponent = SinkComponent(soundController: soundController, node: self.characterNode, entity: self)
         self.addComponent(sinkComponent)
         
         // Attack component
@@ -138,8 +136,8 @@ class Character: GKEntity {
     
     private(set) var directionAngle: CGFloat = 0.0 {
         didSet {
-            node.runAction(
-                SCNAction.rotateTo(x: 0.0, y: directionAngle, z: 0.0, duration: 0.1, usesShortestUnitArc:true))
+            self.characterNode.runAction(
+                SCNAction.rotateTo(x: 0.0, y: directionAngle, z: 0.0, duration: 0.1, usesShortestUnitArc:true))// 0.1
        }
     }
     
@@ -177,11 +175,11 @@ class Character: GKEntity {
 		}
         
         if simd_length_squared(characterVelocity) > 10E-4 * 10E-4 {
-            let startPosition = node.presentation.simdWorldPosition
+            let startPosition = self.characterNode.presentation.simdWorldPosition
             slideInWorld(fromPosition: startPosition, velocity: characterVelocity)
         }
         
-        trackingAgentComponent.position = float3(self.node.presentation.position)
+        trackingAgentComponent.position = float3(self.characterNode.presentation.position)
     }
     
     
@@ -220,11 +218,11 @@ class Character: GKEntity {
             replacementPoint = start + velocity
             stop = true
         }
-        node.simdWorldPosition = replacementPoint
+        self.characterNode.simdWorldPosition = replacementPoint
     }
 
     func resetCharacterPosition() {
-        node.simdPosition = self.initialPosition
+        self.characterNode.simdPosition = self.initialPosition
     }
     
     

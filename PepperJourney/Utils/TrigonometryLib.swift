@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreGraphics
+import simd
 
 class TrigonometryLib
 {
@@ -19,5 +20,25 @@ class TrigonometryLib
         let angle = Float(atan2(deltaY, deltaX))
         
         return CGFloat(angle * (180.0 / Float.pi))
+    }
+    static func getAxisComponents(rad: Float) -> vector_float2 {
+        
+        var finalRad: Float
+        if (rad < 0)
+        {
+            finalRad = rad + (2 * Float.pi)
+        }
+        else
+        {
+            finalRad = rad
+        }
+        let angle = finalRad * 180 / Float.pi
+        
+        var components = vector_float2()
+        components.x = cos(rad)
+        components.y = sin(rad)
+        
+        print("rad: \(angle) | \(components)")
+        return components
     }
 }

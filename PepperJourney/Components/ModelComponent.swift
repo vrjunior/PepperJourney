@@ -35,7 +35,12 @@ class ModelComponent: GKComponent
     }
     func removeModel()
     {
-        self.modelNode.removeFromParentNode()
+        if modelNode.parent != nil {
+            self.modelNode.removeFromParentNode()
+        }
+        else{
+            print("já foi removido")
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
