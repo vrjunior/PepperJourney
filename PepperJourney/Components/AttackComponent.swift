@@ -26,7 +26,7 @@ class AttackComponent: GKComponent
         fatalError("init(coder:) has not been implemented")
     }
     
-    func atack(launchPosition: SCNVector3, characterAngle: Float)
+    func atack(originNode: SCNNode, angle: Float)
     {
         guard let scene = SCNScene(named: "Game.scnassets/character/FireBall.scn") else
         {
@@ -36,15 +36,25 @@ class AttackComponent: GKComponent
             fatalError("Error getting fireball node")
         }
         
-        fireBall.position = launchPosition
+        // Initial position
+        fireBall.position = originNode.presentation.position
+        fireBall.position.y += 5
         
-        let planeComponents = TrigonometryLib.getAxisComponents(rad: characterAngle)
-        print (planeComponents)
+        // add to the scene
+        self.scene.rootNode.addChildNode(fireBall)
         
-        var forceVector = SCNVector3(planeComponents.y * 10, 20, planeComponents.x * 10)
+        // Handle with the movimentation
+        let planeComponents = TrigonometryLib.getAxisComponents(rad: angle)
+        var forceVector = SCNVector3()
+        guard let nodeVelocity = originNode.physicsBody?.velocity else { fatalError("Error in attack component. Physic body not found")}
+        
+        forceVector.x = planeComponents.y * 10 + nodeVelocity.x
+        forceVector.z = planeComponents.x * 10 + nodeVelocity.z
+        forceVector.y = 20
         
         fireBall.physicsBody?.applyForce(forceVector, asImpulse: true)
-        self.scene.rootNode.addChildNode(fireBall)
+        
+        // Controller of disapear the fireballs
         self.madeAttacks.append(fireBall)
         let time: TimeInterval = 0
         self.attackTimes.append(time)
