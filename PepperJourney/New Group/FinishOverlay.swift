@@ -49,7 +49,7 @@ class FinishOverlay: SKScene {
             video.zPosition = 99
             video.size = self.size
             
-            self.addChild(video)
+            self.restartButton.addChild(video)
             video.play()
             
             NotificationCenter.default.addObserver(self, selector: Selector(("videoDidEnd:")), name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: avPlayer.currentItem)
