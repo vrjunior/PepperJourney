@@ -8,23 +8,56 @@
 
 import SpriteKit
 import UIKit.UIGestureRecognizer
+import AVFoundation
 
 class FinishOverlay: SKScene {
     
     public var gameOptionsDelegate: GameOptions?
+    public var finalCutSceneVideo: String = ""
     
     private var restartButton: SKSpriteNode!
     private var menuButton: SKSpriteNode!
     private var fowardButton: SKSpriteNode!
     
+    private var video: SKVideoNode!
+    
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
         
-        self.restartButton = self.childNode(withName: "menuButton") as! SKSpriteNode
-        self.restartButton = self.childNode(withName: "restartButton") as! SKSpriteNode
-        self.restartButton = self.childNode(withName: "fowardButton") as! SKSpriteNode
+        self.setupNodes()
         
+        self.playCutScene()
+    }
+    
+    func setupNodes() {
+        self.menuButton = self.childNode(withName: "menuButton") as! SKSpriteNode
+        self.restartButton = self.childNode(withName: "restartButton") as! SKSpriteNode
+        self.fowardButton = self.childNode(withName: "fowardButton") as! SKSpriteNode
+    }
+    
+    func playCutScene() {
+        if let url = Bundle.main.url(forResource: "cutscene1", withExtension: "mp4") {
+            
+            let avPlayer = AVPlayer(url: url)
+            avPlayer.actionAtItemEnd = .none
+            
+            video = SKVideoNode(avPlayer: avPlayer)
+            
+            video.anchorPoint = CGPoint(x: 0, y: 0)
+            video.position = CGPoint(x: 0, y: 0)
+            video.zPosition = 99
+            video.size = self.size
+            
+            self.addChild(video)
+            video.play()
+            
+            NotificationCenter.default.addObserver(self, selector: Selector(("videoDidEnd:")), name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: avPlayer.currentItem)
+        }
+    }
+    
+    func videoDidEnd(note: Notification) {
+        print("video ended")
     }
     
     override func didMove(to view: SKView) {

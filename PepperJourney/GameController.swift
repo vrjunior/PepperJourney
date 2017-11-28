@@ -243,6 +243,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks") as! FinishOverlay
         finishLevelOverlay.gameOptionsDelegate = self
+        finishLevelOverlay.finalCutSceneVideo = "cutscene1.mp4"
         finishLevelOverlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = finishLevelOverlay
         
