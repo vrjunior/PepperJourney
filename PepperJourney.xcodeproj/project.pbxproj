@@ -60,6 +60,7 @@
 		D25BAE281FC60C0F000ED0EC /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BAE271FC60C0F000ED0EC /* SettingsController.swift */; };
 		D26035F11FCDC57B00E4F069 /* FinishOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26035F01FCDC57B00E4F069 /* FinishOverlay.swift */; };
 		D26035F31FCDC66C00E4F069 /* CGPoint+FromUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26035F21FCDC66C00E4F069 /* CGPoint+FromUIView.swift */; };
+		D26035F61FCDE53D00E4F069 /* cutscene1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D26035F51FCDDB4100E4F069 /* cutscene1.mp4 */; };
 		D26FCCFE1FC88640003EBFDF /* jump.wav in Resources */ = {isa = PBXBuildFile; fileRef = D26FCCFD1FC88640003EBFDF /* jump.wav */; };
 		D2719D901FA0EBDA00FCB61F /* AnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */; };
 		D28623B51FA3AF5F00691E83 /* GameBaseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28623B41FA3AF5F00691E83 /* GameBaseState.swift */; };
@@ -134,6 +135,7 @@
 		D25BAE271FC60C0F000ED0EC /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		D26035F01FCDC57B00E4F069 /* FinishOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishOverlay.swift; sourceTree = "<group>"; };
 		D26035F21FCDC66C00E4F069 /* CGPoint+FromUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+FromUIView.swift"; sourceTree = "<group>"; };
+		D26035F51FCDDB4100E4F069 /* cutscene1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = cutscene1.mp4; sourceTree = "<group>"; };
 		D26FCCFD1FC88640003EBFDF /* jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump.wav; sourceTree = "<group>"; };
 		D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationType.swift; sourceTree = "<group>"; };
 		D28623B41FA3AF5F00691E83 /* GameBaseState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBaseState.swift; sourceTree = "<group>"; };
@@ -278,6 +280,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D26035F41FCDDB2F00E4F069 /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				D26035F51FCDDB4100E4F069 /* cutscene1.mp4 */,
+			);
+			path = Videos;
+			sourceTree = "<group>";
+		};
 		D28623B31FA3AF3300691E83 /* GameState */ = {
 			isa = PBXGroup;
 			children = (
@@ -329,6 +339,7 @@
 		D2EC857B1F83F1240093F009 /* PepperJourney */ = {
 			isa = PBXGroup;
 			children = (
+				D26035F41FCDDB2F00E4F069 /* Videos */,
 				B0465F171FC4C743002B8FE8 /* Sounds */,
 				D20108841FBE11BE007660E3 /* Overlays */,
 				D2B8BBB61FBB648B0042F873 /* Fonts */,
@@ -441,6 +452,7 @@
 				B08B911F1FC4CABD00304E46 /* gameBackground.mp3 in Resources */,
 				9C991DBD1FCDA18C00DEE3D6 /* spark.png in Resources */,
 				9C991DAF1FCC5CB600DEE3D6 /* FinishLevel-jingle-win-00.wav in Resources */,
+				D26035F61FCDE53D00E4F069 /* cutscene1.mp4 in Resources */,
 				D2EC85861F83F1240093F009 /* Assets.xcassets in Resources */,
 				D2EC85841F83F1240093F009 /* Main.storyboard in Resources */,
 				D20108931FBE11D9007660E3 /* GameOverOverlay.sks in Resources */,
