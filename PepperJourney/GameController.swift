@@ -239,8 +239,11 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     func setupFinishLevel() {
         self.prepereToStartGame()
         self.soundController.playSoundEffect(soundName: "FinishLevelSound", loops: false, node: self.cameraNode)
-        let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks")
-        finishLevelOverlay?.scaleMode = .aspectFill
+        
+        
+        let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks") as! FinishOverlay
+        finishLevelOverlay.gameOptionsDelegate = self
+        finishLevelOverlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = finishLevelOverlay
         
         //self.gameStateMachine.enter(PauseState.self)

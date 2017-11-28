@@ -58,6 +58,8 @@
 		D25BAE221FC60443000ED0EC /* SettingsOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D25BAE211FC60443000ED0EC /* SettingsOverlay.sks */; };
 		D25BAE261FC60864000ED0EC /* SettingsOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BAE251FC60864000ED0EC /* SettingsOverlay.swift */; };
 		D25BAE281FC60C0F000ED0EC /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BAE271FC60C0F000ED0EC /* SettingsController.swift */; };
+		D26035F11FCDC57B00E4F069 /* FinishOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26035F01FCDC57B00E4F069 /* FinishOverlay.swift */; };
+		D26035F31FCDC66C00E4F069 /* CGPoint+FromUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26035F21FCDC66C00E4F069 /* CGPoint+FromUIView.swift */; };
 		D26FCCFE1FC88640003EBFDF /* jump.wav in Resources */ = {isa = PBXBuildFile; fileRef = D26FCCFD1FC88640003EBFDF /* jump.wav */; };
 		D2719D901FA0EBDA00FCB61F /* AnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */; };
 		D28623B51FA3AF5F00691E83 /* GameBaseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28623B41FA3AF5F00691E83 /* GameBaseState.swift */; };
@@ -130,6 +132,8 @@
 		D25BAE211FC60443000ED0EC /* SettingsOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = SettingsOverlay.sks; path = PepperJourney/Overlays/SettingsOverlay.sks; sourceTree = SOURCE_ROOT; };
 		D25BAE251FC60864000ED0EC /* SettingsOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOverlay.swift; sourceTree = "<group>"; };
 		D25BAE271FC60C0F000ED0EC /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		D26035F01FCDC57B00E4F069 /* FinishOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishOverlay.swift; sourceTree = "<group>"; };
+		D26035F21FCDC66C00E4F069 /* CGPoint+FromUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+FromUIView.swift"; sourceTree = "<group>"; };
 		D26FCCFD1FC88640003EBFDF /* jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump.wav; sourceTree = "<group>"; };
 		D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationType.swift; sourceTree = "<group>"; };
 		D28623B41FA3AF5F00691E83 /* GameBaseState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBaseState.swift; sourceTree = "<group>"; };
@@ -179,6 +183,7 @@
 				D25160E91F94063400BF756A /* SCNAnimationPlayer + Load Animation.swift */,
 				D291BB531F8E976A00B2D111 /* SimdExtensions.swift */,
 				9C1B82A01FA0D09600173FF3 /* TrigonometryLib.swift */,
+				D26035F21FCDC66C00E4F069 /* CGPoint+FromUIView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -236,6 +241,7 @@
 				D20108891FBE11D9007660E3 /* StartOverlay.sks */,
 				D201088C1FBE11D9007660E3 /* StartOverlay.swift */,
 				D25BAE251FC60864000ED0EC /* SettingsOverlay.swift */,
+				D26035F01FCDC57B00E4F069 /* FinishOverlay.swift */,
 			);
 			name = Overlays;
 			path = "New Group";
@@ -470,6 +476,8 @@
 				9C4A65731FA67ED700293460 /* PotatoGeneratorSystem.swift in Sources */,
 				D25BAE261FC60864000ED0EC /* SettingsOverlay.swift in Sources */,
 				B0FDBAE91FA9F35600D4B08D /* pixelate.metal in Sources */,
+				D26035F11FCDC57B00E4F069 /* FinishOverlay.swift in Sources */,
+				D26035F31FCDC66C00E4F069 /* CGPoint+FromUIView.swift in Sources */,
 				B0FDBAF01FA9F35600D4B08D /* toon.metal in Sources */,
 				B0465F0D1FC444A2002B8FE8 /* SoundRandomComponent.swift in Sources */,
 				9C1B829F1F9FADD300173FF3 /* ModelComponent.swift in Sources */,
