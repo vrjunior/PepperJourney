@@ -59,7 +59,7 @@ class EntityManager
     {
         // Create new potatoes
         let potatoSpawnPoint = SCNVector3(2,50, 285)
-        var i = 0
+        var i = 10
         while i > 0 {
             self.createChasingPotato(position: potatoSpawnPoint)
             i -= 1
@@ -193,7 +193,7 @@ class EntityManager
         return nil
     }
     
-    func killAPotato(node: SCNNode)
+    func killAPotato(node: SCNNode) -> Bool
     {
         
         for index in 0 ..< self.potatoesEntities.count
@@ -201,7 +201,7 @@ class EntityManager
             let potato = self.potatoesEntities[index] as! PotatoEntity
             guard let potatoNode = potato.component(ofType: ModelComponent.self)?.modelNode else
             {
-                return
+                fatalError("Error getting modelComponent from potato")
             }
             
             if node == potatoNode
@@ -209,10 +209,10 @@ class EntityManager
                 
                 potato.removeModelNodeFromScene()
                 let potato = potatoesEntities.remove(at: index)
-                break
+                return true
             }
-            
         }
+        return false
     }
 	
 	//Add sounds here
