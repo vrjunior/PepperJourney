@@ -11,15 +11,20 @@ import SpriteKit
 
 class PauseOverlay: SKScene {
     
+    public var gameOptionsDelegate: GameOptions?
+    
     private var resumeButton: SKSpriteNode!
     private var restartButton: SKSpriteNode!
-    public var gameOptionsDelegate: GameOptions?
+    private var menuButton: SKSpriteNode!
+    private var settingsButton: SKSpriteNode!
     
     override func sceneDidLoad() {
         
         //setup nodes
         self.resumeButton = self.childNode(withName: "resumeButton") as! SKSpriteNode
         self.restartButton = self.childNode(withName: "restartButton") as! SKSpriteNode
+        self.menuButton = self.childNode(withName: "menuButton") as! SKSpriteNode
+        self.settingsButton = self.childNode(withName: "settingsButton") as! SKSpriteNode
         
     }
     
@@ -33,8 +38,7 @@ class PauseOverlay: SKScene {
     
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
         
-        var location = gesture.location(in: self.view)
-        location.y = (self.view?.frame.height)! - location.y
+        let location = gesture.location(in: self.view).fromUiView(height: self.view!.frame.height)
         
         if restartButton.contains(location) {
             self.gameOptionsDelegate?.restart()
@@ -42,6 +46,14 @@ class PauseOverlay: SKScene {
         
         else if resumeButton.contains(location) {
             self.gameOptionsDelegate?.resume()
+        }
+        
+        else if menuButton.contains(location) {
+            //TODO handle menuButton
+        }
+        
+        else if settingsButton.contains(location) {
+            //TODO handle settingsButton
         }
         
     }

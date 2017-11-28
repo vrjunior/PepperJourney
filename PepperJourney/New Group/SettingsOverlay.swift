@@ -11,9 +11,10 @@ import SpriteKit
 
 class SettingsOverlay: SKScene {
     
+    public var gameOptionsDelegate: GameOptions?
+    
     private var musicSwitch: SKLabelNode!
     private var songSwitch: SKLabelNode!
-    //public var gameOptionsDelegate: GameOptions?
     
     override func sceneDidLoad() {
         
