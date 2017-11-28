@@ -26,7 +26,7 @@ class AttackComponent: GKComponent
         fatalError("init(coder:) has not been implemented")
     }
     
-    func atack(launchPosition: SCNVector3, eulerAngle: Float)
+    func atack(launchPosition: SCNVector3, characterAngle: Float)
     {
         guard let scene = SCNScene(named: "Game.scnassets/character/FireBall.scn") else
         {
@@ -38,13 +38,10 @@ class AttackComponent: GKComponent
         
         fireBall.position = launchPosition
         
-        // Then the angle is between -pi and pi
-        let rad = 2 * eulerAngle
+        let planeComponents = TrigonometryLib.getAxisComponents(rad: characterAngle)
+        print (planeComponents)
         
-        let planeComponents = TrigonometryLib.getAxisComponents(rad: rad)
-        //print (planeComponents)
-        
-        var forceVector = SCNVector3(planeComponents.y * 10, 15, planeComponents.x * 10)
+        var forceVector = SCNVector3(planeComponents.y * 10, 20, planeComponents.x * 10)
         
         fireBall.physicsBody?.applyForce(forceVector, asImpulse: true)
         self.scene.rootNode.addChildNode(fireBall)
@@ -59,7 +56,7 @@ class AttackComponent: GKComponent
         {
             self.attackTimes[index] += seconds
             
-            if self.attackTimes[index] > 5
+            if self.attackTimes[index] > 1
             {
                 self.madeAttacks[index].removeFromParentNode()
                 self.madeAttacks.remove(at: index)

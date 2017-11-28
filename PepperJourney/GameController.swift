@@ -82,10 +82,10 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.soundController.loadSound(fileName: "gameBackground.mp3", soundName: "backgroundMusic", volume: 0.5)
         
         
-        self.soundController.loadSound(fileName: "GameOver-Game_over.wav", soundName: "gameOverSound", volume: 0.5)
+        self.soundController.loadSound(fileName: "GameOver-Game_over.wav", soundName: "gameOverSound", volume: 1)
         
         // Finish Level sound
-        self.soundController.loadSound(fileName: "FinishLevel-jingle-win-00.wav", soundName: "FinishLevelSound", volume: 0.5)
+        self.soundController.loadSound(fileName: "FinishLevel-jingle-win-00.wav", soundName: "FinishLevelSound", volume: 1)
         // Potato Yell
         self.soundController.loadSound(fileName: "Yell - small-fairy-hit-moan.wav", soundName: "PotatoYell")
         
@@ -273,9 +273,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         // update characters
         character!.update(atTime: time, with: renderer)
-      //  print(character.characterNode.presentation.eulerAngles.y)
-        //print(character.characterNode.presentation.eulerAngles.y * 360 / Float(Double.pi))
-        //print(self.APAGAR.presentation.eulerAngles.y)
+
         self.entityManager.update(atTime: time)
     }
 }
@@ -327,10 +325,10 @@ extension GameController : Controls {
         }
         
         var lauchPosition = self.character.characterNode.presentation.position
-        lauchPosition.y = 60
+        lauchPosition.y = self.character.characterNode.presentation.position.y + 5
         
         
-        attackComponent.atack(launchPosition: lauchPosition, eulerAngle: self.character.characterNode.presentation.eulerAngles.y)
+        attackComponent.atack(launchPosition: lauchPosition, characterAngle: Float(self.character.directionAngle))
     }
 
 }
@@ -459,8 +457,11 @@ extension GameController : SCNPhysicsContactDelegate {
         }
         else if let potatoNode = potatoNode, anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.fireBall.rawValue
         {
-            self.soundController.playSoundEffect(soundName: "PotatoYell", loops: false, node: self.cameraNode)
-            self.entityManager.killAPotato(node: potatoNode)
+            
+            if self.entityManager.killAPotato(node: potatoNode)
+            {
+                self.soundController.playSoundEffect(soundName: "PotatoYell", loops: false, node: self.cameraNode)
+            }
             
         }
     }
