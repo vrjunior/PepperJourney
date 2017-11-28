@@ -61,10 +61,6 @@ class Character: GKEntity {
         self.loadComponents(scene: scene, soundController: soundController)
     }
     
-//    convenience init(scene: SCNScene) {
-//        self.init(scene: scene, jumpDelegate: nil, soundController: soun)
-//    }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

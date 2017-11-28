@@ -272,6 +272,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         // update characters
         character!.update(atTime: time, with: renderer)
+        print(character.characterNode.physicsBody?.velocity)
 
         self.entityManager.update(atTime: time)
     }
@@ -327,7 +328,7 @@ extension GameController : Controls {
         lauchPosition.y = self.character.characterNode.presentation.position.y + 5
         
         
-        attackComponent.atack(launchPosition: lauchPosition, characterAngle: Float(self.character.directionAngle))
+        attackComponent.atack(originNode: self.character.characterNode, angle: Float(self.character.directionAngle))
     }
 
 }

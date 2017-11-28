@@ -208,7 +208,7 @@ class EntityManager
             {
                 
                 potato.removeModelNodeFromScene()
-                let potato = potatoesEntities.remove(at: index)
+                potatoesEntities.remove(at: index)
                 return true
             }
         }
