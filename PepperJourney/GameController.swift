@@ -95,7 +95,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     }
     func setupCharacter() {
         // create the character with your components
-       self.character = self.entityManager.character
+        self.character = self.entityManager.character
+        self.character.setupCharacter()
         
         characterStateMachine = GKStateMachine(states: [
             StandingState(scene: scene, character: character),
@@ -139,7 +140,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
             PlayState(scene: scene) ])
     }
     
-    var APAGAR: SCNNode!
+    
     // MARK: Initializer
     init(scnView: SCNView) {
         super.init()
@@ -156,14 +157,12 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         //setup game state machine
         self.setupGame()
         
-       
-        self.APAGAR = scene.rootNode.childNode(withName: "ref", recursively: false)
         self.scene.physicsWorld.contactDelegate = self
     
         scnView.scene = scene
         
         //self.scnView.debugOptions = SCNDebugOptions.showPhysicsShapes
-//        self.scnView.showsStatistics = true
+        //self.scnView.showsStatistics = true
         
         // Create the entity manager system
         self.entityManager = EntityManager(scene: self.scene, gameController: self, soundController: self.soundController)
@@ -195,7 +194,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         // Reset of all the sounds
         self.resetSounds()
         
-        self.character.characterNode.position = SCNVector3(self.character.initialPosition)
+        self.character.setupCharacter()
+        
         self.cameraNode.position = self.cameraInitialPosition
         
     }
@@ -273,8 +273,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         // update characters
         character!.update(atTime: time, with: renderer)
-        print(character.characterNode.physicsBody?.velocity)
-
+        
         self.entityManager.update(atTime: time)
     }
 }
@@ -329,7 +328,7 @@ extension GameController : Controls {
         lauchPosition.y = self.character.characterNode.presentation.position.y + 5
         
         
-        attackComponent.atack(originNode: self.character.characterNode, angle: Float(self.character.directionAngle))
+        attackComponent.atack(originNode: self.character.characterNode, direction: self.character.lastDirection, velocity: self.character.characterVelocity)
     }
 
 }

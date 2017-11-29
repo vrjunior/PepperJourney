@@ -19,6 +19,13 @@ func planeIntersect(planeNormal: float3, planeDist: Float, rayOrigin: float3, ra
 
 class Character: GKEntity {
     
+    
+    // Character velocity
+    private(set) var characterVelocity = float3()
+    
+    // value because it is will be update just in moviment of controlls
+    private(set) var lastDirection = float3(0,0,1)
+    
     //speed multiplier
     static private let speedFactor: CGFloat = 100
     public var initialPosition = float3(0, 0, 0)
@@ -60,6 +67,13 @@ class Character: GKEntity {
         self.loadAnimations()
         self.loadComponents(scene: scene, soundController: soundController)
     }
+    
+    func setupCharacter() {
+        self.characterNode.position = SCNVector3(self.initialPosition)
+        self.directionAngle = 0
+        self.lastDirection = float3(0,0,1)
+    }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -140,8 +154,7 @@ class Character: GKEntity {
     var num = 0
     func update(atTime time: TimeInterval, with renderer: SCNSceneRenderer) {
         
-        var characterVelocity = float3()
-        
+        self.characterVelocity = float3()
         let direction = characterDirection(withPointOfView:renderer.pointOfView)
         
         if previousUpdateTime == 0.0 {
@@ -155,6 +168,7 @@ class Character: GKEntity {
         
         // Move
         if !direction.allZero() {
+            self.lastDirection = direction
             characterVelocity = direction * Float(characterSpeed)
             let runModifier = Float(1.0)
             walkSpeed = CGFloat(runModifier * simd_length(direction))
