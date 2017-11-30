@@ -13,42 +13,43 @@ import UIKit
 
 class SoundDistanceComponent: GKComponent
 {
-	var audioSource: SCNAudioSource!
-	var audioPlayer: SCNAudioPlayer!
+	
 	var actionPoint: CGPoint!
 	var radius: Float!
 	var entityAgent3D: GKAgent3D!
-	var node: SCNNode!
 	var isPlaying: Bool! = false
+	private weak var soundController: SoundController!
+	private var soundName: String!
+	private weak var node: SCNNode!
 	
-	init (soundPath: String, entity: GKEntity, actionPoint: CGPoint, minRadius: Float, node: SCNNode)
+	init (fileName: String, actionPoint: CGPoint, minRadius: Float, entity: GKEntity, node: SCNNode, soundController: SoundController)
 	{
 		super.init()
-        guard let audioSource = SCNAudioSource(fileNamed: soundPath) else
-        {
-            fatalError("The audio file (\(soundPath)) could not be found.")
-        }
         guard let agent = entity.component(ofType: GKAgent3D.self) else
         {
             fatalError("No Agent to calculate position.")
         }
         self.entityAgent3D = agent
-        self.audioSource = audioSource
         self.actionPoint = actionPoint
         self.radius = minRadius
-        self.node = node
+		self.soundController = soundController
+		self.soundName = "DistanceComponent-" + entity.description
+		self.node = node
+		
+		// Load the audio source in the memory
+		self.soundController.loadSound(fileName: fileName, soundName: soundName)
 		
 	}
+	
+	deinit {
+		self.soundController.removeAudioSource(soundName: soundName)
+	}
+	
 	public func playMusic(){
-		
-		self.audioSource.volume = 0.3
-		self.audioSource.loops = false
-		self.audioSource.shouldStream = true
-		self.audioSource.isPositional = false
-
-		self.audioPlayer =  SCNAudioPlayer(source: audioSource)
-		node.addAudioPlayer(self.audioPlayer)
+		// Executes the sound
+		self.soundController.playSoundEffect(soundName: self.soundName, loops: false, node: self.node)
 	}
+	
     override func update(deltaTime seconds: TimeInterval) {
         //get the distance
         if !isPlaying {
@@ -56,6 +57,8 @@ class SoundDistanceComponent: GKComponent
                 powf(Float(actionPoint.x) - self.entityAgent3D.position.x, 2)
                     + powf(Float(actionPoint.y) - self.entityAgent3D.position.z, 2)
             )
+			
+//			print(distanceOfPoint)
             //Check if its close
             if distanceOfPoint < self.radius {
                 playMusic()
