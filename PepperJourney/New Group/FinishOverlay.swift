@@ -9,11 +9,19 @@
 import SpriteKit
 import UIKit.UIGestureRecognizer
 import AVFoundation
+import UIKit
 
 class FinishOverlay: SKScene {
     
     public var gameOptionsDelegate: GameOptions?
-    public var finalCutSceneVideo: String = ""
+    public var finalCutSceneVideo: String = "" {
+        didSet {
+            let videoView = VideoViewController()
+            videoView.cutScenePath = finalCutSceneVideo
+            
+           // videoView.present(videoView, animated: true, completion: nil)
+        }
+    }
     
     private var restartButton: SKSpriteNode!
     private var menuButton: SKSpriteNode!
@@ -21,13 +29,11 @@ class FinishOverlay: SKScene {
     
     private var video: SKVideoNode!
     
+    
     required init?(coder aDecoder: NSCoder) {
-        
         super.init(coder: aDecoder)
         
         self.setupNodes()
-        
-        self.playCutScene()
     }
     
     func setupNodes() {
@@ -36,30 +42,7 @@ class FinishOverlay: SKScene {
         self.fowardButton = self.childNode(withName: "fowardButton") as! SKSpriteNode
     }
     
-    func playCutScene() {
-        if let url = Bundle.main.url(forResource: "cutscene1", withExtension: "mp4") {
-            
-            let avPlayer = AVPlayer(url: url)
-            avPlayer.actionAtItemEnd = .none
-            
-            video = SKVideoNode(avPlayer: avPlayer)
-            
-            video.anchorPoint = CGPoint(x: 0, y: 0)
-            video.position = CGPoint(x: 0, y: 0)
-            video.zPosition = 99
-            video.size = self.size
-            
-            self.restartButton.addChild(video)
-            video.play()
-            
-            NotificationCenter.default.addObserver(self, selector: Selector(("videoDidEnd:")), name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: avPlayer.currentItem)
-        }
-    }
-    
-    func videoDidEnd(note: Notification) {
-        print("video ended")
-    }
-    
+
     override func didMove(to view: SKView) {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(FinishOverlay.handleTap(_:)))

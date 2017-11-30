@@ -11,6 +11,11 @@ import QuartzCore
 import SceneKit
 import SpriteKit
 
+
+protocol CutSceneDelegate : NSObjectProtocol {
+    func playCutScene(videoPath: String)
+}
+
 class GameViewController: UIViewController {
 	
     var gameView: SCNView {
@@ -25,6 +30,7 @@ class GameViewController: UIViewController {
         // 1.3x on iPads
         
         gameController = GameController(scnView: gameView)
+        gameController?.cutSceneDelegate = self
         // Configure the view
         gameView.backgroundColor = UIColor.black
 		
@@ -51,4 +57,18 @@ class GameViewController: UIViewController {
         // Release any cached data, images, etc that aren't in use.
     }
 
+}
+
+extension GameViewController: CutSceneDelegate {
+    func playCutScene(videoPath: String) {
+        self.performSegue(withIdentifier: "playVideo", sender: videoPath)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "playVideo" {
+            let videoPath = sender as! String
+            let videoStoryboard = segue.destination as! VideoViewController
+            videoStoryboard.cutScenePath = videoPath
+        }
+    }
 }
