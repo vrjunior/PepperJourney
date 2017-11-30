@@ -33,7 +33,7 @@ class SoundDistanceComponent: GKComponent
         self.actionPoint = actionPoint
         self.radius = minRadius
 		self.soundController = soundController
-		self.soundName = "DistanceComponent-" + entity.description
+		self.soundName = "DistanceComponent" + entity.description + ": sound -> " + fileName
 		self.node = node
 		
 		// Load the audio source in the memory
