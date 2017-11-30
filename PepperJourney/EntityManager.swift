@@ -227,7 +227,7 @@ class EntityManager
 	{
 		var distanceComponentArray = [SoundDistanceComponent]()
 		// F1 - 1
-		distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_1.aiff", actionPoint: CGPoint(x:-15,y:-12), minRadius: 20, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
+		distanceComponentArray.append(SoundDistanceComponent(fileName: "F1-1.wav", actionPoint: CGPoint(x:-15,y:-12), minRadius: 20, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
 		// F1 - 2
 		distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_2.aiff", actionPoint: CGPoint(x:245,y:-570), minRadius: 20, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
 		// F1 - 3
