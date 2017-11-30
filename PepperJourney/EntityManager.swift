@@ -227,17 +227,17 @@ class EntityManager
 	{
 		var distanceComponentArray = [SoundDistanceComponent]()
 		// F1 - 1
-		distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_1.aiff", actionPoint: CGPoint(x:-15,y:-12), minRadius: 20, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
+		distanceComponentArray.append(SoundDistanceComponent(fileName: "splashingWater.wav", actionPoint: CGPoint(x:-15,y:-12), minRadius: 20, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
 		// F1 - 2
-		distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_2.aiff", actionPoint: CGPoint(x:245,y:-570), minRadius: 20, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
+		distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_2.wav", actionPoint: CGPoint(x:245,y:-570), minRadius: 20, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
 		// F1 - 3
-		distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_3.m4a", actionPoint: CGPoint(x:750,y:-570), minRadius: -914, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
+		distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_2.wav", actionPoint: CGPoint(x:750,y:-570), minRadius: -914, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
 		// F1 - 4
-		distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_4.m4a", actionPoint: CGPoint(x:980,y:-1500), minRadius: 20, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
+		distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_2.wav", actionPoint: CGPoint(x:980,y:-1500), minRadius: 20, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
 		// F1 - 5
-		distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_5.m4a", actionPoint: CGPoint(x:366,y:-3370), minRadius: 20, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
+		distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_2.wav", actionPoint: CGPoint(x:366,y:-3370), minRadius: 20, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
 		// F1 - 6
-		distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_6.m4a", actionPoint: CGPoint(x:794,y:-5140), minRadius: 50, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
+		distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_2.wav", actionPoint: CGPoint(x:794,y:-5140), minRadius: 50, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
 		
 		for component in distanceComponentArray {
 			self.character?.addComponent(component)
