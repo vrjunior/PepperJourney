@@ -59,7 +59,7 @@ class EntityManager
     {
         // Create new potatoes
         let potatoSpawnPoint = SCNVector3(2,50, 285)
-        var i = 10
+        var i = 0
         while i > 0 {
             self.createChasingPotato(position: potatoSpawnPoint)
             i -= 1
@@ -195,7 +195,7 @@ class EntityManager
     
     func killAPotato(node: SCNNode) -> Bool
     {
-        
+        var potatoToBeRemoved: Int?
         for index in 0 ..< self.potatoesEntities.count
         {
             let potato = self.potatoesEntities[index] as! PotatoEntity
@@ -206,19 +206,46 @@ class EntityManager
             
             if node == potatoNode
             {
-                
-                potato.removeModelNodeFromScene()
-                potatoesEntities.remove(at: index)
-                return true
+                potatoToBeRemoved = index
+                break
             }
         }
+        
+        if let index = potatoToBeRemoved {
+            let potato = self.potatoesEntities[index] as! PotatoEntity
+            
+            potato.removeModelNodeFromScene()
+            potatoesEntities.remove(at: index)
+            return true
+        }
+        
         return false
     }
 	
 	//Add sounds here
-	public func addPepperSoundPoints(){
-		let soundDistanceComponent = SoundDistanceComponent(soundPath: "PepperPointSound1.mp3", entity: self.character!, actionPoint: CGPoint(x:6,y:-166), minRadius: 100, node: (character?.characterNode)!)
-		self.character?.addComponent(soundDistanceComponent)
-		soundDistanceComponentSystem.addComponent(soundDistanceComponent)
+	public func addPepperSoundPoints()
+	{
+		var distanceComponentArray = [SoundDistanceComponent]()
+		// F1 - 1
+<<<<<<< HEAD
+		distanceComponentArray.append(SoundDistanceComponent(fileName: "F1-1.wav", actionPoint: CGPoint(x:-15,y:-12), minRadius: 20, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
+=======
+		distanceComponentArray.append(SoundDistanceComponent(fileName: "splashingWater.wav", actionPoint: CGPoint(x:-15,y:-12), minRadius: 20, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
+>>>>>>> 9f0a5899279ca7fd012b7109c7d8348caa43846c
+		// F1 - 2
+		distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_2.wav", actionPoint: CGPoint(x:245,y:-570), minRadius: 20, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
+		// F1 - 3
+		distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_2.wav", actionPoint: CGPoint(x:750,y:-570), minRadius: -914, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
+		// F1 - 4
+		distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_2.wav", actionPoint: CGPoint(x:980,y:-1500), minRadius: 20, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
+		// F1 - 5
+		distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_2.wav", actionPoint: CGPoint(x:366,y:-3370), minRadius: 20, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
+		// F1 - 6
+		distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_2.wav", actionPoint: CGPoint(x:794,y:-5140), minRadius: 50, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
+		
+		for component in distanceComponentArray {
+			self.character?.addComponent(component)
+			soundDistanceComponentSystem.addComponent(component)
+		}
 	}
 }

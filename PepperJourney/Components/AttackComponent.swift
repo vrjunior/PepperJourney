@@ -10,11 +10,15 @@ import Foundation
 import GameplayKit
 import SceneKit
 
+struct Attack {
+    var fireBall: SCNNode
+    var time: TimeInterval
+}
 class AttackComponent: GKComponent
 {
-    private var madeAttacks = [SCNNode]()
-    private var attackTimes = [TimeInterval]()
+    private var attacks = [Attack]()
     private weak var scene: SCNScene!
+    private var fireBallLifeTime: TimeInterval = 1
     
     init(scene: SCNScene)
     {
@@ -26,7 +30,7 @@ class AttackComponent: GKComponent
         fatalError("init(coder:) has not been implemented")
     }
     
-    func atack(originNode: SCNNode, angle: Float)
+    func atack(originNode: SCNNode, direction: float3, velocity: float3)
     {
         guard let scene = SCNScene(named: "Game.scnassets/character/FireBall.scn") else
         {
@@ -38,45 +42,56 @@ class AttackComponent: GKComponent
         
         // Initial position
         fireBall.position = originNode.presentation.position
-        fireBall.position.y += 5
+        fireBall.position.y += 7
+        fireBall.position.z += 2
         
         // add to the scene
         self.scene.rootNode.addChildNode(fireBall)
         
-        // Handle with the movimentation
-        let planeComponents = TrigonometryLib.getAxisComponents(rad: angle)
+        // Handle with the movimentation of fireball
         var forceVector = SCNVector3()
-        guard let nodeVelocity = originNode.physicsBody?.velocity else { fatalError("Error in attack component. Physic body not found")}
         
-        forceVector.x = planeComponents.y * 10 + nodeVelocity.x
-        forceVector.z = planeComponents.x * 10 + nodeVelocity.z
+        if velocity.allZero()
+        {
+            // Parameters chosen empirically
+            forceVector.x = 10 * direction.x
+            forceVector.z = 10 * direction.z
+            print(direction)
+        }
+        else
+        {
+            forceVector.x = direction.x + 15 * velocity.x
+            forceVector.z = direction.z + 15 * velocity.z
+           
+        }
+
         forceVector.y = 20
         
         fireBall.physicsBody?.applyForce(forceVector, asImpulse: true)
         
         // Controller of disapear the fireballs
-        self.madeAttacks.append(fireBall)
-        let time: TimeInterval = 0
-        self.attackTimes.append(time)
+        let newAttack = Attack(fireBall: fireBall, time: 0)
+        self.attacks.append(newAttack)
     }
     
     override func update(deltaTime seconds: TimeInterval) {
+        
         var index = 0
-        while index < self.attackTimes.count
+        while index < self.attacks.count
         {
-            self.attackTimes[index] += seconds
+            self.attacks[index].time += seconds
             
-            if self.attackTimes[index] > 1
+            if self.attacks[index].time > self.fireBallLifeTime
             {
-                self.madeAttacks[index].removeFromParentNode()
-                self.madeAttacks.remove(at: index)
-                self.attackTimes.remove(at: index)
+                self.attacks[index].fireBall.removeFromParentNode()
+                self.attacks.remove(at: index)
             }
             else
             {
                 index += 1
             }
         }
+        
         super.update(deltaTime: seconds)
     }
     
