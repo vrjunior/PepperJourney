@@ -37,7 +37,7 @@ class SoundDistanceComponent: GKComponent
 		self.node = node
 		
 		// Load the audio source in the memory
-		self.soundController.loadSound(fileName: fileName, soundName: soundName)
+        self.soundController.loadSound(fileName: fileName, soundName: soundName, volume: 30)
 		
 	}
 	

@@ -79,7 +79,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     }
     func setupSounds() {
         
-        self.soundController.loadSound(fileName: "gameBackground.mp3", soundName: "backgroundMusic", volume: 0.5)//0.5
+        self.soundController.loadSound(fileName: "gameBackground.mp3", soundName: "backgroundMusic", volume: 0.5)
         
         
         self.soundController.loadSound(fileName: "GameOver-Game_over.wav", soundName: "gameOverSound", volume: 1)
@@ -90,7 +90,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.soundController.loadSound(fileName: "Yell - small-fairy-hit-moan.wav", soundName: "PotatoYell")
         
         //setup character sounds
-        self.soundController.loadSound(fileName: "F1-1.wav", soundName: "jump", volume: 30.0)
+        self.soundController.loadSound(fileName: "jump.wav", soundName: "jump", volume: 30.0)
         
     }
     func setupCharacter() {
