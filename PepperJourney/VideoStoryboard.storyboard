@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--videoStoryboard-->
+        <scene sceneID="e8H-pm-djy">
+            <objects>
+                <viewController storyboardIdentifier="videoStoryboard" title="videoStoryboard" id="yaZ-jk-UU7" customClass="VideoViewController" customModule="PepperJourney" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="19b-wP-I4J" customClass="SKView">
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cp2-Ej-0dU">
+                                <rect key="frame" x="608" y="319" width="39" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Skip"/>
+                                <connections>
+                                    <action selector="skipVideo:" destination="yaZ-jk-UU7" eventType="touchUpInside" id="d8V-Ci-1R9"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="NFb-pR-e1g" firstAttribute="trailing" secondItem="cp2-Ej-0dU" secondAttribute="trailing" constant="20" id="F8C-Cd-Baz"/>
+                            <constraint firstItem="NFb-pR-e1g" firstAttribute="bottom" secondItem="cp2-Ej-0dU" secondAttribute="bottom" constant="20" id="Zth-w8-ZnD"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="NFb-pR-e1g"/>
+                    </view>
+                    <connections>
+                        <outlet property="skView" destination="19b-wP-I4J" id="Io2-gx-k8P"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G2b-qi-KMX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2858" y="-2799"/>
+        </scene>
+    </scenes>
+</document>

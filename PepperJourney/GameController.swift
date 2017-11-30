@@ -31,6 +31,9 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     var characterStateMachine: GKStateMachine!
     var gameStateMachine: GKStateMachine!
     
+    
+    public weak var cutSceneDelegate: CutSceneDelegate?
+    
     private var scnView: SCNView!
     private var scene: SCNScene!
     private weak var sceneRenderer: SCNSceneRenderer?
@@ -232,22 +235,22 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         gameOverOverlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = gameOverOverlay
         
-         //self.gameStateMachine.enter(PauseState.self)
+         self.gameStateMachine.enter(PauseState.self)
         
     }
     
     func setupFinishLevel() {
         self.prepereToStartGame()
         self.soundController.playSoundEffect(soundName: "FinishLevelSound", loops: false, node: self.cameraNode)
-        
-        
+    
         let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks") as! FinishOverlay
         finishLevelOverlay.gameOptionsDelegate = self
-        finishLevelOverlay.finalCutSceneVideo = "cutscene1.mp4"
         finishLevelOverlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = finishLevelOverlay
         
-        //self.gameStateMachine.enter(PauseState.self)
+        self.gameStateMachine.enter(PauseState.self)
+        
+        self.cutSceneDelegate?.playCutScene(videoPath: "cutscene1.mp4")
     }
     
     func startGame() {
@@ -509,4 +512,5 @@ extension GameController : GameOptions {
     }
     
 }
+
 
