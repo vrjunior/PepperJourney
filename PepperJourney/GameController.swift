@@ -235,7 +235,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         gameOverOverlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = gameOverOverlay
         
-         self.gameStateMachine.enter(PauseState.self)
+         //self.gameStateMachine.enter(PauseState.self)
         
     }
     
