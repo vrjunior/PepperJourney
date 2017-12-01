@@ -38,7 +38,7 @@ class TrigonometryLib
         components.x = cos(rad)
         components.y = sin(rad)
         
-        print("rad: \(angle) | \(components)")
+       // print("rad: \(angle) | \(components)")
         return components
     }
 }

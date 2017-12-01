@@ -20,7 +20,7 @@ class VideoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        scene = SKScene()
+        scene = SKScene(size: CGSize(width: 1134, height: 750))
         scene.scaleMode = .aspectFill
         self.skView.presentScene(scene)
         self.playCutScene()

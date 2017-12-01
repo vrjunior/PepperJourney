@@ -45,24 +45,26 @@ class SoundDistanceComponent: GKComponent
 		self.soundController.removeAudioSource(soundName: soundName)
 	}
 	
-	public func playMusic(){
+	public func playSoundEffect() {
 		// Executes the sound
 		self.soundController.playSoundEffect(soundName: self.soundName, loops: false, node: self.node)
 	}
 	
+    
     override func update(deltaTime seconds: TimeInterval) {
+        
         //get the distance
         if !isPlaying {
             let distanceOfPoint = sqrt(
                 powf(Float(actionPoint.x) - self.entityAgent3D.position.x, 2)
                     + powf(Float(actionPoint.y) - self.entityAgent3D.position.z, 2)
             )
-			
-//			print(distanceOfPoint)
+            
             //Check if its close
             if distanceOfPoint < self.radius {
-                playMusic()
                 isPlaying = true
+                print("sound played")
+                playSoundEffect()
             }
         }
     }

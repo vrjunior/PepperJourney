@@ -121,7 +121,7 @@ class EntityManager
 		//Sound Random Comoponent
 		if soundRandomComponentSystem.components.count > 0
 		{
-			self.soundRandomComponentSystem.update(deltaTime: deltaTime)
+			self.soundRandomComponentSystem.update(deltaTime: time)
 		}
 
 		//Sound Distance Comoponent
