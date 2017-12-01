@@ -27,11 +27,11 @@ class SinkComponent: GKComponent
         self.soundController.loadSound(fileName: "splashingWater.wav", soundName: soundName)
     }
     
-    deinit {
+    
+    func remove() {
         self.soundController.removeAudioSource(soundName: soundName)
     }
-    
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

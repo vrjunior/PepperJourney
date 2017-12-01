@@ -214,6 +214,10 @@ class EntityManager
         if let index = potatoToBeRemoved {
             let potato = self.potatoesEntities[index] as! PotatoEntity
 
+            
+            //remove component before
+            potato.component(ofType: SinkComponent.self)?.remove()
+            
             potato.removeModelNodeFromScene()
             potatoesEntities.remove(at: index)
             return true
