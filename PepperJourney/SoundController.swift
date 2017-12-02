@@ -32,7 +32,12 @@ class SoundController
     }
 
     func loadSound (fileName: String, soundName: String, volume: Float) {
+        // Avoid that add two audios with the same soundName
         
+        guard self.sounds[soundName] == nil else
+        {
+            fatalError("This sound Name yet exists")
+        }
         guard let audioSource = SCNAudioSource(fileNamed: fileName) else {
             fatalError("Error in find the sound \(fileName)")
         }
@@ -62,6 +67,7 @@ class SoundController
         guard self.sounds.removeValue(forKey: soundName) != nil else
         {
             fatalError("Error getting sound \(soundName)")
+            
         }
     }
     private func playGenericSound(soundName: String, loops: Bool, node: SCNNode)

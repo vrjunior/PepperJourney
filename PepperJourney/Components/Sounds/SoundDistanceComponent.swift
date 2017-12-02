@@ -11,18 +11,23 @@ import SceneKit
 import GameplayKit
 import UIKit
 
+/*
+ ATENÇÃO!!!
+ Antes de remover o componente chame a função removeSoundPoint
+ */
+
 class SoundDistanceComponent: GKComponent
 {
 	
-	var actionPoint: CGPoint!
+	var actionPoint: float2!
 	var radius: Float!
 	var entityAgent3D: GKAgent3D!
-	var isPlaying: Bool! = false
+	var wasPlayed: Bool! = false
 	private weak var soundController: SoundController!
 	private var soundName: String!
 	private weak var node: SCNNode!
 	
-	init (fileName: String, actionPoint: CGPoint, minRadius: Float, entity: GKEntity, node: SCNNode, soundController: SoundController)
+	init (fileName: String, actionPoint: float2, minRadius: Float, entity: GKEntity, node: SCNNode, soundController: SoundController)
 	{
 		super.init()
         guard let agent = entity.component(ofType: GKAgent3D.self) else
@@ -40,21 +45,22 @@ class SoundDistanceComponent: GKComponent
         self.soundController.loadSound(fileName: fileName, soundName: soundName, volume: 30)
 		
 	}
-	
-	deinit {
-		self.soundController.removeAudioSource(soundName: soundName)
-	}
-	
-	public func playSoundEffect() {
-		// Executes the sound
-		self.soundController.playSoundEffect(soundName: self.soundName, loops: false, node: self.node)
-	}
-	
+    
+    func resetComponent()
+    {
+        self.wasPlayed = false
+    }
+    
+    // Remove from memory the sound
+    func removeSoundPoint() {
+    
+        self.soundController.removeAudioSource(soundName: self.soundName)
+    }
     
     override func update(deltaTime seconds: TimeInterval) {
         
         //get the distance
-        if !isPlaying {
+        if !wasPlayed {
             let distanceOfPoint = sqrt(
                 powf(Float(actionPoint.x) - self.entityAgent3D.position.x, 2)
                     + powf(Float(actionPoint.y) - self.entityAgent3D.position.z, 2)
@@ -62,9 +68,10 @@ class SoundDistanceComponent: GKComponent
             
             //Check if its close
             if distanceOfPoint < self.radius {
-                isPlaying = true
-                print("sound played")
-                playSoundEffect()
+                wasPlayed = true
+
+                // Executes the sound
+                self.soundController.playSoundEffect(soundName: self.soundName, loops: false, node: self.node)
             }
         }
     }

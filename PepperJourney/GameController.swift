@@ -95,6 +95,9 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         //setup character sounds
         self.soundController.loadSound(fileName: "jump.wav", soundName: "jump", volume: 30.0)
         
+        // Add the sound points
+        self.entityManager.addPepperSoundPoints()
+        
     }
     func setupCharacter() {
         // create the character with your components
@@ -141,6 +144,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         gameStateMachine = GKStateMachine(states: [
             PauseState(scene: scene),
             PlayState(scene: scene) ])
+        
+        self.gameStateMachine.enter(PauseState.self)
     }
     
     
@@ -180,6 +185,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         // Pre-load all the audios of the game in the memory
         self.setupSounds()
+        
 		
     }
     

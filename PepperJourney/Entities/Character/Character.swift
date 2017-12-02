@@ -74,7 +74,6 @@ class Character: GKEntity {
         self.lastDirection = float3(0,0,1)
     }
     
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

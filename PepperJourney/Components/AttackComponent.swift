@@ -43,7 +43,7 @@ class AttackComponent: GKComponent
         // Initial position
         fireBall.position = originNode.presentation.position
         fireBall.position.y += 7
-        fireBall.position.z += 2
+        
         
         // add to the scene
         self.scene.rootNode.addChildNode(fireBall)

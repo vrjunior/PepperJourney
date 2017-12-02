@@ -73,11 +73,17 @@ class PotatoEntity: GKEntity
             self.potatoModel.modelNode.addAnimationPlayer(animation, forKey: anim.rawValue)
         }
     }
-    
-    func removeModelNodeFromScene()
+    // Coloque nessa função tudo que precisa ser tratado quando for remover uma batata
+    func prepareToKillPotato()
     {
+        // Prepara o Sink Component para ser removido
+        self.component(ofType: SinkComponent.self)?.prepareToRemoveComponent()
+        
+        // Remove o nó da cena
         self.potatoModel.removeModel()
+   
     }
+    
     
     func playAnimation(type: AnimationType) {
         self.potatoModel.modelNode.animationPlayer(forKey: type.rawValue)?.play()

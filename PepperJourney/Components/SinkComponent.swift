@@ -10,6 +10,10 @@ import Foundation
 import GameplayKit
 import SceneKit
 
+/*
+ ATENÇÃO!!!
+ Antes de remover o componente chame a função prepareToRemoveComponent
+ */
 class SinkComponent: GKComponent
 {
     private var isUsed: Bool = false
@@ -48,6 +52,7 @@ class SinkComponent: GKComponent
             
             // Executes the sound
             self.soundController.playSoundEffect(soundName: self.soundName, loops: false, node: self.node)
+            
         }
     }
     func resetComponent()
@@ -57,6 +62,12 @@ class SinkComponent: GKComponent
         // reset do que foi alterado ao cair na agua
         self.node.physicsBody?.velocityFactor = SCNVector3(1, 1, 1)
         self.node.physicsBody?.damping = 0.1
+    }
+    
+    func prepareToRemoveComponent()
+    {
+        // Remove from memory the sound
+        self.soundController.removeAudioSource(soundName: self.soundName)
     }
 }
 

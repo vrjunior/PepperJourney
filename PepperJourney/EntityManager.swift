@@ -54,6 +54,7 @@ class EntityManager
 
     }
 
+    /* ESSA FUNÇAO DEVE SER UNICA PRA CADA FASE */
     // Use this function ever in game initialization or restart
     func setupGameInitialization()
     {
@@ -73,9 +74,15 @@ class EntityManager
             let sinkComponent = sinkComponent as! SinkComponent
             sinkComponent.resetComponent()
         }
-
-        // Reset componentSounds
-		addPepperSoundPoints()
+        
+        for soundDistanceComponent in soundDistanceComponentSystem.components {
+            guard let component = soundDistanceComponent as? SoundDistanceComponent else {
+                fatalError("Error getting soundDistanceComponent")
+            }
+            // clean the played state
+            component.resetComponent()
+            
+        }
     }
 
     // Creates a potato chasing Pepper
@@ -163,10 +170,9 @@ class EntityManager
         for potato in self.potatoesEntities
         {
             let potato = potato as! PotatoEntity
-
-            // remove da memoria o som carregado de queda na agua
-            self.soundController.removeSoundFromMemory(soundName: potato.description)
-            potato.removeModelNodeFromScene()
+            
+            // Prepare to kill the potato
+            potato.prepareToKillPotato()
         }
 
         self.potatoesEntities.removeAll()
@@ -215,10 +221,8 @@ class EntityManager
             let potato = self.potatoesEntities[index] as! PotatoEntity
 
             
-            //remove component before
-            potato.component(ofType: SinkComponent.self)?.remove()
+            potato.prepareToKillPotato()
             
-            potato.removeModelNodeFromScene()
             potatoesEntities.remove(at: index)
             return true
         }
@@ -234,10 +238,10 @@ class EntityManager
         
         for soundPoint in soundPoints!
         {
-            let x = Double(soundPoint.presentation.position.x)
-            let z = Double(soundPoint.presentation.position.z)
+            let x = soundPoint.presentation.position.x
+            let z = soundPoint.presentation.position.z
             
-            let point = CGPoint(x: x, y: z)
+            let point = float2(x, z)
             
             switch soundPoint.name! {
             case "F1_1":
