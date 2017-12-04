@@ -265,7 +265,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         if controlsOverlay == nil {
             controlsOverlay = SKScene(fileNamed: "ControlsOverlay.sks") as? ControlsOverlay
-            controlsOverlay?.padDelegate = self
             controlsOverlay?.controlsDelegate = self
             controlsOverlay?.gameOptionsDelegate = self
             controlsOverlay?.scaleMode = .aspectFill
@@ -287,10 +286,9 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     }
 }
 
-extension GameController : PadOverlayDelegate {
+extension GameController : Controls {
     
-    func padOverlayVirtualStickInteractionDidStart(_ padNode: PadOverlay)
-    {
+    func padOverlayVirtualStickInteractionDidStart(_ padNode: PadOverlay) {
         characterDirection = float2(Float(padNode.stickPosition.x), -Float(padNode.stickPosition.y))
     }
     
@@ -312,16 +310,14 @@ extension GameController : PadOverlayDelegate {
         
     }
     
-    
     func padOverlayVirtualStickInteractionDidEnd(_ padNode: PadOverlay) {
         characterDirection = [0, 0]
         
         self.characterStateMachine.enter(StandingState.self)
     }
     
-}
-
-extension GameController : Controls {
+    
+    
     func jump() {
         self.characterStateMachine.enter(JumpingState.self)
     }
@@ -338,6 +334,10 @@ extension GameController : Controls {
         
         
         attackComponent.atack(originNode: self.character.characterNode, direction: self.character.lastDirection, velocity: self.character.characterVelocity)
+    }
+    
+    func rotateCamera(angle: CGFloat) {
+        self.character.rotateBy(angle: angle)
     }
 
 }

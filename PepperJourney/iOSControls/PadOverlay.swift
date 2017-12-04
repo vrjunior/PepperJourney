@@ -9,16 +9,11 @@ import SpriteKit
 import UIKit.UIGestureRecognizerSubclass
 import simd
 
-protocol PadOverlayDelegate: NSObjectProtocol {
-    func padOverlayVirtualStickInteractionDidStart(_ padNode: PadOverlay)
-    func padOverlayVirtualStickInteractionDidChange(_ padNode: PadOverlay)
-    func padOverlayVirtualStickInteractionDidEnd(_ padNode: PadOverlay)
-}
 
 class PadOverlay: SKSpriteNode {
     // Default 100, 100
     
-    public weak var delegate: PadOverlayDelegate?
+    public weak var delegate: Controls?
     
     var padSize = CGSize.zero {
         didSet {
