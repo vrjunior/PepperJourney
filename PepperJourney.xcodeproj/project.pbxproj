@@ -13,6 +13,9 @@
 		9C0350EE1FD0A69800970006 /* F1_2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C0350ED1FD0A69700970006 /* F1_2.wav */; };
 		9C0350F11FD0D4EA00970006 /* F1_5.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C0350EF1FD0D4E900970006 /* F1_5.wav */; };
 		9C0350F21FD0D4EA00970006 /* F1_7.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C0350F01FD0D4EA00970006 /* F1_7.wav */; };
+		9C0350F61FD59EA800970006 /* Fase1GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0350F51FD59EA800970006 /* Fase1GameController.swift */; };
+		9C0350F81FD59ED200970006 /* Fase2GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0350F71FD59ED200970006 /* Fase2GameController.swift */; };
+		9C0350FA1FD5CA2800970006 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0350F91FD5CA2800970006 /* MenuViewController.swift */; };
 		9C03A2421F9A33DD008F191A /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C03A2411F9A33DD008F191A /* EntityManager.swift */; };
 		9C1B829D1F9E2FD300173FF3 /* SeekComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B829C1F9E2FD300173FF3 /* SeekComponent.swift */; };
 		9C1B829F1F9FADD300173FF3 /* ModelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */; };
@@ -95,6 +98,9 @@
 		9C0350ED1FD0A69700970006 /* F1_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = F1_2.wav; sourceTree = "<group>"; };
 		9C0350EF1FD0D4E900970006 /* F1_5.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = F1_5.wav; sourceTree = "<group>"; };
 		9C0350F01FD0D4EA00970006 /* F1_7.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = F1_7.wav; sourceTree = "<group>"; };
+		9C0350F51FD59EA800970006 /* Fase1GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fase1GameController.swift; sourceTree = "<group>"; };
+		9C0350F71FD59ED200970006 /* Fase2GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fase2GameController.swift; sourceTree = "<group>"; };
+		9C0350F91FD5CA2800970006 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		9C03A2411F9A33DD008F191A /* EntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
 		9C1B829C1F9E2FD300173FF3 /* SeekComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekComponent.swift; sourceTree = "<group>"; };
 		9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelComponent.swift; sourceTree = "<group>"; };
@@ -384,6 +390,9 @@
 				D2EC85851F83F1240093F009 /* Assets.xcassets */,
 				D2C7654B1FD0782000EC7D9B /* VideoStoryboard.storyboard */,
 				D25AD5AB1F87EAC800F2093E /* GameController.swift */,
+				9C0350F91FD5CA2800970006 /* MenuViewController.swift */,
+				9C0350F51FD59EA800970006 /* Fase1GameController.swift */,
+				9C0350F71FD59ED200970006 /* Fase2GameController.swift */,
 				9CE0FF421FC765B9004AF735 /* SoundController.swift */,
 				D2C7654E1FD0891100EC7D9B /* VideoViewController.swift */,
 				D2EC857C1F83F1240093F009 /* AppDelegate.swift */,
@@ -518,6 +527,7 @@
 				D2EC85811F83F1240093F009 /* GameViewController.swift in Sources */,
 				D25160EC1F940ACF00BF756A /* StandingState.swift in Sources */,
 				D2E0A8981F993B5D00FCC255 /* JumpComponent.swift in Sources */,
+				9C0350FA1FD5CA2800970006 /* MenuViewController.swift in Sources */,
 				D25AD5AE1F87ECF900F2093E /* Character.swift in Sources */,
 				D2050A7D1FCC99D9001EC7FE /* JumpButton.swift in Sources */,
 				D207CFC71F8EA5370084240E /* Stick.swift in Sources */,
@@ -530,6 +540,7 @@
 				D26035F11FCDC57B00E4F069 /* FinishOverlay.swift in Sources */,
 				D2C7654F1FD0891100EC7D9B /* VideoViewController.swift in Sources */,
 				D26035F31FCDC66C00E4F069 /* CGPoint+FromUIView.swift in Sources */,
+				9C0350F81FD59ED200970006 /* Fase2GameController.swift in Sources */,
 				B0FDBAF01FA9F35600D4B08D /* toon.metal in Sources */,
 				B0465F0D1FC444A2002B8FE8 /* SoundRandomComponent.swift in Sources */,
 				9C1B829F1F9FADD300173FF3 /* ModelComponent.swift in Sources */,
@@ -551,6 +562,7 @@
 				D2719D901FA0EBDA00FCB61F /* AnimationType.swift in Sources */,
 				D28623B51FA3AF5F00691E83 /* GameBaseState.swift in Sources */,
 				D28623B71FA3AFB600691E83 /* PauseState.swift in Sources */,
+				9C0350F61FD59EA800970006 /* Fase1GameController.swift in Sources */,
 				9CE0FF431FC765B9004AF735 /* SoundController.swift in Sources */,
 				D25BAE281FC60C0F000ED0EC /* SettingsController.swift in Sources */,
 				D20108921FBE11D9007660E3 /* PauseOverlay.swift in Sources */,
@@ -693,7 +705,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BJ4PHJU9L8;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = PepperJourney/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vrmassoni.PepperJourney;
@@ -708,7 +720,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BJ4PHJU9L8;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = PepperJourney/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vrmassoni.PepperJourney;
