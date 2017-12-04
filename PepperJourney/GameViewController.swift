@@ -17,7 +17,8 @@ protocol CutSceneDelegate : NSObjectProtocol {
 }
 
 class GameViewController: UIViewController {
-	
+    public var fase: Int = 0
+    
     var gameView: SCNView {
         return view as! SCNView
     }
@@ -28,8 +29,15 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         // 1.3x on iPads
-        
-        gameController = GameController(scnView: gameView)
+        if self.fase == 1
+        {
+           gameController = Fase1GameController(scnView: gameView)
+        }
+        else if self.fase == 2
+        {
+              gameController = Fase2GameController(scnView: gameView)
+        }
+      
         gameController?.cutSceneDelegate = self
         // Configure the view
         gameView.backgroundColor = UIColor.black
