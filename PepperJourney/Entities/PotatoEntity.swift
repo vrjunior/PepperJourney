@@ -33,7 +33,7 @@ class PotatoEntity: GKEntity
         super.init()
         
         self.scene = scene
-        let path = "Game.scnassets/potato/potato.scn"
+        let path = "Game.scnassets/characters/potato/potato.scn"
         
         self.potatoModel = ModelComponent(modelPath: path, scene: scene, position: position)
         self.addComponent(self.potatoModel)
@@ -67,7 +67,7 @@ class PotatoEntity: GKEntity
         let animations:[AnimationType] = [.running]
         
         for anim in animations {
-            let animation = SCNAnimationPlayer.withScene(named: "Game.scnassets/potato/\(anim.rawValue).dae")
+            let animation = SCNAnimationPlayer.withScene(named: "Game.scnassets/characters/potato/\(anim.rawValue).dae")
         
             animation.stop()
             self.potatoModel.modelNode.addAnimationPlayer(animation, forKey: anim.rawValue)
