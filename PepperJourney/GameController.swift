@@ -141,8 +141,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         sceneRenderer = scnView
         sceneRenderer!.delegate = self
-                
-        
+
     }
     
     func initializeTheGame () {
@@ -243,6 +242,28 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     
     func handleWithPhysicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
     }
+    
+    func rotateCamera(byAngle angle2: CGFloat) {
+        
+        let targetPosition = SCNVector3(1,0,1) //self.character.visualTarget.presentation.worldPosition
+        let cameraPosition = SCNVector3(8,0,8) //self.cameraNode.presentation.position
+        
+        var relativeCameraPositionZ = cameraPosition.z - targetPosition.z
+        var relativeCameraPositionX = cameraPosition.x - targetPosition.x
+        
+        let radius: Float = abs(cameraPosition.z - targetPosition.z)
+        
+        let initialAngle = atan(relativeCameraPositionZ / relativeCameraPositionX)
+        let cu = Float.pi
+        
+        let newPositionX =  radius * Float(cos(cu + initialAngle))
+        let newPositionZ =  radius * Float(sin(cu + initialAngle))
+        
+        //let action = SCNAction.move(to: SCNVector3(x: newPositionX, y: cameraPosition.y, z: newPositionZ), duration: 0.1)
+        
+        //self.cameraNode.runAction(action)
+        
+    }
 }
 
 extension GameController : Controls {
@@ -297,6 +318,8 @@ extension GameController : Controls {
     
     func rotateCamera(angle: CGFloat) {
         self.character.rotateBy(angle: angle)
+        self.rotateCamera(byAngle: angle)
+        
     }
 
 }

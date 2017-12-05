@@ -72,7 +72,6 @@
 		D26035F31FCDC66C00E4F069 /* CGPoint+FromUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26035F21FCDC66C00E4F069 /* CGPoint+FromUIView.swift */; };
 		D26035F61FCDE53D00E4F069 /* cutscene1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D26035F51FCDDB4100E4F069 /* cutscene1.mp4 */; };
 		D26610181FD5B831006B1455 /* CameraControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26610171FD5B831006B1455 /* CameraControl.swift */; };
-		D266101A1FD5BD55006B1455 /* UIColor+NewColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26610191FD5BD55006B1455 /* UIColor+NewColors.swift */; };
 		D266101C1FD5DEE0006B1455 /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = D266101B1FD5DEE0006B1455 /* Controls.swift */; };
 		D26FCCFE1FC88640003EBFDF /* jump.wav in Resources */ = {isa = PBXBuildFile; fileRef = D26FCCFD1FC88640003EBFDF /* jump.wav */; };
 		D2719D901FA0EBDA00FCB61F /* AnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */; };

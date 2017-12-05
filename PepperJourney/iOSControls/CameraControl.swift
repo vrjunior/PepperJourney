@@ -84,7 +84,6 @@ class CameraControl: SKSpriteNode {
             
             //call the delegate method
             let angleToRotate = self.getAngle(byDistance: distance) - previousRotation
-            print("angle to rotate: \(self.getAngle(byDistance: distance))")
             self.delegate?.rotateCamera(angle: angleToRotate)
             
             //set previousRotation

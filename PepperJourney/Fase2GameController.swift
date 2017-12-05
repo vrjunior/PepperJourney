@@ -206,7 +206,6 @@ class Fase2GameController: GameController {
         
         if controlsOverlay == nil {
             controlsOverlay = SKScene(fileNamed: "ControlsOverlay.sks") as? ControlsOverlay
-            controlsOverlay?.padDelegate = self
             controlsOverlay?.controlsDelegate = self
             controlsOverlay?.gameOptionsDelegate = self
             controlsOverlay?.scaleMode = .aspectFill

@@ -62,10 +62,17 @@ class SoundController
         self.loadSound(fileName: fileName, soundName: soundName, volume: self.defaultSoudEffectVolume)
     }
     
+    
+    
     func removeAudioSource(soundName: String)
     {
         guard self.sounds.removeValue(forKey: soundName) != nil else
         {
+            //: TODO CRASH HERE
+            /*
+             <_UISystemGestureGateGestureRecognizer: 0x1c01c6db0>: Gesture: Failed to receive system gesture state notification before next touch
+             tocou: PotatoYell
+             */
             fatalError("Error getting sound \(soundName)")
             
         }
