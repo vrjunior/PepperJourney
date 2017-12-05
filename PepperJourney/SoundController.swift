@@ -77,7 +77,7 @@ class SoundController
             fatalError("Error at get the audio source \(soundName)")
             
         }
-        //print("tocou: \(soundName)")
+        print("tocou: \(soundName)")
         sound.loops = loops
         node.runAction(SCNAction.playAudio(sound, waitForCompletion: false))
     }
