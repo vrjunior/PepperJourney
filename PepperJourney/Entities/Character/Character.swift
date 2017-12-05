@@ -236,8 +236,6 @@ class Character: GKEntity {
     }
     
     func rotateBy(angle: CGFloat) {
-        let currentAngle = self.characterNode.eulerAngles
-        
         let rotateAction = SCNAction.rotateBy(x: 0, y: angle, z: 0, duration: 0.1)
         self.characterNode.runAction(rotateAction)
     }

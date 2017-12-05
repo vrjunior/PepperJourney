@@ -88,7 +88,7 @@ class CameraControl: SKSpriteNode {
             self.delegate?.rotateCamera(angle: angleToRotate)
             
             //set previousRotation
-            previousRotation = angleToRotate
+            previousRotation += angleToRotate
             
         }
         
@@ -121,8 +121,8 @@ class CameraControl: SKSpriteNode {
     private func getAngle(byDistance distance: CGFloat) -> CGFloat {
         let maxX: CGFloat = self.lineSize.width / 2
         let minX: CGFloat = -(self.lineSize.width / 2)
-        let a: CGFloat = -(CGFloat.pi / 2)
-        let b: CGFloat = CGFloat.pi / 2
+        let a: CGFloat = -CGFloat.pi
+        let b: CGFloat = CGFloat.pi
         
         let result = (b - a) * ((distance - minX) / (maxX - minX)) + a
         

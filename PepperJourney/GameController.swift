@@ -127,7 +127,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         lookAtConstraint.influenceFactor = 1
         
         let distanceConstraint = SCNDistanceConstraint(target: characterNode)
-        
         distanceConstraint.minimumDistance = 45
         distanceConstraint.maximumDistance = 45
         
