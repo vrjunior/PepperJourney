@@ -10,39 +10,32 @@ import Foundation
 import SceneKit
 import SpriteKit
 
-// MARK: Controls Protocol
-
-protocol Controls {
-    func jump()
-    func attack()
-}
-
 class ControlsOverlay: SKScene {
     
-    var padDelegate:PadOverlayDelegate? {
+    public var controlsDelegate: Controls? {
         didSet {
-            self.padOverlay.delegate = padDelegate
-        }
-    }
-    var padOverlay: PadOverlay!
-    var pauseButton: SKSpriteNode!
-    var controlsDelegate: Controls?
-    
-    var gameOptionsDelegate: GameOptions? {
-        didSet {
+            self.padOverlay.delegate = controlsDelegate
+            self.cameraControl.delegate = controlsDelegate
             self.attackButton.delegate = controlsDelegate
             self.jumpButton.delegate = controlsDelegate
         }
     }
     
-    var jumpButton: JumpButton!
-    var attackButton: AttackButton!
+    public var gameOptionsDelegate: GameOptions?
+    
+    
+    private var jumpButton: JumpButton!
+    private var attackButton: AttackButton!
+    private var padOverlay: PadOverlay!
+    private var pauseButton: SKSpriteNode!
+    private var cameraControl: CameraControl!
     
     public var isPausedControl:Bool = false {
         didSet {
             self.padOverlay.isPausedControl = self.isPausedControl
             self.jumpButton.isPausedControls = self.isPausedControl
             self.attackButton.isPausedControls = self.isPausedControl
+            self.cameraControl.isPausedControl = self.isPausedControl
         }
     }
         
@@ -56,6 +49,7 @@ class ControlsOverlay: SKScene {
         self.jumpButton = self.childNode(withName: "jumpButton") as! JumpButton
         self.attackButton = self.childNode(withName: "attackButton") as! AttackButton
         self.pauseButton = self.childNode(withName: "pauseButton") as! SKSpriteNode
+        self.cameraControl = self.childNode(withName: "cameraControl") as! CameraControl
         
         // disable interation in scenekit
         self.isUserInteractionEnabled = false

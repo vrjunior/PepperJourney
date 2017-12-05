@@ -71,6 +71,9 @@
 		D26035F11FCDC57B00E4F069 /* FinishOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26035F01FCDC57B00E4F069 /* FinishOverlay.swift */; };
 		D26035F31FCDC66C00E4F069 /* CGPoint+FromUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26035F21FCDC66C00E4F069 /* CGPoint+FromUIView.swift */; };
 		D26035F61FCDE53D00E4F069 /* cutscene1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D26035F51FCDDB4100E4F069 /* cutscene1.mp4 */; };
+		D26610181FD5B831006B1455 /* CameraControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26610171FD5B831006B1455 /* CameraControl.swift */; };
+		D266101A1FD5BD55006B1455 /* UIColor+NewColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26610191FD5BD55006B1455 /* UIColor+NewColors.swift */; };
+		D266101C1FD5DEE0006B1455 /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = D266101B1FD5DEE0006B1455 /* Controls.swift */; };
 		D26FCCFE1FC88640003EBFDF /* jump.wav in Resources */ = {isa = PBXBuildFile; fileRef = D26FCCFD1FC88640003EBFDF /* jump.wav */; };
 		D2719D901FA0EBDA00FCB61F /* AnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */; };
 		D28623B51FA3AF5F00691E83 /* GameBaseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28623B41FA3AF5F00691E83 /* GameBaseState.swift */; };
@@ -158,6 +161,9 @@
 		D26035F01FCDC57B00E4F069 /* FinishOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishOverlay.swift; sourceTree = "<group>"; };
 		D26035F21FCDC66C00E4F069 /* CGPoint+FromUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+FromUIView.swift"; sourceTree = "<group>"; };
 		D26035F51FCDDB4100E4F069 /* cutscene1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = cutscene1.mp4; sourceTree = "<group>"; };
+		D26610171FD5B831006B1455 /* CameraControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraControl.swift; sourceTree = "<group>"; };
+		D26610191FD5BD55006B1455 /* UIColor+NewColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+NewColors.swift"; sourceTree = "<group>"; };
+		D266101B1FD5DEE0006B1455 /* Controls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controls.swift; sourceTree = "<group>"; };
 		D26FCCFD1FC88640003EBFDF /* jump.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump.wav; sourceTree = "<group>"; };
 		D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationType.swift; sourceTree = "<group>"; };
 		D28623B41FA3AF5F00691E83 /* GameBaseState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBaseState.swift; sourceTree = "<group>"; };
@@ -209,6 +215,7 @@
 				D291BB531F8E976A00B2D111 /* SimdExtensions.swift */,
 				9C1B82A01FA0D09600173FF3 /* TrigonometryLib.swift */,
 				D26035F21FCDC66C00E4F069 /* CGPoint+FromUIView.swift */,
+				D26610191FD5BD55006B1455 /* UIColor+NewColors.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -418,6 +425,8 @@
 				D207CFC61F8EA5370084240E /* Stick.swift */,
 				D2050A7C1FCC99D9001EC7FE /* JumpButton.swift */,
 				D2050A7E1FCC9BD1001EC7FE /* AttackButton.swift */,
+				D26610171FD5B831006B1455 /* CameraControl.swift */,
+				D266101B1FD5DEE0006B1455 /* Controls.swift */,
 			);
 			path = iOSControls;
 			sourceTree = "<group>";
@@ -527,6 +536,7 @@
 				D2E594B21FC758880050D5D5 /* GameController.swift in Sources */,
 				D2863F221FA14761004CCCDC /* JumpingMoveState.swift in Sources */,
 				B08B91211FC4CCBE00304E46 /* SoundDistanceComponent.swift in Sources */,
+				D26610181FD5B831006B1455 /* CameraControl.swift in Sources */,
 				D2EC85811F83F1240093F009 /* GameViewController.swift in Sources */,
 				D25160EC1F940ACF00BF756A /* StandingState.swift in Sources */,
 				D2E0A8981F993B5D00FCC255 /* JumpComponent.swift in Sources */,
@@ -537,6 +547,7 @@
 				9C9A9A621FD5D8D700BE85B9 /* EscapeComponent.swift in Sources */,
 				D20108901FBE11D9007660E3 /* GameOverOverlay.swift in Sources */,
 				9C1B82A11FA0D09800173FF3 /* TrigonometryLib.swift in Sources */,
+				D266101C1FD5DEE0006B1455 /* Controls.swift in Sources */,
 				9C03A2421F9A33DD008F191A /* EntityManager.swift in Sources */,
 				9C4A65731FA67ED700293460 /* PotatoGeneratorSystem.swift in Sources */,
 				D25BAE261FC60864000ED0EC /* SettingsOverlay.swift in Sources */,
