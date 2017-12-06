@@ -62,6 +62,7 @@ class Fase1GameController: GameController {
     }
     
     override func setupCamera() {
+        self.followingCamera = self.scene.rootNode.childNode(withName: "followingCamera", recursively: true)
         self.cameraNode = self.scene.rootNode.childNode(withName: "camera", recursively: true)!
         self.cameraInitialPosition = cameraNode.presentation.position
         

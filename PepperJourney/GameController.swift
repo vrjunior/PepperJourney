@@ -30,6 +30,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     var character: Character!
     var characterStateMachine: GKStateMachine!
     var gameStateMachine: GKStateMachine!
+    var followingCamera: SCNNode!
     
     open var scnView: SCNView!
     open var scene: SCNScene!
@@ -243,26 +244,9 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     func handleWithPhysicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
     }
     
-    func rotateCamera(byAngle angle2: CGFloat) {
-        
-        let targetPosition = SCNVector3(1,0,1) //self.character.visualTarget.presentation.worldPosition
-        let cameraPosition = SCNVector3(8,0,8) //self.cameraNode.presentation.position
-        
-        var relativeCameraPositionZ = cameraPosition.z - targetPosition.z
-        var relativeCameraPositionX = cameraPosition.x - targetPosition.x
-        
-        let radius: Float = abs(cameraPosition.z - targetPosition.z)
-        
-        let initialAngle = atan(relativeCameraPositionZ / relativeCameraPositionX)
-        let cu = Float.pi
-        
-        let newPositionX =  radius * Float(cos(cu + initialAngle))
-        let newPositionZ =  radius * Float(sin(cu + initialAngle))
-        
-        //let action = SCNAction.move(to: SCNVector3(x: newPositionX, y: cameraPosition.y, z: newPositionZ), duration: 0.1)
-        
-        //self.cameraNode.runAction(action)
-        
+    func rotateCamera(byAngle angle: CGFloat, withDuration duration: Double) {
+        let rotateAction = SCNAction.rotateBy(x: 0, y: angle, z: 0, duration: duration)
+        self.followingCamera.runAction(rotateAction)
     }
 }
 
@@ -317,9 +301,9 @@ extension GameController : Controls {
     }
     
     func rotateCamera(angle: CGFloat) {
-        self.character.rotateBy(angle: angle)
-        self.rotateCamera(byAngle: angle)
-        
+        let duration: Double = 0.1
+        self.character.rotateBy(angle: angle, withDuration: duration)
+        self.rotateCamera(byAngle: angle, withDuration: duration)
     }
 
 }
