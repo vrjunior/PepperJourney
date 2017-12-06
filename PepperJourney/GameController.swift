@@ -297,12 +297,12 @@ extension GameController : Controls {
         lauchPosition.y = self.character.characterNode.presentation.position.y + 5
         
         
-        attackComponent.atack(originNode: self.character.characterNode, direction: self.character.lastDirection, velocity: self.character.characterVelocity)
+        attackComponent.attack(originNode: self.character.characterNode, direction: self.character.lastDirection, velocity: self.character.characterVelocity)
     }
     
     func rotateCamera(angle: CGFloat) {
         let duration: Double = 0.1
-        self.character.rotateBy(angle: angle, withDuration: duration)
+        self.character.rotateBy(angle: angle)
         self.rotateCamera(byAngle: angle, withDuration: duration)
     }
 

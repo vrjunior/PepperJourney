@@ -27,8 +27,6 @@ class CaptiveComponent: GKComponent {
                 characterScene = "Game.scnassets/characters/Avocado.dae"
             case CaptiveType.Tomato:
                 characterScene = "Game.scnassets/characters/Tomato.dae"
-            default:
-                characterScene = "Game.scnassets/characters/Tomato.dae"
         }
         
         return characterScene
