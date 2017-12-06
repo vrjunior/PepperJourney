@@ -302,7 +302,6 @@ extension GameController : Controls {
     
     func rotateCamera(angle: CGFloat) {
         let duration: Double = 0.1
-        self.character.rotateBy(angle: angle)
         self.rotateCamera(byAngle: angle, withDuration: duration)
     }
 

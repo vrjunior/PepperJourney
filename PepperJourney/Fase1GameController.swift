@@ -63,6 +63,7 @@ class Fase1GameController: GameController {
     
     override func setupCamera() {
         self.followingCamera = self.scene.rootNode.childNode(withName: "followingCamera", recursively: true)
+        
         self.cameraNode = self.scene.rootNode.childNode(withName: "camera", recursively: true)!
         self.cameraInitialPosition = cameraNode.presentation.position
         
@@ -89,6 +90,10 @@ class Fase1GameController: GameController {
             PlayState(scene: scene) ])
         
         self.gameStateMachine.enter(PauseState.self)
+    }
+    
+    func updateFollowingCamera() {
+        self.followingCamera.position = self.character.characterNode.presentation.position
     }
     
     
@@ -219,6 +224,7 @@ class Fase1GameController: GameController {
     override func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         // update characters
         character!.update(atTime: time, with: renderer)
+        self.updateFollowingCamera()
         
         self.entityManager.update(atTime: time)
     }
