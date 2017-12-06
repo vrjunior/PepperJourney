@@ -235,8 +235,8 @@ class Character: GKEntity {
         self.characterNode.simdPosition = self.initialPosition
     }
     
-    func rotateBy(angle: CGFloat) {
-        let rotateAction = SCNAction.rotateBy(x: 0, y: angle, z: 0, duration: 0.1)
+    func rotateBy(angle: CGFloat, withDuration duration: Double) {
+        let rotateAction = SCNAction.rotateBy(x: 0, y: angle, z: 0, duration: duration)
         self.characterNode.runAction(rotateAction)
     }
     
