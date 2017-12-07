@@ -203,20 +203,10 @@ class Fase1GameController: GameController {
     }
     
     override func startGame() {
+        super.startGame()
         // Inittialize the game with the defaults settings.
-        self.initializeTheGame()
         
-        if controlsOverlay == nil {
-            controlsOverlay = SKScene(fileNamed: "ControlsOverlay.sks") as? ControlsOverlay
-            controlsOverlay?.controlsDelegate = self
-            controlsOverlay?.gameOptionsDelegate = self
-            controlsOverlay?.scaleMode = .aspectFill
-        }
-        
-        self.scnView.overlaySKScene = controlsOverlay
-        
-        gameStateMachine.enter(PlayState.self)
-        characterStateMachine.enter(StandingState.self)
+        //here we can hidden indicators
     }
     
     // MARK: - Update
@@ -281,7 +271,7 @@ class Fase1GameController: GameController {
                                 self.setupGameOver()
                                 return
                             }
-                            print("Current Life: \(currentLife)")
+                            self.overlayDelegate?.updateLifeIndicator(percentage: currentLife)
                         }
                     }
                 }

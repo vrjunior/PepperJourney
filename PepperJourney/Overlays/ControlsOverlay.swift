@@ -10,6 +10,12 @@ import Foundation
 import SceneKit
 import SpriteKit
 
+
+protocol UpdateIndicators {
+    func updateLifeIndicator(percentage: Float)
+    func updateAttackIndicator(percentage: Float)
+}
+
 class ControlsOverlay: SKScene {
     
     public var controlsDelegate: Controls? {
@@ -22,13 +28,15 @@ class ControlsOverlay: SKScene {
     }
     
     public var gameOptionsDelegate: GameOptions?
-    
+    public var isLifeIndicatorHidden = false
     
     private var jumpButton: JumpButton!
     private var attackButton: AttackButton!
     private var padOverlay: PadOverlay!
     private var pauseButton: SKSpriteNode!
     private var cameraControl: CameraControl!
+    private var lifeIndicatorFullWidth: CGFloat!
+    private var lifeIndicator: SKSpriteNode!
     
     public var isPausedControl:Bool = false {
         didSet {
@@ -50,9 +58,13 @@ class ControlsOverlay: SKScene {
         self.attackButton = self.childNode(withName: "attackButton") as! AttackButton
         self.pauseButton = self.childNode(withName: "pauseButton") as! SKSpriteNode
         self.cameraControl = self.childNode(withName: "cameraControl") as! CameraControl
+        self.lifeIndicator = self.childNode(withName: "lifeIndicator") as! SKSpriteNode
+        self.lifeIndicatorFullWidth = lifeIndicator.size.width
         
         // disable interation in scenekit
         self.isUserInteractionEnabled = false
+        
+        self.lifeIndicator.isHidden = self.isLifeIndicatorHidden
     }
     
 }
@@ -77,6 +89,13 @@ extension ControlsOverlay {
         }
         
     }
-    
-    
+}
+
+extension ControlsOverlay: UpdateIndicators {
+    func updateLifeIndicator(percentage: Float) {
+        self.lifeIndicator.size.width = CGFloat(percentage) * self.lifeIndicatorFullWidth
+    }
+    func updateAttackIndicator(percentage: Float) {
+        
+    }
 }

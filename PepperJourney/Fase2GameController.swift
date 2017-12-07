@@ -190,20 +190,8 @@ class Fase2GameController: GameController {
     }
     
     override func startGame() {
+        super.startGame()
         // Inittialize the game with the defaults settings.
-        self.initializeTheGame()
-        
-        if controlsOverlay == nil {
-            controlsOverlay = SKScene(fileNamed: "ControlsOverlay.sks") as? ControlsOverlay
-            controlsOverlay?.controlsDelegate = self
-            controlsOverlay?.gameOptionsDelegate = self
-            controlsOverlay?.scaleMode = .aspectFill
-        }
-        
-        self.scnView.overlaySKScene = controlsOverlay
-        
-        gameStateMachine.enter(PlayState.self)
-        characterStateMachine.enter(StandingState.self)
     }
     
     // MARK: - Update
