@@ -15,7 +15,7 @@ class SoundController
     var areSoundEffectsMute: Bool
     var isBackgroundMusicMute: Bool
     var defaultSoudEffectVolume: Float = 1
-  
+    
     static let sharedInstance = SoundController()
     
     private var sounds: [String: SCNAudioSource] = [:]
@@ -30,7 +30,7 @@ class SoundController
         // pega do sistema
         // verifica botoes internos
     }
-
+    
     func loadSound (fileName: String, soundName: String, volume: Float) {
         // Avoid that add two audios with the same soundName
         
@@ -66,7 +66,7 @@ class SoundController
     
     func removeAudioSource(soundName: String)
     {
-       self.sounds.removeValue(forKey: soundName)
+        self.sounds.removeValue(forKey: soundName)
     }
     private func playGenericSound(soundName: String, loops: Bool, node: SCNNode)
     {
@@ -80,11 +80,40 @@ class SoundController
         node.runAction(SCNAction.playAudio(sound, waitForCompletion: false))
     }
     
+    private func playGenericSound(soundName: String, loops: Bool, node: SCNNode, block: @escaping () -> ())
+    {
+        guard let sound = self.sounds[soundName] else
+        {
+            fatalError("Error at get the audio source \(soundName)")
+            
+        }
+        print("tocou: \(soundName)")
+        sound.loops = loops
+        node.runAction(SCNAction.playAudio(sound, waitForCompletion: false))
+        
+        let actionSequence = SCNAction.sequence([SCNAction.playAudio(sound, waitForCompletion: false),
+                                                 SCNAction.wait(duration: 2.0),
+                                                 SCNAction.run({ (node) in
+                                                    block()
+                                                    
+                                                 })])
+        
+        node.runAction(actionSequence)
+    }
+    
     func playSoundEffect(soundName: String, loops: Bool, node: SCNNode)
     {
         if !areSoundEffectsMute
         {
             playGenericSound(soundName: soundName, loops: loops, node: node)
+        }
+    }
+    
+    func playSoundEffect(soundName: String, loops: Bool, node: SCNNode, block: @escaping () -> ())
+    {
+        if !areSoundEffectsMute
+        {
+            playGenericSound(soundName: soundName, loops: loops, node: node, block: block)
         }
     }
     
@@ -107,24 +136,25 @@ class SoundController
     }
     
     //===================================================================================
-//    func muteSound() {
-//        var player: AVAudioNode
-//        
-//        player = AVAudioPlayerNode()
-//        self.audioPlayer = SCNAudioPlayer(source: audioSource)
-//        self.audioPlayer.audioNode!.engine?.attach(player)
-//        self.audioPlayer.audioNode!.engine?.mainMixerNode.outputVolume = 0
-//    }
-//    
-//    func unmuteSound()
-//    {
-//        self.audioSource.volume = self.volume
-//    }
-//    
-//   
-//    func stopSound()
-//    {
-//        self.node.removeAudioPlayer(self.audioPlayer)
-//    }
+    //    func muteSound() {
+    //        var player: AVAudioNode
+    //
+    //        player = AVAudioPlayerNode()
+    //        self.audioPlayer = SCNAudioPlayer(source: audioSource)
+    //        self.audioPlayer.audioNode!.engine?.attach(player)
+    //        self.audioPlayer.audioNode!.engine?.mainMixerNode.outputVolume = 0
+    //    }
+    //
+    //    func unmuteSound()
+    //    {
+    //        self.audioSource.volume = self.volume
+    //    }
+    //
+    //
+    //    func stopSound()
+    //    {
+    //        self.node.removeAudioPlayer(self.audioPlayer)
+    //    }
     
 }
+

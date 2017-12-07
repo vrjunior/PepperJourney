@@ -103,7 +103,7 @@ class Fase1GameController: GameController {
 
         
         //load the main scene
-        self.scene = SCNScene(named: "Game.scnassets/Fases/Fase1.scn")
+        self.scene = SCNScene(named: "Game.scnassets/fases/fase1.scn")
         
         //setup game state machine
         self.setupGame()

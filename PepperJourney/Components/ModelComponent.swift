@@ -14,6 +14,11 @@ class ModelComponent: GKComponent
 {
     private(set) var modelNode: SCNNode!
     
+    /*
+     modelPath: scene of the model
+     scene: Scene destination
+     Atenção: o nome do nó contendo a mash deve ser "modelNode"
+     */
     init (modelPath: String, scene: SCNScene, position: SCNVector3)
     {
         super.init()
@@ -25,16 +30,17 @@ class ModelComponent: GKComponent
         
         self.modelNode = modelScene.rootNode.childNode(withName: "modelNode", recursively: false)
         
-        guard self.modelNode != nil else { return }
+        guard self.modelNode != nil else {
+            fatalError("Error! Not found \"modelNode\" in scene \(modelPath)")
+        }
         
         self.modelNode.position = position
         
         scene.rootNode.addChildNode(self.modelNode)
-
+        
         
     }
-    func removeModel()
-    {
+    public func removeModel() {
         if modelNode.parent != nil {
             self.modelNode.removeFromParentNode()
         }
@@ -43,7 +49,12 @@ class ModelComponent: GKComponent
         }
     }
     
+    public func setPosition(newPosition: SCNVector3) {
+        self.modelNode.position = newPosition
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+

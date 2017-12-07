@@ -14,13 +14,15 @@ import GameplayKit
 
 
 enum CategoryMaskType: Int {
-    case character    = 0b1         // 1
+    case pepper       = 0b1         // 1
     case solidSurface = 0b10        // 2
     case potato       = 0b100       // 4
     case lake         = 0b1000      // 8
     case obstacle     = 0b10000     // 16
     case finalLevel   = 0b100000    // 32
     case fireBall     = 0b1000000   // 64
+    case box          = 0b10000000  // 128
+    case characters   = 0b100000000 // 256
 }
 
 
@@ -100,18 +102,16 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     }
     
     func setupCamera() {
+        self.followingCamera = self.scene.rootNode.childNode(withName: "followingCamera", recursively: true)
+        
         self.cameraNode = self.scene.rootNode.childNode(withName: "camera", recursively: true)!
         self.cameraInitialPosition = cameraNode.presentation.position
-        
-        guard let characterNode = self.character.characterNode else {
-            fatalError("Error with the target of the follow camera")
-        }
         
         let lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
         lookAtConstraint.isGimbalLockEnabled = true
         lookAtConstraint.influenceFactor = 1
         
-        let distanceConstraint = SCNDistanceConstraint(target: characterNode)
+        let distanceConstraint = SCNDistanceConstraint(target: self.character.characterNode)
         distanceConstraint.minimumDistance = 45
         distanceConstraint.maximumDistance = 45
         
@@ -121,7 +121,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
             return SCNVector3(position)
         }
         
-        self.cameraNode.constraints = [lookAtConstraint, distanceConstraint, keepAltitude]
+        self.cameraNode.constraints = [lookAtConstraint, distanceConstraint , keepAltitude]
     }
     
     func setupGame() {

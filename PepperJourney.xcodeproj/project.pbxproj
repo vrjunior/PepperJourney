@@ -29,7 +29,9 @@
 		9C991DB31FCC99DE00DEE3D6 /* AttackComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C991DB21FCC99DE00DEE3D6 /* AttackComponent.swift */; };
 		9C991DB91FCD9F5300DEE3D6 /* Yell - small-fairy-hit-moan.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C991DB71FCD9F5300DEE3D6 /* Yell - small-fairy-hit-moan.wav */; };
 		9C991DBD1FCDA18C00DEE3D6 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C991DBB1FCDA18C00DEE3D6 /* spark.png */; };
-		9C9A9A621FD5D8D700BE85B9 /* EscapeComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9A9A611FD5D8D700BE85B9 /* EscapeComponent.swift */; };
+		9CD635A31FD8CEB90016CC7B /* PrisonerBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD635A21FD8CEB90016CC7B /* PrisonerBox.swift */; };
+		9CD635A61FD8CEDE0016CC7B /* TimeAlarmComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD635A41FD8CEDD0016CC7B /* TimeAlarmComponent.swift */; };
+		9CD635A71FD8CEDE0016CC7B /* DistanceAlarmComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD635A51FD8CEDE0016CC7B /* DistanceAlarmComponent.swift */; };
 		9CE0FF431FC765B9004AF735 /* SoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE0FF421FC765B9004AF735 /* SoundController.swift */; };
 		9CE0FF491FC854B2004AF735 /* splashingWater.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9CE0FF481FC854B1004AF735 /* splashingWater.wav */; };
 		9CE4A50B1FD08D3800A02DE5 /* F1_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9CE4A50A1FD08D3800A02DE5 /* F1_1.wav */; };
@@ -117,7 +119,9 @@
 		9C991DB21FCC99DE00DEE3D6 /* AttackComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackComponent.swift; sourceTree = "<group>"; };
 		9C991DB71FCD9F5300DEE3D6 /* Yell - small-fairy-hit-moan.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Yell - small-fairy-hit-moan.wav"; sourceTree = "<group>"; };
 		9C991DBB1FCDA18C00DEE3D6 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
-		9C9A9A611FD5D8D700BE85B9 /* EscapeComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EscapeComponent.swift; sourceTree = "<group>"; };
+		9CD635A21FD8CEB90016CC7B /* PrisonerBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrisonerBox.swift; sourceTree = "<group>"; };
+		9CD635A41FD8CEDD0016CC7B /* TimeAlarmComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeAlarmComponent.swift; sourceTree = "<group>"; };
+		9CD635A51FD8CEDE0016CC7B /* DistanceAlarmComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceAlarmComponent.swift; sourceTree = "<group>"; };
 		9CE0FF421FC765B9004AF735 /* SoundController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
 		9CE0FF481FC854B1004AF735 /* splashingWater.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splashingWater.wav; sourceTree = "<group>"; };
 		9CE4A50A1FD08D3800A02DE5 /* F1_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = F1_1.wav; sourceTree = "<group>"; };
@@ -353,13 +357,14 @@
 		D2E0A8961F993B4800FCC255 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				9CD635A51FD8CEDE0016CC7B /* DistanceAlarmComponent.swift */,
+				9CD635A41FD8CEDD0016CC7B /* TimeAlarmComponent.swift */,
 				9CE0FF411FC7656E004AF735 /* Sounds */,
 				D2E0A8971F993B5D00FCC255 /* JumpComponent.swift */,
 				9C1B829C1F9E2FD300173FF3 /* SeekComponent.swift */,
 				9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */,
 				9C4806801FC88A2700168571 /* SinkComponent.swift */,
 				9C991DB21FCC99DE00DEE3D6 /* AttackComponent.swift */,
-				9C9A9A611FD5D8D700BE85B9 /* EscapeComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -398,6 +403,7 @@
 				9C6D3DEA1F93252500B8FA2A /* Game.scnassets */,
 				D2EC85851F83F1240093F009 /* Assets.xcassets */,
 				D2C7654B1FD0782000EC7D9B /* VideoStoryboard.storyboard */,
+				9CD635A21FD8CEB90016CC7B /* PrisonerBox.swift */,
 				D25AD5AB1F87EAC800F2093E /* GameController.swift */,
 				9C0350F91FD5CA2800970006 /* MenuViewController.swift */,
 				9C0350F51FD59EA800970006 /* Fase1GameController.swift */,
@@ -543,13 +549,13 @@
 				D25AD5AE1F87ECF900F2093E /* Character.swift in Sources */,
 				D2050A7D1FCC99D9001EC7FE /* JumpButton.swift in Sources */,
 				D207CFC71F8EA5370084240E /* Stick.swift in Sources */,
-				9C9A9A621FD5D8D700BE85B9 /* EscapeComponent.swift in Sources */,
 				D20108901FBE11D9007660E3 /* GameOverOverlay.swift in Sources */,
 				9C1B82A11FA0D09800173FF3 /* TrigonometryLib.swift in Sources */,
 				D266101C1FD5DEE0006B1455 /* Controls.swift in Sources */,
 				9C03A2421F9A33DD008F191A /* EntityManager.swift in Sources */,
 				9C4A65731FA67ED700293460 /* PotatoGeneratorSystem.swift in Sources */,
 				D25BAE261FC60864000ED0EC /* SettingsOverlay.swift in Sources */,
+				9CD635A31FD8CEB90016CC7B /* PrisonerBox.swift in Sources */,
 				B0FDBAE91FA9F35600D4B08D /* pixelate.metal in Sources */,
 				D26035F11FCDC57B00E4F069 /* FinishOverlay.swift in Sources */,
 				D2C7654F1FD0891100EC7D9B /* VideoViewController.swift in Sources */,
@@ -566,6 +572,7 @@
 				9C991DB31FCC99DE00DEE3D6 /* AttackComponent.swift in Sources */,
 				D25AD5A61F87E1B100F2093E /* PadOverlay.swift in Sources */,
 				D25160E81F93FB7F00BF756A /* RunningState.swift in Sources */,
+				9CD635A71FD8CEDE0016CC7B /* DistanceAlarmComponent.swift in Sources */,
 				9C1B829D1F9E2FD300173FF3 /* SeekComponent.swift in Sources */,
 				D25160EA1F94063400BF756A /* SCNAnimationPlayer + Load Animation.swift in Sources */,
 				9C4806811FC88A2700168571 /* SinkComponent.swift in Sources */,
@@ -578,6 +585,7 @@
 				D28623B71FA3AFB600691E83 /* PauseState.swift in Sources */,
 				9C0350F61FD59EA800970006 /* Fase1GameController.swift in Sources */,
 				9CE0FF431FC765B9004AF735 /* SoundController.swift in Sources */,
+				9CD635A61FD8CEDE0016CC7B /* TimeAlarmComponent.swift in Sources */,
 				D25BAE281FC60C0F000ED0EC /* SettingsController.swift in Sources */,
 				D20108921FBE11D9007660E3 /* PauseOverlay.swift in Sources */,
 				D25160EE1F940B0C00BF756A /* JumpingState.swift in Sources */,

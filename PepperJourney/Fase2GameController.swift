@@ -13,7 +13,9 @@ import SpriteKit
 import GameplayKit
 
 class Fase2GameController: GameController {
-
+    
+    private var prisonerBoxes = [PrisonerBox]()
+    
     override func resetSounds()
     {
         // Restart the background music
@@ -42,6 +44,9 @@ class Fase2GameController: GameController {
         //setup character sounds
         self.soundController.loadSound(fileName: "jump.wav", soundName: "jump", volume: 30.0)
         
+        // Prisioner sounds
+        self.soundController.loadSound(fileName: "F1_3.wav", soundName: "PrisonerSound", volume: 30.0)
+        
         // Add the sound points
         self.entityManager.addPepperSoundPoints()
         
@@ -61,32 +66,6 @@ class Fase2GameController: GameController {
         
     }
     
-    override func setupCamera() {
-        self.cameraNode = self.scene.rootNode.childNode(withName: "camera", recursively: true)!
-        self.cameraInitialPosition = cameraNode.presentation.position
-        
-        guard let characterNode = self.character.characterNode else {
-            fatalError("Error with the target of the follow camera")
-        }
-        
-        let lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
-        lookAtConstraint.isGimbalLockEnabled = true
-        lookAtConstraint.influenceFactor = 1
-        
-        let distanceConstraint = SCNDistanceConstraint(target: characterNode)
-        
-        distanceConstraint.minimumDistance = 45
-        distanceConstraint.maximumDistance = 45
-        
-        let keepAltitude = SCNTransformConstraint.positionConstraint(inWorldSpace: true) { (node: SCNNode, position: SCNVector3) -> SCNVector3 in
-            var position = float3(position)
-            position.y = self.character.characterNode.presentation.position.y + 20
-            return SCNVector3(position)
-        }
-        
-        self.cameraNode.constraints = [lookAtConstraint, distanceConstraint, keepAltitude]
-    }
-    
     override func setupGame() {
         gameStateMachine = GKStateMachine(states: [
             PauseState(scene: scene),
@@ -101,8 +80,10 @@ class Fase2GameController: GameController {
         super.init(scnView: scnView)
         
         //load the main scene
-        self.scene = SCNScene(named: "Game.scnassets/Fase2.scn")
-        
+        guard let scene = SCNScene(named: "Game.scnassets/fases/fase2.scn") else {
+            fatalError("Error loading fase2.scn")
+        }
+        self.scene = scene
         //setup game state machine
         self.setupGame()
         
@@ -127,6 +108,9 @@ class Fase2GameController: GameController {
         // Pre-load all the audios of the game in the memory
         self.setupSounds()
         
+        // Add all the prisoner boxes
+        self.addPrisonerBoxes()
+        
         
     }
     
@@ -143,6 +127,11 @@ class Fase2GameController: GameController {
         
         // Reset of all the sounds
         self.resetSounds()
+        
+        // Reset all the prisoner boxes for the new play
+        for prisonerBox in self.prisonerBoxes {
+            prisonerBox.resetPrisonerBox()
+        }
         
         self.character.setupCharacter()
         
@@ -341,6 +330,52 @@ class Fase2GameController: GameController {
                 self.soundController.playSoundEffect(soundName: "PotatoYell", loops: false, node: self.cameraNode)
             }
             
+        }
+        if contact.nodeA.physicsBody?.categoryBitMask == CategoryMaskType.box.rawValue ||
+            contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.box.rawValue {
+            self.prisonerBoxes[0].breakBox()
+        }
+    }
+    
+    func addPrisonerBoxes() {
+        guard let prisonerBoxesNode = self.scene.rootNode.childNode(withName: "prisonerBoxes", recursively: false) else {
+            fatalError("Error getting prisonerBoxes node")
+        }
+        let prisonerBoxesNodePosition = prisonerBoxesNode.presentation.position
+        
+        let boxNodes = prisonerBoxesNode.childNodes
+        
+        for boxNode in boxNodes {
+            
+            // box position relative at the scene world
+            let initialPoint = SCNNode()
+            initialPoint.position.x =  prisonerBoxesNodePosition.x + boxNode.presentation.position.x
+            initialPoint.position.y =  prisonerBoxesNodePosition.y + boxNode.presentation.position.y
+            initialPoint.position.z =  prisonerBoxesNodePosition.z + boxNode.presentation.position.z
+            
+            // Character final position
+            guard let destinationPoint = boxNode.childNode(withName: "destinationPoint", recursively: false) else {
+                fatalError("Error getting destinationPoint node to PrisonerBox")
+            }
+            // Final position relative at the scene world
+            var finalPoint = SCNNode()
+            finalPoint.position.x = initialPoint.position.x + destinationPoint.position.x
+            finalPoint.position.y = initialPoint.position.y + destinationPoint.position.y
+            finalPoint.position.z = initialPoint.position.z + destinationPoint.position.z
+            
+            let characters: [CaptiveType] = [.Tomato, .Tomato, .Tomato]
+            
+            // create a box with prisoners
+            let box = PrisonerBox(scene: self.scene,
+                                   entityManager: self.entityManager,
+                                   initialPoint: initialPoint,
+                                   finalPoint: finalPoint,
+                                   characterTypeArray: characters,
+                                   visualTarget: self.character.characterNode,
+                                   talkTime: 0,
+                                   talkAudioName: "PrisonerSound",
+                                   soundController: self.soundController)
+            self.prisonerBoxes.append(box)
         }
     }
 }

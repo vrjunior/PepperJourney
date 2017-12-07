@@ -60,7 +60,7 @@ class EntityManager
     {
         // Create new potatoes
         let potatoSpawnPoint = SCNVector3(2,50, 285)
-        var i = 10
+        var i = 0
         while i > 0 {
             self.createChasingPotato(position: potatoSpawnPoint)
             i -= 1
@@ -83,6 +83,10 @@ class EntityManager
             component.resetComponent()
             
         }
+    }
+
+    func loadInComponentSystem(component: SeekComponent) {
+        self.seekComponentSystem.addComponent(component)
     }
 
     // Creates a potato chasing Pepper

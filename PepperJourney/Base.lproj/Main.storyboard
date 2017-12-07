@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,24 +18,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TuS-ci-Ghz">
-                                <rect key="frame" x="310" y="101" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Fase 1"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xg9-kW-0Lh" userLabel="Fase 2">
+                                <rect key="frame" x="183.5" y="227" width="300" height="100"/>
+                                <color key="backgroundColor" red="1" green="0.84805644049999995" blue="0.025770364140000002" alpha="0.73060055599999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Fase 2">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="fase2:" destination="8lE-jX-xZT" eventType="touchUpInside" id="LDP-NN-u46"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TuS-ci-Ghz">
+                                <rect key="frame" x="183.5" y="52" width="300" height="100"/>
+                                <color key="backgroundColor" red="1" green="0.84805644046307349" blue="0.025770364135743629" alpha="0.73060055598159512" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="TuS-ci-Ghz" secondAttribute="height" multiplier="3:1" id="md2-Xm-z6U"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="zEm-fo-ggf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="Fase 1">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="fase1:" destination="8lE-jX-xZT" eventType="touchUpInside" id="eS6-3O-IYI"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JNV-7Y-dQv">
-                                <rect key="frame" x="310" y="216" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Fase 2"/>
-                                <connections>
-                                    <action selector="fase2:" destination="8lE-jX-xZT" eventType="touchUpInside" id="S91-Om-imr"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="JL4-8L-xD3" firstAttribute="bottom" secondItem="xg9-kW-0Lh" secondAttribute="bottom" constant="48" id="8Vj-eL-mYH"/>
+                            <constraint firstItem="xg9-kW-0Lh" firstAttribute="width" secondItem="TuS-ci-Ghz" secondAttribute="width" id="Hjc-QJ-1BI"/>
+                            <constraint firstItem="TuS-ci-Ghz" firstAttribute="top" secondItem="JL4-8L-xD3" secondAttribute="top" constant="52" id="L0M-MS-jsh"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="xg9-kW-0Lh" secondAttribute="trailing" constant="20" symbolic="YES" id="UaU-CQ-yhy"/>
+                            <constraint firstItem="xg9-kW-0Lh" firstAttribute="leading" secondItem="TuS-ci-Ghz" secondAttribute="leading" id="XjY-2K-dGK"/>
+                            <constraint firstItem="xg9-kW-0Lh" firstAttribute="height" secondItem="TuS-ci-Ghz" secondAttribute="height" id="fDN-Za-JJ1"/>
+                            <constraint firstItem="TuS-ci-Ghz" firstAttribute="centerX" secondItem="N8F-iS-qVq" secondAttribute="centerX" id="uKu-Tx-qzJ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="JL4-8L-xD3"/>
                     </view>
                     <connections>
@@ -43,7 +63,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xSF-Qs-BU4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-690" y="124"/>
+            <point key="canvasLocation" x="-690.40479760119945" y="124"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
