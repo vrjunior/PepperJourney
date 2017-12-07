@@ -197,9 +197,7 @@ class Fase2GameController: GameController {
     // MARK: - Update
     var lastPowerLeverPorcento: Float = 0
     override func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        // update characters
-        character!.update(atTime: time, with: renderer)
-        
+        super.renderer(renderer, updateAtTime: time)
         
         // MELHORAR ISSO, PQ ESTÁ HORRÍVEL
         let powerLevelComponent = character.component(ofType: PowerLevelCompoenent.self)!
@@ -209,7 +207,6 @@ class Fase2GameController: GameController {
             
             self.overlayDelegate?.updateAttackIndicator(percentage: lastPowerLeverPorcento)
         }
-        self.entityManager.update(atTime: time)
     }
     
     override func handleWithPhysicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
