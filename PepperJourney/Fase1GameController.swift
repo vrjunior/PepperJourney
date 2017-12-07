@@ -207,6 +207,7 @@ class Fase1GameController: GameController {
         // Inittialize the game with the defaults settings.
         
         //here we can hidden indicators
+        controlsOverlay?.isAttackHidden = true
     }
     
     // MARK: - Update

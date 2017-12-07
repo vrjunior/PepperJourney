@@ -33,9 +33,10 @@ class ControlsOverlay: SKScene {
             self.lifeIndicator.isHidden = self.isLifeIndicatorHidden
         }
     }
-    public var isAttackIndicatorHidden = false {
+    public var isAttackHidden = false {
         didSet {
-            self.attackIndicator.isHidden = self.isAttackIndicatorHidden
+            self.attackButton.isHidden = self.isAttackHidden
+            self.attackIndicator.isHidden = self.isAttackHidden
         }
     }
     
