@@ -18,10 +18,12 @@ class EntityManager
 
 
     // colocar aqui os components system
-    var seekComponentSystem = GKComponentSystem(componentClass: SeekComponent.self)
+    public var seekComponentSystem = GKComponentSystem(componentClass: SeekComponent.self)
 	var soundRandomComponentSystem = GKComponentSystem(componentClass: SoundRandomComponent.self)
 	var soundDistanceComponentSystem = GKComponentSystem(componentClass: SoundDistanceComponent.self)
     var sinkComponentSystem = GKComponentSystem(componentClass: SinkComponent.self)
+    var distanceAlarmComponentSystem = GKComponentSystem(componentClass: DistanceAlarmComponent.self)
+    var entityCleanerComponentSystem = GKComponentSystem(componentClass: EntityCleanerComponent.self)
 
     // Game entities
     private(set) var character: Character!
@@ -85,9 +87,23 @@ class EntityManager
         }
     }
 
-    func loadInComponentSystem(component: SeekComponent) {
+    func removeDistanceAlarm(entity: GKEntity) {
+        self.distanceAlarmComponentSystem.removeComponent(foundIn: entity)
+    }
+    func removeSeekComponent(entity: GKEntity) {
+        self.seekComponentSystem.removeComponent(foundIn: entity)
+    }
+    
+    func loadSeekComponent(component: SeekComponent) {
         self.seekComponentSystem.addComponent(component)
     }
+    func loadDistanceAlarmComponent(component: DistanceAlarmComponent) {
+        self.distanceAlarmComponentSystem.addComponent(component)
+    }
+    func loadEntityCleanerComponent(component: EntityCleanerComponent) {
+        self.entityCleanerComponentSystem.addComponent(component)
+    }
+
 
     // Creates a potato chasing Pepper
     func createChasingPotato(position: SCNVector3)
@@ -123,12 +139,24 @@ class EntityManager
 
         let deltaTime = time - previousUpdateTime
 
-		//Seek Component
+        //Seek Component
         if seekComponentSystem.components.count > 0
         {
             self.seekComponentSystem.update(deltaTime: deltaTime)
         }
 
+        // distance Alarm Component System
+        if self.distanceAlarmComponentSystem.components.count > 0
+        {
+            self.distanceAlarmComponentSystem.update(deltaTime: deltaTime)
+        }
+
+        // Entity cleaner system
+        if self.entityCleanerComponentSystem.components.count > 0
+        {
+            self.entityCleanerComponentSystem.update(deltaTime: deltaTime)
+        }
+        
 		//Sound Random Comoponent
 		if soundRandomComponentSystem.components.count > 0
 		{

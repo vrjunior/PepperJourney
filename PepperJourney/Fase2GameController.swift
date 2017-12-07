@@ -363,7 +363,7 @@ class Fase2GameController: GameController {
             finalPoint.position.y = initialPoint.position.y + destinationPoint.position.y
             finalPoint.position.z = initialPoint.position.z + destinationPoint.position.z
             
-            let characters: [CaptiveType] = [.Tomato, .Tomato, .Tomato]
+            let characters: [PrisonerType] = [.Tomato, .Tomato, .Tomato]
             
             // create a box with prisoners
             let box = PrisonerBox(scene: self.scene,

@@ -31,8 +31,8 @@ class TimeAlarmComponent: GKComponent {
         self.time += seconds
         
         if self.time > self.trigerTime {
-            let entity = self.entity as! DistanceAlarmProtocol
-            entity.fireDistanceAlarm()
+            let entity = self.entity as! TimeAlarmProtocol
+            entity.fireAlarm()
             self.entity?.removeComponent(ofType: TimeAlarmComponent.self)
         }
     }

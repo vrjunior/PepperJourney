@@ -10,7 +10,7 @@ import Foundation
 import GameplayKit
 import SceneKit
 
-enum CaptiveType {
+enum PrisonerType {
     case Avocado
     case Tomato
 }
@@ -24,13 +24,13 @@ class PrisonerBox {
     var visualTarget: SCNNode!
     var box = GKEntity()
     var destinationPoint = GKAgent3D()
-    var characterTypeArray: [CaptiveType]
+    var characterTypeArray: [PrisonerType]
     weak var entityManager: EntityManager?
     // Sound
     weak var soundController: SoundController!
     var talkAudioName: String!
 
-    init (scene: SCNScene, entityManager: EntityManager, initialPoint: SCNNode, finalPoint:SCNNode, characterTypeArray: [CaptiveType], visualTarget: SCNNode, talkTime: TimeInterval, talkAudioName: String, soundController: SoundController)  {
+    init (scene: SCNScene, entityManager: EntityManager, initialPoint: SCNNode, finalPoint:SCNNode, characterTypeArray: [PrisonerType], visualTarget: SCNNode, talkTime: TimeInterval, talkAudioName: String, soundController: SoundController)  {
         
         self.scene = scene
         self.entityManager = entityManager
@@ -41,49 +41,57 @@ class PrisonerBox {
         self.talkAudioName = talkAudioName
         self.characterTypeArray = characterTypeArray
         
+        // Create all the entities to this box
+        for _ in self.characterTypeArray {
+            self.characters.append(GKEntity())
+        }
+        
         //  Destination point (GKAgent3D
         self.destinationPoint.position = float3(self.finalPoint.position)
         
         // Add the box where the characters will be arrested
         self.loadBox()
+        
+        // Add the components responsable by cleaning the entity
+        self.addEntityCleaners()
+    }
+    func addEntityCleaners() {
+        for character in characters {
+            guard let entityManager = self.entityManager else { fatalError() }
+            let entityCleanerComponent = EntityCleanerComponent(entityManager: entityManager)
+            character.addComponent(entityCleanerComponent)
+            self.entityManager?.loadEntityCleanerComponent(component: entityCleanerComponent)
+        }
     }
  
-    func getCharecterScene(type: CaptiveType) -> String {
+    func getCharecterScene(type: PrisonerType) -> String {
         var characterScene: String
         
         switch type {
-        case CaptiveType.Avocado:
+        case PrisonerType.Avocado:
             characterScene = "Game.scnassets/characters/avocado/avocado.scn"
-        case CaptiveType.Tomato:
+        case PrisonerType.Tomato:
             characterScene = "Game.scnassets/characters/tomato/tomato.scn"
         }
         return characterScene
     }
 
-    func loadCharacter(typeCharacter: CaptiveType, visualTarget: SCNNode) -> GKEntity
+    func loadCharacter(characterIndex: Int, typeCharacter: PrisonerType, visualTarget: SCNNode)
     {
-        let entity = GKEntity()
-        
         // Add the captive character
         let path = self.getCharecterScene(type: typeCharacter)
         
         let modelComponent = ModelComponent(modelPath: path, scene: scene, position: self.initialPosition)
         
+        self.characters[characterIndex].addComponent(modelComponent)
+        
         // Add look at constraint
-        self.setLookAtConstraint(visualTarget: visualTarget, node: modelComponent.modelNode)
+        if let node = self.getModelComponent(entity: self.characters[characterIndex]).modelNode {
+            self.setLookAtConstraint(visualTarget: visualTarget, node: node)
+        }
         
-        entity.addComponent(modelComponent)
-        
-        return entity
     }
-    
-    func loadBox() {
-        let path = "Game.scnassets/scenario/box.scn"
-        let modelComponent = ModelComponent(modelPath: path, scene: self.scene, position: self.initialPosition)
-        self.box.addComponent(modelComponent)
-    }
-    
-    
+ 
     func setLookAtConstraint(visualTarget: SCNNode, node: SCNNode) {
         let lookAtConstraint = SCNLookAtConstraint(target: visualTarget)
         lookAtConstraint.isGimbalLockEnabled = true
@@ -92,6 +100,11 @@ class PrisonerBox {
         node.constraints = [lookAtConstraint]
     }
     
+    func loadBox() {
+        let path = "Game.scnassets/scenario/box.scn"
+        let modelComponent = ModelComponent(modelPath: path, scene: self.scene, position: self.initialPosition)
+        self.box.addComponent(modelComponent)
+    }
     func breakBox()
     {
         // verifica se a caixa já foi aberta
@@ -105,8 +118,8 @@ class PrisonerBox {
         self.box.removeComponent(ofType: ModelComponent.self)
         
         // Spawn the characters
-        for captiveType in characterTypeArray {
-            self.characters.append(loadCharacter(typeCharacter: captiveType, visualTarget: self.visualTarget))
+        for index in 0 ..< self.characters.count {
+            loadCharacter(characterIndex: index, typeCharacter: self.characterTypeArray[index], visualTarget: self.finalPoint)
         }
         // Update the flag
         self.isBoxOpen = true
@@ -114,6 +127,7 @@ class PrisonerBox {
         // Run the conversation
         let characterNode = getModelComponent(entity: self.characters[0]).modelNode
         
+        // Run audio conversation and after run charactersEcape function
         self.soundController.playSoundEffect(soundName: self.talkAudioName, loops: false, node: characterNode!, block: self.charactersEcape)
     }
     
@@ -129,17 +143,30 @@ class PrisonerBox {
         // If the box is not open
         if !self.isBoxOpen { return }
         
-        // Reset all characters position
+        // Reset all components
         for character in self.characters {
             
             // Remove the character
-            let modelComponent = self.getModelComponent(entity: character)
-            // Remove node of scene
-            modelComponent.removeModel()
-            // Remove component from box entity
-            character.removeComponent(ofType: ModelComponent.self)
+            let modelComponent = character.component(ofType: ModelComponent.self)
+            if modelComponent != nil {
+                // Remove node of scene
+                modelComponent!.removeModel()
+                // Remove component from box entity
+                character.removeComponent(ofType: ModelComponent.self)
+            }
+            // Remove de seek component
+            let seekComponet = character.component(ofType: SeekComponent.self)
+            if seekComponet != nil {
+                self.entityManager?.removeSeekComponent(entity: character)
+                character.removeComponent(ofType: SeekComponent.self)
+            }
+            // Remove distanceAlarmComponent
+            let distanceAlarmComponent = character.component(ofType: DistanceAlarmComponent.self)
+            if distanceAlarmComponent != nil {
+                self.entityManager?.removeDistanceAlarm(entity: character)
+                character.removeComponent(ofType: DistanceAlarmComponent.self)
+            }
         }
-        self.characters.removeAll()
         
         // Add the box
         self.loadBox()
@@ -151,39 +178,44 @@ class PrisonerBox {
     func charactersEcape() {
         for character in characters {
             // Add seek component
-            let seekComponent = SeekComponent(target: self.destinationPoint, maxSpeed: 150, maxAcceleration: 50)
+            let seekComponent = SeekComponent(target: self.destinationPoint, maxSpeed: 100, maxAcceleration: 50)
             character.addComponent(seekComponent)
-            self.entityManager?.loadInComponentSystem(component: seekComponent)
-            
+            self.entityManager?.loadSeekComponent(component: seekComponent)
+
             // Remove look at constraint
             let modelComponent = self.getModelComponent(entity: character)
-            
+
             // Add new look at constraint
             self.setLookAtConstraint(visualTarget: self.finalPoint, node: modelComponent.modelNode!)
+
+            guard self.entityManager != nil else {fatalError()}
+            let distanceAlarm = DistanceAlarmComponent(targetPosition: self.finalPoint.position, alarmTriggerRadius: 5, entityManager: self.entityManager!)
+            character.addComponent(distanceAlarm)
+            self.entityManager?.loadDistanceAlarmComponent(component: distanceAlarm)
         }
     }
     
-//    //Load all animation of the Potato
-//    private func loadAnimations()
-//    {
-//        let animations:[AnimationType] = [.running]
-//        
-//        for anim in animations {
-//            let animation = SCNAnimationPlayer.withScene(named: "Game.scnassets/characters/potato/\(anim.rawValue).dae")
-//            
-//            animation.stop()
-//            self.potatoModel.modelNode.addAnimationPlayer(animation, forKey: anim.rawValue)
-//        }
-//    }
-//    
-//    func playAnimation(type: AnimationType) {
-//        self.potatoModel.modelNode.animationPlayer(forKey: type.rawValue)?.play()
-//    }
-//    
-//    func stopAnimation(type: AnimationType) {
-//        self.potatoModel.modelNode.animationPlayer(forKey: type.rawValue)?.stop()
-//    }
-// 
+    //Load all animation of the Character
+    private func loadAnimations(modelNode: SCNNode)
+    {
+        let animations:[AnimationType] = [.running]
+        
+        for anim in animations {
+            let animation = SCNAnimationPlayer.withScene(named: "Game.scnassets/characters/tomato/\(anim.rawValue).dae")
+            
+            animation.stop()
+            modelNode.addAnimationPlayer(animation, forKey: anim.rawValue)
+        }
+    }
+    
+    func playAnimation(type: AnimationType, modelNode: SCNNode) {
+        modelNode.animationPlayer(forKey: type.rawValue)?.play()
+    }
+    
+    func stopAnimation(type: AnimationType, modelNode: SCNNode) {
+        modelNode.animationPlayer(forKey: type.rawValue)?.stop()
+    }
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

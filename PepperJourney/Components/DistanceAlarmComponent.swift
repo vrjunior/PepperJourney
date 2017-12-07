@@ -20,14 +20,20 @@ protocol DistanceAlarmProtocol {
 class DistanceAlarmComponent: GKComponent {
     private var targetPosition: SCNVector3!
     private var alarmTriggerRadius: Float!
-    
-    init(targetPosition: SCNVector3, alarmTriggerRadius: Float) {
+    private var isAlarmFired: Bool = false
+    private weak var entityManager: EntityManager?
+    init(targetPosition: SCNVector3, alarmTriggerRadius: Float, entityManager: EntityManager) {
         super.init()
         self.targetPosition = targetPosition
         self.alarmTriggerRadius = alarmTriggerRadius
+        self.entityManager = entityManager
     }
     
     override func update(deltaTime seconds: TimeInterval) {
+        if self.isAlarmFired {
+            return
+        }
+        
         guard let modelComponent = self.entity?.component(ofType: ModelComponent.self) else {
             fatalError("Error getting model Component in Distance Alarm Component")
         }
@@ -36,9 +42,16 @@ class DistanceAlarmComponent: GKComponent {
         let distance = getDistance(point1: float3(position), point2: float3(targetPosition))
         
         if distance < self.alarmTriggerRadius {
-            let entity = self.entity as! DistanceAlarmProtocol
-            entity.fireDistanceAlarm()
-            self.entity?.removeComponent(ofType: DistanceAlarmComponent.self)
+            
+            guard let entity = self.entity else {
+                fatalError("Error getting entity of DistanceAlarmComponent")
+            }
+            
+            guard let entityCleanerComponent = entity.component(ofType: EntityCleanerComponent.self) else {fatalError()}
+            entityCleanerComponent.prepareToCleanEntity()
+            
+            // fire the alarm
+            self.isAlarmFired = true
         }
     }
     

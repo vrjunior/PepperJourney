@@ -29,6 +29,7 @@
 		9C991DB31FCC99DE00DEE3D6 /* AttackComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C991DB21FCC99DE00DEE3D6 /* AttackComponent.swift */; };
 		9C991DB91FCD9F5300DEE3D6 /* Yell - small-fairy-hit-moan.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C991DB71FCD9F5300DEE3D6 /* Yell - small-fairy-hit-moan.wav */; };
 		9C991DBD1FCDA18C00DEE3D6 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C991DBB1FCDA18C00DEE3D6 /* spark.png */; };
+		9CC26F651FD9369500292099 /* EntityCleanerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC26F641FD9369500292099 /* EntityCleanerComponent.swift */; };
 		9CD635A31FD8CEB90016CC7B /* PrisonerBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD635A21FD8CEB90016CC7B /* PrisonerBox.swift */; };
 		9CD635A61FD8CEDE0016CC7B /* TimeAlarmComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD635A41FD8CEDD0016CC7B /* TimeAlarmComponent.swift */; };
 		9CD635A71FD8CEDE0016CC7B /* DistanceAlarmComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD635A51FD8CEDE0016CC7B /* DistanceAlarmComponent.swift */; };
@@ -120,6 +121,7 @@
 		9C991DB21FCC99DE00DEE3D6 /* AttackComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackComponent.swift; sourceTree = "<group>"; };
 		9C991DB71FCD9F5300DEE3D6 /* Yell - small-fairy-hit-moan.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Yell - small-fairy-hit-moan.wav"; sourceTree = "<group>"; };
 		9C991DBB1FCDA18C00DEE3D6 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		9CC26F641FD9369500292099 /* EntityCleanerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityCleanerComponent.swift; sourceTree = "<group>"; };
 		9CD635A21FD8CEB90016CC7B /* PrisonerBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrisonerBox.swift; sourceTree = "<group>"; };
 		9CD635A41FD8CEDD0016CC7B /* TimeAlarmComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeAlarmComponent.swift; sourceTree = "<group>"; };
 		9CD635A51FD8CEDE0016CC7B /* DistanceAlarmComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceAlarmComponent.swift; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 				9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */,
 				9C4806801FC88A2700168571 /* SinkComponent.swift */,
 				9C991DB21FCC99DE00DEE3D6 /* AttackComponent.swift */,
+				9CC26F641FD9369500292099 /* EntityCleanerComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 				D25AD5AE1F87ECF900F2093E /* Character.swift in Sources */,
 				D2050A7D1FCC99D9001EC7FE /* JumpButton.swift in Sources */,
 				D207CFC71F8EA5370084240E /* Stick.swift in Sources */,
+				9CC26F651FD9369500292099 /* EntityCleanerComponent.swift in Sources */,
 				D20108901FBE11D9007660E3 /* GameOverOverlay.swift in Sources */,
 				9C1B82A11FA0D09800173FF3 /* TrigonometryLib.swift in Sources */,
 				D266101C1FD5DEE0006B1455 /* Controls.swift in Sources */,

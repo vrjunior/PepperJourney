@@ -89,10 +89,9 @@ class SoundController
         }
         print("tocou: \(soundName)")
         sound.loops = loops
-        node.runAction(SCNAction.playAudio(sound, waitForCompletion: false))
         
-        let actionSequence = SCNAction.sequence([SCNAction.playAudio(sound, waitForCompletion: false),
-                                                 SCNAction.wait(duration: 2.0),
+        let actionSequence = SCNAction.sequence([SCNAction.playAudio(sound, waitForCompletion: true),
+                                                 /*SCNAction.wait(duration: 2.0),*/
                                                  SCNAction.run({ (node) in
                                                     block()
                                                     
