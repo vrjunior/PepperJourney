@@ -37,6 +37,7 @@
 		9CE4A50B1FD08D3800A02DE5 /* F1_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9CE4A50A1FD08D3800A02DE5 /* F1_1.wav */; };
 		9CFDF8701F9A36F7009385A7 /* PotatoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */; };
 		B0465F0D1FC444A2002B8FE8 /* SoundRandomComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0465F0B1FC444A1002B8FE8 /* SoundRandomComponent.swift */; };
+		B06FCD6A1FD8EC6E00EFFA31 /* PotatoSpearEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06FCD691FD8EC6E00EFFA31 /* PotatoSpearEntity.swift */; };
 		B08B911F1FC4CABD00304E46 /* gameBackground.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B08B911D1FC4CABD00304E46 /* gameBackground.mp3 */; };
 		B08B91211FC4CCBE00304E46 /* SoundDistanceComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08B91201FC4CCBE00304E46 /* SoundDistanceComponent.swift */; };
 		B0FDBAE91FA9F35600D4B08D /* pixelate.metal in Sources */ = {isa = PBXBuildFile; fileRef = B0FDBAE01FA9F35600D4B08D /* pixelate.metal */; };
@@ -127,6 +128,7 @@
 		9CE4A50A1FD08D3800A02DE5 /* F1_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = F1_1.wav; sourceTree = "<group>"; };
 		9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotatoEntity.swift; sourceTree = "<group>"; };
 		B0465F0B1FC444A1002B8FE8 /* SoundRandomComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundRandomComponent.swift; sourceTree = "<group>"; };
+		B06FCD691FD8EC6E00EFFA31 /* PotatoSpearEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotatoSpearEntity.swift; sourceTree = "<group>"; };
 		B08B911D1FC4CABD00304E46 /* gameBackground.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameBackground.mp3; sourceTree = "<group>"; };
 		B08B91201FC4CCBE00304E46 /* SoundDistanceComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundDistanceComponent.swift; sourceTree = "<group>"; };
 		B0FDBAE01FA9F35600D4B08D /* pixelate.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = pixelate.metal; path = PepperJourney/Shaders/pixelate.metal; sourceTree = SOURCE_ROOT; };
@@ -229,6 +231,7 @@
 				D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */,
 				D25160E31F93FA0800BF756A /* Character */,
 				9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */,
+				B06FCD691FD8EC6E00EFFA31 /* PotatoSpearEntity.swift */,
 				9C4A65721FA67ED700293460 /* PotatoGeneratorSystem.swift */,
 			);
 			path = Entities;
@@ -579,6 +582,7 @@
 				D25160E51F93FA3400BF756A /* BaseState.swift in Sources */,
 				D207CFC51F8EA2D10084240E /* Dpad.swift in Sources */,
 				D28623B91FA3B00200691E83 /* PlayState.swift in Sources */,
+				B06FCD6A1FD8EC6E00EFFA31 /* PotatoSpearEntity.swift in Sources */,
 				D2050A7F1FCC9BD1001EC7FE /* AttackButton.swift in Sources */,
 				D2719D901FA0EBDA00FCB61F /* AnimationType.swift in Sources */,
 				D28623B51FA3AF5F00691E83 /* GameBaseState.swift in Sources */,
