@@ -211,6 +211,11 @@ class Fase2GameController: GameController {
     override func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         // update characters
         character!.update(atTime: time, with: renderer)
+        if let value = character!.component(ofType: PowerLevelCompoenent.self)?.currentPowerLevel
+        {
+            print(value)
+        }
+        else {print("NIL")}
         
         self.entityManager.update(atTime: time)
     }
@@ -358,12 +363,12 @@ class Fase2GameController: GameController {
                 fatalError("Error getting destinationPoint node to PrisonerBox")
             }
             // Final position relative at the scene world
-            var finalPoint = SCNNode()
+            let finalPoint = SCNNode()
             finalPoint.position.x = initialPoint.position.x + destinationPoint.position.x
             finalPoint.position.y = initialPoint.position.y + destinationPoint.position.y
             finalPoint.position.z = initialPoint.position.z + destinationPoint.position.z
             
-            let characters: [PrisonerType] = [.Tomato, .Tomato, .Tomato]
+            let characters: [PrisonerType] = [.Avocado, .Tomato, .Tomato]
             
             // create a box with prisoners
             let box = PrisonerBox(scene: self.scene,

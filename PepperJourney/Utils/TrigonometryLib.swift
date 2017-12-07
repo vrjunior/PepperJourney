@@ -32,7 +32,7 @@ class TrigonometryLib
         {
             finalRad = rad
         }
-        let angle = finalRad * 180 / Float.pi
+        _ = finalRad * 180 / Float.pi
         
         var components = vector_float2()
         components.x = cos(rad)

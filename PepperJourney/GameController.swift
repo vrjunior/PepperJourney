@@ -288,16 +288,16 @@ extension GameController : Controls {
     
     func attack() {
         
-        guard let attackComponent = self.character.component(ofType: AttackComponent.self) else
+        guard let attackLimiterComponent = self.character.component(ofType: AttackLimiterComponent.self) else
         {
-            fatalError("Error getting attack component")
+            fatalError("Error getting attack limiter component")
         }
         
         var lauchPosition = self.character.characterNode.presentation.position
         lauchPosition.y = self.character.characterNode.presentation.position.y + 5
         
         
-        attackComponent.attack(originNode: self.character.characterNode, direction: self.character.lastDirection, velocity: self.character.characterVelocity)
+        attackLimiterComponent.tryAttack(originNode: self.character.characterNode, direction: self.character.lastDirection, velocity: self.character.characterVelocity)
     }
     
     func rotateCamera(angle: CGFloat) {
