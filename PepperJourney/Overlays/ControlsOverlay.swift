@@ -28,15 +28,28 @@ class ControlsOverlay: SKScene {
     }
     
     public var gameOptionsDelegate: GameOptions?
-    public var isLifeIndicatorHidden = false
+    public var isLifeIndicatorHidden = false {
+        didSet {
+            self.lifeIndicator.isHidden = self.isLifeIndicatorHidden
+        }
+    }
+    public var isAttackIndicatorHidden = false {
+        didSet {
+            self.attackIndicator.isHidden = self.isAttackIndicatorHidden
+        }
+    }
     
     private var jumpButton: JumpButton!
     private var attackButton: AttackButton!
     private var padOverlay: PadOverlay!
     private var pauseButton: SKSpriteNode!
     private var cameraControl: CameraControl!
+    
     private var lifeIndicatorFullWidth: CGFloat!
     private var lifeIndicator: SKSpriteNode!
+    
+    private var attackIndicatorFullWidth: CGFloat!
+    private var attackIndicator: SKSpriteNode!
     
     public var isPausedControl:Bool = false {
         didSet {
@@ -58,13 +71,17 @@ class ControlsOverlay: SKScene {
         self.attackButton = self.childNode(withName: "attackButton") as! AttackButton
         self.pauseButton = self.childNode(withName: "pauseButton") as! SKSpriteNode
         self.cameraControl = self.childNode(withName: "cameraControl") as! CameraControl
+        
+        
         self.lifeIndicator = self.childNode(withName: "lifeIndicator") as! SKSpriteNode
         self.lifeIndicatorFullWidth = lifeIndicator.size.width
+        
+        self.attackIndicator = self.childNode(withName: "attackIndicator") as! SKSpriteNode
+        self.attackIndicatorFullWidth = attackIndicator.size.width
         
         // disable interation in scenekit
         self.isUserInteractionEnabled = false
         
-        self.lifeIndicator.isHidden = self.isLifeIndicatorHidden
     }
     
 }
@@ -96,6 +113,6 @@ extension ControlsOverlay: UpdateIndicators {
         self.lifeIndicator.size.width = CGFloat(percentage) * self.lifeIndicatorFullWidth
     }
     func updateAttackIndicator(percentage: Float) {
-        
+        self.attackIndicator.size.width = CGFloat(percentage) * self.attackIndicatorFullWidth
     }
 }
