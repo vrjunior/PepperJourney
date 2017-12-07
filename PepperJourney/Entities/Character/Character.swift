@@ -117,6 +117,10 @@ class Character: GKEntity {
         // Attack component
         let attackComponet = AttackComponent(scene: scene)
         self.addComponent(attackComponet)
+        
+        //Life component
+        let lifeComponent = LifeComponent()
+        self.addComponent(lifeComponent)
     }
     
     // MARK: Animatins Functins

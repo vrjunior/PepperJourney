@@ -272,7 +272,18 @@ class Fase1GameController: GameController {
                 // foi pego por uma batata
             else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue {
                 DispatchQueue.main.async { [unowned self] in
-                    self.setupGameOver()
+                    if let lifeComponent = self.character.component(ofType: LifeComponent.self) {
+                        if lifeComponent.canReceiveDamage {
+                            lifeComponent.receiveDamage(enemyCategory: .potato, waitTime: 0.2)
+                            let currentLife = lifeComponent.getLifePercentage()
+                            
+                            if currentLife <= 0 {
+                                self.setupGameOver()
+                                return
+                            }
+                            print("Current Life: \(currentLife)")
+                        }
+                    }
                 }
                 
             }

@@ -176,8 +176,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.scnView.overlaySKScene = tapOverlay
         
     }
-    func prepereToStartGame()
-    {
+    func prepereToStartGame() {
         self.stopSounds()
         
         entityManager.killAllPotatoes()
