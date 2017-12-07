@@ -330,6 +330,9 @@ extension GameController : GameOptions {
     }
     
     func restart() {
+        //reset lifebar
+        self.overlayDelegate?.resetLifeIndicator()
+        
         // Do the setup to restart the game
         self.prepereToStartGame()
         
