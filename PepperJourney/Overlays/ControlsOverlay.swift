@@ -10,6 +10,12 @@ import Foundation
 import SceneKit
 import SpriteKit
 
+
+protocol UpdateIndicators {
+    func updateLifeIndicator(percentage: Float)
+    func updateAttackIndicator(percentage: Float)
+}
+
 class ControlsOverlay: SKScene {
     
     public var controlsDelegate: Controls? {
@@ -22,13 +28,29 @@ class ControlsOverlay: SKScene {
     }
     
     public var gameOptionsDelegate: GameOptions?
-    
+    public var isLifeIndicatorHidden = false {
+        didSet {
+            self.lifeIndicator.isHidden = self.isLifeIndicatorHidden
+        }
+    }
+    public var isAttackHidden = false {
+        didSet {
+            self.attackButton.isHidden = self.isAttackHidden
+            self.attackIndicator.isHidden = self.isAttackHidden
+        }
+    }
     
     private var jumpButton: JumpButton!
     private var attackButton: AttackButton!
     private var padOverlay: PadOverlay!
     private var pauseButton: SKSpriteNode!
     private var cameraControl: CameraControl!
+    
+    private var lifeIndicatorFullWidth: CGFloat!
+    private var lifeIndicator: SKSpriteNode!
+    
+    private var attackIndicatorFullWidth: CGFloat!
+    private var attackIndicator: SKSpriteNode!
     
     public var isPausedControl:Bool = false {
         didSet {
@@ -51,8 +73,16 @@ class ControlsOverlay: SKScene {
         self.pauseButton = self.childNode(withName: "pauseButton") as! SKSpriteNode
         self.cameraControl = self.childNode(withName: "cameraControl") as! CameraControl
         
+        
+        self.lifeIndicator = self.childNode(withName: "lifeIndicator") as! SKSpriteNode
+        self.lifeIndicatorFullWidth = lifeIndicator.size.width
+        
+        self.attackIndicator = self.childNode(withName: "attackIndicator") as! SKSpriteNode
+        self.attackIndicatorFullWidth = attackIndicator.size.width
+        
         // disable interation in scenekit
         self.isUserInteractionEnabled = false
+        
     }
     
 }
@@ -77,6 +107,13 @@ extension ControlsOverlay {
         }
         
     }
-    
-    
+}
+
+extension ControlsOverlay: UpdateIndicators {
+    func updateLifeIndicator(percentage: Float) {
+        self.lifeIndicator.size.width = CGFloat(percentage) * self.lifeIndicatorFullWidth
+    }
+    func updateAttackIndicator(percentage: Float) {
+        self.attackIndicator.size.width = CGFloat(percentage) * self.attackIndicatorFullWidth
+    }
 }

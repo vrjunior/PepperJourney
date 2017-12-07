@@ -190,35 +190,28 @@ class Fase2GameController: GameController {
     }
     
     override func startGame() {
+        super.startGame()
         // Inittialize the game with the defaults settings.
-        self.initializeTheGame()
-        
-        if controlsOverlay == nil {
-            controlsOverlay = SKScene(fileNamed: "ControlsOverlay.sks") as? ControlsOverlay
-            controlsOverlay?.controlsDelegate = self
-            controlsOverlay?.gameOptionsDelegate = self
-            controlsOverlay?.scaleMode = .aspectFill
-        }
-        
-        self.scnView.overlaySKScene = controlsOverlay
-        
-        gameStateMachine.enter(PlayState.self)
-        characterStateMachine.enter(StandingState.self)
     }
     
     // MARK: - Update
-    
+    var lastPowerLeverPorcento: Float = 0
     override func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         // update characters
         character!.update(atTime: time, with: renderer)
-        if let value = character!.component(ofType: PowerLevelCompoenent.self)?.currentPowerLevel
-        {
-            print(value)
-        }
-        else {print("NIL")}
         
+        
+        // MELHORAR ISSO, PQ ESTÁ HORRÍVEL
+        let powerLevelComponent = character.component(ofType: PowerLevelCompoenent.self)!
+        let porcento:Float = powerLevelComponent.currentPowerLevel / powerLevelComponent.MaxPower
+        if porcento != lastPowerLeverPorcento {
+            lastPowerLeverPorcento = porcento
+            
+            self.overlayDelegate?.updateAttackIndicator(percentage: lastPowerLeverPorcento)
+        }
         self.entityManager.update(atTime: time)
     }
+    
     override func handleWithPhysicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         var characterNode: SCNNode?
         var anotherNode: SCNNode?
@@ -261,9 +254,19 @@ class Fase2GameController: GameController {
                 // foi pego por uma batata
             else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue {
                 DispatchQueue.main.async { [unowned self] in
-                    self.setupGameOver()
-                }
-                
+                    if let lifeComponent = self.character.component(ofType: LifeComponent.self) {
+                        if lifeComponent.canReceiveDamage {
+                            lifeComponent.receiveDamage(enemyCategory: .potato, waitTime: 0.2)
+                            let currentLife = lifeComponent.getLifePercentage()
+                            
+                            if currentLife <= 0 {
+                                self.setupGameOver()
+                                return
+                            }
+                            self.overlayDelegate?.updateLifeIndicator(percentage: currentLife)
+                        }
+                    }
+                }  
             }
                 
             else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.lake.rawValue {

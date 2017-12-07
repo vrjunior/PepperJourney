@@ -33,6 +33,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     var characterStateMachine: GKStateMachine!
     var gameStateMachine: GKStateMachine!
     var followingCamera: SCNNode!
+    var overlayDelegate: UpdateIndicators?
     
     open var scnView: SCNView!
     open var scene: SCNScene!
@@ -176,8 +177,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.scnView.overlaySKScene = tapOverlay
         
     }
-    func prepereToStartGame()
-    {
+    func prepereToStartGame() {
         self.stopSounds()
         
         entityManager.killAllPotatoes()
@@ -224,6 +224,9 @@ class GameController: NSObject, SCNSceneRendererDelegate {
             controlsOverlay?.controlsDelegate = self
             controlsOverlay?.gameOptionsDelegate = self
             controlsOverlay?.scaleMode = .aspectFill
+            
+            //setting updateDelegate
+            self.overlayDelegate = controlsOverlay
         }
         
         self.scnView.overlaySKScene = controlsOverlay
@@ -239,6 +242,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         character!.update(atTime: time, with: renderer)
         
         self.entityManager.update(atTime: time)
+        
     }
     
     func handleWithPhysicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {

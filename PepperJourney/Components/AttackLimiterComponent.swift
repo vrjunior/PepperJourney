@@ -59,7 +59,8 @@ class AttackLimiterComponent: GKComponent {
             guard let powerLevelComponent = entity.component(ofType: PowerLevelCompoenent.self) else {fatalError()}
             let _ = powerLevelComponent.chargePower(charge: self.chargeRate)
             
-            //ATUALIZAR OVERLAY
+            // Update the indicator overlay
+            
             
             self.timer = 0
         }

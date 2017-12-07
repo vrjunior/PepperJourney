@@ -203,20 +203,11 @@ class Fase1GameController: GameController {
     }
     
     override func startGame() {
+        super.startGame()
         // Inittialize the game with the defaults settings.
-        self.initializeTheGame()
         
-        if controlsOverlay == nil {
-            controlsOverlay = SKScene(fileNamed: "ControlsOverlay.sks") as? ControlsOverlay
-            controlsOverlay?.controlsDelegate = self
-            controlsOverlay?.gameOptionsDelegate = self
-            controlsOverlay?.scaleMode = .aspectFill
-        }
-        
-        self.scnView.overlaySKScene = controlsOverlay
-        
-        gameStateMachine.enter(PlayState.self)
-        characterStateMachine.enter(StandingState.self)
+        //here we can hidden indicators
+        controlsOverlay?.isAttackHidden = true
     }
     
     // MARK: - Update
@@ -272,7 +263,18 @@ class Fase1GameController: GameController {
                 // foi pego por uma batata
             else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue {
                 DispatchQueue.main.async { [unowned self] in
-                    self.setupGameOver()
+                    if let lifeComponent = self.character.component(ofType: LifeComponent.self) {
+                        if lifeComponent.canReceiveDamage {
+                            lifeComponent.receiveDamage(enemyCategory: .potato, waitTime: 0.2)
+                            let currentLife = lifeComponent.getLifePercentage()
+                            
+                            if currentLife <= 0 {
+                                self.setupGameOver()
+                                return
+                            }
+                            self.overlayDelegate?.updateLifeIndicator(percentage: currentLife)
+                        }
+                    }
                 }
                 
             }

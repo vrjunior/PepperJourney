@@ -128,11 +128,14 @@ class Character: GKEntity {
         self.addComponent(powerLevelComponent)
         
         // Attack Limiter Component
-        let attackLimiterComponent = AttackLimiterComponent(rechargeInterval: 3, chargeRate: 1, dischargeRate: 1)
+        let attackLimiterComponent = AttackLimiterComponent(rechargeInterval: 1.5, chargeRate: 1, dischargeRate: 1)
         self.addComponent(attackLimiterComponent)
         self.entityManager?.loadComponentSystem(component: attackLimiterComponent)
         
-        
+        //Life component
+        let lifeComponent = LifeComponent()
+        self.addComponent(lifeComponent)
+
     }
     
     // MARK: Animatins Functins
