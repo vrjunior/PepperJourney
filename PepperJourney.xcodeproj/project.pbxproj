@@ -30,6 +30,8 @@
 		9C991DB91FCD9F5300DEE3D6 /* Yell - small-fairy-hit-moan.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C991DB71FCD9F5300DEE3D6 /* Yell - small-fairy-hit-moan.wav */; };
 		9C991DBD1FCDA18C00DEE3D6 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 9C991DBB1FCDA18C00DEE3D6 /* spark.png */; };
 		9CC26F651FD9369500292099 /* EntityCleanerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC26F641FD9369500292099 /* EntityCleanerComponent.swift */; };
+		9CC26F671FD95A5700292099 /* PowerLevelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC26F661FD95A5700292099 /* PowerLevelComponent.swift */; };
+		9CC26F691FD960B300292099 /* AttackLimiterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC26F681FD960B300292099 /* AttackLimiterComponent.swift */; };
 		9CD635A31FD8CEB90016CC7B /* PrisonerBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD635A21FD8CEB90016CC7B /* PrisonerBox.swift */; };
 		9CD635A61FD8CEDE0016CC7B /* TimeAlarmComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD635A41FD8CEDD0016CC7B /* TimeAlarmComponent.swift */; };
 		9CD635A71FD8CEDE0016CC7B /* DistanceAlarmComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD635A51FD8CEDE0016CC7B /* DistanceAlarmComponent.swift */; };
@@ -123,6 +125,8 @@
 		9C991DB71FCD9F5300DEE3D6 /* Yell - small-fairy-hit-moan.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Yell - small-fairy-hit-moan.wav"; sourceTree = "<group>"; };
 		9C991DBB1FCDA18C00DEE3D6 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		9CC26F641FD9369500292099 /* EntityCleanerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityCleanerComponent.swift; sourceTree = "<group>"; };
+		9CC26F661FD95A5700292099 /* PowerLevelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerLevelComponent.swift; sourceTree = "<group>"; };
+		9CC26F681FD960B300292099 /* AttackLimiterComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackLimiterComponent.swift; sourceTree = "<group>"; };
 		9CD635A21FD8CEB90016CC7B /* PrisonerBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrisonerBox.swift; sourceTree = "<group>"; };
 		9CD635A41FD8CEDD0016CC7B /* TimeAlarmComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeAlarmComponent.swift; sourceTree = "<group>"; };
 		9CD635A51FD8CEDE0016CC7B /* DistanceAlarmComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceAlarmComponent.swift; sourceTree = "<group>"; };
@@ -364,9 +368,9 @@
 		D2E0A8961F993B4800FCC255 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				9CE0FF411FC7656E004AF735 /* Sounds */,
 				9CD635A51FD8CEDE0016CC7B /* DistanceAlarmComponent.swift */,
 				9CD635A41FD8CEDD0016CC7B /* TimeAlarmComponent.swift */,
-				9CE0FF411FC7656E004AF735 /* Sounds */,
 				D2E0A8971F993B5D00FCC255 /* JumpComponent.swift */,
 				9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */,
 				9C1B829C1F9E2FD300173FF3 /* SeekComponent.swift */,
@@ -374,6 +378,8 @@
 				D26D7B681FD952D700CCA3C1 /* LifeComponent.swift */,
 				9C991DB21FCC99DE00DEE3D6 /* AttackComponent.swift */,
 				9CC26F641FD9369500292099 /* EntityCleanerComponent.swift */,
+				9CC26F661FD95A5700292099 /* PowerLevelComponent.swift */,
+				9CC26F681FD960B300292099 /* AttackLimiterComponent.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -552,6 +558,7 @@
 				B08B91211FC4CCBE00304E46 /* SoundDistanceComponent.swift in Sources */,
 				D26610181FD5B831006B1455 /* CameraControl.swift in Sources */,
 				D2EC85811F83F1240093F009 /* GameViewController.swift in Sources */,
+				9CC26F691FD960B300292099 /* AttackLimiterComponent.swift in Sources */,
 				D25160EC1F940ACF00BF756A /* StandingState.swift in Sources */,
 				D2E0A8981F993B5D00FCC255 /* JumpComponent.swift in Sources */,
 				9C0350FA1FD5CA2800970006 /* MenuViewController.swift in Sources */,
@@ -570,6 +577,7 @@
 				D26035F11FCDC57B00E4F069 /* FinishOverlay.swift in Sources */,
 				D2C7654F1FD0891100EC7D9B /* VideoViewController.swift in Sources */,
 				D26035F31FCDC66C00E4F069 /* CGPoint+FromUIView.swift in Sources */,
+				9CC26F671FD95A5700292099 /* PowerLevelComponent.swift in Sources */,
 				9C0350F81FD59ED200970006 /* Fase2GameController.swift in Sources */,
 				B0FDBAF01FA9F35600D4B08D /* toon.metal in Sources */,
 				B0465F0D1FC444A2002B8FE8 /* SoundRandomComponent.swift in Sources */,

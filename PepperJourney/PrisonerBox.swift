@@ -54,6 +54,7 @@ class PrisonerBox {
         
         // Add the components responsable by cleaning the entity
         self.addEntityCleaners()
+        
     }
     func addEntityCleaners() {
         for character in characters {
@@ -93,7 +94,9 @@ class PrisonerBox {
     }
  
     func setLookAtConstraint(visualTarget: SCNNode, node: SCNNode) {
-        let lookAtConstraint = SCNLookAtConstraint(target: visualTarget)
+        let target = self.scene.rootNode.childNode(withName: "character", recursively: true)
+
+        let lookAtConstraint = SCNLookAtConstraint(target: target)
         lookAtConstraint.isGimbalLockEnabled = true
         lookAtConstraint.influenceFactor = 1
         
@@ -178,7 +181,7 @@ class PrisonerBox {
     func charactersEcape() {
         for character in characters {
             // Add seek component
-            let seekComponent = SeekComponent(target: self.destinationPoint, maxSpeed: 100, maxAcceleration: 50)
+            let seekComponent = SeekComponent(target: self.destinationPoint, maxSpeed: 50, maxAcceleration: 10)
             character.addComponent(seekComponent)
             self.entityManager?.loadSeekComponent(component: seekComponent)
 
@@ -187,7 +190,12 @@ class PrisonerBox {
 
             // Add new look at constraint
             self.setLookAtConstraint(visualTarget: self.finalPoint, node: modelComponent.modelNode!)
-
+            
+            // Load animations
+            self.loadAnimations(modelNode: modelComponent.modelNode)
+            // Play animation
+            self.playAnimation(type: .running, modelNode: modelComponent.modelNode)
+            
             guard self.entityManager != nil else {fatalError()}
             let distanceAlarm = DistanceAlarmComponent(targetPosition: self.finalPoint.position, alarmTriggerRadius: 5, entityManager: self.entityManager!)
             character.addComponent(distanceAlarm)

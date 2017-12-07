@@ -30,8 +30,8 @@ class Character: GKEntity {
     static private let speedFactor: CGFloat = 100
     public var initialPosition = float3(0, 0, 0)
 
-    // Sound
-    
+    // Entity Manager
+    private weak var entityManager: EntityManager?
     
     // actions
     private let jumpImpulse:Float = 800
@@ -58,11 +58,11 @@ class Character: GKEntity {
     var trackingAgentComponent: GKAgent3D!
     
     // MARK: - Initialization
-    init(scene: SCNScene, jumpDelegate: JumpDelegate?, soundController: SoundController) {
+    init(scene: SCNScene, jumpDelegate: JumpDelegate?, entityManager: EntityManager, soundController: SoundController) {
         super.init()
         
         self.jumpDelegate = jumpDelegate
-        
+        self.entityManager = entityManager
         self.loadCharacter(scene: scene)
         self.loadAnimations()
         self.loadComponents(scene: scene, soundController: soundController)
@@ -72,6 +72,11 @@ class Character: GKEntity {
         self.characterNode.position = SCNVector3(self.initialPosition)
         self.directionAngle = 0
         self.lastDirection = float3(0,0,1)
+        
+        // Reset the power Level to the default
+        guard let powerLevelComponent = self.component(ofType: PowerLevelCompoenent.self) else {fatalError()}
+        powerLevelComponent.resetPowerLevel()
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -115,12 +120,22 @@ class Character: GKEntity {
         self.addComponent(sinkComponent)
         
         // Attack component
-        let attackComponet = AttackComponent(scene: scene)
-        self.addComponent(attackComponet)
+        let attackComponent = AttackComponent(scene: scene)
+        self.addComponent(attackComponent)
+        
+        // Power Level Component
+        let powerLevelComponent = PowerLevelCompoenent(MaxPower: 10, defaultPowerLevel: 5)
+        self.addComponent(powerLevelComponent)
+        
+        // Attack Limiter Component
+        let attackLimiterComponent = AttackLimiterComponent(rechargeInterval: 1.5, chargeRate: 1, dischargeRate: 1)
+        self.addComponent(attackLimiterComponent)
+        self.entityManager?.loadComponentSystem(component: attackLimiterComponent)
         
         //Life component
         let lifeComponent = LifeComponent()
         self.addComponent(lifeComponent)
+
     }
     
     // MARK: Animatins Functins

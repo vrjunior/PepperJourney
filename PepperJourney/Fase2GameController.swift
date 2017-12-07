@@ -195,13 +195,23 @@ class Fase2GameController: GameController {
     }
     
     // MARK: - Update
-    
+    var lastPowerLeverPorcento: Float = 0
     override func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         // update characters
         character!.update(atTime: time, with: renderer)
         
+        
+        // MELHORAR ISSO, PQ ESTÁ HORRÍVEL
+        let powerLevelComponent = character.component(ofType: PowerLevelCompoenent.self)!
+        let porcento:Float = powerLevelComponent.currentPowerLevel / powerLevelComponent.MaxPower
+        if porcento != lastPowerLeverPorcento {
+            lastPowerLeverPorcento = porcento
+            
+            self.overlayDelegate?.updateAttackIndicator(percentage: lastPowerLeverPorcento)
+        }
         self.entityManager.update(atTime: time)
     }
+    
     override func handleWithPhysicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         var characterNode: SCNNode?
         var anotherNode: SCNNode?
@@ -244,9 +254,19 @@ class Fase2GameController: GameController {
                 // foi pego por uma batata
             else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue {
                 DispatchQueue.main.async { [unowned self] in
-                    self.setupGameOver()
-                }
-                
+                    if let lifeComponent = self.character.component(ofType: LifeComponent.self) {
+                        if lifeComponent.canReceiveDamage {
+                            lifeComponent.receiveDamage(enemyCategory: .potato, waitTime: 0.2)
+                            let currentLife = lifeComponent.getLifePercentage()
+                            
+                            if currentLife <= 0 {
+                                self.setupGameOver()
+                                return
+                            }
+                            self.overlayDelegate?.updateLifeIndicator(percentage: currentLife)
+                        }
+                    }
+                }  
             }
                 
             else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.lake.rawValue {
@@ -346,12 +366,12 @@ class Fase2GameController: GameController {
                 fatalError("Error getting destinationPoint node to PrisonerBox")
             }
             // Final position relative at the scene world
-            var finalPoint = SCNNode()
+            let finalPoint = SCNNode()
             finalPoint.position.x = initialPoint.position.x + destinationPoint.position.x
             finalPoint.position.y = initialPoint.position.y + destinationPoint.position.y
             finalPoint.position.z = initialPoint.position.z + destinationPoint.position.z
             
-            let characters: [PrisonerType] = [.Tomato, .Tomato, .Tomato]
+            let characters: [PrisonerType] = [.Avocado, .Tomato, .Tomato]
             
             // create a box with prisoners
             let box = PrisonerBox(scene: self.scene,

@@ -25,6 +25,7 @@ class EntityManager
     var distanceAlarmComponentSystem = GKComponentSystem(componentClass: DistanceAlarmComponent.self)
     var entityCleanerComponentSystem = GKComponentSystem(componentClass: EntityCleanerComponent.self)
 
+    var componentSystems = [GKComponentSystem]()
     // Game entities
     private(set) var character: Character!
     private(set) var potatoesEntities = [GKEntity]()
@@ -37,9 +38,13 @@ class EntityManager
     {
         self.scene = scene
         self.soundController = soundController
+        
+        // Add the componentSystems
+        let componentSystem = GKComponentSystem(componentClass: AttackLimiterComponent.self)
+        self.componentSystems.append(componentSystem)
 
         // Create the character entity
-        self.character = Character(scene: self.scene, jumpDelegate: gameController, soundController: self.soundController)
+        self.character = Character(scene: self.scene, jumpDelegate: gameController, entityManager: self , soundController: self.soundController)
 
         // Add the sinkComponent to a component system
         guard let sinkCompnent = self.character.component(ofType: SinkComponent.self) else
@@ -53,6 +58,8 @@ class EntityManager
 
         // Create a Entity that coordinate the potato creation
         self.potatoGeneratorSystem = PotatoGeneratorSystem(scene: self.scene, characterNode: self.character.characterNode)
+        
+        
 
     }
 
@@ -86,7 +93,12 @@ class EntityManager
             
         }
     }
-
+    func loadComponentSystem(component: GKComponent) {
+        
+        for componentSystem in self.componentSystems {
+            componentSystem.addComponent(component)
+        }
+    }
     func removeDistanceAlarm(entity: GKEntity) {
         self.distanceAlarmComponentSystem.removeComponent(foundIn: entity)
     }
@@ -139,6 +151,11 @@ class EntityManager
 
         let deltaTime = time - previousUpdateTime
 
+        // Component Systems
+        for componentSystem in self.componentSystems {
+            componentSystem.update(deltaTime: deltaTime)
+        }
+        
         //Seek Component
         if seekComponentSystem.components.count > 0
         {

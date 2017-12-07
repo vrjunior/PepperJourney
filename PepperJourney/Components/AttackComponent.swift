@@ -75,7 +75,7 @@ class AttackComponent: GKComponent
     }
     
     override func update(deltaTime seconds: TimeInterval) {
-        
+        // Make the balls disapears after fireBallLifeTime seconds
         var index = 0
         while index < self.attacks.count
         {
