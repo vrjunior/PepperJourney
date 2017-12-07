@@ -32,7 +32,7 @@ class CameraControl: SKSpriteNode {
         
         self.isUserInteractionEnabled = true
        
-        self.lineSize = CGSize(width: 100, height: 6)
+        self.lineSize = CGSize(width: 180, height: 6)
         self.line = SKSpriteNode(color: UIColor.gray, size: self.lineSize)
         self.addChild(line!)
         
@@ -84,7 +84,6 @@ class CameraControl: SKSpriteNode {
             
             //call the delegate method
             let angleToRotate = self.getAngle(byDistance: distance) - previousRotation
-            print("angle to rotate: \(self.getAngle(byDistance: distance))")
             self.delegate?.rotateCamera(angle: angleToRotate)
             
             //set previousRotation
@@ -126,7 +125,7 @@ class CameraControl: SKSpriteNode {
         
         let result = (b - a) * ((distance - minX) / (maxX - minX)) + a
         
-        return result
+        return -result
     }
     
 }

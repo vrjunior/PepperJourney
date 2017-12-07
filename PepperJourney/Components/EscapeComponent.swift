@@ -16,22 +16,20 @@ enum CaptiveType {
 }
 class CaptiveComponent: GKComponent {
     init (initialPosition: SCNVector3, type: CaptiveType) {
-        
+        super.init()
     }
     
     func getCharecterScene(type: CaptiveType) -> String {
         var characterScene: String
         
         switch type {
-        case CaptiveType.Avocado:
-            characterScene = "Game.scnassets/characters/Avocado.dae"
-        case CaptiveType.Tomato:
-            characterScene = "Game.scnassets/characters/Tomato.dae"
-        default:
-            <#code#>
+            case CaptiveType.Avocado:
+                characterScene = "Game.scnassets/characters/Avocado.dae"
+            case CaptiveType.Tomato:
+                characterScene = "Game.scnassets/characters/Tomato.dae"
         }
         
-        
+        return characterScene
     }
         
     required init?(coder aDecoder: NSCoder) {

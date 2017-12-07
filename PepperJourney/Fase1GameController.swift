@@ -62,19 +62,16 @@ class Fase1GameController: GameController {
     }
     
     override func setupCamera() {
+        self.followingCamera = self.scene.rootNode.childNode(withName: "followingCamera", recursively: true)
+        
         self.cameraNode = self.scene.rootNode.childNode(withName: "camera", recursively: true)!
         self.cameraInitialPosition = cameraNode.presentation.position
-        
-        guard let characterNode = self.character.characterNode else {
-            fatalError("Error with the target of the follow camera")
-        }
         
         let lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
         lookAtConstraint.isGimbalLockEnabled = true
         lookAtConstraint.influenceFactor = 1
         
-        let distanceConstraint = SCNDistanceConstraint(target: characterNode)
-        
+        let distanceConstraint = SCNDistanceConstraint(target: self.character.characterNode)
         distanceConstraint.minimumDistance = 45
         distanceConstraint.maximumDistance = 45
         
@@ -84,7 +81,7 @@ class Fase1GameController: GameController {
             return SCNVector3(position)
         }
         
-        self.cameraNode.constraints = [lookAtConstraint, distanceConstraint, keepAltitude]
+        self.cameraNode.constraints = [lookAtConstraint, distanceConstraint , keepAltitude]
     }
     
     override func setupGame() {
@@ -95,6 +92,10 @@ class Fase1GameController: GameController {
         self.gameStateMachine.enter(PauseState.self)
     }
     
+    func updateFollowingCamera() {
+        self.followingCamera.position = self.character.characterNode.presentation.position
+    }
+    
     
     // MARK: Initializer
     override init(scnView: SCNView) {
@@ -102,7 +103,7 @@ class Fase1GameController: GameController {
 
         
         //load the main scene
-        self.scene = SCNScene(named: "Game.scnassets/Fase1.scn")
+        self.scene = SCNScene(named: "Game.scnassets/Fases/Fase1.scn")
         
         //setup game state machine
         self.setupGame()
@@ -207,7 +208,6 @@ class Fase1GameController: GameController {
         
         if controlsOverlay == nil {
             controlsOverlay = SKScene(fileNamed: "ControlsOverlay.sks") as? ControlsOverlay
-            controlsOverlay?.padDelegate = self
             controlsOverlay?.controlsDelegate = self
             controlsOverlay?.gameOptionsDelegate = self
             controlsOverlay?.scaleMode = .aspectFill
@@ -224,6 +224,7 @@ class Fase1GameController: GameController {
     override func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         // update characters
         character!.update(atTime: time, with: renderer)
+        self.updateFollowingCamera()
         
         self.entityManager.update(atTime: time)
     }

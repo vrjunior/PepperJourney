@@ -30,7 +30,7 @@ class AttackComponent: GKComponent
         fatalError("init(coder:) has not been implemented")
     }
     
-    func atack(originNode: SCNNode, direction: float3, velocity: float3)
+    func attack(originNode: SCNNode, direction: float3, velocity: float3)
     {
         guard let scene = SCNScene(named: "Game.scnassets/character/FireBall.scn") else
         {

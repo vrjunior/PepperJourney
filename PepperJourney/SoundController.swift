@@ -62,13 +62,11 @@ class SoundController
         self.loadSound(fileName: fileName, soundName: soundName, volume: self.defaultSoudEffectVolume)
     }
     
+    
+    
     func removeAudioSource(soundName: String)
     {
-        guard self.sounds.removeValue(forKey: soundName) != nil else
-        {
-            fatalError("Error getting sound \(soundName)")
-            
-        }
+       self.sounds.removeValue(forKey: soundName)
     }
     private func playGenericSound(soundName: String, loops: Bool, node: SCNNode)
     {

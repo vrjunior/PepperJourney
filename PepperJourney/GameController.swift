@@ -30,6 +30,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     var character: Character!
     var characterStateMachine: GKStateMachine!
     var gameStateMachine: GKStateMachine!
+    var followingCamera: SCNNode!
     
     open var scnView: SCNView!
     open var scene: SCNScene!
@@ -141,8 +142,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         sceneRenderer = scnView
         sceneRenderer!.delegate = self
-                
-        
+
     }
     
     func initializeTheGame () {
@@ -243,6 +243,11 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     
     func handleWithPhysicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
     }
+    
+    func rotateCamera(byAngle angle: CGFloat, withDuration duration: Double) {
+        let rotateAction = SCNAction.rotateBy(x: 0, y: angle, z: 0, duration: duration)
+        self.followingCamera.runAction(rotateAction)
+    }
 }
 
 extension GameController : Controls {
@@ -292,11 +297,12 @@ extension GameController : Controls {
         lauchPosition.y = self.character.characterNode.presentation.position.y + 5
         
         
-        attackComponent.atack(originNode: self.character.characterNode, direction: self.character.lastDirection, velocity: self.character.characterVelocity)
+        attackComponent.attack(originNode: self.character.characterNode, direction: self.character.lastDirection, velocity: self.character.characterVelocity)
     }
     
     func rotateCamera(angle: CGFloat) {
-        self.character.rotateBy(angle: angle)
+        let duration: Double = 0.1
+        self.rotateCamera(byAngle: angle, withDuration: duration)
     }
 
 }
