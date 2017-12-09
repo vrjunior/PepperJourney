@@ -240,6 +240,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         // update characters
         character!.update(atTime: time, with: renderer)
+        self.updateFollowingCamera()
         
         self.entityManager.update(atTime: time)
         
@@ -251,6 +252,10 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     func rotateCamera(byAngle angle: CGFloat, withDuration duration: Double) {
         let rotateAction = SCNAction.rotateBy(x: 0, y: angle, z: 0, duration: duration)
         self.followingCamera.runAction(rotateAction)
+    }
+    
+    func updateFollowingCamera() {
+        self.followingCamera.position = self.character.characterNode.presentation.position
     }
 }
 
@@ -330,6 +335,9 @@ extension GameController : GameOptions {
     }
     
     func restart() {
+        //reset lifebar
+        self.overlayDelegate?.resetLifeIndicator()
+        
         // Do the setup to restart the game
         self.prepereToStartGame()
         

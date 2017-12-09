@@ -14,6 +14,7 @@ import SpriteKit
 protocol UpdateIndicators {
     func updateLifeIndicator(percentage: Float)
     func updateAttackIndicator(percentage: Float)
+    func resetLifeIndicator()
 }
 
 class ControlsOverlay: SKScene {
@@ -115,5 +116,8 @@ extension ControlsOverlay: UpdateIndicators {
     }
     func updateAttackIndicator(percentage: Float) {
         self.attackIndicator.size.width = CGFloat(percentage) * self.attackIndicatorFullWidth
+    }
+    func resetLifeIndicator() {
+        self.lifeIndicator.size.width = self.lifeIndicatorFullWidth
     }
 }

@@ -92,11 +92,6 @@ class Fase1GameController: GameController {
         self.gameStateMachine.enter(PauseState.self)
     }
     
-    func updateFollowingCamera() {
-        self.followingCamera.position = self.character.characterNode.presentation.position
-    }
-    
-    
     // MARK: Initializer
     override init(scnView: SCNView) {
         super.init(scnView: scnView)
@@ -209,17 +204,7 @@ class Fase1GameController: GameController {
         //here we can hidden indicators
         controlsOverlay?.isAttackHidden = true
     }
-    
-    // MARK: - Update
-    
-    override func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        // update characters
-        character!.update(atTime: time, with: renderer)
-        self.updateFollowingCamera()
         
-        self.entityManager.update(atTime: time)
-    }
-    
     override func handleWithPhysicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         
         var characterNode: SCNNode?

@@ -74,8 +74,12 @@ class Character: GKEntity {
         self.lastDirection = float3(0,0,1)
         
         // Reset the power Level to the default
-        guard let powerLevelComponent = self.component(ofType: PowerLevelCompoenent.self) else {fatalError()}
-        powerLevelComponent.resetPowerLevel()
+        let powerLevelComponent = self.component(ofType: PowerLevelCompoenent.self)
+        powerLevelComponent?.resetPowerLevel()
+        
+        //heal character
+        let lifeComponent = self.component(ofType: LifeComponent.self)
+        lifeComponent?.healAll()
         
     }
     
