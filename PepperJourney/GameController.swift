@@ -20,8 +20,8 @@ enum CategoryMaskType: Int {
     case lake         = 0b1000      // 8
     case obstacle     = 0b10000     // 16
     case finalLevel   = 0b100000    // 32
-    case fireBall     = 0b1000000   // 64
-    case box          = 0b10000000  // 128
+    case fireBall     = 64
+    case box          = 128  // 128
     case characters   = 0b100000000 // 256
 }
 

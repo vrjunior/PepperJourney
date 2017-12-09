@@ -88,22 +88,22 @@ class PrisonerBox {
         
         // Add look at constraint
         if let node = self.getModelComponent(entity: self.characters[characterIndex]).modelNode {
-            self.setLookAtConstraint(visualTarget: visualTarget, node: node)
+            self.setLookAtConstraint(visualTarget: visualTarget, nodeToApply: node)
         }
         
     }
  
-    func setLookAtConstraint(visualTarget: SCNNode, node: SCNNode) {
+    func setLookAtConstraint(visualTarget: SCNNode, nodeToApply: SCNNode) {
 
         let lookAtConstraint = SCNLookAtConstraint(target: visualTarget)
         lookAtConstraint.isGimbalLockEnabled = true
         lookAtConstraint.influenceFactor = 1
         
-        node.constraints = [lookAtConstraint]
+        nodeToApply.constraints = [lookAtConstraint]
     }
     
     func loadBox() {
-        let path = "Game.scnassets/scenario/box.scn"
+        let path = "Game.scnassets/scenario/box/box.scn"
         let modelComponent = ModelComponent(modelPath: path, scene: self.scene, position: self.initialPosition)
         self.box.addComponent(modelComponent)
     }
@@ -119,9 +119,9 @@ class PrisonerBox {
         // Remove component from box entity
         self.box.removeComponent(ofType: ModelComponent.self)
         
-        // Spawn the characters
+        // Spawn the characters looking to the Pepper in the beggining
         for index in 0 ..< self.characters.count {
-            loadCharacter(characterIndex: index, typeCharacter: self.characterTypeArray[index], visualTarget: self.finalPoint)
+            loadCharacter(characterIndex: index, typeCharacter: self.characterTypeArray[index], visualTarget: self.visualTarget)
         }
         // Update the flag
         self.isBoxOpen = true
@@ -180,15 +180,13 @@ class PrisonerBox {
     func charactersEcape() {
         for character in characters {
             // Add seek component
-            let seekComponent = SeekComponent(target: self.destinationPoint, maxSpeed: 50, maxAcceleration: 10)
+            let seekComponent = SeekComponent(target: self.destinationPoint, maxSpeed: 50, maxAcceleration: 5)
             character.addComponent(seekComponent)
             self.entityManager?.loadSeekComponent(component: seekComponent)
 
-            // Remove look at constraint
+            // Setup the new look at constraint
             let modelComponent = self.getModelComponent(entity: character)
-
-            // Add new look at constraint
-            self.setLookAtConstraint(visualTarget: self.finalPoint, node: self.finalPoint)
+            self.setLookAtConstraint(visualTarget: self.finalPoint, nodeToApply: modelComponent.modelNode)
             
             // Load animations
             self.loadAnimations(modelNode: modelComponent.modelNode)
