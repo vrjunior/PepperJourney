@@ -282,7 +282,7 @@ class EntityManager
 	//Add sounds here
 	public func addPepperSoundPoints()
 	{
-        let soundPoints = self.scene.rootNode.childNode(withName: "FaseAudioPositions", recursively: false)?.childNodes
+        let soundPoints = self.scene.rootNode.childNode(withName: "levelAudioPoints", recursively: false)?.childNodes
 		var distanceComponentArray = [SoundDistanceComponent]()
         
         for soundPoint in soundPoints!

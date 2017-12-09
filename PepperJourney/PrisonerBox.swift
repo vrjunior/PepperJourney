@@ -94,9 +94,8 @@ class PrisonerBox {
     }
  
     func setLookAtConstraint(visualTarget: SCNNode, node: SCNNode) {
-        let target = self.scene.rootNode.childNode(withName: "character", recursively: true)
 
-        let lookAtConstraint = SCNLookAtConstraint(target: target)
+        let lookAtConstraint = SCNLookAtConstraint(target: visualTarget)
         lookAtConstraint.isGimbalLockEnabled = true
         lookAtConstraint.influenceFactor = 1
         
@@ -189,7 +188,7 @@ class PrisonerBox {
             let modelComponent = self.getModelComponent(entity: character)
 
             // Add new look at constraint
-            self.setLookAtConstraint(visualTarget: self.finalPoint, node: modelComponent.modelNode!)
+            self.setLookAtConstraint(visualTarget: self.finalPoint, node: self.finalPoint)
             
             // Load animations
             self.loadAnimations(modelNode: modelComponent.modelNode)
