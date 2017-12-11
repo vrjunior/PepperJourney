@@ -326,6 +326,7 @@ class Fase2GameController: GameController {
                     potatoEntity.removeComponent(ofType: SeekComponent.self)
                 }
             }
+            return
         }
         else if let potatoNode = potatoNode, anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.fireBall.rawValue
         {
@@ -334,11 +335,24 @@ class Fase2GameController: GameController {
             {
                 self.soundController.playSoundEffect(soundName: "PotatoYell", loops: false, node: self.cameraNode)
             }
+            return
             
         }
-        if contact.nodeA.physicsBody?.categoryBitMask == CategoryMaskType.box.rawValue ||
-            contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.box.rawValue {
-            self.prisonerBoxes[0].breakBox()
+        var boxNode: SCNNode?
+        if contact.nodeA.physicsBody?.categoryBitMask == CategoryMaskType.box.rawValue {
+            boxNode = contact.nodeA
+        }
+        else if contact.nodeB.physicsBody?.categoryBitMask == CategoryMaskType.box.rawValue {
+            boxNode = contact.nodeB
+        }
+        if let boxNode = boxNode {
+            for prisonerBox in self.prisonerBoxes {
+                if let modelNode = prisonerBox.box.component(ofType: ModelComponent.self)?.modelNode {
+                    if modelNode == boxNode {
+                        prisonerBox.breakBox()
+                    }
+                }
+            }
         }
     }
     
@@ -370,8 +384,12 @@ class Fase2GameController: GameController {
             
             let characters: [PrisonerType] = [.Avocado, .Tomato, .Tomato]
             
+            var boxName = ""
+            if boxNode.name != nil {
+                boxName = boxNode.name!
+            }
             // create a box with prisoners
-            let box = PrisonerBox(scene: self.scene,
+            let box = PrisonerBox(boxName: boxName, scene: self.scene,
                                    entityManager: self.entityManager,
                                    initialPoint: initialPoint,
                                    finalPoint: finalPoint,

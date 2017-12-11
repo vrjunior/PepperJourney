@@ -4,14 +4,14 @@
   <contributor>
    <authoring_tool>SceneKit Collada Exporter v1.0</authoring_tool>
   </contributor>
-  <created>2017-12-09T01:15:32Z</created>
-  <modified>2017-12-09T01:15:32Z</modified>
+  <created>2017-12-11T12:22:32Z</created>
+  <modified>2017-12-11T12:22:32Z</modified>
   <unit meter="1.000000"/>
-  <up_axis>Z_UP</up_axis>
+  <up_axis>Y_UP</up_axis>
  </asset>
  <library_images>
   <image id="image1">
-   <init_from>../textures/AOBox.png</init_from>
+   <init_from>../../textures/AOBox.png</init_from>
   </image>
  </library_images>
  <library_materials>
@@ -113,7 +113,7 @@
      <input semantic="VERTEX" offset="0" source="#Cube_001-mesh-positions-vertices"/>
      <input semantic="NORMAL" offset="0" source="#Cube_001-mesh-normals"/>
      <input semantic="TEXCOORD" offset="0" source="#Cube_001-mesh-map-0" set="1"/>
-     <p>894 2835 2835 1596 1143 2835 2836 331 2836 1191 2836 1214 2835 1139 2836 1216 </p>
+     <p>894 2835 2835 91 1384 2835 2836 331 2836 1191 2836 1217 2835 2580 2836 1216 </p>
     </lines>
     <triangles count="945" material="geometryElement8">
      <input semantic="VERTEX" offset="0" source="#Cube_001-mesh-positions-vertices"/>
@@ -127,7 +127,7 @@
  <library_visual_scenes>
   <visual_scene id="scene9">
    <node id="Cube" name="Cube">
-    <matrix>5 0 0 0 0 5 0 0 0 0 5 0 0 0 0 1 </matrix>
+    <matrix>5 0 -0 0 0 2.980232e-07 5 0 0 -5 2.980232e-07 0 0 0 0 1 </matrix>
     <instance_geometry url="#geometry3">
      <bind_material>
       <technique_common>
