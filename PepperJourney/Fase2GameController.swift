@@ -51,20 +51,6 @@ class Fase2GameController: GameController {
         self.entityManager.addPepperSoundPoints()
         
     }
-    override func setupCharacter() {
-        // create the character with your components
-        self.character = self.entityManager.character
-        self.character.setupCharacter()
-        
-        characterStateMachine = GKStateMachine(states: [
-            StandingState(scene: scene, character: character),
-            WalkingState(scene: scene, character: character),
-            RunningState(scene: scene, character: character),
-            JumpingState(scene: scene, character: character),
-            JumpingMoveState(scene: scene, character: character)
-            ])
-        
-    }
     
     override func setupGame() {
         gameStateMachine = GKStateMachine(states: [

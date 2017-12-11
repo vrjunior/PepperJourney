@@ -16,7 +16,6 @@ class AttackLimiterComponent: GKComponent {
     private(set) var dischargeRate: Float!
     private(set) var chargeRate: Float!
     
-    
     init(rechargeInterval: TimeInterval, chargeRate: Float, dischargeRate: Float) {
         super.init()
         self.rechargeInterval = rechargeInterval
@@ -39,14 +38,11 @@ class AttackLimiterComponent: GKComponent {
         if powerLevel == nil {
             emptyFireLevelHandler()
         }
-        else {
-            guard let attackComponent = entity.component(ofType: AttackComponent.self) else {fatalError()}
-            
-            
-            attackComponent.attack(originNode: originNode, direction: direction, velocity: velocity)
-        }
+        
+        guard let attackComponent = entity.component(ofType: AttackComponent.self) else {fatalError()}
         
         
+        attackComponent.attack(originNode: originNode, direction: direction, velocity: velocity)
     }
     func emptyFireLevelHandler() {
         

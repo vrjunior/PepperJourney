@@ -98,7 +98,7 @@ class Character: GKEntity {
     
     //Load all animation in character node
     private func loadAnimations() {
-        let animTypes:[AnimationType] = [.walking, .running, .jumpingLanding, .jumpingImpulse, .standing1, .standing2]
+        let animTypes:[AnimationType] = [.walking, .running, .jumpingLanding, .jumpingImpulse, .standing1, .standing2, .standingAttack, .runningAttack, .walkingAttack]
         
         for anim in animTypes {
             let animation = SCNAnimationPlayer.withScene(named: "Game.scnassets/character/\(anim.rawValue).dae")
@@ -150,7 +150,10 @@ class Character: GKEntity {
     func playAnimationOnce(type: AnimationType) {
         let animationPlayer = self.characterNode.animationPlayer(forKey: type.rawValue)
         animationPlayer?.play()
-        animationPlayer?.stop(withBlendOutDuration: (animationPlayer?.animation.duration)!)
+        let when = DispatchTime.now() + (animationPlayer?.animation.duration)!
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            animationPlayer?.stop()
+        }
     }
     
     func playOne(type: AnimationType) {

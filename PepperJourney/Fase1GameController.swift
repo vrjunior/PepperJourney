@@ -46,20 +46,6 @@ class Fase1GameController: GameController {
         self.entityManager.addPepperSoundPoints()
         
     }
-    override func setupCharacter() {
-        // create the character with your components
-        self.character = self.entityManager.character
-        self.character.setupCharacter()
-        
-        characterStateMachine = GKStateMachine(states: [
-            StandingState(scene: scene, character: character),
-            WalkingState(scene: scene, character: character),
-            RunningState(scene: scene, character: character),
-            JumpingState(scene: scene, character: character),
-            JumpingMoveState(scene: scene, character: character)
-            ])
-        
-    }
     
     override func setupCamera() {
         self.followingCamera = self.scene.rootNode.childNode(withName: "followingCamera", recursively: true)

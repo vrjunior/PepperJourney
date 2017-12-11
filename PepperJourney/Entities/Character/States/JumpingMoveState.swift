@@ -27,6 +27,9 @@ class JumpingMoveState : BaseState {
         if stateClass == RunningState.self {
             return false
         }
+        if stateClass == AttackState.self {
+            return false
+        }
         
         return true
     }

@@ -97,7 +97,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
             WalkingState(scene: scene, character: character),
             RunningState(scene: scene, character: character),
             JumpingState(scene: scene, character: character),
-            JumpingMoveState(scene: scene, character: character)
+            JumpingMoveState(scene: scene, character: character),
+            AttackState(scene: scene, character: character)
             ])
         
     }
@@ -296,17 +297,7 @@ extension GameController : Controls {
     }
     
     func attack() {
-        
-        guard let attackLimiterComponent = self.character.component(ofType: AttackLimiterComponent.self) else
-        {
-            fatalError("Error getting attack limiter component")
-        }
-        
-        var lauchPosition = self.character.characterNode.presentation.position
-        lauchPosition.y = self.character.characterNode.presentation.position.y + 5
-        
-        
-        attackLimiterComponent.tryAttack(originNode: self.character.characterNode, direction: self.character.lastDirection, velocity: self.character.characterVelocity)
+        self.characterStateMachine.enter(AttackState.self)
     }
     
     func rotateCamera(angle: CGFloat) {

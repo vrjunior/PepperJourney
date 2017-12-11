@@ -16,4 +16,7 @@ enum AnimationType : String {
     case jumpingLanding = "jumpingLanding"
     case standing1 = "standing1"
     case standing2 = "standing2"
+    case runningAttack = "runningAttack"
+    case walkingAttack = "walkingAttack"
+    case standingAttack = "standingAttack"
 }

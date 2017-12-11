@@ -38,6 +38,10 @@ class JumpingState: BaseState
             return false
         }
         
+        if stateClass == AttackState.self {
+            return false
+        }
+        
         return true
     }
     

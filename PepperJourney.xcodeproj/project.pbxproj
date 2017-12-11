@@ -87,6 +87,7 @@
 		D28623B91FA3B00200691E83 /* PlayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28623B81FA3B00200691E83 /* PlayState.swift */; };
 		D2863F221FA14761004CCCDC /* JumpingMoveState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2863F211FA14761004CCCDC /* JumpingMoveState.swift */; };
 		D291BB541F8E976A00B2D111 /* SimdExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291BB531F8E976A00B2D111 /* SimdExtensions.swift */; };
+		D2A584341FDEF71200082174 /* AttackState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A584331FDEF71200082174 /* AttackState.swift */; };
 		D2B8BBB81FBB64D70042F873 /* Burrito.TTF in Resources */ = {isa = PBXBuildFile; fileRef = D2B8BBB71FBB64D70042F873 /* Burrito.TTF */; };
 		D2C7654C1FD0782000EC7D9B /* VideoStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2C7654B1FD0782000EC7D9B /* VideoStoryboard.storyboard */; };
 		D2C7654F1FD0891100EC7D9B /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C7654E1FD0891100EC7D9B /* VideoViewController.swift */; };
@@ -184,6 +185,7 @@
 		D28623B81FA3B00200691E83 /* PlayState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayState.swift; sourceTree = "<group>"; };
 		D2863F211FA14761004CCCDC /* JumpingMoveState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpingMoveState.swift; sourceTree = "<group>"; };
 		D291BB531F8E976A00B2D111 /* SimdExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimdExtensions.swift; sourceTree = "<group>"; };
+		D2A584331FDEF71200082174 /* AttackState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackState.swift; sourceTree = "<group>"; };
 		D2B8BBB71FBB64D70042F873 /* Burrito.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = Burrito.TTF; sourceTree = "<group>"; };
 		D2C7654B1FD0782000EC7D9B /* VideoStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VideoStoryboard.storyboard; sourceTree = "<group>"; };
 		D2C7654E1FD0891100EC7D9B /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				D25160E41F93FA3400BF756A /* BaseState.swift */,
+				D2A584331FDEF71200082174 /* AttackState.swift */,
 				D25160E71F93FB7F00BF756A /* RunningState.swift */,
 				D25160EB1F940ACF00BF756A /* StandingState.swift */,
 				D25160ED1F940B0C00BF756A /* JumpingState.swift */,
@@ -584,6 +587,7 @@
 				9C1B829F1F9FADD300173FF3 /* ModelComponent.swift in Sources */,
 				D2F53D751F9A88FF00422F24 /* WalkingState.swift in Sources */,
 				D2EC857D1F83F1240093F009 /* AppDelegate.swift in Sources */,
+				D2A584341FDEF71200082174 /* AttackState.swift in Sources */,
 				D20108941FBE11D9007660E3 /* StartOverlay.swift in Sources */,
 				D291BB541F8E976A00B2D111 /* SimdExtensions.swift in Sources */,
 				D201088F1FBE11D9007660E3 /* ControlsOverlay.swift in Sources */,
