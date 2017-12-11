@@ -29,12 +29,14 @@ class PrisonerBox {
     // Sound
     weak var soundController: SoundController!
     var talkAudioName: String!
+    var boxName: String
 
-    init (scene: SCNScene, entityManager: EntityManager, initialPoint: SCNNode, finalPoint:SCNNode, characterTypeArray: [PrisonerType], visualTarget: SCNNode, talkTime: TimeInterval, talkAudioName: String, soundController: SoundController)  {
+    init (boxName: String, scene: SCNScene, entityManager: EntityManager, initialPoint: SCNNode, finalPoint:SCNNode, characterTypeArray: [PrisonerType], visualTarget: SCNNode, talkTime: TimeInterval, talkAudioName: String, soundController: SoundController)  {
         
         self.scene = scene
         self.entityManager = entityManager
         self.initialPosition = initialPoint.position
+        self.boxName = boxName
         self.finalPoint = finalPoint
         self.visualTarget = visualTarget
         self.soundController = soundController
@@ -82,14 +84,21 @@ class PrisonerBox {
         // Add the captive character
         let path = self.getCharecterScene(type: typeCharacter)
         
+        // Create a model component
         let modelComponent = ModelComponent(modelPath: path, scene: scene, position: self.initialPosition)
         
+        // get the node
+        guard let modelNode = modelComponent.modelNode else {
+            return
+        }
+        modelNode.name = self.boxName + "CharacterModelNode"
         self.characters[characterIndex].addComponent(modelComponent)
         
         // Add look at constraint
-        if let node = self.getModelComponent(entity: self.characters[characterIndex]).modelNode {
-            self.setLookAtConstraint(visualTarget: visualTarget, nodeToApply: node)
-        }
+        self.setLookAtConstraint(visualTarget: visualTarget, nodeToApply: modelNode)
+        
+        // Load animations
+        self.loadAnimations(characterIndex: characterIndex)
         
     }
  
@@ -105,6 +114,8 @@ class PrisonerBox {
     func loadBox() {
         let path = "Game.scnassets/scenario/box/box.scn"
         let modelComponent = ModelComponent(modelPath: path, scene: self.scene, position: self.initialPosition)
+        modelComponent.modelNode.name = self.boxName + "ModelNode"
+        
         self.box.addComponent(modelComponent)
     }
     func breakBox()
@@ -140,6 +151,7 @@ class PrisonerBox {
         }
         return modelComponent
     }
+    
     
     func resetPrisonerBox() {
         // If the box is not open
@@ -178,7 +190,9 @@ class PrisonerBox {
     }
     
     func charactersEcape() {
+        var characterIndex: Int = 0
         for character in characters {
+            
             // Add seek component
             let seekComponent = SeekComponent(target: self.destinationPoint, maxSpeed: 50, maxAcceleration: 5)
             character.addComponent(seekComponent)
@@ -188,20 +202,19 @@ class PrisonerBox {
             let modelComponent = self.getModelComponent(entity: character)
             self.setLookAtConstraint(visualTarget: self.finalPoint, nodeToApply: modelComponent.modelNode)
             
-            // Load animations
-            self.loadAnimations(modelNode: modelComponent.modelNode)
             // Play animation
-            self.playAnimation(type: .running, modelNode: modelComponent.modelNode)
+            self.playAnimation(type: .running, characterIndex: characterIndex)
             
             guard self.entityManager != nil else {fatalError()}
             let distanceAlarm = DistanceAlarmComponent(targetPosition: self.finalPoint.position, alarmTriggerRadius: 5, entityManager: self.entityManager!)
             character.addComponent(distanceAlarm)
             self.entityManager?.loadDistanceAlarmComponent(component: distanceAlarm)
+            characterIndex += 1
         }
     }
     
     //Load all animation of the Character
-    private func loadAnimations(modelNode: SCNNode)
+    private func loadAnimations(characterIndex: Int)
     {
         let animations:[AnimationType] = [.running]
         
@@ -209,15 +222,18 @@ class PrisonerBox {
             let animation = SCNAnimationPlayer.withScene(named: "Game.scnassets/characters/tomato/\(anim.rawValue).dae")
             
             animation.stop()
+            guard let modelNode = getModelComponent(entity: self.characters[characterIndex]).modelNode else { return }
             modelNode.addAnimationPlayer(animation, forKey: anim.rawValue)
         }
     }
     
-    func playAnimation(type: AnimationType, modelNode: SCNNode) {
+    func playAnimation(type: AnimationType, characterIndex: Int) {
+        guard let modelNode = getModelComponent(entity: self.characters[characterIndex]).modelNode else { return }
         modelNode.animationPlayer(forKey: type.rawValue)?.play()
     }
     
-    func stopAnimation(type: AnimationType, modelNode: SCNNode) {
+    func stopAnimation(type: AnimationType, characterIndex: Int) {
+         guard let modelNode = getModelComponent(entity: self.characters[characterIndex]).modelNode else { return }
         modelNode.animationPlayer(forKey: type.rawValue)?.stop()
     }
 
