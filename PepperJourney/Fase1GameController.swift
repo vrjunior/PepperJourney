@@ -114,15 +114,12 @@ class Fase1GameController: GameController {
     }
     
     override func initializeTheGame () {
-        //        guard let node = character.component(ofType: ModelComponent.self)?.modelNode else
-        //        {
-        //            fatalError("Character node not found")
-        //        }
-        
         // Show de character
         self.character.characterNode.isHidden = false
         
         self.entityManager.setupGameInitialization()
+        
+        self.generatePotatoCrowd()
         
         // Reset of all the sounds
         self.resetSounds()
@@ -167,6 +164,16 @@ class Fase1GameController: GameController {
         
         //self.gameStateMachine.enter(PauseState.self)
         
+    }
+    
+    func generatePotatoCrowd() {
+        // Create new potatoes
+        let potatoSpawnPoint = SCNVector3(2,50, 285)
+        var i = 10
+        while i > 0 {
+            entityManager.createPursuitEnemy(type: EnemyTypes.potato.rawValue, position: potatoSpawnPoint)
+            i -= 1
+        }
     }
     
     override func setupFinishLevel() {
@@ -299,12 +306,12 @@ class Fase1GameController: GameController {
             
             if lakeNode.name == "lakeBottom"
             {
-                self.entityManager.killAPotato(node: potatoNode)
+                self.entityManager.killAnEnemy(node: potatoNode)
             }
             else if lakeNode.name == "lakeSurface"
             {
                 // If the potato yet exists it will be found
-                if let potatoEntity = self.entityManager.getPotatoEntity(node: potatoNode) {
+                if let potatoEntity = self.entityManager.getEnemyEntity(node: potatoNode) {
                     let sinkComponent = self.entityManager.getComponent(entity: potatoEntity, ofType: SinkComponent.self) as! SinkComponent
                     sinkComponent.sinkInWater()
                     potatoEntity.removeComponent(ofType: SeekComponent.self)
@@ -314,7 +321,7 @@ class Fase1GameController: GameController {
         else if let potatoNode = potatoNode, anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.fireBall.rawValue
         {
             
-            if self.entityManager.killAPotato(node: potatoNode)
+            if self.entityManager.killAnEnemy(node: potatoNode)
             {
                 self.soundController.playSoundEffect(soundName: "PotatoYell", loops: false, node: self.cameraNode)
             }

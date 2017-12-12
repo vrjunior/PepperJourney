@@ -156,12 +156,6 @@ class Character: GKEntity {
         }
     }
     
-    func playOne(type: AnimationType) {
-        let animationPlayer = self.characterNode.animationPlayer(forKey: type.rawValue)
-        animationPlayer?.animation.repeatCount = 1
-        animationPlayer?.play()
-    }
-    
     func stopAnimation(type: AnimationType) {
         self.characterNode.animationPlayer(forKey: type.rawValue)?.stop()
     }
