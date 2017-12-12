@@ -17,11 +17,11 @@ class AttackState : BaseState {
         
         self.shootFireBall()
         
-        if previousState is RunningState {
-            animationType = .runningAttack
-        } else if previousState is StandingState {
-            animationType = .standingAttack
-        } //else if previousState is WalkingState {
+//        if previousState is RunningState {
+//            animationType = .runningAttack
+//        } else if previousState is StandingState {
+//            animationType = .standingAttack
+//        } else if previousState is WalkingState {
 //            animationType = .walkingAttack
 //        }
         
