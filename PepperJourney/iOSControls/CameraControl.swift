@@ -32,11 +32,11 @@ class CameraControl: SKSpriteNode {
         
         self.isUserInteractionEnabled = true
        
-        self.lineSize = CGSize(width: 180, height: 6)
+        self.lineSize = CGSize(width: 540, height: 18)
         self.line = SKSpriteNode(color: UIColor.gray, size: self.lineSize)
         self.addChild(line!)
         
-        self.markSize = CGSize(width: 6, height: 20)
+        self.markSize = CGSize(width: 18, height: 60)
         self.mark = SKSpriteNode(color: UIColor.black, size: self.markSize)
         self.addChild(mark!)
         

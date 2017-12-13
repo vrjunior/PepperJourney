@@ -354,6 +354,7 @@ extension GameController : GameOptions {
 			
             if self.pauseOverlay == nil {
                 self.pauseOverlay = SKScene(fileNamed: "PauseOverlay.sks") as? PauseOverlay
+                self.pauseOverlay?.scaleMode = .aspectFit
                 self.pauseOverlay?.gameOptionsDelegate = self
             }
             
