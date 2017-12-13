@@ -7,3 +7,13 @@
 //
 
 import Foundation
+import GameKit
+
+class TutorialFase1State: GameBaseState {
+	
+	override func didEnter(from previousState: GKState?) {
+		self.scene.isPaused = true
+		self.scene.rootNode.isPaused = true
+	}
+	
+}

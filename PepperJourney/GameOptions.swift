@@ -13,4 +13,5 @@ protocol GameOptions  {
     func restart()
     func pause()
     func resume()
+	func tutorialFase1()
 }

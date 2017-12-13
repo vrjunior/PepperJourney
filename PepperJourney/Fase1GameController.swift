@@ -53,21 +53,21 @@ class Fase1GameController: GameController {
         self.cameraNode = self.scene.rootNode.childNode(withName: "camera", recursively: true)!
         self.cameraInitialPosition = cameraNode.presentation.position
         
-        let lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
-        lookAtConstraint.isGimbalLockEnabled = true
-        lookAtConstraint.influenceFactor = 1
-        
-        let distanceConstraint = SCNDistanceConstraint(target: self.character.characterNode)
-        distanceConstraint.minimumDistance = 45
-        distanceConstraint.maximumDistance = 45
-        
-        let keepAltitude = SCNTransformConstraint.positionConstraint(inWorldSpace: true) { (node: SCNNode, position: SCNVector3) -> SCNVector3 in
-            var position = float3(position)
-            position.y = self.character.characterNode.presentation.position.y + 20
-            return SCNVector3(position)
-        }
-        
-        self.cameraNode.constraints = [lookAtConstraint, distanceConstraint , keepAltitude]
+//        let lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
+//        lookAtConstraint.isGimbalLockEnabled = true
+//        lookAtConstraint.influenceFactor = 1
+//
+//        let distanceConstraint = SCNDistanceConstraint(target: self.character.characterNode)
+//        distanceConstraint.minimumDistance = 45
+//        distanceConstraint.maximumDistance = 45
+//
+//        let keepAltitude = SCNTransformConstraint.positionConstraint(inWorldSpace: true) { (node: SCNNode, position: SCNVector3) -> SCNVector3 in
+//            var position = float3(position)
+//            position.y = self.character.characterNode.presentation.position.y + 20
+//            return SCNVector3(position)
+//        }
+//
+//        self.cameraNode.constraints = [lookAtConstraint, distanceConstraint , keepAltitude]
     }
     
     override func setupGame() {
@@ -103,7 +103,7 @@ class Fase1GameController: GameController {
         self.setupCharacter()
         
         self.setupCamera()
-        
+		
         //setup tap to start
         self.setupTapToStart()
         
@@ -130,7 +130,9 @@ class Fase1GameController: GameController {
         self.character.setupCharacter()
         
         self.cameraNode.position = self.cameraInitialPosition
-        
+		
+		gameStateMachine.enter(TutorialFase1State.self)
+		
     }
     
     override func setupTapToStart() {
@@ -142,8 +144,8 @@ class Fase1GameController: GameController {
         tapOverlay.gameOptionsDelegate = self
         tapOverlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = tapOverlay
-        
     }
+	
     override func prepereToStartGame()
     {
         self.stopSounds()
@@ -189,7 +191,51 @@ class Fase1GameController: GameController {
         
         //here we can hidden indicators
         controlsOverlay?.isAttackHidden = true
+		
+		
+		//Start the tutorial
+		tutorial()
+		
     }
+	
+	func tutorial(){
+		//Get the Camera points to form the path
+		guard let generationPointsNode = scene.rootNode.childNode(withName: "CameraPathT1" ,recursively: false) else
+		{
+			fatalError("Error CameraPathT1 node not found")
+		}
+		
+		guard let lookAtNode = scene.rootNode.childNode(withName: "LookAt" ,recursively: false) else
+		{
+			fatalError("Error LookAt node not found")
+		}
+
+		let generationPoints = generationPointsNode.childNodes
+
+		let path = UIBezierPath()
+		var pathPoints = [CGPoint]()
+		
+		pathPoints.append(CGPoint.zero)
+		
+		for point in generationPoints
+		{
+			pathPoints.append(CGPoint(x: Double(point.position.z), y: Double(point.position.y)))
+		}
+	
+		path.move(to: pathPoints[0])
+		path.addCurve(to: pathPoints[1], controlPoint1: pathPoints[2], controlPoint2: pathPoints[3])
+
+		let moveAction = SCNAction.moveAlong(path: path)
+		let repeatAction = SCNAction.repeatForever(moveAction)
+		self.cameraNode.runAction(repeatAction)
+		
+		let lookAtConstraint = SCNLookAtConstraint(target: lookAtNode)
+		lookAtConstraint.isGimbalLockEnabled = true
+		lookAtConstraint.influenceFactor = 1
+
+		self.cameraNode.constraints = [lookAtConstraint]
+
+	}
         
     override func handleWithPhysicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         
@@ -322,6 +368,7 @@ class Fase1GameController: GameController {
         }
     }
 }
+
 
 
 
