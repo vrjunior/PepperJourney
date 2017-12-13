@@ -98,6 +98,7 @@
 		D2EC85891F83F1240093F009 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2EC85871F83F1240093F009 /* LaunchScreen.storyboard */; };
 		D2F53D751F9A88FF00422F24 /* WalkingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F53D741F9A88FF00422F24 /* WalkingState.swift */; };
 		D2FBD29E1FE1900900F47A9F /* EnemyGeneratorSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FBD29D1FE1900900F47A9F /* EnemyGeneratorSystem.swift */; };
+		D2FBD2A01FE19D3600F47A9F /* SKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FBD29F1FE19D3600F47A9F /* SKButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -195,6 +196,7 @@
 		D2EC858A1F83F1240093F009 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2F53D741F9A88FF00422F24 /* WalkingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkingState.swift; sourceTree = "<group>"; };
 		D2FBD29D1FE1900900F47A9F /* EnemyGeneratorSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyGeneratorSystem.swift; sourceTree = "<group>"; };
+		D2FBD29F1FE19D3600F47A9F /* SKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,6 +293,7 @@
 				D26035F01FCDC57B00E4F069 /* FinishOverlay.swift */,
 				B095F5CF1FE01EE600B4F386 /* TutorialFase1Overlay.sks */,
 				B095F5D11FE01FF100B4F386 /* TutorialFase1Overlay.swift */,
+				D2FBD29F1FE19D3600F47A9F /* SKButton.swift */,
 			);
 			name = Overlays;
 			path = "New Group";
@@ -588,6 +591,7 @@
 				B06FCD6A1FD8EC6E00EFFA31 /* PotatoSpearEntity.swift in Sources */,
 				D2050A7F1FCC9BD1001EC7FE /* AttackButton.swift in Sources */,
 				D2719D901FA0EBDA00FCB61F /* AnimationType.swift in Sources */,
+				D2FBD2A01FE19D3600F47A9F /* SKButton.swift in Sources */,
 				D28623B51FA3AF5F00691E83 /* GameBaseState.swift in Sources */,
 				D28623B71FA3AFB600691E83 /* PauseState.swift in Sources */,
 				9C0350F61FD59EA800970006 /* Fase1GameController.swift in Sources */,

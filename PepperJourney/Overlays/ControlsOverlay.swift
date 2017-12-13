@@ -44,7 +44,7 @@ class ControlsOverlay: SKScene {
     private var jumpButton: JumpButton!
     private var attackButton: AttackButton!
     private var padOverlay: PadOverlay!
-    private var pauseButton: SKSpriteNode!
+    private var pauseButton: SKButton!
     private var cameraControl: CameraControl!
     
     private var lifeIndicatorFullWidth: CGFloat!
@@ -71,9 +71,10 @@ class ControlsOverlay: SKScene {
         self.padOverlay = self.childNode(withName: "padOverlay") as! PadOverlay
         self.jumpButton = self.childNode(withName: "jumpButton") as! JumpButton
         self.attackButton = self.childNode(withName: "attackButton") as! AttackButton
-        self.pauseButton = self.childNode(withName: "pauseButton") as! SKSpriteNode
         self.cameraControl = self.childNode(withName: "cameraControl") as! CameraControl
         
+        self.pauseButton = self.childNode(withName: "pauseButton") as! SKButton
+        self.pauseButton.delegate = self
         
         self.lifeIndicator = self.childNode(withName: "lifeIndicator") as! SKSpriteNode
         self.lifeIndicatorFullWidth = lifeIndicator.size.width
@@ -88,28 +89,6 @@ class ControlsOverlay: SKScene {
     
 }
 
-extension ControlsOverlay {
-    
-    override func didMove(to view: SKView) {
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ControlsOverlay.handleTap(_:)))
-        
-        view.addGestureRecognizer(tapGesture)
-        
-    }
-    
-    @objc func handleTap(_ gesture: UITapGestureRecognizer) {
-        
-        var location = gesture.location(in: self.view)
-        location.y = (self.view?.frame.height)! - location.y
-        
-        if pauseButton.contains(location) {
-            self.gameOptionsDelegate?.pause()
-        }
-        
-    }
-}
-
 extension ControlsOverlay: UpdateIndicators {
     func updateLifeIndicator(percentage: Float) {
         self.lifeIndicator.size.width = CGFloat(percentage) * self.lifeIndicatorFullWidth
@@ -120,4 +99,16 @@ extension ControlsOverlay: UpdateIndicators {
     func resetLifeIndicator() {
         self.lifeIndicator.size.width = self.lifeIndicatorFullWidth
     }
+}
+
+extension ControlsOverlay : SKButtonDelegate {
+    
+    func buttonPressed(target: SKButton) {
+        
+        if target == pauseButton {
+            self.gameOptionsDelegate?.pause()
+        }
+        
+    }
+    
 }
