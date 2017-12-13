@@ -22,7 +22,6 @@
 		9C1B82A11FA0D09800173FF3 /* TrigonometryLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B82A01FA0D09600173FF3 /* TrigonometryLib.swift */; };
 		9C4806811FC88A2700168571 /* SinkComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4806801FC88A2700168571 /* SinkComponent.swift */; };
 		9C4806851FCC505000168571 /* splashingWater2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C4806841FCC504F00168571 /* splashingWater2.wav */; };
-		9C4A65731FA67ED700293460 /* EnemyGeneratorSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4A65721FA67ED700293460 /* EnemyGeneratorSystem.swift */; };
 		9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C6D3DEA1F93252500B8FA2A /* Game.scnassets */; };
 		9C991DAA1FCC588B00DEE3D6 /* GameOver-Game_over.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C991DA71FCC588A00DEE3D6 /* GameOver-Game_over.wav */; };
 		9C991DAF1FCC5CB600DEE3D6 /* FinishLevel-jingle-win-00.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C991DAC1FCC5CB500DEE3D6 /* FinishLevel-jingle-win-00.wav */; };
@@ -98,6 +97,7 @@
 		D2EC85861F83F1240093F009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2EC85851F83F1240093F009 /* Assets.xcassets */; };
 		D2EC85891F83F1240093F009 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2EC85871F83F1240093F009 /* LaunchScreen.storyboard */; };
 		D2F53D751F9A88FF00422F24 /* WalkingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F53D741F9A88FF00422F24 /* WalkingState.swift */; };
+		D2FBD29E1FE1900900F47A9F /* EnemyGeneratorSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FBD29D1FE1900900F47A9F /* EnemyGeneratorSystem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,7 +116,6 @@
 		9C1B82A01FA0D09600173FF3 /* TrigonometryLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrigonometryLib.swift; sourceTree = "<group>"; };
 		9C4806801FC88A2700168571 /* SinkComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinkComponent.swift; sourceTree = "<group>"; };
 		9C4806841FCC504F00168571 /* splashingWater2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splashingWater2.wav; sourceTree = "<group>"; };
-		9C4A65721FA67ED700293460 /* EnemyGeneratorSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyGeneratorSystem.swift; sourceTree = "<group>"; };
 		9C6D3DEA1F93252500B8FA2A /* Game.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Game.scnassets; sourceTree = "<group>"; };
 		9C991DA71FCC588A00DEE3D6 /* GameOver-Game_over.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "GameOver-Game_over.wav"; sourceTree = "<group>"; };
 		9C991DAC1FCC5CB500DEE3D6 /* FinishLevel-jingle-win-00.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "FinishLevel-jingle-win-00.wav"; sourceTree = "<group>"; };
@@ -195,6 +194,7 @@
 		D2EC85881F83F1240093F009 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2EC858A1F83F1240093F009 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2F53D741F9A88FF00422F24 /* WalkingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkingState.swift; sourceTree = "<group>"; };
+		D2FBD29D1FE1900900F47A9F /* EnemyGeneratorSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyGeneratorSystem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,9 +238,9 @@
 				D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */,
 				D25160E31F93FA0800BF756A /* Character */,
 				9CFDF86F1F9A36F7009385A7 /* PotatoEntity.swift */,
+				D2FBD29D1FE1900900F47A9F /* EnemyGeneratorSystem.swift */,
 				B06FCD691FD8EC6E00EFFA31 /* PotatoSpearEntity.swift */,
 				D236731E1FE0396C00FFDE77 /* EnemyEntity.swift */,
-				9C4A65721FA67ED700293460 /* EnemyGeneratorSystem.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -556,8 +556,6 @@
 				D266101C1FD5DEE0006B1455 /* Controls.swift in Sources */,
 				9C03A2421F9A33DD008F191A /* EntityManager.swift in Sources */,
 				B0676A301FE143E30001BA27 /* MoveAlong.swift in Sources */,
-				9C4A65731FA67ED700293460 /* EnemyGeneratorSystem.swift in Sources */
-				9C4A65731FA67ED700293460 /* EnemyGeneratorSystem.swift in Sources */,
 				D25BAE261FC60864000ED0EC /* SettingsOverlay.swift in Sources */,
 				9CD635A31FD8CEB90016CC7B /* PrisonerBox.swift in Sources */,
 				B095F5D41FE0240300B4F386 /* TutorialFase1State.swift in Sources */,
@@ -566,6 +564,7 @@
 				D2C7654F1FD0891100EC7D9B /* VideoViewController.swift in Sources */,
 				D26035F31FCDC66C00E4F069 /* CGPoint+FromUIView.swift in Sources */,
 				9CC26F671FD95A5700292099 /* PowerLevelComponent.swift in Sources */,
+				D2FBD29E1FE1900900F47A9F /* EnemyGeneratorSystem.swift in Sources */,
 				9C0350F81FD59ED200970006 /* Fase2GameController.swift in Sources */,
 				B0465F0D1FC444A2002B8FE8 /* SoundRandomComponent.swift in Sources */,
 				9C1B829F1F9FADD300173FF3 /* ModelComponent.swift in Sources */,
