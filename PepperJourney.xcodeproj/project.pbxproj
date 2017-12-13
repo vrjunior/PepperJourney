@@ -556,7 +556,7 @@
 				D266101C1FD5DEE0006B1455 /* Controls.swift in Sources */,
 				9C03A2421F9A33DD008F191A /* EntityManager.swift in Sources */,
 				B0676A301FE143E30001BA27 /* MoveAlong.swift in Sources */,
-				9C4A65731FA67ED700293460 /* EnemyGeneratorSystem.swift in Sources */,
+				9C4A65731FA67ED700293460 /* EnemyGeneratorSystem.swift in Sources */
 				9C4A65731FA67ED700293460 /* EnemyGeneratorSystem.swift in Sources */,
 				D25BAE261FC60864000ED0EC /* SettingsOverlay.swift in Sources */,
 				9CD635A31FD8CEB90016CC7B /* PrisonerBox.swift in Sources */,
