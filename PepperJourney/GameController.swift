@@ -42,6 +42,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     //overlays
     open var controlsOverlay: ControlsOverlay?
     open var pauseOverlay: PauseOverlay?
+	open var tutorialFase1Overlay: TutorialFase1Overlay?
+	
     
     
     
@@ -145,7 +147,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         sceneRenderer = scnView
         sceneRenderer!.delegate = self
         
-        self.scnView.debugOptions = SCNDebugOptions.showPhysicsShapes
+        //self.scnView.debugOptions = SCNDebugOptions.showPhysicsShapes
         //self.scnView.showsStatistics = true
 
     }
@@ -167,7 +169,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.character.setupCharacter()
         
         self.cameraNode.position = self.cameraInitialPosition
-        
+		
     }
    
     func setupTapToStart() {
@@ -353,6 +355,7 @@ extension GameController : GameOptions {
     
     func pause() {
         if(!self.scene.isPaused){
+			
             if self.pauseOverlay == nil {
                 self.pauseOverlay = SKScene(fileNamed: "PauseOverlay.sks") as? PauseOverlay
                 self.pauseOverlay?.gameOptionsDelegate = self
@@ -366,6 +369,22 @@ extension GameController : GameOptions {
         }
         
     }
+	
+	func tutorialFase1() {
+		//
+		if(!self.scene.isPaused){
+			if self.tutorialFase1Overlay == nil {
+				self.tutorialFase1Overlay = SKScene(fileNamed: "tutorialFase1.sks") as? TutorialFase1Overlay
+				self.tutorialFase1Overlay?.gameOptionsDelegate = self
+			}
+			
+			self.scnView.overlaySKScene = self.tutorialFase1Overlay
+			self.gameStateMachine.enter(TutorialFase1State.self)
+			
+			//pause controls
+			self.controlsOverlay?.isPausedControl = true
+		}
+	}
 }
 
 extension GameController : SCNPhysicsContactDelegate {
