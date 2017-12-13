@@ -65,7 +65,7 @@ class ControlsOverlay: SKScene {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        self.scaleMode = .aspectFill
+        self.scaleMode = .aspectFit
         
         
         self.padOverlay = self.childNode(withName: "padOverlay") as! PadOverlay
