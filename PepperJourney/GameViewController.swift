@@ -35,7 +35,7 @@ class GameViewController: UIViewController {
         }
         else if self.fase == 2
         {
-              gameController = Fase2GameController(scnView: gameView)
+            gameController = Fase2GameController(scnView: gameView)
         }
       
         gameController?.cutSceneDelegate = self

@@ -10,8 +10,13 @@ import GameplayKit
 import SceneKit
 import Foundation
 
-class EntityManager
-{
+
+enum EnemyTypes : String {
+    case potato = "potato"
+    case potatoSpear = "potatoSpear"
+}
+
+class EntityManager {
     private var scene: SCNScene!
     private weak var soundController: SoundController!
     private var chasedTargetAgent: GKAgent3D!
@@ -28,8 +33,8 @@ class EntityManager
     var componentSystems = [GKComponentSystem]()
     // Game entities
     private(set) var character: Character!
-    private(set) var potatoesEntities = [GKEntity]()
-    private(set) var potatoGeneratorSystem: PotatoGeneratorSystem!
+    private(set) var enemyEntities = [EnemyEntity]()
+    private(set) var potatoGeneratorSystem: EnemyGeneratorSystem!
 
     /// Keeps track of the time for use in the update method.
     var previousUpdateTime: TimeInterval = 0
@@ -57,7 +62,7 @@ class EntityManager
         guard self.chasedTargetAgent != nil else { return }
 
         // Create a Entity that coordinate the potato creation
-        self.potatoGeneratorSystem = PotatoGeneratorSystem(scene: self.scene, characterNode: self.character.characterNode)
+        self.potatoGeneratorSystem = EnemyGeneratorSystem(scene: self.scene, characterNode: self.character.characterNode)
         
         
 
@@ -67,14 +72,6 @@ class EntityManager
     // Use this function ever in game initialization or restart
     func setupGameInitialization()
     {
-        // Create new potatoes
-        let potatoSpawnPoint = SCNVector3(2,50, 285)
-        var i = 0
-        while i > 0 {
-            self.createChasingPotato(position: potatoSpawnPoint)
-            i -= 1
-        }
-
         // Configuration of the potato generator system
         self.potatoGeneratorSystem.setupPotatoGeneratorSystem()
 
@@ -118,29 +115,43 @@ class EntityManager
 
 
     // Creates a potato chasing Pepper
-    func createChasingPotato(position: SCNVector3)
+    func createPursuitEnemy(type: String, position: SCNVector3)
     {
-        // create a new potato entity
-        let potato = PotatoEntity(model: PotatoType.model1 , scene: self.scene, position: position, trakingAgent: self.chasedTargetAgent)
+        var enemy: GKEntity
+        
+        switch type {
+            case EnemyTypes.potato.rawValue :
+                enemy = PotatoEntity(model: PotatoType.model1 , scene: self.scene, position: position, trakingAgent: self.chasedTargetAgent)
+            
+            case EnemyTypes.potatoSpear.rawValue :
+                enemy = PotatoSpearEntity(model: PotatoType.model1, scene: self.scene, position: position, trakingAgent: self.chasedTargetAgent)
+            
+            default:
+                enemy = PotatoEntity(model: PotatoType.model1 , scene: self.scene, position: position, trakingAgent: self.chasedTargetAgent)
+        }
 
         // Create a seek component
-        let seekComponent = potato.component(ofType: SeekComponent.self)!
+        let seekComponent = enemy.component(ofType: SeekComponent.self)!
         self.seekComponentSystem.addComponent(seekComponent)
 
-		let soundRandomComponent = potato.component(ofType: SoundRandomComponent.self)!
+		let soundRandomComponent = enemy.component(ofType: SoundRandomComponent.self)!
 		self.soundRandomComponentSystem.addComponent(soundRandomComponent)
 
         // Add the component that enable the potato sink in water
-        guard let potatoNode = potato.component(ofType: ModelComponent.self)?.modelNode else {fatalError("Error getting the node")}
+        guard let potatoNode = enemy.component(ofType: ModelComponent.self)?.modelNode else {fatalError("Error getting the node")}
 
-        let sinkComponent = SinkComponent(soundController: self.soundController, node: potatoNode, entity: potato)
-        potato.addComponent(sinkComponent)
+        let sinkComponent = SinkComponent(soundController: self.soundController, node: potatoNode, entity: enemy)
+        
+        enemy.addComponent(sinkComponent)
 
         // add the sinkComponent to ComponentSystem
         self.sinkComponentSystem.addComponent(sinkComponent)
 
         // Add the potato entity to array of potatoes
-        self.potatoesEntities.append(potato)
+        if let enemyEnity = enemy as? EnemyEntity {
+            self.enemyEntities.append(enemyEnity)
+        }
+        
     }
 
     func update(atTime time: TimeInterval)
@@ -191,10 +202,11 @@ class EntityManager
         self.potatoGeneratorSystem.update(deltaTime: deltaTime)
 
         // Create points that are needed.
-        let readyPotatoes = self.potatoGeneratorSystem.getReadyPotatoes()
-        for potatoPosition in readyPotatoes
+        let readyEnemies = self.potatoGeneratorSystem.getReadyPotatoes()
+        for enemy in readyEnemies
         {
-            self.createChasingPotato(position: potatoPosition)
+            let enemyType = enemy.name ?? ""
+            self.createPursuitEnemy(type: enemyType, position: enemy.position)
         }
 
         self.previousUpdateTime = time
@@ -214,65 +226,52 @@ class EntityManager
         return component
     }
 
-    func killAllPotatoes ()
-    {
-        for potato in self.potatoesEntities
-        {
-            let potato = potato as! PotatoEntity
-            
+    func killAllPotatoes() {
+        for potato in self.enemyEntities {
             // Prepare to kill the potato
-            potato.prepareToKillPotato()
+            potato.killEnemy()
         }
 
-        self.potatoesEntities.removeAll()
+        self.enemyEntities.removeAll()
     }
 
-    func getPotatoEntity(node: SCNNode) -> PotatoEntity?
-    {
-        for index in 0 ..< self.potatoesEntities.count
-        {
-            let potato = self.potatoesEntities[index] as! PotatoEntity
-            guard let potatoNode = potato.component(ofType: ModelComponent.self)?.modelNode else
-            {
-                fatalError("Error getting modelComponent from \(potato.description)")
-            }
+    func getEnemyEntity(node: SCNNode) -> GKEntity? {
 
-            if node == potatoNode
-            {
+        for index in 0 ..< self.enemyEntities.count {
+            let enemy = self.enemyEntities[index]
+            
+            let enemyNode = enemy.getEnemyNode()
 
-                let potato = self.potatoesEntities[index] as! PotatoEntity
-                return potato
+            if node == enemyNode {
+
+                let enemyEntity = self.enemyEntities[index].getEntity()
+                return enemyEntity
             }
 
         }
         return nil
     }
 
-    func killAPotato(node: SCNNode) -> Bool
-    {
-        var potatoToBeRemoved: Int?
-        for index in 0 ..< self.potatoesEntities.count
-        {
-            let potato = self.potatoesEntities[index] as! PotatoEntity
-            guard let potatoNode = potato.component(ofType: ModelComponent.self)?.modelNode else
-            {
-                fatalError("Error getting modelComponent from potato")
-            }
+    func killAnEnemy(node: SCNNode) -> Bool {
+        
+        var enemyToBeRemoved: Int?
+        
+        for index in 0 ..< self.enemyEntities.count {
+            let enemy = self.enemyEntities[index]
+            let enemyNode = enemy.getEnemyNode()
 
-            if node == potatoNode
-            {
-                potatoToBeRemoved = index
+            if node == enemyNode {
+                enemyToBeRemoved = index
                 break
             }
         }
 
-        if let index = potatoToBeRemoved {
-            let potato = self.potatoesEntities[index] as! PotatoEntity
+        if let index = enemyToBeRemoved {
+            let enemy = self.enemyEntities[index]
 
+            enemy.killEnemy()
             
-            potato.prepareToKillPotato()
-            
-            potatoesEntities.remove(at: index)
+            enemyEntities.remove(at: index)
             return true
         }
 
