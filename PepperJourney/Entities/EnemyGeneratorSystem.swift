@@ -10,11 +10,10 @@ import Foundation
 import SceneKit
 import GameplayKit
 
-class PotatoGeneratorSystem: GKEntity
-{
-    var originalPotatoList = [SCNVector3]()
-    var potatoesPositionsToGenerate = [SCNVector3]()
-    var readyPotatoes = [SCNVector3]()
+class EnemyGeneratorSystem: GKEntity {
+    var originalEnemiesList = [SCNNode]()
+    var enemiesToGenerate = [SCNNode]()
+    var readyEnemies = [SCNNode]()
     
     let distanceToGenerate:Float = 100
     weak var characterNode: SCNNode!
@@ -33,8 +32,7 @@ class PotatoGeneratorSystem: GKEntity
         
         for generationPoint in generationPoints
         {
-            let position = generationPoint.position
-            self.originalPotatoList.append(position)
+            self.originalEnemiesList.append(generationPoint)
         }
     }
     
@@ -44,25 +42,25 @@ class PotatoGeneratorSystem: GKEntity
     
     // Use this function to reset the points of creation
     func setupPotatoGeneratorSystem() {
-        self.potatoesPositionsToGenerate = self.originalPotatoList
+        self.enemiesToGenerate = self.originalEnemiesList
     }
     
     override func update(deltaTime seconds: TimeInterval)
     {
         let characterPosition = self.characterNode.presentation.position
         
-        self.readyPotatoes.removeAll()
+        self.readyEnemies.removeAll()
         
         var index = 0
-        while index < self.potatoesPositionsToGenerate.count
+        while index < self.enemiesToGenerate.count
         {
-            let potatoPosition = self.potatoesPositionsToGenerate[index]
+            let potatoPosition = self.enemiesToGenerate[index].position
             
             if self.potatoIsReady(characterPosition: characterPosition, potatoPosition: potatoPosition)
             {
-                let readyPotato = self.potatoesPositionsToGenerate.remove(at: index)
+                let readyPotato = self.enemiesToGenerate.remove(at: index)
                 
-                self.readyPotatoes.append(readyPotato)
+                self.readyEnemies.append(readyPotato)
             }
             else
             {
@@ -71,9 +69,9 @@ class PotatoGeneratorSystem: GKEntity
         }
     }
     
-    func getReadyPotatoes() -> [SCNVector3]
+    func getReadyPotatoes() -> [SCNNode]
     {
-        return self.readyPotatoes
+        return self.readyEnemies
     }
     
     func potatoIsReady(characterPosition: SCNVector3, potatoPosition: SCNVector3) -> Bool
