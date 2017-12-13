@@ -153,10 +153,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     }
     
     func initializeTheGame () {
-//        guard let node = character.component(ofType: ModelComponent.self)?.modelNode else
-//        {
-//            fatalError("Character node not found")
-//        }
         
         // Show de character
         self.character.characterNode.isHidden = false

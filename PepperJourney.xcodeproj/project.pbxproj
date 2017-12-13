@@ -72,7 +72,6 @@
 		D25AD5B31F8809E500F2093E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25AD5B21F8809E500F2093E /* GameKit.framework */; };
 		D25BAE221FC60443000ED0EC /* SettingsOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D25BAE211FC60443000ED0EC /* SettingsOverlay.sks */; };
 		D25BAE261FC60864000ED0EC /* SettingsOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BAE251FC60864000ED0EC /* SettingsOverlay.swift */; };
-		D25BAE281FC60C0F000ED0EC /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BAE271FC60C0F000ED0EC /* SettingsController.swift */; };
 		D26035F11FCDC57B00E4F069 /* FinishOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26035F01FCDC57B00E4F069 /* FinishOverlay.swift */; };
 		D26035F31FCDC66C00E4F069 /* CGPoint+FromUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26035F21FCDC66C00E4F069 /* CGPoint+FromUIView.swift */; };
 		D26035F61FCDE53D00E4F069 /* cutscene1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D26035F51FCDDB4100E4F069 /* cutscene1.mp4 */; };
@@ -168,7 +167,6 @@
 		D25AD5B21F8809E500F2093E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		D25BAE211FC60443000ED0EC /* SettingsOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = SettingsOverlay.sks; path = PepperJourney/Overlays/SettingsOverlay.sks; sourceTree = SOURCE_ROOT; };
 		D25BAE251FC60864000ED0EC /* SettingsOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOverlay.swift; sourceTree = "<group>"; };
-		D25BAE271FC60C0F000ED0EC /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		D26035F01FCDC57B00E4F069 /* FinishOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishOverlay.swift; sourceTree = "<group>"; };
 		D26035F21FCDC66C00E4F069 /* CGPoint+FromUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+FromUIView.swift"; sourceTree = "<group>"; };
 		D26035F51FCDDB4100E4F069 /* cutscene1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = cutscene1.mp4; sourceTree = "<group>"; };
@@ -418,7 +416,6 @@
 				D2C7654E1FD0891100EC7D9B /* VideoViewController.swift */,
 				D2EC857C1F83F1240093F009 /* AppDelegate.swift */,
 				D2DDAD511FBA2913009FA2B0 /* GameOptions.swift */,
-				D25BAE271FC60C0F000ED0EC /* SettingsController.swift */,
 				D2EC85801F83F1240093F009 /* GameViewController.swift */,
 				D2EC85821F83F1240093F009 /* Main.storyboard */,
 				D2EC85871F83F1240093F009 /* LaunchScreen.storyboard */,
@@ -558,12 +555,9 @@
 				9C1B82A11FA0D09800173FF3 /* TrigonometryLib.swift in Sources */,
 				D266101C1FD5DEE0006B1455 /* Controls.swift in Sources */,
 				9C03A2421F9A33DD008F191A /* EntityManager.swift in Sources */,
-<<<<<<< HEAD
 				B0676A301FE143E30001BA27 /* MoveAlong.swift in Sources */,
-				9C4A65731FA67ED700293460 /* PotatoGeneratorSystem.swift in Sources */,
-=======
 				9C4A65731FA67ED700293460 /* EnemyGeneratorSystem.swift in Sources */,
->>>>>>> 8a51713521a1bcc03e268b6883e82e20fc2d9e20
+				9C4A65731FA67ED700293460 /* EnemyGeneratorSystem.swift in Sources */,
 				D25BAE261FC60864000ED0EC /* SettingsOverlay.swift in Sources */,
 				9CD635A31FD8CEB90016CC7B /* PrisonerBox.swift in Sources */,
 				B095F5D41FE0240300B4F386 /* TutorialFase1State.swift in Sources */,
@@ -601,7 +595,6 @@
 				D26D7B691FD952D700CCA3C1 /* LifeComponent.swift in Sources */,
 				9CE0FF431FC765B9004AF735 /* SoundController.swift in Sources */,
 				9CD635A61FD8CEDE0016CC7B /* TimeAlarmComponent.swift in Sources */,
-				D25BAE281FC60C0F000ED0EC /* SettingsController.swift in Sources */,
 				D20108921FBE11D9007660E3 /* PauseOverlay.swift in Sources */,
 				D25160EE1F940B0C00BF756A /* JumpingState.swift in Sources */,
 				9CFDF8701F9A36F7009385A7 /* PotatoEntity.swift in Sources */,
