@@ -558,12 +558,8 @@
 				9C1B82A11FA0D09800173FF3 /* TrigonometryLib.swift in Sources */,
 				D266101C1FD5DEE0006B1455 /* Controls.swift in Sources */,
 				9C03A2421F9A33DD008F191A /* EntityManager.swift in Sources */,
-<<<<<<< HEAD
 				B0676A301FE143E30001BA27 /* MoveAlong.swift in Sources */,
-				9C4A65731FA67ED700293460 /* PotatoGeneratorSystem.swift in Sources */,
-=======
 				9C4A65731FA67ED700293460 /* EnemyGeneratorSystem.swift in Sources */,
->>>>>>> 8a51713521a1bcc03e268b6883e82e20fc2d9e20
 				D25BAE261FC60864000ED0EC /* SettingsOverlay.swift in Sources */,
 				9CD635A31FD8CEB90016CC7B /* PrisonerBox.swift in Sources */,
 				B095F5D41FE0240300B4F386 /* TutorialFase1State.swift in Sources */,

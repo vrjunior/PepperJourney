@@ -53,21 +53,21 @@ class Fase1GameController: GameController {
         self.cameraNode = self.scene.rootNode.childNode(withName: "camera", recursively: true)!
         self.cameraInitialPosition = cameraNode.presentation.position
         
-//        let lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
-//        lookAtConstraint.isGimbalLockEnabled = true
-//        lookAtConstraint.influenceFactor = 1
-//
-//        let distanceConstraint = SCNDistanceConstraint(target: self.character.characterNode)
-//        distanceConstraint.minimumDistance = 45
-//        distanceConstraint.maximumDistance = 45
-//
-//        let keepAltitude = SCNTransformConstraint.positionConstraint(inWorldSpace: true) { (node: SCNNode, position: SCNVector3) -> SCNVector3 in
-//            var position = float3(position)
-//            position.y = self.character.characterNode.presentation.position.y + 20
-//            return SCNVector3(position)
-//        }
-//
-//        self.cameraNode.constraints = [lookAtConstraint, distanceConstraint , keepAltitude]
+        let lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
+        lookAtConstraint.isGimbalLockEnabled = true
+        lookAtConstraint.influenceFactor = 1
+
+        let distanceConstraint = SCNDistanceConstraint(target: self.character.characterNode)
+        distanceConstraint.minimumDistance = 45
+        distanceConstraint.maximumDistance = 45
+
+        let keepAltitude = SCNTransformConstraint.positionConstraint(inWorldSpace: true) { (node: SCNNode, position: SCNVector3) -> SCNVector3 in
+            var position = float3(position)
+            position.y = self.character.characterNode.presentation.position.y + 20
+            return SCNVector3(position)
+        }
+
+        self.cameraNode.constraints = [lookAtConstraint, distanceConstraint , keepAltitude]
     }
     
     override func setupGame() {
@@ -199,7 +199,7 @@ class Fase1GameController: GameController {
 		
 		
 		//Start the tutorial
-		tutorial()
+		//tutorial()
 		
     }
 	
