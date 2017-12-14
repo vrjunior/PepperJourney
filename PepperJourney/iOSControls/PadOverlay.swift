@@ -43,11 +43,16 @@ class PadOverlay: SKSpriteNode {
     private var higherXSafeArea: CGFloat!
     private var higherYSafeArea: CGFloat!
     
+    private var standingPosition: CGPoint!
+    
     
     public var isPausedControl = false {
         didSet {
             if isPausedControl == true {
                 self.destroyPad()
+            }
+            else {
+                self.padBackground.alpha = 1
             }
         }
     }
@@ -57,11 +62,11 @@ class PadOverlay: SKSpriteNode {
         
         super.init(coder: aDecoder)
         
-        alpha = 1
         isUserInteractionEnabled = true
         
+        self.standingPosition = self.position
+        
         self.setupPad()
-//        print("padsize: \(self.padSize)")
     }
     
     func setupPad() {
@@ -70,7 +75,6 @@ class PadOverlay: SKSpriteNode {
         self.stick = self.padBackground.childNode(withName: "stick") as! SKSpriteNode
         
         self.padSize = self.padBackground.size
-        
         
         self.lowerXSafeArea = self.padSize.width / 2
         self.lowerYSafeArea = self.padSize.height / 2
@@ -93,7 +97,7 @@ class PadOverlay: SKSpriteNode {
     
     func checkSafeArea(position: CGPoint) -> CGPoint {
         var positionSafe = position
-        let margin: CGFloat = 60
+        let margin: CGFloat = 100
         
         if(position.x < self.lowerXSafeArea) {
             positionSafe.x = (self.lowerXSafeArea - self.padSize.width / 2) + margin
@@ -117,8 +121,6 @@ class PadOverlay: SKSpriteNode {
     func destroyPad() {
         
         self.padBackground.alpha = 0
-        self.delegate?.padOverlayVirtualStickInteractionDidEnd(self)
-        
         self.delegate?.padOverlayVirtualStickInteractionDidEnd(self)
     }
     
@@ -193,7 +195,7 @@ class PadOverlay: SKSpriteNode {
             startLocation = trackingTouch!.location(in: self)
             startLocation.x -= self.padSize.width / 2
             startLocation.y -= self.padSize.height / 2
-            //self.buildPad()
+            self.buildPad()
             updateStickPosition(forTouchLocation: trackingTouch!.location(in: self))
             delegate?.padOverlayVirtualStickInteractionDidStart(self)
         }
@@ -220,12 +222,12 @@ class PadOverlay: SKSpriteNode {
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-       // self.destroyPad()
+        self.destroyPad()
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         if touches.contains(trackingTouch!) {
-            //self.destroyPad()
+            self.destroyPad()
         }
     }
 }

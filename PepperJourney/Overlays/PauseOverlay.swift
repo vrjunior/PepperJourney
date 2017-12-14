@@ -25,7 +25,7 @@ class PauseOverlay: SKScene {
         self.resumeButton.delegate = self
         
         self.restartButton = self.childNode(withName: "restartButton") as! SKButton
-        self.resumeButton.delegate = self
+        self.restartButton.delegate = self
         
         self.menuButton = self.childNode(withName: "menuButton") as! SKButton
         self.resumeButton.delegate = self
