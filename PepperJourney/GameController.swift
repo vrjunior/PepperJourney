@@ -382,6 +382,7 @@ extension GameController : GameOptions {
 		if(!self.scene.isPaused){
 			if self.tutorialFase1Overlay == nil {
 				self.tutorialFase1Overlay = SKScene(fileNamed: "TutorialFase1Overlay.sks") as? TutorialFase1Overlay
+				self.tutorialFase1Overlay?.scaleMode = .aspectFill
 				self.tutorialFase1Overlay?.gameOptionsDelegate = self
 			}
 			
