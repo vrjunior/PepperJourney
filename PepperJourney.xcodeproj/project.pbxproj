@@ -24,6 +24,7 @@
 		9C4806851FCC505000168571 /* splashingWater2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C4806841FCC504F00168571 /* splashingWater2.wav */; };
 		9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C6D3DEA1F93252500B8FA2A /* Game.scnassets */; };
 		9C774A631FE1997C00A388CC /* SubtitleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C774A621FE1997C00A388CC /* SubtitleController.swift */; };
+		9C774A651FE2314E00A388CC /* ControlsOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C774A641FE2314E00A388CC /* ControlsOverlay.sks */; };
 		9C991DAA1FCC588B00DEE3D6 /* GameOver-Game_over.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C991DA71FCC588A00DEE3D6 /* GameOver-Game_over.wav */; };
 		9C991DAF1FCC5CB600DEE3D6 /* FinishLevel-jingle-win-00.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C991DAC1FCC5CB500DEE3D6 /* FinishLevel-jingle-win-00.wav */; };
 		9C991DB31FCC99DE00DEE3D6 /* AttackComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C991DB21FCC99DE00DEE3D6 /* AttackComponent.swift */; };
@@ -47,7 +48,6 @@
 		B095F5D01FE01EE600B4F386 /* TutorialFase1Overlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = B095F5CF1FE01EE600B4F386 /* TutorialFase1Overlay.sks */; };
 		B095F5D21FE01FF100B4F386 /* TutorialFase1Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095F5D11FE01FF100B4F386 /* TutorialFase1Overlay.swift */; };
 		B095F5D41FE0240300B4F386 /* TutorialFase1State.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095F5D31FE0240300B4F386 /* TutorialFase1State.swift */; };
-		D201088D1FBE11D9007660E3 /* ControlsOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D20108851FBE11D8007660E3 /* ControlsOverlay.sks */; };
 		D201088E1FBE11D9007660E3 /* PauseOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D20108861FBE11D9007660E3 /* PauseOverlay.sks */; };
 		D201088F1FBE11D9007660E3 /* ControlsOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20108871FBE11D9007660E3 /* ControlsOverlay.swift */; };
 		D20108901FBE11D9007660E3 /* GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20108881FBE11D9007660E3 /* GameOverOverlay.swift */; };
@@ -120,6 +120,7 @@
 		9C4806841FCC504F00168571 /* splashingWater2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splashingWater2.wav; sourceTree = "<group>"; };
 		9C6D3DEA1F93252500B8FA2A /* Game.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Game.scnassets; sourceTree = "<group>"; };
 		9C774A621FE1997C00A388CC /* SubtitleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleController.swift; sourceTree = "<group>"; };
+		9C774A641FE2314E00A388CC /* ControlsOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ControlsOverlay.sks; sourceTree = "<group>"; };
 		9C991DA71FCC588A00DEE3D6 /* GameOver-Game_over.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "GameOver-Game_over.wav"; sourceTree = "<group>"; };
 		9C991DAC1FCC5CB500DEE3D6 /* FinishLevel-jingle-win-00.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "FinishLevel-jingle-win-00.wav"; sourceTree = "<group>"; };
 		9C991DB21FCC99DE00DEE3D6 /* AttackComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackComponent.swift; sourceTree = "<group>"; };
@@ -143,7 +144,6 @@
 		B095F5CF1FE01EE600B4F386 /* TutorialFase1Overlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TutorialFase1Overlay.sks; sourceTree = "<group>"; };
 		B095F5D11FE01FF100B4F386 /* TutorialFase1Overlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialFase1Overlay.swift; sourceTree = "<group>"; };
 		B095F5D31FE0240300B4F386 /* TutorialFase1State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialFase1State.swift; sourceTree = "<group>"; };
-		D20108851FBE11D8007660E3 /* ControlsOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = ControlsOverlay.sks; path = PepperJourney/Overlays/ControlsOverlay.sks; sourceTree = SOURCE_ROOT; };
 		D20108861FBE11D9007660E3 /* PauseOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = PauseOverlay.sks; path = PepperJourney/Overlays/PauseOverlay.sks; sourceTree = SOURCE_ROOT; };
 		D20108871FBE11D9007660E3 /* ControlsOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControlsOverlay.swift; path = PepperJourney/Overlays/ControlsOverlay.swift; sourceTree = SOURCE_ROOT; };
 		D20108881FBE11D9007660E3 /* GameOverOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameOverOverlay.swift; path = PepperJourney/Overlays/GameOverOverlay.swift; sourceTree = SOURCE_ROOT; };
@@ -291,7 +291,6 @@
 			children = (
 				D20108951FBE11FC007660E3 /* FinishOverlay.sks */,
 				D26035F01FCDC57B00E4F069 /* FinishOverlay.swift */,
-				D20108851FBE11D8007660E3 /* ControlsOverlay.sks */,
 				D20108871FBE11D9007660E3 /* ControlsOverlay.swift */,
 				D201088B1FBE11D9007660E3 /* GameOverOverlay.sks */,
 				D20108881FBE11D9007660E3 /* GameOverOverlay.swift */,
@@ -301,6 +300,7 @@
 				D201088A1FBE11D9007660E3 /* PauseOverlay.swift */,
 				D201088C1FBE11D9007660E3 /* StartOverlay.swift */,
 				D20108891FBE11D9007660E3 /* StartOverlay.sks */,
+				9C774A641FE2314E00A388CC /* ControlsOverlay.sks */,
 				B095F5CF1FE01EE600B4F386 /* TutorialFase1Overlay.sks */,
 				B095F5D11FE01FF100B4F386 /* TutorialFase1Overlay.swift */,
 				D2FBD29F1FE19D3600F47A9F /* SKButton.swift */,
@@ -512,7 +512,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D201088D1FBE11D9007660E3 /* ControlsOverlay.sks in Resources */,
 				9C0350E71FD0A52800970006 /* F1_Pepper_3.wav in Resources */,
 				9CE4A50B1FD08D3800A02DE5 /* F1_Pepper_1.wav in Resources */,
 				D2EC85891F83F1240093F009 /* LaunchScreen.storyboard in Resources */,
@@ -522,6 +521,7 @@
 				D2C7654C1FD0782000EC7D9B /* VideoStoryboard.storyboard in Resources */,
 				9C991DAA1FCC588B00DEE3D6 /* GameOver-Game_over.wav in Resources */,
 				9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */,
+				9C774A651FE2314E00A388CC /* ControlsOverlay.sks in Resources */,
 				D20108911FBE11D9007660E3 /* StartOverlay.sks in Resources */,
 				D201088E1FBE11D9007660E3 /* PauseOverlay.sks in Resources */,
 				B08B911F1FC4CABD00304E46 /* gameBackground.mp3 in Resources */,
