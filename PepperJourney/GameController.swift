@@ -57,6 +57,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
 	
 	// Sound Player
     open let soundController = SoundController.sharedInstance
+    
+    var subtitleController = SubtitleController.sharedInstance
 	
     // MARK: - Controling the character
     
@@ -137,7 +139,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.gameStateMachine.enter(PauseState.self)
     }
     
-    
     // MARK: Initializer
     init(scnView: SCNView) {
         super.init()
@@ -149,15 +150,14 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         sceneRenderer!.delegate = self
         
         //self.scnView.debugOptions = SCNDebugOptions.showPhysicsShapes
-        //self.scnView.showsStatistics = true
+        self.scnView.showsStatistics = true
+        
+        
+        
 
     }
     
     func initializeTheGame () {
-//        guard let node = character.component(ofType: ModelComponent.self)?.modelNode else
-//        {
-//            fatalError("Character node not found")
-//        }
         
         // Show de character
         self.character.characterNode.isHidden = false
@@ -180,7 +180,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         let tapOverlay = SKScene(fileNamed: "StartOverlay.sks") as! StartOverlay
         tapOverlay.gameOptionsDelegate = self
-        tapOverlay.scaleMode = .aspectFill
+        tapOverlay.scaleMode = .aspectFit
         self.scnView.overlaySKScene = tapOverlay
         
     }
@@ -201,7 +201,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         let gameOverOverlay = SKScene(fileNamed: "GameOverOverlay.sks") as! GameOverOverlay
         gameOverOverlay.gameOptionsDelegate = self
-        gameOverOverlay.scaleMode = .aspectFill
+        gameOverOverlay.scaleMode = .aspectFit
         self.scnView.overlaySKScene = gameOverOverlay
         
          //self.gameStateMachine.enter(PauseState.self)
@@ -214,7 +214,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     
         let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks") as! FinishOverlay
         finishLevelOverlay.gameOptionsDelegate = self
-        finishLevelOverlay.scaleMode = .aspectFill
+        finishLevelOverlay.scaleMode = .aspectFit
         self.scnView.overlaySKScene = finishLevelOverlay
         
         self.gameStateMachine.enter(PauseState.self)
@@ -231,10 +231,13 @@ class GameController: NSObject, SCNSceneRendererDelegate {
             controlsOverlay = SKScene(fileNamed: "ControlsOverlay.sks") as? ControlsOverlay
             controlsOverlay?.controlsDelegate = self
             controlsOverlay?.gameOptionsDelegate = self
-            controlsOverlay?.scaleMode = .aspectFill
+            controlsOverlay?.scaleMode = .aspectFit
             
             //setting updateDelegate
             self.overlayDelegate = controlsOverlay
+            
+            self.subtitleController.overlayDelegate = controlsOverlay
+            
         }
         
         self.scnView.overlaySKScene = controlsOverlay
@@ -249,8 +252,10 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         // update characters
         character!.update(atTime: time, with: renderer)
         self.updateFollowingCamera()
-        
-        self.entityManager.update(atTime: time)
+        if  !self.scene.rootNode.isPaused {
+            self.entityManager.update(atTime: time)
+            SubtitleController.sharedInstance.update(systemTime: time)
+        }
         
     }
     
@@ -359,6 +364,7 @@ extension GameController : GameOptions {
 			
             if self.pauseOverlay == nil {
                 self.pauseOverlay = SKScene(fileNamed: "PauseOverlay.sks") as? PauseOverlay
+                self.pauseOverlay?.scaleMode = .aspectFit
                 self.pauseOverlay?.gameOptionsDelegate = self
             }
             

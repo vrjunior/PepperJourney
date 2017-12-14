@@ -25,9 +25,9 @@ class AttackState : BaseState {
 //            animationType = .walkingAttack
 //        }
         
-        if let animationType = animationType {
-            character.playAnimationOnce(type: animationType)
-        }
+//        if let animationType = animationType {
+//            character.playAnimationOnce(type: animationType)
+//        }
         
     }
     

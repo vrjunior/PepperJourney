@@ -15,19 +15,23 @@ import UIKit
  ATENÇÃO!!!
  Antes de remover o componente chame a função removeSoundPoint
  */
-
+struct SoundSettings {
+    var fileName: String
+    var soundName: String
+    var duration: TimeInterval = 0
+}
 class SoundDistanceComponent: GKComponent
 {
-	
 	var actionPoint: float2!
 	var radius: Float!
+    var duration: TimeInterval!
 	var entityAgent3D: GKAgent3D!
 	var wasPlayed: Bool! = false
 	private weak var soundController: SoundController!
 	private var soundName: String!
 	private weak var node: SCNNode!
 	
-	init (fileName: String, actionPoint: float2, minRadius: Float, entity: GKEntity, node: SCNNode, soundController: SoundController)
+    init (soundSettings: SoundSettings, actionPoint: float2, minRadius: Float, entity: GKEntity, node: SCNNode)
 	{
 		super.init()
         guard let agent = entity.component(ofType: GKAgent3D.self) else
@@ -37,12 +41,13 @@ class SoundDistanceComponent: GKComponent
         self.entityAgent3D = agent
         self.actionPoint = actionPoint
         self.radius = minRadius
-		self.soundController = soundController
-		self.soundName = "DistanceComponent" + entity.description + ": sound -> " + fileName
+		self.soundController = SoundController.sharedInstance
+		self.soundName = soundSettings.soundName
+        self.duration = soundSettings.duration
 		self.node = node
 		
 		// Load the audio source in the memory
-        self.soundController.loadSound(fileName: fileName, soundName: soundName, volume: 30)
+        self.soundController.loadSound(fileName: soundSettings.fileName, soundName: soundName, volume: 30)
 		
 	}
     
@@ -72,6 +77,8 @@ class SoundDistanceComponent: GKComponent
 
                 // Executes the sound
                 self.soundController.playSoundEffect(soundName: self.soundName, loops: false, node: self.node)
+                SubtitleController.sharedInstance.setupSubtitle(subName: soundName, audioDuration: self.duration)
+                
             }
         }
     }

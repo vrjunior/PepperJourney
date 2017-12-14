@@ -21,7 +21,7 @@ class VideoViewController: UIViewController {
         super.viewDidLoad()
 
         scene = SKScene(size: CGSize(width: 1134, height: 750))
-        scene.scaleMode = .aspectFill
+        scene.scaleMode = .aspectFit
         self.skView.presentScene(scene)
         self.playCutScene()
         

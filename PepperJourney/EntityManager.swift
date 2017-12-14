@@ -63,9 +63,6 @@ class EntityManager {
 
         // Create a Entity that coordinate the potato creation
         self.potatoGeneratorSystem = EnemyGeneratorSystem(scene: self.scene, characterNode: self.character.characterNode)
-        
-        
-
     }
 
     /* ESSA FUNÇAO DEVE SER UNICA PRA CADA FASE */
@@ -290,31 +287,47 @@ class EntityManager {
             let z = soundPoint.presentation.position.z
             
             let point = float2(x, z)
+            if let soundName = soundPoint.name {
             
-            switch soundPoint.name! {
-            case "F1_1":
-                // F1 - 1
-                distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_1.wav", actionPoint: point, minRadius: 165, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
-            case "F1_2":
-                // F1 - 2
-                distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_2.wav", actionPoint: point, minRadius: 20, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
-            case "F1_3":
-                // F1 - 3
-                distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_3.wav", actionPoint: point, minRadius: 20, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
-            case "F1_4":
-                // F1 - 4
-                distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_4.wav", actionPoint: point, minRadius: 40, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
-            case "F1_5":
-                // F1 - 5
-                distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_5.wav", actionPoint: point, minRadius: 20, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
-            case "F1_6":
-                // F1 - 6
-                distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_6.wav", actionPoint: point, minRadius: 50, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
-            case "F1_7":
-                // F1 - 6
-                distanceComponentArray.append(SoundDistanceComponent(fileName: "F1_7.wav", actionPoint: point, minRadius: 50, entity: self.character!, node: (character?.characterNode)!, soundController: soundController))
-            default:
-                print("not found")
+                switch soundName {
+                    
+                case "F1_Pepper_1":
+                    
+                    let sound = SoundSettings(fileName: "F1_Pepper_1.wav", soundName: soundName, duration: 2.66)
+                    distanceComponentArray.append(SoundDistanceComponent(soundSettings: sound, actionPoint: point, minRadius: 165, entity: self.character!, node: (character?.characterNode)!))
+                    
+                case "F1_Pepper_2":
+                    
+                    let sound = SoundSettings(fileName: "F1_Pepper_2.wav", soundName: soundName, duration: 3.51)
+                    distanceComponentArray.append(SoundDistanceComponent(soundSettings: sound, actionPoint: point, minRadius: 20, entity: self.character!, node: (character?.characterNode)!))
+                    
+                case "F1_Pepper_3":
+                    
+                    let sound = SoundSettings(fileName: "F1_Pepper_3.wav", soundName: soundName, duration: 1.56)
+                    distanceComponentArray.append(SoundDistanceComponent(soundSettings: sound, actionPoint: point, minRadius: 20, entity: self.character!, node: (character?.characterNode)!))
+                    
+                case "F1_Pepper_4":
+                    
+                    let sound = SoundSettings(fileName: "F1_Pepper_4.wav", soundName: soundName, duration: 2.47)
+                    distanceComponentArray.append(SoundDistanceComponent(soundSettings: sound, actionPoint: point, minRadius: 40, entity: self.character!, node: (character?.characterNode)!))
+                    
+                case "F1_Pepper_5":
+                    
+                    let sound = SoundSettings(fileName: "F1_Pepper_5.wav", soundName: soundName, duration: 2.81)
+                    distanceComponentArray.append(SoundDistanceComponent(soundSettings: sound, actionPoint: point, minRadius: 20, entity: self.character!, node: (character?.characterNode)!))
+                    
+                case "F1_Potato_1":
+                    
+                    let sound = SoundSettings(fileName: "F1_Potato_1.wav", soundName: soundName, duration: 2.51)
+                    distanceComponentArray.append(SoundDistanceComponent(soundSettings: sound, actionPoint: point, minRadius: 50, entity: self.character!, node: (character?.characterNode)!))
+                    
+                case "F1_Potato_2":
+                    
+                    let sound = SoundSettings(fileName: "F1_Potato_2.wav", soundName: soundName, duration: 3.17)
+                    distanceComponentArray.append(SoundDistanceComponent(soundSettings: sound, actionPoint: point, minRadius: 50, entity: self.character!, node: (character?.characterNode)!))
+                default:
+                    print("not found")
+                }
             }
         }
 		for component in distanceComponentArray {
