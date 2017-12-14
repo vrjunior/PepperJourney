@@ -56,6 +56,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
 	
 	// Sound Player
     open let soundController = SoundController.sharedInstance
+    
+    var subtitleController = SubtitleController.sharedInstance
 	
     // MARK: - Controling the character
     
@@ -136,7 +138,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.gameStateMachine.enter(PauseState.self)
     }
     
-    
     // MARK: Initializer
     init(scnView: SCNView) {
         super.init()
@@ -148,7 +149,10 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         sceneRenderer!.delegate = self
         
         //self.scnView.debugOptions = SCNDebugOptions.showPhysicsShapes
-        //self.scnView.showsStatistics = true
+        self.scnView.showsStatistics = true
+        
+        
+        
 
     }
     
@@ -234,6 +238,9 @@ class GameController: NSObject, SCNSceneRendererDelegate {
             
             //setting updateDelegate
             self.overlayDelegate = controlsOverlay
+            
+            self.subtitleController.overlayDelegate = controlsOverlay
+            
         }
         
         self.scnView.overlaySKScene = controlsOverlay
@@ -248,8 +255,10 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         // update characters
         character!.update(atTime: time, with: renderer)
         self.updateFollowingCamera()
-        
-        self.entityManager.update(atTime: time)
+        if  !self.scene.rootNode.isPaused {
+            self.entityManager.update(atTime: time)
+            SubtitleController.sharedInstance.update(systemTime: time)
+        }
         
     }
     

@@ -10,7 +10,10 @@ import Foundation
 import SceneKit
 import SpriteKit
 
-
+protocol SubtitleProtocol {
+    func showSubtitle(text: String, duration: TimeInterval, fadeInDuration: TimeInterval)
+    func hideSubtitle(fadeOutDuration: TimeInterval)
+}
 protocol UpdateIndicators {
     func updateLifeIndicator(percentage: Float)
     func updateAttackIndicator(percentage: Float)
@@ -41,6 +44,7 @@ class ControlsOverlay: SKScene {
         }
     }
     
+    private var subtitleLabel: SKLabelNode!
     private var jumpButton: JumpButton!
     private var attackButton: AttackButton!
     private var padOverlay: PadOverlay!
@@ -67,6 +71,9 @@ class ControlsOverlay: SKScene {
         
         self.scaleMode = .aspectFill
         
+        self.subtitleLabel = self.childNode(withName: "subtitleLabel") as! SKLabelNode
+        self.subtitleLabel.color = SKColor.purple
+        self.subtitleLabel.colorBlendFactor = 1
         
         self.padOverlay = self.childNode(withName: "padOverlay") as! PadOverlay
         self.jumpButton = self.childNode(withName: "jumpButton") as! JumpButton
@@ -121,3 +128,27 @@ extension ControlsOverlay: UpdateIndicators {
         self.lifeIndicator.size.width = self.lifeIndicatorFullWidth
     }
 }
+extension ControlsOverlay: SubtitleProtocol {
+    func showSubtitle(text: String, duration: TimeInterval, fadeInDuration: TimeInterval) {
+        
+        self.subtitleLabel.text = text
+        self.subtitleLabel.isHidden = false
+//        self.subtitleLabel.run(SKAction.fadeIn(withDuration: fadeInDuration))
+        
+    }
+    
+   
+    
+    func hideSubtitle(fadeOutDuration: TimeInterval) {
+
+//        self.subtitleLabel.run(SKAction.fadeOut(withDuration: fadeOutDuration))
+        self.subtitleLabel.isHidden = true
+    }
+    
+}
+
+
+
+
+
+
