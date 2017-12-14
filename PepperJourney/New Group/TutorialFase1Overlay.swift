@@ -13,25 +13,19 @@ import SpriteKit
 class TutorialFase1Overlay: SKScene {
 	
 	var gameOptionsDelegate:GameOptions?
-	private var resumeButton: SKSpriteNode!
+	private var resumeButton: SKButton!
 	
 	override func sceneDidLoad() {
-		self.resumeButton = self.childNode(withName: "resumeButton") as! SKSpriteNode
+		self.resumeButton = self.childNode(withName: "resumeButton") as! SKButton
+        self.resumeButton.delegate = self
 	}
-	
-	override func didMove(to view: SKView) {
-		
-		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(TutorialFase1Overlay.handleTap(_:)))
-		view.addGestureRecognizer(tapGesture)
-		
-	}
-	
-	@objc func handleTap(_ gesture: UITapGestureRecognizer) {
-		let location = gesture.location(in: self.view).fromUiView(height: self.view!.frame.height)
-		
-		if resumeButton.contains(location) {
-			self.gameOptionsDelegate?.resume()
-		}
-	}
+}
+
+extension TutorialFase1Overlay : SKButtonDelegate {
+    
+    func buttonPressed(target: SKButton) {
+        self.gameOptionsDelegate?.resume()
+    }
+    
 }
 
