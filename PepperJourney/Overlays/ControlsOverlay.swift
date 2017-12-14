@@ -21,7 +21,7 @@ protocol UpdateIndicators {
 }
 
 class ControlsOverlay: SKScene {
-    
+
     public var controlsDelegate: Controls? {
         didSet {
             self.padOverlay.delegate = controlsDelegate
@@ -30,7 +30,7 @@ class ControlsOverlay: SKScene {
             self.jumpButton.delegate = controlsDelegate
         }
     }
-    
+
     public var gameOptionsDelegate: GameOptions?
     public var isLifeIndicatorHidden = false {
         didSet {
@@ -43,20 +43,20 @@ class ControlsOverlay: SKScene {
             self.attackIndicator.isHidden = self.isAttackHidden
         }
     }
-    
+
     private var subtitleLabel: SKLabelNode!
     private var jumpButton: JumpButton!
     private var attackButton: AttackButton!
     private var padOverlay: PadOverlay!
-    private var pauseButton: SKSpriteNode!
+    private var pauseButton: SKButton!
     private var cameraControl: CameraControl!
-    
+
     private var lifeIndicatorFullWidth: CGFloat!
     private var lifeIndicator: SKSpriteNode!
-    
+
     private var attackIndicatorFullWidth: CGFloat!
     private var attackIndicator: SKSpriteNode!
-    
+
     public var isPausedControl:Bool = false {
         didSet {
             self.padOverlay.isPausedControl = self.isPausedControl
@@ -65,56 +65,35 @@ class ControlsOverlay: SKScene {
             self.cameraControl.isPausedControl = self.isPausedControl
         }
     }
-        
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
-        self.scaleMode = .aspectFill
-        
+
+        self.scaleMode = .aspectFit
+
         self.subtitleLabel = self.childNode(withName: "subtitleLabel") as! SKLabelNode
         self.subtitleLabel.color = SKColor.purple
         self.subtitleLabel.colorBlendFactor = 1
-        
+
         self.padOverlay = self.childNode(withName: "padOverlay") as! PadOverlay
         self.jumpButton = self.childNode(withName: "jumpButton") as! JumpButton
         self.attackButton = self.childNode(withName: "attackButton") as! AttackButton
-        self.pauseButton = self.childNode(withName: "pauseButton") as! SKSpriteNode
         self.cameraControl = self.childNode(withName: "cameraControl") as! CameraControl
-        
-        
+
+        self.pauseButton = self.childNode(withName: "pauseButton") as! SKButton
+        self.pauseButton.delegate = self
+
         self.lifeIndicator = self.childNode(withName: "lifeIndicator") as! SKSpriteNode
         self.lifeIndicatorFullWidth = lifeIndicator.size.width
-        
+
         self.attackIndicator = self.childNode(withName: "attackIndicator") as! SKSpriteNode
         self.attackIndicatorFullWidth = attackIndicator.size.width
-        
+
         // disable interation in scenekit
         self.isUserInteractionEnabled = false
-        
-    }
-    
-}
 
-extension ControlsOverlay {
-    
-    override func didMove(to view: SKView) {
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ControlsOverlay.handleTap(_:)))
-        
-        view.addGestureRecognizer(tapGesture)
-        
     }
-    
-    @objc func handleTap(_ gesture: UITapGestureRecognizer) {
-        
-        var location = gesture.location(in: self.view)
-        location.y = (self.view?.frame.height)! - location.y
-        
-        if pauseButton.contains(location) {
-            self.gameOptionsDelegate?.pause()
-        }
-        
-    }
+
 }
 
 extension ControlsOverlay: UpdateIndicators {
@@ -128,27 +107,36 @@ extension ControlsOverlay: UpdateIndicators {
         self.lifeIndicator.size.width = self.lifeIndicatorFullWidth
     }
 }
+
 extension ControlsOverlay: SubtitleProtocol {
     func showSubtitle(text: String, duration: TimeInterval, fadeInDuration: TimeInterval) {
-        
+
         self.subtitleLabel.text = text
         self.subtitleLabel.isHidden = false
 //        self.subtitleLabel.run(SKAction.fadeIn(withDuration: fadeInDuration))
-        
+
     }
-    
-   
-    
+
+
+
     func hideSubtitle(fadeOutDuration: TimeInterval) {
 
 //        self.subtitleLabel.run(SKAction.fadeOut(withDuration: fadeOutDuration))
         self.subtitleLabel.isHidden = true
     }
-    
+
 }
 
 
 
+extension ControlsOverlay : SKButtonDelegate {
 
+    func buttonPressed(target: SKButton) {
 
+        if target == pauseButton {
+            self.gameOptionsDelegate?.pause()
+        }
 
+    }
+
+}

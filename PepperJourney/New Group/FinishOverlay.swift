@@ -19,13 +19,12 @@ class FinishOverlay: SKScene {
             let videoView = VideoViewController()
             videoView.cutScenePath = finalCutSceneVideo
             
-           // videoView.present(videoView, animated: true, completion: nil)
         }
     }
     
-    private var restartButton: SKSpriteNode!
-    private var menuButton: SKSpriteNode!
-    private var fowardButton: SKSpriteNode!
+    private var restartButton: SKButton!
+    private var menuButton: SKButton!
+    private var fowardButton: SKButton!
     
     private var video: SKVideoNode!
     
@@ -37,37 +36,30 @@ class FinishOverlay: SKScene {
     }
     
     func setupNodes() {
-        self.menuButton = self.childNode(withName: "menuButton") as! SKSpriteNode
-        self.restartButton = self.childNode(withName: "restartButton") as! SKSpriteNode
-        self.fowardButton = self.childNode(withName: "fowardButton") as! SKSpriteNode
+        self.menuButton = self.childNode(withName: "menuButton") as! SKButton
+        self.menuButton.delegate = self
+        
+        self.restartButton = self.childNode(withName: "restartButton") as! SKButton
+        self.menuButton.delegate = self
+        
+        self.fowardButton = self.childNode(withName: "fowardButton") as! SKButton
+        self.fowardButton.delegate = self
     }
     
+}
 
-    override func didMove(to view: SKView) {
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(FinishOverlay.handleTap(_:)))
-        view.addGestureRecognizer(tapGesture)
-        
-    }
+extension FinishOverlay : SKButtonDelegate {
     
-    @objc func handleTap(_ gesture: UITapGestureRecognizer) {
+    func buttonPressed(target: SKButton) {
         
-        let location = gesture.location(in: self.view).fromUiView(height: (self.view?.frame.height)!)
-        
-        //tap on restardButton
-        if self.restartButton.contains(location) {
+        if target == restartButton {
             gameOptionsDelegate?.restart()
-            
         }
-        //tap on fowardButton
-        else if self.fowardButton.contains(location) {
+        else if target == fowardButton {
             //TODO handle fowardbutton
-            
         }
-        //tap on menuButton
-        else if self.menuButton.contains(location) {
+        else if target == menuButton {
             //TODO handle menuButton
-            
         }
         
     }

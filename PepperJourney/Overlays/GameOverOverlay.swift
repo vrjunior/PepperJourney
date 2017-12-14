@@ -12,37 +12,41 @@ import SpriteKit
 class GameOverOverlay: SKScene {
     public var gameOptionsDelegate: GameOptions?
     
-    private var restartButton: SKSpriteNode!
-    private var menuButton: SKSpriteNode!
-    private var settingsButton: SKSpriteNode!
+    private var restartButton: SKButton!
+    private var menuButton: SKButton!
+    private var settingsButton: SKButton!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        //setup node
-        self.restartButton = self.childNode(withName: "restartButton") as! SKSpriteNode
-        self.menuButton = self.childNode(withName: "menuButton") as! SKSpriteNode
-        self.settingsButton = self.childNode(withName: "settingsButton") as! SKSpriteNode
+        //setup nodes
+        self.restartButton = self.childNode(withName: "restartButton") as! SKButton
+        self.restartButton.delegate = self
+        
+        self.menuButton = self.childNode(withName: "menuButton") as! SKButton
+        self.menuButton.delegate = self
+        
+        self.settingsButton = self.childNode(withName: "settingsButton") as! SKButton
+        self.settingsButton.delegate = self
+        
     }
     
-    override func didMove(to view: SKView) {
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(GameOverOverlay.handleTap(_:)))
-        view.addGestureRecognizer(tapGesture)
-    }
+}
+
+extension GameOverOverlay : SKButtonDelegate {
     
-    @objc func handleTap(_ gesture: UITapGestureRecognizer) {
+    func buttonPressed(target: SKButton) {
         
-        let location = gesture.location(in: self.view).fromUiView(height: self.view!.frame.height)
-        
-        if self.restartButton.contains(location) {
+        if target == self.restartButton {
             gameOptionsDelegate?.restart()
         }
-        else if self.menuButton.contains(location) {
+        else if target == self.menuButton {
             //TODO handle menuButton
         }
-        else if self.settingsButton.contains(location) {
+        else if target ==  self.settingsButton {
             //TODO handle settingsButtons
         }
+        
     }
+    
 }

@@ -13,46 +13,43 @@ class PauseOverlay: SKScene {
     
     public var gameOptionsDelegate: GameOptions?
     
-    private var resumeButton: SKSpriteNode!
-    private var restartButton: SKSpriteNode!
-    private var menuButton: SKSpriteNode!
-    private var settingsButton: SKSpriteNode!
+    private var resumeButton: SKButton!
+    private var restartButton: SKButton!
+    private var menuButton: SKButton!
+    private var settingsButton: SKButton!
     
     override func sceneDidLoad() {
         
         //setup nodes
-        self.resumeButton = self.childNode(withName: "resumeButton") as! SKSpriteNode
-        self.restartButton = self.childNode(withName: "restartButton") as! SKSpriteNode
-        self.menuButton = self.childNode(withName: "menuButton") as! SKSpriteNode
-        self.settingsButton = self.childNode(withName: "settingsButton") as! SKSpriteNode
+        self.resumeButton = self.childNode(withName: "resumeButton") as! SKButton
+        self.resumeButton.delegate = self
+        
+        self.restartButton = self.childNode(withName: "restartButton") as! SKButton
+        self.resumeButton.delegate = self
+        
+        self.menuButton = self.childNode(withName: "menuButton") as! SKButton
+        self.resumeButton.delegate = self
+        
+        self.settingsButton = self.childNode(withName: "settingsButton") as! SKButton
+        self.settingsButton.delegate = self
         
     }
+}
+
+extension PauseOverlay : SKButtonDelegate {
     
-    override func didMove(to view: SKView) {
+    func buttonPressed(target: SKButton) {
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(StartOverlay.handleTap(_:)))
-        
-        view.addGestureRecognizer(tapGesture)
-        
-    }
-    
-    @objc func handleTap(_ gesture: UITapGestureRecognizer) {
-        
-        let location = gesture.location(in: self.view).fromUiView(height: self.view!.frame.height)
-        
-        if restartButton.contains(location) {
+        if target == restartButton {
             self.gameOptionsDelegate?.restart()
         }
-        
-        else if resumeButton.contains(location) {
+        else if target == resumeButton {
             self.gameOptionsDelegate?.resume()
         }
-        
-        else if menuButton.contains(location) {
+        else if target == menuButton {
             //TODO handle menuButton
         }
-        
-        else if settingsButton.contains(location) {
+        else if target == settingsButton {
             //TODO handle settingsButton
         }
         

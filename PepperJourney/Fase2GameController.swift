@@ -132,7 +132,7 @@ class Fase2GameController: GameController {
         
         let tapOverlay = SKScene(fileNamed: "StartOverlay.sks") as! StartOverlay
         tapOverlay.gameOptionsDelegate = self
-        tapOverlay.scaleMode = .aspectFill
+        tapOverlay.scaleMode = .aspectFit
         self.scnView.overlaySKScene = tapOverlay
         
     }
@@ -154,7 +154,7 @@ class Fase2GameController: GameController {
         
         let gameOverOverlay = SKScene(fileNamed: "GameOverOverlay.sks") as! GameOverOverlay
         gameOverOverlay.gameOptionsDelegate = self
-        gameOverOverlay.scaleMode = .aspectFill
+        gameOverOverlay.scaleMode = .aspectFit
         self.scnView.overlaySKScene = gameOverOverlay
         
         //self.gameStateMachine.enter(PauseState.self)
@@ -167,7 +167,7 @@ class Fase2GameController: GameController {
         
         let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks") as! FinishOverlay
         finishLevelOverlay.gameOptionsDelegate = self
-        finishLevelOverlay.scaleMode = .aspectFill
+        finishLevelOverlay.scaleMode = .aspectFit
         self.scnView.overlaySKScene = finishLevelOverlay
         
         self.gameStateMachine.enter(PauseState.self)

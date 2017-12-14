@@ -28,7 +28,6 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 1.3x on iPads
         if self.fase == 1
         {
            gameController = Fase1GameController(scnView: gameView)
