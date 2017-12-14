@@ -75,7 +75,7 @@ class SoundController
             fatalError("Error at get the audio source \(soundName)")
             
         }
-        print("tocou: \(soundName)")
+//        print("tocou: \(soundName)")
         sound.loops = loops
         node.runAction(SCNAction.playAudio(sound, waitForCompletion: false))
     }
@@ -87,11 +87,11 @@ class SoundController
             fatalError("Error at get the audio source \(soundName)")
             
         }
-        print("tocou: \(soundName)")
+//        print("tocou: \(soundName)")
         sound.loops = loops
         
-        let actionSequence = SCNAction.sequence([SCNAction.playAudio(sound, waitForCompletion: false),
-                                                 SCNAction.wait(duration: 2.0),
+        let actionSequence = SCNAction.sequence([SCNAction.playAudio(sound, waitForCompletion: true),
+//                                                 SCNAction.wait(duration: 2.0),
                                                  SCNAction.run({ (node) in
                                                     block()
                                                     

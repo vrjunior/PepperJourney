@@ -48,7 +48,7 @@ class Fase2GameController: GameController {
         self.soundController.loadSound(fileName: "F1_3.wav", soundName: "PrisonerSound", volume: 30.0)
         
         // Add the sound points
-        self.entityManager.addPepperSoundPoints()
+       // self.addPepperSoundPoints()
         
     }
     
