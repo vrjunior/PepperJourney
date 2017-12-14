@@ -97,7 +97,7 @@ class PadOverlay: SKSpriteNode {
     
     func checkSafeArea(position: CGPoint) -> CGPoint {
         var positionSafe = position
-        let margin: CGFloat = 100
+        let margin: CGFloat = 60
         
         if(position.x < self.lowerXSafeArea) {
             positionSafe.x = (self.lowerXSafeArea - self.padSize.width / 2) + margin
@@ -108,7 +108,7 @@ class PadOverlay: SKSpriteNode {
         }
         
         if(position.y < self.lowerYSafeArea) {
-            positionSafe.y = (self.lowerYSafeArea - self.padSize.height / 2) + margin
+            positionSafe.y = self.lowerYSafeArea + margin
         }
         
         if(position.y > self.higherYSafeArea) {
@@ -226,8 +226,6 @@ class PadOverlay: SKSpriteNode {
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if touches.contains(trackingTouch!) {
-            self.destroyPad()
-        }
+        self.destroyPad()
     }
 }
