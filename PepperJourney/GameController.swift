@@ -76,15 +76,13 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         }
     }
 	
-    func resetSounds()
-    {
+    func resetSounds() {
         // Restart the background music
         self.soundController.playbackgroundMusic(soundName: "backgroundMusic", loops: true, node: self.cameraNode)
         
     }
     
-    func stopSounds()
-    {
+    func stopSounds() {
         // Clean all the sounds
         soundController.stopSoundsFromNode(node: self.cameraNode)
         soundController.stopSoundsFromNode(node: self.character.characterNode)
