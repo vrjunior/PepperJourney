@@ -14,4 +14,5 @@ protocol GameOptions  {
     func pause()
     func resume()
 	func tutorialFase1()
+    func skipTutorial()
 }

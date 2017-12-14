@@ -5,14 +5,10 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Burrito.TTF">
-            <string>BurritoOne</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -22,30 +18,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pepper Journey" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tL6-si-fPf">
-                                <rect key="frame" x="141.5" y="9" width="384.5" height="60"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="JourneyGames" translatesAutoresizingMaskIntoConstraints="NO" id="L5h-8U-eTg">
+                                <rect key="frame" x="146" y="0.0" width="375" height="375"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="Mym-62-dhA"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="BurritoOne" family="Burrito" pointSize="54"/>
-                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" image="launchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="sp3-ti-Dlw">
-                                <rect key="frame" x="153" y="77" width="360" height="298"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="360" id="2z0-V2-RWw"/>
-                                    <constraint firstAttribute="height" constant="298" id="bWG-Mo-vjq"/>
+                                    <constraint firstAttribute="width" secondItem="L5h-8U-eTg" secondAttribute="height" multiplier="1:1" id="dUo-eh-i2W"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="sp3-ti-Dlw" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="3tk-Ec-Bdo"/>
-                            <constraint firstItem="tL6-si-fPf" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="8de-Rr-rje"/>
-                            <constraint firstItem="sp3-ti-Dlw" firstAttribute="top" secondItem="tL6-si-fPf" secondAttribute="bottom" constant="8" id="Any-iu-xTh"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="sp3-ti-Dlw" secondAttribute="bottom" id="bPi-qt-0c3"/>
-                            <constraint firstItem="tL6-si-fPf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="9" id="u2H-Q7-mzE"/>
+                            <constraint firstItem="L5h-8U-eTg" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="Cqt-h5-1Na"/>
+                            <constraint firstItem="L5h-8U-eTg" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="MWO-l2-xLt"/>
+                            <constraint firstItem="L5h-8U-eTg" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="dUu-hq-d3x"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -56,6 +40,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launchScreen" width="190" height="339"/>
+        <image name="JourneyGames" width="1024" height="1024"/>
     </resources>
 </document>

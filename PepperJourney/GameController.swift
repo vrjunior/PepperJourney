@@ -322,6 +322,10 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
             self.gameStateMachine.enter(TutorialFase1State.self)
         }
     }
+    
+    func skipTutorial() {
+        self.resume()
+    }
 }
 
 extension GameController : Controls {

@@ -16,9 +16,6 @@ class Fase1GameController: GameController {
     
     private var isWinner:Bool = false
     
-    // VOCÊS me obrigam a fazer gambiarras
-    private var isGeneratedPotatoCrowd = false
-    
     override func resetSounds() {
         // Restart the background music
         self.soundController.playbackgroundMusic(soundName: "backgroundMusic", loops: true, node: self.cameraNode)
@@ -402,12 +399,9 @@ class Fase1GameController: GameController {
     
     
     //GAMBIARRA
-    override func resume() {
-        super.resume()
-        if(!isGeneratedPotatoCrowd) {
-            self.generatePotatoCrowd()
-        }
-        isGeneratedPotatoCrowd = true
+    override func skipTutorial() {
+        super.skipTutorial()
+        self.generatePotatoCrowd()
     }
 }
 

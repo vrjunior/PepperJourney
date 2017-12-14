@@ -24,7 +24,7 @@ class TutorialFase1Overlay: SKScene {
 extension TutorialFase1Overlay : SKButtonDelegate {
     
     func buttonPressed(target: SKButton) {
-        self.gameOptionsDelegate?.resume()
+        self.gameOptionsDelegate?.skipTutorial()
     }
     
 }
