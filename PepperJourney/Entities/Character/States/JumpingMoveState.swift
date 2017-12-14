@@ -24,6 +24,9 @@ class JumpingMoveState : BaseState {
         if stateClass == JumpingMoveState.self {
             return false
         }
+        if stateClass == JumpingState.self {
+            return false
+        }
         if stateClass == RunningState.self {
             return false
         }
