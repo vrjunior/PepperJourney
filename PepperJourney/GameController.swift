@@ -51,6 +51,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     
     // Camera and targets
     open var cameraInitialPosition: SCNVector3!
+	open var cameraInitialPresentation: SCNNode!
     open var cameraNode: SCNNode!
     open var pepperNode: SCNNode!
 	
@@ -380,7 +381,7 @@ extension GameController : GameOptions {
 		//
 		if(!self.scene.isPaused){
 			if self.tutorialFase1Overlay == nil {
-				self.tutorialFase1Overlay = SKScene(fileNamed: "tutorialFase1.sks") as? TutorialFase1Overlay
+				self.tutorialFase1Overlay = SKScene(fileNamed: "TutorialFase1Overlay.sks") as? TutorialFase1Overlay
 				self.tutorialFase1Overlay?.gameOptionsDelegate = self
 			}
 			
@@ -389,6 +390,7 @@ extension GameController : GameOptions {
 			
 			//pause controls
 			self.controlsOverlay?.isPausedControl = true
+			//Generate the potatos
 		}
 	}
 }

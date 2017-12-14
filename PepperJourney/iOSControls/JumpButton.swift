@@ -36,7 +36,7 @@ class JumpButton: SKSpriteNode {
         
         self.isUserInteractionEnabled = true
         
-        self.draw()
+//        self.draw()
     }
     
     func draw() {

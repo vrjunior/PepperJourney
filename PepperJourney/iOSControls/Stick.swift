@@ -26,7 +26,7 @@ import SpriteKit
         stick.strokeColor = SKColor.black
         stick.fillColor = SKColor.white
         
-        self.addChild(stick)
+//        self.addChild(stick)
     }
     
 }

@@ -24,7 +24,7 @@ import SpriteKit
         background.strokeColor = SKColor.black
         background.lineWidth = lineWidth
         
-        self.addChild(background)
+//        self.addChild(background)
     }
     
 }

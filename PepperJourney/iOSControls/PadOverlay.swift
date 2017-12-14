@@ -57,7 +57,7 @@ class PadOverlay: SKSpriteNode {
         
         super.init(coder: aDecoder)
         
-        alpha = 0.7
+        alpha = 1
         isUserInteractionEnabled = true
         
         self.setupPad()

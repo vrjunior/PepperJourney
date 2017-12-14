@@ -39,7 +39,7 @@ class AttackButton: SKSpriteNode {
         
         self.parentOverlay = self.scene as? ControlsOverlay
         
-        self.draw()
+//        self.draw()
     }
     
     func draw() {
