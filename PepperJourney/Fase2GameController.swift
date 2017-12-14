@@ -77,9 +77,6 @@ class Fase2GameController: GameController {
         
         scnView.scene = scene
         
-        //self.scnView.debugOptions = SCNDebugOptions.showPhysicsShapes
-        //self.scnView.showsStatistics = true
-        
         // Create the entity manager system
         self.entityManager = EntityManager(scene: self.scene, gameController: self, soundController: self.soundController)
         
@@ -132,7 +129,7 @@ class Fase2GameController: GameController {
         
         let tapOverlay = SKScene(fileNamed: "StartOverlay.sks") as! StartOverlay
         tapOverlay.gameOptionsDelegate = self
-        tapOverlay.scaleMode = .aspectFit
+        tapOverlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = tapOverlay
         
     }
@@ -154,7 +151,7 @@ class Fase2GameController: GameController {
         
         let gameOverOverlay = SKScene(fileNamed: "GameOverOverlay.sks") as! GameOverOverlay
         gameOverOverlay.gameOptionsDelegate = self
-        gameOverOverlay.scaleMode = .aspectFit
+        gameOverOverlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = gameOverOverlay
         
         //self.gameStateMachine.enter(PauseState.self)
@@ -167,7 +164,7 @@ class Fase2GameController: GameController {
         
         let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks") as! FinishOverlay
         finishLevelOverlay.gameOptionsDelegate = self
-        finishLevelOverlay.scaleMode = .aspectFit
+        finishLevelOverlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = finishLevelOverlay
         
         self.gameStateMachine.enter(PauseState.self)

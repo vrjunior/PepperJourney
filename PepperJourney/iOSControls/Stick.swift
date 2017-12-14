@@ -16,7 +16,7 @@ import SpriteKit
         
         self.color = UIColor.clear
         
-        let lineWidth:CGFloat = 2.0
+        let lineWidth:CGFloat = 6.0
         
         let stickRect = CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(self.size.width), height: CGFloat(self.size.height))
     
