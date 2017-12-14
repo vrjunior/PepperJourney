@@ -149,7 +149,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         sceneRenderer!.delegate = self
         
         //self.scnView.debugOptions = SCNDebugOptions.showPhysicsShapes
-        self.scnView.showsStatistics = true
+        //self.scnView.showsStatistics = true
         
         
         

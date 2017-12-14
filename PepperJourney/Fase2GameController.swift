@@ -77,9 +77,6 @@ class Fase2GameController: GameController {
         
         scnView.scene = scene
         
-        //self.scnView.debugOptions = SCNDebugOptions.showPhysicsShapes
-        //self.scnView.showsStatistics = true
-        
         // Create the entity manager system
         self.entityManager = EntityManager(scene: self.scene, gameController: self, soundController: self.soundController)
         
