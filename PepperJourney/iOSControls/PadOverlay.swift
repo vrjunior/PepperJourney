@@ -93,7 +93,7 @@ class PadOverlay: SKSpriteNode {
     
     func checkSafeArea(position: CGPoint) -> CGPoint {
         var positionSafe = position
-        let margin: CGFloat = 20
+        let margin: CGFloat = 60
         
         if(position.x < self.lowerXSafeArea) {
             positionSafe.x = (self.lowerXSafeArea - self.padSize.width / 2) + margin

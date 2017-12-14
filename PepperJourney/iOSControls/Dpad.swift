@@ -15,7 +15,7 @@ import SpriteKit
         
         self.color = UIColor.clear
         
-        let lineWidth:CGFloat = 3.0
+        let lineWidth:CGFloat = 9.0
         
         let backgroundRect = CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(self.size.width), height: CGFloat(self.size.height))
         

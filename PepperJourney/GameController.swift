@@ -175,7 +175,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         let tapOverlay = SKScene(fileNamed: "StartOverlay.sks") as! StartOverlay
         tapOverlay.gameOptionsDelegate = self
-        tapOverlay.scaleMode = .aspectFit
+        tapOverlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = tapOverlay
         
     }
@@ -196,7 +196,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         let gameOverOverlay = SKScene(fileNamed: "GameOverOverlay.sks") as! GameOverOverlay
         gameOverOverlay.gameOptionsDelegate = self
-        gameOverOverlay.scaleMode = .aspectFit
+        gameOverOverlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = gameOverOverlay
         
          //self.gameStateMachine.enter(PauseState.self)
@@ -209,7 +209,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     
         let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks") as! FinishOverlay
         finishLevelOverlay.gameOptionsDelegate = self
-        finishLevelOverlay.scaleMode = .aspectFit
+        finishLevelOverlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = finishLevelOverlay
         
         self.gameStateMachine.enter(PauseState.self)
@@ -226,7 +226,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
             controlsOverlay = SKScene(fileNamed: "ControlsOverlay.sks") as? ControlsOverlay
             controlsOverlay?.controlsDelegate = self
             controlsOverlay?.gameOptionsDelegate = self
-            controlsOverlay?.scaleMode = .aspectFit
+            controlsOverlay?.scaleMode = .aspectFill
             
             //setting updateDelegate
             self.overlayDelegate = controlsOverlay
@@ -354,7 +354,7 @@ extension GameController : GameOptions {
 			
             if self.pauseOverlay == nil {
                 self.pauseOverlay = SKScene(fileNamed: "PauseOverlay.sks") as? PauseOverlay
-                self.pauseOverlay?.scaleMode = .aspectFit
+                self.pauseOverlay?.scaleMode = .aspectFill
                 self.pauseOverlay?.gameOptionsDelegate = self
             }
             
