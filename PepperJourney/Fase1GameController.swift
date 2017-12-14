@@ -14,15 +14,18 @@ import GameplayKit
 
 class Fase1GameController: GameController {
     
-    override func resetSounds()
-    {
+    private var isWinner:Bool = false
+    
+    // VOCÊS me obrigam a fazer gambiarras
+    private var isGeneratedPotatoCrowd = false
+    
+    override func resetSounds() {
         // Restart the background music
         self.soundController.playbackgroundMusic(soundName: "backgroundMusic", loops: true, node: self.cameraNode)
         
     }
     
-    override func stopSounds()
-    {
+    override func stopSounds() {
         // Clean all the sounds
         soundController.stopSoundsFromNode(node: self.cameraNode)
         soundController.stopSoundsFromNode(node: self.character.characterNode)
@@ -179,21 +182,22 @@ class Fase1GameController: GameController {
         //here we can hidden indicators
         controlsOverlay?.isAttackHidden = true
 		
-		
 		//Start the tutorial
 		tutorial()
 		
     }
-	
+    
 	func tutorial(){
+        
+        //pause controls
+        self.controlsOverlay?.isPausedControl = true
+        
 		//Get the Camera points to form the path
-		guard let pathPointsNode = scene.rootNode.childNode(withName: "CameraPathT1" ,recursively: false) else
-		{
+		guard let pathPointsNode = scene.rootNode.childNode(withName: "CameraPathT1" ,recursively: false) else {
 			fatalError("Error CameraPathT1 node not found")
 		}
 		
-		guard let lookAtNode = scene.rootNode.childNode(withName: "LookAt" ,recursively: false) else
-		{
+		guard let lookAtNode = scene.rootNode.childNode(withName: "LookAt" ,recursively: false) else {
 			fatalError("Error LookAt node not found")
 		}
 		
@@ -340,11 +344,14 @@ class Fase1GameController: GameController {
                 }
             }
                 
-                // venceu a fase
+            // venceu a fase
             else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.finalLevel.rawValue {
                 
-                DispatchQueue.main.async { [unowned self] in
-                    self.setupFinishLevel()
+                if !isWinner {
+                    self.isWinner = true
+                    DispatchQueue.main.async { [unowned self] in
+                        self.setupFinishLevel()
+                    }
                 }
                 
             }
@@ -392,7 +399,18 @@ class Fase1GameController: GameController {
             
         }
     }
+    
+    
+    //GAMBIARRA
+    override func resume() {
+        super.resume()
+        if(!isGeneratedPotatoCrowd) {
+            self.generatePotatoCrowd()
+        }
+        isGeneratedPotatoCrowd = true
+    }
 }
+
 
 
 

@@ -70,7 +70,6 @@ class Character: GKEntity {
     
     func setupCharacter() {
         self.characterNode.position = SCNVector3(self.initialPosition)
-        self.directionAngle = 0
         self.lastDirection = float3(0,0,1)
         
         // Reset the power Level to the default

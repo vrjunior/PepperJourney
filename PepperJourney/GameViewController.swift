@@ -17,7 +17,7 @@ protocol CutSceneDelegate : NSObjectProtocol {
 }
 
 class GameViewController: UIViewController {
-    public var fase: Int = 0
+    public var fase: Int = 1
     
     var gameView: SCNView {
         return view as! SCNView

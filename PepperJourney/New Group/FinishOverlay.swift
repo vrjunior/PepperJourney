@@ -40,7 +40,7 @@ class FinishOverlay: SKScene {
         self.menuButton.delegate = self
         
         self.restartButton = self.childNode(withName: "restartButton") as! SKButton
-        self.menuButton.delegate = self
+        self.restartButton.delegate = self
         
         self.fowardButton = self.childNode(withName: "fowardButton") as! SKButton
         self.fowardButton.delegate = self

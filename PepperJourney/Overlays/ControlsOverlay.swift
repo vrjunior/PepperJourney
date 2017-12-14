@@ -72,7 +72,6 @@ class ControlsOverlay: SKScene {
         self.scaleMode = .aspectFill
     
         self.subtitleLabel = self.childNode(withName: "subtitleLabel") as! SKLabelNode
-        self.subtitleLabel.color = SKColor.purple
         self.subtitleLabel.colorBlendFactor = 1
 
         self.padOverlay = self.childNode(withName: "padOverlay") as! PadOverlay

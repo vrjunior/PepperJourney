@@ -26,7 +26,7 @@ enum CategoryMaskType: Int {
 }
 
 
-class GameController: NSObject, SCNSceneRendererDelegate {
+class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     
     var entityManager: EntityManager!
     var character: Character!
@@ -44,9 +44,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     open var pauseOverlay: PauseOverlay?
 	open var tutorialFase1Overlay: TutorialFase1Overlay?
 	
-    
-    
-    
     public weak var cutSceneDelegate: CutSceneDelegate?
     
     // Camera and targets
@@ -150,9 +147,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         //self.scnView.debugOptions = SCNDebugOptions.showPhysicsShapes
         //self.scnView.showsStatistics = true
         
-        
-        
-
     }
     
     func initializeTheGame () {
@@ -268,6 +262,66 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     func updateFollowingCamera() {
         self.followingCamera.position = self.character.characterNode.presentation.position
     }
+    
+    //:MARK GAME OPTIONS
+    
+    func start() {
+        self.startGame()
+    }
+    
+    func restart() {
+        //reset lifebar
+        self.overlayDelegate?.resetLifeIndicator()
+        
+        // Do the setup to restart the game
+        self.prepereToStartGame()
+        
+        //unpause controls
+        self.controlsOverlay?.isPausedControl = false
+        
+        self.startGame()
+    }
+    
+    func resume() {
+        self.gameStateMachine.enter(PlayState.self)
+        
+        //unpause controls
+        self.controlsOverlay?.isPausedControl = false
+        
+        self.scnView.overlaySKScene = controlsOverlay
+    }
+    
+    func pause() {
+        if(!self.scene.isPaused){
+            
+            if self.pauseOverlay == nil {
+                self.pauseOverlay = SKScene(fileNamed: "PauseOverlay.sks") as? PauseOverlay
+                self.pauseOverlay?.scaleMode = .aspectFill
+                self.pauseOverlay?.gameOptionsDelegate = self
+            }
+            
+            self.scnView.overlaySKScene = self.pauseOverlay
+            self.gameStateMachine.enter(PauseState.self)
+            
+            //pause controls
+            self.controlsOverlay?.isPausedControl = true
+        }
+        
+    }
+    
+    func tutorialFase1() {
+        
+        if(!self.scene.isPaused){
+            if self.tutorialFase1Overlay == nil {
+                self.tutorialFase1Overlay = SKScene(fileNamed: "TutorialFase1Overlay.sks") as? TutorialFase1Overlay
+                self.tutorialFase1Overlay?.scaleMode = .aspectFill
+                self.tutorialFase1Overlay?.gameOptionsDelegate = self
+            }
+            
+            self.scnView.overlaySKScene = self.tutorialFase1Overlay
+            self.gameStateMachine.enter(TutorialFase1State.self)
+        }
+    }
 }
 
 extension GameController : Controls {
@@ -328,71 +382,6 @@ extension GameController : JumpDelegate {
     }
 }
 
-
-extension GameController : GameOptions {
-    
-    func start() {
-        self.startGame()
-    }
-    
-    func restart() {
-        //reset lifebar
-        self.overlayDelegate?.resetLifeIndicator()
-        
-        // Do the setup to restart the game
-        self.prepereToStartGame()
-        
-        //unpause controls
-        self.controlsOverlay?.isPausedControl = false
-        
-        self.startGame()
-    }
-    
-    func resume() {
-        self.gameStateMachine.enter(PlayState.self)
-        
-        //unpause controls
-        self.controlsOverlay?.isPausedControl = false
-        
-        self.scnView.overlaySKScene = controlsOverlay
-    }
-    
-    func pause() {
-        if(!self.scene.isPaused){
-			
-            if self.pauseOverlay == nil {
-                self.pauseOverlay = SKScene(fileNamed: "PauseOverlay.sks") as? PauseOverlay
-                self.pauseOverlay?.scaleMode = .aspectFill
-                self.pauseOverlay?.gameOptionsDelegate = self
-            }
-            
-            self.scnView.overlaySKScene = self.pauseOverlay
-            self.gameStateMachine.enter(PauseState.self)
-            
-            //pause controls
-           self.controlsOverlay?.isPausedControl = true
-        }
-        
-    }
-	
-	func tutorialFase1() {
-		//
-		if(!self.scene.isPaused){
-			if self.tutorialFase1Overlay == nil {
-				self.tutorialFase1Overlay = SKScene(fileNamed: "TutorialFase1Overlay.sks") as? TutorialFase1Overlay
-				self.tutorialFase1Overlay?.scaleMode = .aspectFill
-				self.tutorialFase1Overlay?.gameOptionsDelegate = self
-			}
-			
-			self.scnView.overlaySKScene = self.tutorialFase1Overlay
-			self.gameStateMachine.enter(TutorialFase1State.self)
-			
-			//pause controls
-			self.controlsOverlay?.isPausedControl = true
-			//Generate the potatos
-		}
-	}
-}
 
 extension GameController : SCNPhysicsContactDelegate {
     
