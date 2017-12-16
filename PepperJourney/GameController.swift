@@ -309,13 +309,14 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         
     }
     
-    func tutorialFase1() {
+	func tutorialFase1(fase1: Fase1GameController) {
         
         if(!self.scene.isPaused){
             if self.tutorialFase1Overlay == nil {
                 self.tutorialFase1Overlay = SKScene(fileNamed: "TutorialFase1Overlay.sks") as? TutorialFase1Overlay
                 self.tutorialFase1Overlay?.scaleMode = .aspectFill
                 self.tutorialFase1Overlay?.gameOptionsDelegate = self
+				self.tutorialFase1Overlay?.fase1GameController = fase1
             }
             
             self.scnView.overlaySKScene = self.tutorialFase1Overlay
@@ -323,9 +324,9 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         }
     }
     
-    func skipTutorial() {
-        self.resume()
-    }
+//    func skipTutorial() {
+//        self.resume()
+//    }
 }
 
 extension GameController : Controls {

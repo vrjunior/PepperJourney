@@ -63,6 +63,7 @@ class ControlsOverlay: SKScene {
             self.jumpButton.isPausedControls = self.isPausedControl
             self.attackButton.isPausedControls = self.isPausedControl
             self.cameraControl.isPausedControl = self.isPausedControl
+			self.pauseButton.isPausedControls = self.isPausedControl
         }
     }
 

@@ -13,6 +13,6 @@ protocol GameOptions  {
     func restart()
     func pause()
     func resume()
-	func tutorialFase1()
-    func skipTutorial()
+	func tutorialFase1(fase1: Fase1GameController)
+//    func skipTutorial()
 }

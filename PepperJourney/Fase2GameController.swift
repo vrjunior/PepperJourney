@@ -182,7 +182,9 @@ class Fase2GameController: GameController {
     override func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         super.renderer(renderer, updateAtTime: time)
         
-        // MELHORAR ISSO, PQ ESTÁ HORRÍVEL
+		// Talvez, por gentileza, mas somente caso não seja importuno para você, teria como
+		// verificar se existe outra possibilidade de realizarmos este pedaço de código por favor?
+		// Muito obrigado mesmo assim, bjs.
         let powerLevelComponent = character.component(ofType: PowerLevelCompoenent.self)!
         let porcento:Float = powerLevelComponent.currentPowerLevel / powerLevelComponent.MaxPower
         if porcento != lastPowerLeverPorcento {

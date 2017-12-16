@@ -16,6 +16,17 @@ protocol SKButtonDelegate {
 class SKButton : SKSpriteNode {
     
     public var delegate : SKButtonDelegate?
+	
+	var isPausedControls: Bool = false {
+		didSet {
+			if isPausedControls {
+				self.isHidden = true
+			}
+			else {
+				self.isHidden = false
+			}
+		}
+	}
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

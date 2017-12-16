@@ -15,12 +15,12 @@ class JumpButton: SKSpriteNode {
     
     var isPausedControls: Bool = false {
         didSet {
-            if isPausedControls {
-                self.destroyButton()
-            }
-            else {
-                self.buildButton()
-            }
+			if isPausedControls {
+				self.destroyButton()
+			}
+			else {
+				self.buildButton()
+			}
         }
     }
     

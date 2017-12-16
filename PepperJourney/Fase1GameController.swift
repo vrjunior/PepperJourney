@@ -15,6 +15,7 @@ import GameplayKit
 class Fase1GameController: GameController {
     
     private var isWinner:Bool = false
+	private var firstTimePlayingTutorial:Bool = true
     
     override func resetSounds() {
         // Restart the background music
@@ -180,15 +181,21 @@ class Fase1GameController: GameController {
         controlsOverlay?.isAttackHidden = true
 		
 		//Start the tutorial
-		tutorial()
-		
+		if firstTimePlayingTutorial{
+			tutorial()
+			self.firstTimePlayingTutorial = false
+		} else {
+			self.generatePotatoCrowd()
+		}
     }
     
 	func tutorial(){
         
         //pause controls
         self.controlsOverlay?.isPausedControl = true
-        
+		//hide the play button also, so you cannot use it
+		
+		
 		//Get the Camera points to form the path
 		guard let pathPointsNode = scene.rootNode.childNode(withName: "CameraPathT1" ,recursively: false) else {
 			fatalError("Error CameraPathT1 node not found")
@@ -232,6 +239,7 @@ class Fase1GameController: GameController {
 		actions.append(SCNAction.move(to: originalCameraPosition, duration: 2))
 		actions.append(SCNAction.rotateBy(x: 0, y: -CGFloat.pi, z: 0, duration: 0))
 		actions.append(SCNAction.run({ _ in
+			
 			self.cameraNode.removeAllActions()
 			
 			let lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
@@ -251,7 +259,7 @@ class Fase1GameController: GameController {
 			
 			self.cameraNode.constraints = [lookAtConstraint, distanceConstraint , keepAltitude]
 			
-			self.tutorialFase1()
+			self.tutorialFase1(fase1: self)
 		}))
 		actions.append(SCNAction.run({ _ in
 			
@@ -398,11 +406,10 @@ class Fase1GameController: GameController {
     }
     
     
-    //GAMBIARRA
-    override func skipTutorial() {
-        super.skipTutorial()
-        self.generatePotatoCrowd()
-    }
+//    override func skipTutorial() {
+//        super.skipTutorial()
+////        self.generatePotatoCrowd()
+//    }
 }
 
 
