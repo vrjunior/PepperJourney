@@ -1,15 +1,14 @@
 //
-//  PotatoEntity.swift
-//  SpicyHero
+//  PotatoEntity2.swift
+//  PepperJourney
 //
-//  Created by Marcelo Martimiano Junior on 20/10/17.
+//  Created by Marcelo Martimiano Junior on 21/12/17.
 //  Copyright © 2017 Valmir Junior. All rights reserved.
-//
 
 import Foundation
 import GameplayKit
 
-enum PotatoType: String {
+public enum PotatoType: String {
     case model1 = "potato"
 }
 
@@ -20,13 +19,15 @@ class PotatoEntity: GKEntity {
     private var potatoModel: ModelComponent!
     
     //seek component params for potatoes
-
-    private let maxSpeed: Float = 150  
-    private let maxAcceleration: Float = 50
+    
+    private let defaultMaxSpeed: Float = 150
+    private let defaultMaxAcceleration: Float = 50
+    
+    private var persecutedTarget: GKAgent3D!
     
     
     
-    init(model: PotatoType, scene: SCNScene, position: SCNVector3, trakingAgent: GKAgent3D)
+    init(model: PotatoType, scene: SCNScene, position: SCNVector3, persecutedTarget: GKAgent3D, maxSpeed: Float? = nil, maxAcceleration: Float? = nil, persecutionBehavior: Bool = true)
     {
         super.init()
         
@@ -36,14 +37,29 @@ class PotatoEntity: GKEntity {
         self.potatoModel = ModelComponent(modelPath: path, scene: scene, position: position)
         self.addComponent(self.potatoModel)
         
-        self.addSeekBehavior(trackingAgent: trakingAgent)
+        self.persecutedTarget = persecutedTarget
+       
+         // Set max Speed
+        var speedLimit: Float
+        if maxSpeed != nil {
+            speedLimit = maxSpeed!
+        }
+        else {
+            speedLimit = self.defaultMaxSpeed
+        }
+        // Set max acceleration
+        var accelerationLimit: Float
+        if maxAcceleration != nil {
+            accelerationLimit = maxAcceleration!
+        }
+        else {
+            accelerationLimit = self.defaultMaxAcceleration
+        }
+        self.loadComponents(persecutionBehavior: persecutionBehavior, maxSpeed: speedLimit, maxAcceleration: accelerationLimit)
+        
         self.loadAnimations()
         
         self.playAnimation(type: .running)
-		
-		let soundRandomComponent = SoundRandomComponent(soundPath: "potatoSound.wav", entity: self)
-		self.addComponent(soundRandomComponent)
-        
     }
     
     required init?(coder aDecoder: NSCoder)
@@ -51,12 +67,29 @@ class PotatoEntity: GKEntity {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func addSeekBehavior(trackingAgent: GKAgent3D)
+    func definePersecutionBehavior(isEnable: Bool)
     {
-        
-        let seekComponent = SeekComponent(target: trackingAgent, maxSpeed: maxSpeed, maxAcceleration: maxAcceleration)
+        let seekComponent = self.component(ofType: SeekComponent.self)
+        seekComponent?.isRunningEnable = isEnable
+    }
+    
+    func loadComponents(persecutionBehavior: Bool, maxSpeed: Float, maxAcceleration: Float) {
+        // Add the seek Component
+        let seekComponent = SeekComponent(target: self.persecutedTarget, maxSpeed: maxSpeed, maxAcceleration: maxAcceleration, isRunningEnable: persecutionBehavior)
         self.addComponent(seekComponent)
         
+        // Add the component to the component system
+        EntityManager.sharedInstance.seekComponentSystem.addComponent(seekComponent)
+        
+        // Add the component that enable the potato sink in water
+        guard let potatoNode = self.component(ofType: ModelComponent.self)?.modelNode else {fatalError("Error getting the node")}
+        
+        let sinkComponent = SinkComponent(node: potatoNode, entity: self)
+        
+        self.addComponent(sinkComponent)
+        
+        // add the sinkComponent to ComponentSystem
+        EntityManager.sharedInstance.sinkComponentSystem.addComponent(sinkComponent)
     }
     
     //Load all animation of the Potato
@@ -66,7 +99,7 @@ class PotatoEntity: GKEntity {
         
         for anim in animations {
             let animation = SCNAnimationPlayer.withScene(named: "Game.scnassets/characters/potato/\(anim.rawValue).dae")
-        
+            
             animation.stop()
             self.potatoModel.modelNode.addAnimationPlayer(animation, forKey: anim.rawValue)
         }
@@ -98,6 +131,7 @@ extension PotatoEntity : EnemyEntity {
         
         // Remove o nó da cena
         self.potatoModel.removeModel()
+        
         
     }
     

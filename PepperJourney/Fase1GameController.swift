@@ -43,6 +43,7 @@ class Fase1GameController: GameController {
         //setup character sounds
         self.soundController.loadSound(fileName: "jump.wav", soundName: "jump", volume: 30.0)
         
+        
         // Add the sound points
         self.entityManager.addPepperSoundPoints()
         
@@ -78,9 +79,9 @@ class Fase1GameController: GameController {
         
         scnView.scene = scene
         
-        
-        // Create the entity manager system
-        self.entityManager = EntityManager(scene: self.scene, gameController: self, soundController: self.soundController)
+        // Get the entity manager instance
+        self.entityManager = EntityManager.sharedInstance
+        self.entityManager.initEntityManager(scene: self.scene, gameController: self, soundController: self.soundController)
         
         //load the character
         self.setupCharacter()
@@ -149,12 +150,12 @@ class Fase1GameController: GameController {
         
     }
     
-    func generatePotatoCrowd() {
+    func generatePotatoCrowd(position: SCNVector3 = SCNVector3(2,50, 285), maxSpeed: Float? = nil, maxAcceleration: Float? = nil) {
         // Create new potatoes
-        let potatoSpawnPoint = SCNVector3(2,50, 285)
+    
         var i = 10
         while i > 0 {
-            entityManager.createPursuitEnemy(type: EnemyTypes.potato.rawValue, position: potatoSpawnPoint)
+            entityManager.createEnemy(type: EnemyTypes.potato.rawValue, position: position, persecutionBehavior: true, maxSpeed: maxSpeed, maxAcceleration: maxAcceleration)
             i -= 1
         }
     }
@@ -179,14 +180,26 @@ class Fase1GameController: GameController {
         
         //here we can hidden indicators
         controlsOverlay?.isAttackHidden = true
-		
+        
 		//Start the tutorial
 		if firstTimePlayingTutorial{
+            self.generatePotatoCrowd(maxSpeed: 10, maxAcceleration: 1)
+            let removeEnimiesAction = SCNAction.sequence([
+                                                    SCNAction.wait(duration: 5),
+                                                    SCNAction.run({ (node) in
+                                                        self.entityManager.killAllPotatoes()
+                                                    })
+                ])
+            
+            self.scene.rootNode.runAction(removeEnimiesAction)
+            
 			tutorial()
 			self.firstTimePlayingTutorial = false
-		} else {
-			self.generatePotatoCrowd()
 		}
+        else {
+            generatePotatoCrowd()
+        }
+        
     }
     
 	func tutorial(){
@@ -216,20 +229,23 @@ class Fase1GameController: GameController {
 			lookAtConstraint.influenceFactor = 1
 			self.cameraNode.constraints = [lookAtConstraint]
 			self.controlsOverlay?.isPausedControl = true
+            
+            // Mata as batatas do tutorial e cria novas
+            
 		}))
 		
 		for point in generationPoints
 		{
 			let vector3 = SCNVector3(point.position.x, point.position.y, point.position.z)
-			let action = SCNAction.move(to: vector3, duration: 0.5)
+			let action = SCNAction.move(to: vector3, duration: 0.25)
 			actions.append(action)
 		}
 		
-		actions.append(SCNAction.wait(duration: 1))
+		actions.append(SCNAction.wait(duration: 0.5))
 		actions.append(SCNAction.run({ _ in
 			self.cameraNode.constraints = []
 		}))
-		actions.append(SCNAction.rotateBy(x: 0, y: CGFloat.pi, z: 0, duration: 2))
+		actions.append(SCNAction.rotateBy(x: 0, y: CGFloat.pi, z: 0, duration: 1))
 		actions.append(SCNAction.run({ _ in
 			let lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
 			lookAtConstraint.isGimbalLockEnabled = true
@@ -254,6 +270,10 @@ class Fase1GameController: GameController {
 			let keepAltitude = SCNTransformConstraint.positionConstraint(inWorldSpace: true) { (node: SCNNode, position: SCNVector3) -> SCNVector3 in
 				var position = float3(position)
 				position.y = self.character.characterNode.presentation.position.y + 20
+                if position.y < 20
+                {
+                    position.y = 20
+                }
 				return SCNVector3(position)
 			}
 			

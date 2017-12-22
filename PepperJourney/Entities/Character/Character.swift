@@ -119,7 +119,7 @@ class Character: GKEntity {
         trackingAgentComponent.position = float3(self.characterNode.presentation.position)
         self.addComponent(trackingAgentComponent)
         
-        let sinkComponent = SinkComponent(soundController: soundController, node: self.characterNode, entity: self)
+        let sinkComponent = SinkComponent(node: self.characterNode, entity: self)
         self.addComponent(sinkComponent)
         
         // Attack component

@@ -13,8 +13,10 @@ import CoreGraphics
 
 class SeekComponent: GKAgent3D, GKAgentDelegate
 {
+    var isRunningEnable: Bool = true
+    var isLookAtEnable: Bool = true
     
-    init(target: GKAgent3D, maxSpeed: Float, maxAcceleration: Float)
+    init(target: GKAgent3D, maxSpeed: Float, maxAcceleration: Float, isRunningEnable: Bool = true, isLookAtEnable: Bool = true)
     {
         super.init()
         let goal = GKGoal(toSeekAgent: target)
@@ -24,6 +26,9 @@ class SeekComponent: GKAgent3D, GKAgentDelegate
         self.maxSpeed = maxSpeed
 
         self.maxAcceleration = maxAcceleration
+        
+        self.isRunningEnable = isRunningEnable
+        self.isLookAtEnable = isLookAtEnable
         
         //mass is the resistance of the agent to changes in speed or direction.
         self.mass = 0.01
@@ -49,15 +54,20 @@ class SeekComponent: GKAgent3D, GKAgentDelegate
         
         guard let modelComponent = self.entity?.component(ofType: ModelComponent.self) else {return}
         
+        if self.isRunningEnable {
+            modelComponent.modelNode.position = SCNVector3(self.position)
+        }
         
-        modelComponent.modelNode.position = SCNVector3(self.position)
         
-        let xVelocity = self.velocity.x
-        let zVelocity = self.velocity.z
-        
-        let angle = -Float(atan2(zVelocity, xVelocity)) + Float.pi/2
-        
-        modelComponent.modelNode.rotation = SCNVector4(0,1,0, angle)
+        if self.isLookAtEnable {
+            
+            let xVelocity = self.velocity.x
+            let zVelocity = self.velocity.z
+            
+            let angle = -Float(atan2(zVelocity, xVelocity)) + Float.pi/2
+            
+            modelComponent.modelNode.rotation = SCNVector4(0,1,0, angle)
+        }
         
     }
 
