@@ -31,7 +31,15 @@ class SubtitleController {
             "F1_Potato_1": ["Não deixem ela escapar!",      "Ela sabe demais!"],
             "F1_Potato_2": ["Senhor!", "Agora nós a pegamos",  "ela nunca passará dessa ilha!"],
             "F1_Pepper_4": ["Rápido! Ajude-me a pular",     "por essas plataformas!"],
-            "F1_Pepper_5": ["Eu conheço alguém que pode",   "nos ajudar,estamos quase lá!"]
+            "F1_Pepper_5": ["Eu conheço alguém que pode",   "nos ajudar,estamos quase lá!"],
+            "CS1_Pepper_1": ["Rápido, as batatas estão astás de mim!"],
+            "CS1_Pepper_2": ["Eu fui uma das escolhidas", "Para uma nova receita de hamburguer"],
+            "CS1_Pepper_3": ["No laboratório de criação de comidas", "Eu vi a verdade", "Sobre o mundo humanos"],
+            "CS1_Pepper_4": ["Eu vi tristeza", "Doentes", "Todos tomando muitos remédios"],
+            "CS1_Pepper_5": ["No fim, a única coisa que pude fazer", "Foi fugir deles"],
+            "CS1_Rick_1": ["Vamos, entre!"],
+            "CS1_Rick_2": ["Agora me diga", "O que está acontecendo!?"],
+            "SPACE": [""]
         ]
     }
     
