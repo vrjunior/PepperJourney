@@ -41,6 +41,7 @@
 		9CE0FF431FC765B9004AF735 /* SoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE0FF421FC765B9004AF735 /* SoundController.swift */; };
 		9CE0FF491FC854B2004AF735 /* splashingWater.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9CE0FF481FC854B1004AF735 /* splashingWater.wav */; };
 		9CE4A50B1FD08D3800A02DE5 /* F1_Pepper_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9CE4A50A1FD08D3800A02DE5 /* F1_Pepper_1.wav */; };
+		AAAAED081FF2B9C9005E992F /* cutscene1_ptbr.srt in Resources */ = {isa = PBXBuildFile; fileRef = AAAAED071FF2B9C9005E992F /* cutscene1_ptbr.srt */; };
 		B0465F0D1FC444A2002B8FE8 /* SoundRandomComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0465F0B1FC444A1002B8FE8 /* SoundRandomComponent.swift */; };
 		B0676A301FE143E30001BA27 /* MoveAlong.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0676A2F1FE143E30001BA27 /* MoveAlong.swift */; };
 		B06FCD6A1FD8EC6E00EFFA31 /* PotatoSpearEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06FCD691FD8EC6E00EFFA31 /* PotatoSpearEntity.swift */; };
@@ -138,6 +139,7 @@
 		9CE0FF421FC765B9004AF735 /* SoundController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
 		9CE0FF481FC854B1004AF735 /* splashingWater.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splashingWater.wav; sourceTree = "<group>"; };
 		9CE4A50A1FD08D3800A02DE5 /* F1_Pepper_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = F1_Pepper_1.wav; sourceTree = "<group>"; };
+		AAAAED071FF2B9C9005E992F /* cutscene1_ptbr.srt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cutscene1_ptbr.srt; sourceTree = "<group>"; };
 		B0465F0B1FC444A1002B8FE8 /* SoundRandomComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundRandomComponent.swift; sourceTree = "<group>"; };
 		B0676A2F1FE143E30001BA27 /* MoveAlong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveAlong.swift; sourceTree = "<group>"; };
 		B06FCD691FD8EC6E00EFFA31 /* PotatoSpearEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotatoSpearEntity.swift; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				D26035F51FCDDB4100E4F069 /* cutscene1.mp4 */,
+				AAAAED071FF2B9C9005E992F /* cutscene1_ptbr.srt */,
 				D216F4ED1FEC10EF00F6059D /* cutscene1.srt */,
 			);
 			path = Videos;
@@ -544,6 +547,7 @@
 				9C991DAA1FCC588B00DEE3D6 /* GameOver-Game_over.wav in Resources */,
 				9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */,
 				D216F4EE1FEC10EF00F6059D /* cutscene1.srt in Resources */,
+				AAAAED081FF2B9C9005E992F /* cutscene1_ptbr.srt in Resources */,
 				9C774A651FE2314E00A388CC /* ControlsOverlay.sks in Resources */,
 				D20108911FBE11D9007660E3 /* StartOverlay.sks in Resources */,
 				D201088E1FBE11D9007660E3 /* PauseOverlay.sks in Resources */,

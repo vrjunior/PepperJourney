@@ -1,60 +1,63 @@
 1
 0:00:00,400 --> 0:00:03,380
-Hurry, the potatoes are behind me!
+Rápido, as batatas estão atrás de mim!
 2
 0:00:03,416 --> 0:00:05,633
-Hurry, come inside!
+Vamos, entre!
 3
 0:00:06,432 --> 0:00:08,104
-So now, tell me
+Agora me diga,
 4
 0:00:08,140 --> 0:00:10,066
-What’s going on?
+o que está acontecendo?
 5
 0:00:10,212 --> 0:00:11,920
-I was one of the few chosen
+Eu fui uma das escolhidas
 6
 0:00:12,029 --> 0:00:13,773
-for a new hamburger research,
+para uma nova receita de hambúrguer.
 7
 0:00:14,246 --> 0:00:16,281
-at the Food creation Laboratory
+No laboratório de criação de comidas
 8
 0:00:16,390 --> 0:00:17,335
-I saw the true
+Eu vi a verdade sobre
 9
 0:00:17,444 --> 0:00:18,934
-about humans world...
+o mundo dos humanos
 10
 0:00:19,370 --> 0:00:20,460
-I saw sadness,
+Eu vi tristeza
 11
 0:00:20,569 --> 0:00:21,623
-sickness,
+doentes
 12
 0:00:21,732 --> 0:00:23,803
-everyone taking a lot of medicines …
+todos tomando muitos remédios
 13
 0:00:23,912 --> 0:00:25,729
-In the end, all I could do
+No fim, a única coisa que pude fazer
 14
 0:00:25,802 --> 0:00:27,583
-was run away from them…
+foi fugir deles.
 15
 0:00:27,692 --> 0:00:29,472
-I was there in the beginning…
+Eu estava lá no início
 16
 0:00:29,581 --> 0:00:31,217
-I fought against them
+lutei contra eles
 17
 0:00:32,016 --> 0:00:33,797
-but I failed …
+mas eu falhei
 18
 0:00:33,906 --> 0:00:35,759
-and now my time has run out,
+e agora, meu tempo acabou
 19
 0:00:36,668 --> 0:00:38,412
-but yours is just beginning.
+mas o seu, está só começando
 20
 0:00:39.539 --> 0:00:41.392
-let me teach you all that I know…
+Me deixe te ensinar tudo que sei!
+21
+0:00:42.555 --> 0:00:46,444
+Continua…
