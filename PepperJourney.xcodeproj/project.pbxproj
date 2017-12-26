@@ -47,17 +47,13 @@
 		B06FCD6A1FD8EC6E00EFFA31 /* PotatoSpearEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06FCD691FD8EC6E00EFFA31 /* PotatoSpearEntity.swift */; };
 		B08B911F1FC4CABD00304E46 /* gameBackground.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B08B911D1FC4CABD00304E46 /* gameBackground.mp3 */; };
 		B08B91211FC4CCBE00304E46 /* SoundDistanceComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08B91201FC4CCBE00304E46 /* SoundDistanceComponent.swift */; };
-		B095F5D01FE01EE600B4F386 /* TutorialFase1Overlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = B095F5CF1FE01EE600B4F386 /* TutorialFase1Overlay.sks */; };
 		B095F5D21FE01FF100B4F386 /* TutorialFase1Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095F5D11FE01FF100B4F386 /* TutorialFase1Overlay.swift */; };
 		B095F5D41FE0240300B4F386 /* TutorialFase1State.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095F5D31FE0240300B4F386 /* TutorialFase1State.swift */; };
-		D201088E1FBE11D9007660E3 /* PauseOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D20108861FBE11D9007660E3 /* PauseOverlay.sks */; };
 		D201088F1FBE11D9007660E3 /* ControlsOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20108871FBE11D9007660E3 /* ControlsOverlay.swift */; };
 		D20108901FBE11D9007660E3 /* GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20108881FBE11D9007660E3 /* GameOverOverlay.swift */; };
-		D20108911FBE11D9007660E3 /* StartOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D20108891FBE11D9007660E3 /* StartOverlay.sks */; };
 		D20108921FBE11D9007660E3 /* PauseOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D201088A1FBE11D9007660E3 /* PauseOverlay.swift */; };
 		D20108931FBE11D9007660E3 /* GameOverOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D201088B1FBE11D9007660E3 /* GameOverOverlay.sks */; };
 		D20108941FBE11D9007660E3 /* StartOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D201088C1FBE11D9007660E3 /* StartOverlay.swift */; };
-		D20108961FBE11FC007660E3 /* FinishOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D20108951FBE11FC007660E3 /* FinishOverlay.sks */; };
 		D2050A7D1FCC99D9001EC7FE /* JumpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2050A7C1FCC99D9001EC7FE /* JumpButton.swift */; };
 		D2050A7F1FCC9BD1001EC7FE /* AttackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2050A7E1FCC9BD1001EC7FE /* AttackButton.swift */; };
 		D207CFC51F8EA2D10084240E /* Dpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207CFC41F8EA2D10084240E /* Dpad.swift */; };
@@ -88,6 +84,12 @@
 		D28623B91FA3B00200691E83 /* PlayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28623B81FA3B00200691E83 /* PlayState.swift */; };
 		D2863F221FA14761004CCCDC /* JumpingMoveState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2863F211FA14761004CCCDC /* JumpingMoveState.swift */; };
 		D291BB541F8E976A00B2D111 /* SimdExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D291BB531F8E976A00B2D111 /* SimdExtensions.swift */; };
+		D2983A331FF2C09F00979A52 /* FinishOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D2983A351FF2C09F00979A52 /* FinishOverlay.sks */; };
+		D2983A401FF2C8AE00979A52 /* PauseOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D2983A421FF2C8AE00979A52 /* PauseOverlay.sks */; };
+		D2983A441FF2C8E300979A52 /* StartOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D2983A461FF2C8E300979A52 /* StartOverlay.sks */; };
+		D2983A481FF2C93900979A52 /* TutorialFase1Overlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D2983A4A1FF2C93900979A52 /* TutorialFase1Overlay.sks */; };
+		D2983A4E1FF2CA4E00979A52 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D2983A501FF2CA4E00979A52 /* Localizable.strings */; };
+		D2983A541FF2CBAA00979A52 /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2983A531FF2CBAA00979A52 /* String+Localized.swift */; };
 		D2A584341FDEF71200082174 /* AttackState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A584331FDEF71200082174 /* AttackState.swift */; };
 		D2B8BBB81FBB64D70042F873 /* Burrito.TTF in Resources */ = {isa = PBXBuildFile; fileRef = D2B8BBB71FBB64D70042F873 /* Burrito.TTF */; };
 		D2C7654C1FD0782000EC7D9B /* VideoStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2C7654B1FD0782000EC7D9B /* VideoStoryboard.storyboard */; };
@@ -145,18 +147,14 @@
 		B06FCD691FD8EC6E00EFFA31 /* PotatoSpearEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotatoSpearEntity.swift; sourceTree = "<group>"; };
 		B08B911D1FC4CABD00304E46 /* gameBackground.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameBackground.mp3; sourceTree = "<group>"; };
 		B08B91201FC4CCBE00304E46 /* SoundDistanceComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundDistanceComponent.swift; sourceTree = "<group>"; };
-		B095F5CF1FE01EE600B4F386 /* TutorialFase1Overlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TutorialFase1Overlay.sks; sourceTree = "<group>"; };
 		B095F5D11FE01FF100B4F386 /* TutorialFase1Overlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialFase1Overlay.swift; sourceTree = "<group>"; };
 		B095F5D31FE0240300B4F386 /* TutorialFase1State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialFase1State.swift; sourceTree = "<group>"; };
 		CDEDAB54193D026F2A4A659F /* Pods-PepperJourney.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PepperJourney.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PepperJourney/Pods-PepperJourney.debug.xcconfig"; sourceTree = "<group>"; };
-		D20108861FBE11D9007660E3 /* PauseOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = PauseOverlay.sks; path = PepperJourney/Overlays/PauseOverlay.sks; sourceTree = SOURCE_ROOT; };
 		D20108871FBE11D9007660E3 /* ControlsOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControlsOverlay.swift; path = PepperJourney/Overlays/ControlsOverlay.swift; sourceTree = SOURCE_ROOT; };
 		D20108881FBE11D9007660E3 /* GameOverOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameOverOverlay.swift; path = PepperJourney/Overlays/GameOverOverlay.swift; sourceTree = SOURCE_ROOT; };
-		D20108891FBE11D9007660E3 /* StartOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = StartOverlay.sks; path = PepperJourney/Overlays/StartOverlay.sks; sourceTree = SOURCE_ROOT; };
 		D201088A1FBE11D9007660E3 /* PauseOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PauseOverlay.swift; path = PepperJourney/Overlays/PauseOverlay.swift; sourceTree = SOURCE_ROOT; };
 		D201088B1FBE11D9007660E3 /* GameOverOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = GameOverOverlay.sks; path = PepperJourney/Overlays/GameOverOverlay.sks; sourceTree = SOURCE_ROOT; };
 		D201088C1FBE11D9007660E3 /* StartOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StartOverlay.swift; path = PepperJourney/Overlays/StartOverlay.swift; sourceTree = SOURCE_ROOT; };
-		D20108951FBE11FC007660E3 /* FinishOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = FinishOverlay.sks; path = PepperJourney/Overlays/FinishOverlay.sks; sourceTree = SOURCE_ROOT; };
 		D2050A7C1FCC99D9001EC7FE /* JumpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpButton.swift; sourceTree = "<group>"; };
 		D2050A7E1FCC9BD1001EC7FE /* AttackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackButton.swift; sourceTree = "<group>"; };
 		D207CFC41F8EA2D10084240E /* Dpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dpad.swift; sourceTree = "<group>"; };
@@ -189,6 +187,19 @@
 		D28623B81FA3B00200691E83 /* PlayState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayState.swift; sourceTree = "<group>"; };
 		D2863F211FA14761004CCCDC /* JumpingMoveState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpingMoveState.swift; sourceTree = "<group>"; };
 		D291BB531F8E976A00B2D111 /* SimdExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimdExtensions.swift; sourceTree = "<group>"; };
+		D2983A361FF2C0A500979A52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Base; path = Base.lproj/FinishOverlay.sks; sourceTree = "<group>"; };
+		D2983A371FF2C10800979A52 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
+		D2983A381FF2C10800979A52 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		D2983A3A1FF2C72100979A52 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = "pt-BR"; path = "pt-BR.lproj/FinishOverlay.sks"; sourceTree = "<group>"; };
+		D2983A411FF2C8AE00979A52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Base; path = Base.lproj/PauseOverlay.sks; sourceTree = "<group>"; };
+		D2983A431FF2C8B200979A52 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = "pt-BR"; path = "pt-BR.lproj/PauseOverlay.sks"; sourceTree = "<group>"; };
+		D2983A451FF2C8E300979A52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Base; path = Base.lproj/StartOverlay.sks; sourceTree = "<group>"; };
+		D2983A471FF2C8F100979A52 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = "pt-BR"; path = "pt-BR.lproj/StartOverlay.sks"; sourceTree = "<group>"; };
+		D2983A491FF2C93900979A52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Base; path = Base.lproj/TutorialFase1Overlay.sks; sourceTree = "<group>"; };
+		D2983A4B1FF2C93B00979A52 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = "pt-BR"; path = "pt-BR.lproj/TutorialFase1Overlay.sks"; sourceTree = "<group>"; };
+		D2983A511FF2CA5300979A52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D2983A521FF2CA5B00979A52 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		D2983A531FF2CBAA00979A52 /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
 		D2A584331FDEF71200082174 /* AttackState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackState.swift; sourceTree = "<group>"; };
 		D2B8BBB71FBB64D70042F873 /* Burrito.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = Burrito.TTF; sourceTree = "<group>"; };
 		D2C7654B1FD0782000EC7D9B /* VideoStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = VideoStoryboard.storyboard; sourceTree = "<group>"; };
@@ -258,6 +269,7 @@
 				9C1B82A01FA0D09600173FF3 /* TrigonometryLib.swift */,
 				D26035F21FCDC66C00E4F069 /* CGPoint+FromUIView.swift */,
 				D26610191FD5BD55006B1455 /* UIColor+NewColors.swift */,
+				D2983A531FF2CBAA00979A52 /* String+Localized.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -307,19 +319,19 @@
 		D20108841FBE11BE007660E3 /* Overlays */ = {
 			isa = PBXGroup;
 			children = (
-				D20108951FBE11FC007660E3 /* FinishOverlay.sks */,
+				D2983A351FF2C09F00979A52 /* FinishOverlay.sks */,
 				D26035F01FCDC57B00E4F069 /* FinishOverlay.swift */,
 				D201088B1FBE11D9007660E3 /* GameOverOverlay.sks */,
 				D20108881FBE11D9007660E3 /* GameOverOverlay.swift */,
 				D25BAE211FC60443000ED0EC /* SettingsOverlay.sks */,
 				D25BAE251FC60864000ED0EC /* SettingsOverlay.swift */,
-				D20108861FBE11D9007660E3 /* PauseOverlay.sks */,
+				D2983A421FF2C8AE00979A52 /* PauseOverlay.sks */,
 				D201088A1FBE11D9007660E3 /* PauseOverlay.swift */,
-				D20108891FBE11D9007660E3 /* StartOverlay.sks */,
+				D2983A461FF2C8E300979A52 /* StartOverlay.sks */,
 				D201088C1FBE11D9007660E3 /* StartOverlay.swift */,
 				9C774A641FE2314E00A388CC /* ControlsOverlay.sks */,
 				D20108871FBE11D9007660E3 /* ControlsOverlay.swift */,
-				B095F5CF1FE01EE600B4F386 /* TutorialFase1Overlay.sks */,
+				D2983A4A1FF2C93900979A52 /* TutorialFase1Overlay.sks */,
 				B095F5D11FE01FF100B4F386 /* TutorialFase1Overlay.swift */,
 				D2FBD29F1FE19D3600F47A9F /* SKButton.swift */,
 			);
@@ -429,6 +441,7 @@
 		D2EC857B1F83F1240093F009 /* PepperJourney */ = {
 			isa = PBXGroup;
 			children = (
+				D2983A501FF2CA4E00979A52 /* Localizable.strings */,
 				9C774A611FE1996200A388CC /* Controlers */,
 				D26035F41FCDDB2F00E4F069 /* Videos */,
 				B0465F171FC4C743002B8FE8 /* Sounds */,
@@ -521,6 +534,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = D2EC85701F83F1240093F009;
 			productRefGroup = D2EC857A1F83F1240093F009 /* Products */;
@@ -540,7 +554,7 @@
 				9C0350E71FD0A52800970006 /* F1_Pepper_3.wav in Resources */,
 				9CE4A50B1FD08D3800A02DE5 /* F1_Pepper_1.wav in Resources */,
 				D2EC85891F83F1240093F009 /* LaunchScreen.storyboard in Resources */,
-				B095F5D01FE01EE600B4F386 /* TutorialFase1Overlay.sks in Resources */,
+				D2983A481FF2C93900979A52 /* TutorialFase1Overlay.sks in Resources */,
 				D26FCCFE1FC88640003EBFDF /* jump.wav in Resources */,
 				9C991DB91FCD9F5300DEE3D6 /* Yell - small-fairy-hit-moan.wav in Resources */,
 				D2C7654C1FD0782000EC7D9B /* VideoStoryboard.storyboard in Resources */,
@@ -549,8 +563,8 @@
 				D216F4EE1FEC10EF00F6059D /* cutscene1.srt in Resources */,
 				AAAAED081FF2B9C9005E992F /* cutscene1_ptbr.srt in Resources */,
 				9C774A651FE2314E00A388CC /* ControlsOverlay.sks in Resources */,
-				D20108911FBE11D9007660E3 /* StartOverlay.sks in Resources */,
-				D201088E1FBE11D9007660E3 /* PauseOverlay.sks in Resources */,
+				D2983A441FF2C8E300979A52 /* StartOverlay.sks in Resources */,
+				D2983A4E1FF2CA4E00979A52 /* Localizable.strings in Resources */,
 				B08B911F1FC4CABD00304E46 /* gameBackground.mp3 in Resources */,
 				9C991DBD1FCDA18C00DEE3D6 /* spark.png in Resources */,
 				9C0350F21FD0D4EA00970006 /* F1_Potato_2.wav in Resources */,
@@ -562,9 +576,10 @@
 				D20108931FBE11D9007660E3 /* GameOverOverlay.sks in Resources */,
 				D25BAE221FC60443000ED0EC /* SettingsOverlay.sks in Resources */,
 				9C0350E81FD0A52800970006 /* F1_Potato_1.wav in Resources */,
+				D2983A401FF2C8AE00979A52 /* PauseOverlay.sks in Resources */,
 				9C0350EA1FD0A52800970006 /* F1_Pepper_4.wav in Resources */,
 				D2B8BBB81FBB64D70042F873 /* Burrito.TTF in Resources */,
-				D20108961FBE11FC007660E3 /* FinishOverlay.sks in Resources */,
+				D2983A331FF2C09F00979A52 /* FinishOverlay.sks in Resources */,
 				9C0350F11FD0D4EA00970006 /* F1_Pepper_5.wav in Resources */,
 				9C4806851FCC505000168571 /* splashingWater2.wav in Resources */,
 				9CE0FF491FC854B2004AF735 /* splashingWater.wav in Resources */,
@@ -650,6 +665,7 @@
 				D20108901FBE11D9007660E3 /* GameOverOverlay.swift in Sources */,
 				9C1B82A11FA0D09800173FF3 /* TrigonometryLib.swift in Sources */,
 				D266101C1FD5DEE0006B1455 /* Controls.swift in Sources */,
+				D2983A541FF2CBAA00979A52 /* String+Localized.swift in Sources */,
 				9C03A2421F9A33DD008F191A /* EntityManager.swift in Sources */,
 				B0676A301FE143E30001BA27 /* MoveAlong.swift in Sources */,
 				D25BAE261FC60864000ED0EC /* SettingsOverlay.swift in Sources */,
@@ -700,10 +716,58 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		D2983A351FF2C09F00979A52 /* FinishOverlay.sks */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D2983A361FF2C0A500979A52 /* Base */,
+				D2983A3A1FF2C72100979A52 /* pt-BR */,
+			);
+			name = FinishOverlay.sks;
+			path = PepperJourney/Overlays;
+			sourceTree = SOURCE_ROOT;
+		};
+		D2983A421FF2C8AE00979A52 /* PauseOverlay.sks */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D2983A411FF2C8AE00979A52 /* Base */,
+				D2983A431FF2C8B200979A52 /* pt-BR */,
+			);
+			name = PauseOverlay.sks;
+			sourceTree = "<group>";
+		};
+		D2983A461FF2C8E300979A52 /* StartOverlay.sks */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D2983A451FF2C8E300979A52 /* Base */,
+				D2983A471FF2C8F100979A52 /* pt-BR */,
+			);
+			name = StartOverlay.sks;
+			path = PepperJourney/Overlays;
+			sourceTree = SOURCE_ROOT;
+		};
+		D2983A4A1FF2C93900979A52 /* TutorialFase1Overlay.sks */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D2983A491FF2C93900979A52 /* Base */,
+				D2983A4B1FF2C93B00979A52 /* pt-BR */,
+			);
+			name = TutorialFase1Overlay.sks;
+			sourceTree = "<group>";
+		};
+		D2983A501FF2CA4E00979A52 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D2983A511FF2CA5300979A52 /* Base */,
+				D2983A521FF2CA5B00979A52 /* pt-BR */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		D2EC85821F83F1240093F009 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D2EC85831F83F1240093F009 /* Base */,
+				D2983A371FF2C10800979A52 /* pt-BR */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -712,6 +776,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D2EC85881F83F1240093F009 /* Base */,
+				D2983A381FF2C10800979A52 /* pt-BR */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -723,6 +788,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -780,6 +846,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
