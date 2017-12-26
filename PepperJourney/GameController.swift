@@ -205,17 +205,7 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     }
     
     func setupFinishLevel() {
-        self.prepereToStartGame()
-        self.soundController.playSoundEffect(soundName: "FinishLevelSound", loops: false, node: self.cameraNode)
-    
-        let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks") as! FinishOverlay
-        finishLevelOverlay.gameOptionsDelegate = self
-        finishLevelOverlay.scaleMode = .aspectFill
-        self.scnView.overlaySKScene = finishLevelOverlay
-        
-        self.gameStateMachine.enter(PauseState.self)
-        
-        self.cutSceneDelegate?.playCutScene(videoPath: "cutscene1.mp4")
+
     }
     
     func startGame() {
