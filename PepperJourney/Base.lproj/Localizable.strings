@@ -5,3 +5,41 @@
   Created by Valmir Junior on 26/12/17.
   Copyright © 2017 Valmir Junior. All rights reserved.
 */
+
+"cutscene1.srt" = "cutscene1.srt";
+
+
+//Subtitle fase 1
+
+//F1_Pepper_1
+"I have to run!" = "I have to run!";
+"Otherwise they’ll catch me" = "Otherwise they’ll catch me";
+
+//F1_Pepper_2
+"If I could I would make a" = "If I could I would make a";
+"smashed potato of them" = "smashed potato of them";
+
+//F1_Pepper_3
+"I’ll never let" = "I’ll never let";
+"you catch me!" = "you catch me!";
+
+//F1_Pepper_4
+"Hurry, help me jump" = "Hurry, help me jump";
+"throw those islands!" = "throw those islands!";
+
+//F1_Pepper_5
+"I know someone who can helps us," = "I know someone who can helps us,";
+"we’re almost there." = "we’re almost there.";
+
+
+//F1_Potato_1
+"Don’t let her escape!" = "Don’t let her escape!";
+"She knows too much" = "She knows too much";
+
+//F1_Potato_2
+"Sir, we got her!" = "Sir, we got her!";
+"She'll never pass throw this islands" = "She'll never pass throw this islands";
+
+
+
+
