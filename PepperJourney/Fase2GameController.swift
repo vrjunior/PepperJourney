@@ -169,7 +169,7 @@ class Fase2GameController: GameController {
         
         self.gameStateMachine.enter(PauseState.self)
         
-        self.cutSceneDelegate?.playCutScene(videoPath: "cutscene1.mp4")
+        self.cutSceneDelegate?.playCutScene(videoPath: "cutscene1.mp4", subtitlePath: "cuscene1.srt")
     }
     
     override func startGame() {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8161761BA21974BC4B48BAC5 /* Pods_PepperJourney.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB9DF5DA0F7A09F704C22504 /* Pods_PepperJourney.framework */; };
 		9C0350E71FD0A52800970006 /* F1_Pepper_3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C0350E11FD0A52700970006 /* F1_Pepper_3.wav */; };
 		9C0350E81FD0A52800970006 /* F1_Potato_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C0350E21FD0A52700970006 /* F1_Potato_1.wav */; };
 		9C0350EA1FD0A52800970006 /* F1_Pepper_4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C0350E41FD0A52800970006 /* F1_Pepper_4.wav */; };
@@ -60,6 +61,7 @@
 		D2050A7F1FCC9BD1001EC7FE /* AttackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2050A7E1FCC9BD1001EC7FE /* AttackButton.swift */; };
 		D207CFC51F8EA2D10084240E /* Dpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207CFC41F8EA2D10084240E /* Dpad.swift */; };
 		D207CFC71F8EA5370084240E /* Stick.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207CFC61F8EA5370084240E /* Stick.swift */; };
+		D216F4EE1FEC10EF00F6059D /* cutscene1.srt in Resources */ = {isa = PBXBuildFile; fileRef = D216F4ED1FEC10EF00F6059D /* cutscene1.srt */; };
 		D236731F1FE0396C00FFDE77 /* EnemyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D236731E1FE0396C00FFDE77 /* EnemyEntity.swift */; };
 		D25160E51F93FA3400BF756A /* BaseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25160E41F93FA3400BF756A /* BaseState.swift */; };
 		D25160E81F93FB7F00BF756A /* RunningState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25160E71F93FB7F00BF756A /* RunningState.swift */; };
@@ -144,6 +146,7 @@
 		B095F5CF1FE01EE600B4F386 /* TutorialFase1Overlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = TutorialFase1Overlay.sks; sourceTree = "<group>"; };
 		B095F5D11FE01FF100B4F386 /* TutorialFase1Overlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialFase1Overlay.swift; sourceTree = "<group>"; };
 		B095F5D31FE0240300B4F386 /* TutorialFase1State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialFase1State.swift; sourceTree = "<group>"; };
+		CDEDAB54193D026F2A4A659F /* Pods-PepperJourney.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PepperJourney.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PepperJourney/Pods-PepperJourney.debug.xcconfig"; sourceTree = "<group>"; };
 		D20108861FBE11D9007660E3 /* PauseOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = PauseOverlay.sks; path = PepperJourney/Overlays/PauseOverlay.sks; sourceTree = SOURCE_ROOT; };
 		D20108871FBE11D9007660E3 /* ControlsOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ControlsOverlay.swift; path = PepperJourney/Overlays/ControlsOverlay.swift; sourceTree = SOURCE_ROOT; };
 		D20108881FBE11D9007660E3 /* GameOverOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameOverOverlay.swift; path = PepperJourney/Overlays/GameOverOverlay.swift; sourceTree = SOURCE_ROOT; };
@@ -156,6 +159,7 @@
 		D2050A7E1FCC9BD1001EC7FE /* AttackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackButton.swift; sourceTree = "<group>"; };
 		D207CFC41F8EA2D10084240E /* Dpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dpad.swift; sourceTree = "<group>"; };
 		D207CFC61F8EA5370084240E /* Stick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stick.swift; sourceTree = "<group>"; };
+		D216F4ED1FEC10EF00F6059D /* cutscene1.srt */ = {isa = PBXFileReference; lastKnownFileType = text; path = cutscene1.srt; sourceTree = "<group>"; };
 		D236731E1FE0396C00FFDE77 /* EnemyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyEntity.swift; sourceTree = "<group>"; };
 		D25160E41F93FA3400BF756A /* BaseState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseState.swift; sourceTree = "<group>"; };
 		D25160E71F93FB7F00BF756A /* RunningState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningState.swift; sourceTree = "<group>"; };
@@ -199,6 +203,8 @@
 		D2F53D741F9A88FF00422F24 /* WalkingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkingState.swift; sourceTree = "<group>"; };
 		D2FBD29D1FE1900900F47A9F /* EnemyGeneratorSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyGeneratorSystem.swift; sourceTree = "<group>"; };
 		D2FBD29F1FE19D3600F47A9F /* SKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKButton.swift; sourceTree = "<group>"; };
+		F1F5605B77443234249D458A /* Pods-PepperJourney.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PepperJourney.release.xcconfig"; path = "Pods/Target Support Files/Pods-PepperJourney/Pods-PepperJourney.release.xcconfig"; sourceTree = "<group>"; };
+		FB9DF5DA0F7A09F704C22504 /* Pods_PepperJourney.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PepperJourney.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,12 +214,22 @@
 			files = (
 				D25AD5B31F8809E500F2093E /* GameKit.framework in Frameworks */,
 				D25AD5B11F8809DE00F2093E /* SceneKit.framework in Frameworks */,
+				8161761BA21974BC4B48BAC5 /* Pods_PepperJourney.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		74DFD999A616317BB7F900DE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CDEDAB54193D026F2A4A659F /* Pods-PepperJourney.debug.xcconfig */,
+				F1F5605B77443234249D458A /* Pods-PepperJourney.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		9C774A611FE1996200A388CC /* Controlers */ = {
 			isa = PBXGroup;
 			children = (
@@ -337,6 +353,7 @@
 			children = (
 				D25AD5B21F8809E500F2093E /* GameKit.framework */,
 				D25AD5B01F8809DE00F2093E /* SceneKit.framework */,
+				FB9DF5DA0F7A09F704C22504 /* Pods_PepperJourney.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -345,6 +362,7 @@
 			isa = PBXGroup;
 			children = (
 				D26035F51FCDDB4100E4F069 /* cutscene1.mp4 */,
+				D216F4ED1FEC10EF00F6059D /* cutscene1.srt */,
 			);
 			path = Videos;
 			sourceTree = "<group>";
@@ -393,6 +411,7 @@
 				D2EC857B1F83F1240093F009 /* PepperJourney */,
 				D2EC857A1F83F1240093F009 /* Products */,
 				D25AD5AF1F8809DD00F2093E /* Frameworks */,
+				74DFD999A616317BB7F900DE /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -460,9 +479,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2EC858D1F83F1240093F009 /* Build configuration list for PBXNativeTarget "PepperJourney" */;
 			buildPhases = (
+				0578BEFA110F4F75158C4202 /* [CP] Check Pods Manifest.lock */,
 				D2EC85751F83F1240093F009 /* Sources */,
 				D2EC85761F83F1240093F009 /* Frameworks */,
 				D2EC85771F83F1240093F009 /* Resources */,
+				672E8D6E871DDC3B64826583 /* [CP] Embed Pods Frameworks */,
+				170788B227114C8BD217D750 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -521,6 +543,7 @@
 				D2C7654C1FD0782000EC7D9B /* VideoStoryboard.storyboard in Resources */,
 				9C991DAA1FCC588B00DEE3D6 /* GameOver-Game_over.wav in Resources */,
 				9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */,
+				D216F4EE1FEC10EF00F6059D /* cutscene1.srt in Resources */,
 				9C774A651FE2314E00A388CC /* ControlsOverlay.sks in Resources */,
 				D20108911FBE11D9007660E3 /* StartOverlay.sks in Resources */,
 				D201088E1FBE11D9007660E3 /* PauseOverlay.sks in Resources */,
@@ -545,6 +568,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0578BEFA110F4F75158C4202 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PepperJourney-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		170788B227114C8BD217D750 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PepperJourney/Pods-PepperJourney-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		672E8D6E871DDC3B64826583 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-PepperJourney/Pods-PepperJourney-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AVPlayerViewController-Subtitles/AVPlayerViewControllerSubtitles.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AVPlayerViewControllerSubtitles.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PepperJourney/Pods-PepperJourney-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D2EC85751F83F1240093F009 /* Sources */ = {
@@ -747,6 +824,7 @@
 		};
 		D2EC858E1F83F1240093F009 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CDEDAB54193D026F2A4A659F /* Pods-PepperJourney.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -762,6 +840,7 @@
 		};
 		D2EC858F1F83F1240093F009 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F1F5605B77443234249D458A /* Pods-PepperJourney.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

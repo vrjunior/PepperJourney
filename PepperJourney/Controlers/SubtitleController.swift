@@ -31,7 +31,7 @@ class SubtitleController {
             "F1_Potato_1": ["Não deixem ela escapar!",      "Ela sabe demais!"],
             "F1_Potato_2": ["Senhor!", "Agora nós a pegamos",  "ela nunca passará dessa ilha!"],
             "F1_Pepper_4": ["Rápido! Ajude-me a pular",     "por essas plataformas!"],
-            "F1_Pepper_5": ["Eu conheço alguém que pode",   "nos ajudar,estamos quase lá!"]
+            "F1_Pepper_5": ["Eu conheço alguém que pode",   "nos ajudar, estamos quase lá!"]
         ]
     }
     

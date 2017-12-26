@@ -7,22 +7,17 @@
 //
 
 import UIKit
-import SpriteKit
-import AVFoundation
+import AVKit
+import AVPlayerViewControllerSubtitles
 
-class VideoViewController: UIViewController {
+class VideoViewController: AVPlayerViewController {
     
-    @IBOutlet weak var skView: SKView!
     public var cutScenePath: String = ""
-    private var video: SKVideoNode!
-    private var scene: SKScene!
+    public var cutSceneSubtitlePath: String  = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        scene = SKScene(size: CGSize(width: 1134, height: 750))
-        scene.scaleMode = .aspectFill
-        self.skView.presentScene(scene)
         self.playCutScene()
         
     }
@@ -35,21 +30,19 @@ class VideoViewController: UIViewController {
     func playCutScene() {
         if let url = Bundle.main.url(forResource: self.cutScenePath, withExtension: nil) {
             
-            let avPlayer = AVPlayer(url: url)
-            avPlayer.actionAtItemEnd = .none
+            self.player = AVPlayer(url: url)
+            self.player?.actionAtItemEnd = .none
+
+        
+            if let subtitleUrl = Bundle.main.url(forResource: self.cutSceneSubtitlePath, withExtension: nil) {
+                
+                self.addSubtitles().open(file: subtitleUrl)
+                
+            }
             
-            video = SKVideoNode(avPlayer: avPlayer)
+            NotificationCenter.default.addObserver(self, selector: #selector(VideoViewController.videoDidEnd(notification:)), name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: self.player?.currentItem)
             
-            video.anchorPoint = CGPoint(x: 0, y: 0)
-            video.position = CGPoint(x: 0, y: 0)
-            video.zPosition = 1
-            video.size = self.scene.frame.size
-            video.name = "video"
-            
-            self.skView.scene?.addChild(video)
-            video.play()
-            
-            NotificationCenter.default.addObserver(self, selector: #selector(VideoViewController.videoDidEnd(notification:)), name: Notification.Name.AVPlayerItemDidPlayToEndTime, object: avPlayer.currentItem)
+            self.player?.play()
         }
     }
     

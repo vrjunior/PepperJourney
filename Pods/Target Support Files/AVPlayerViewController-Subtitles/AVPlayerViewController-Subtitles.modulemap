@@ -1,0 +1,6 @@
+framework module AVPlayerViewControllerSubtitles {
+  umbrella header "AVPlayerViewController-Subtitles-umbrella.h"
+
+  export *
+  module * { export * }
+}
