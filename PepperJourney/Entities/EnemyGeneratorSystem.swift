@@ -15,7 +15,7 @@ class EnemyGeneratorSystem: GKEntity {
     var enemiesToGenerate = [SCNNode]()
     var readyEnemies = [SCNNode]()
     
-    let distanceToGenerate:Float = 100
+    let distanceToGenerate:Float = 150
     weak var characterNode: SCNNode!
     
     init(scene: SCNScene, characterNode: SCNNode)

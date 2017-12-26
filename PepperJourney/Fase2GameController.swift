@@ -77,8 +77,9 @@ class Fase2GameController: GameController {
         
         scnView.scene = scene
         
-        // Create the entity manager system
-        self.entityManager = EntityManager(scene: self.scene, gameController: self, soundController: self.soundController)
+        // Get the entity manager instance
+        self.entityManager = EntityManager.sharedInstance
+        self.entityManager.initEntityManager(scene: self.scene, gameController: self, soundController: self.soundController)
         
         //load the character
         self.setupCharacter()

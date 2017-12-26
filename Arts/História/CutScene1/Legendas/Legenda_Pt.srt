@@ -1,0 +1,156 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\csgenericrgb\c0\c0\c0;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww25100\viewh15220\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs32 \cf0 \expnd0\expndtw0\kerning0
+1\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 0:00:00,400\cf0 \expnd0\expndtw0\kerning0
+ --> \cf2 \kerning1\expnd0\expndtw0 0:00:03,380\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 R\'e1pido, as batatas est\'e3o atr\'e1s de mim!\
+2\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 0:00:03,416\cf0 \expnd0\expndtw0\kerning0
+ --> \cf2 \kerning1\expnd0\expndtw0 0:00:05,633\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 Vamos, entre!\
+3\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 0:00:06,432\cf0 \expnd0\expndtw0\kerning0
+ --> \cf2 \kerning1\expnd0\expndtw0 0:00:08,104\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 Agora me diga,\
+4\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 0:00:08,140\cf0 \expnd0\expndtw0\kerning0
+ --> \cf2 \kerning1\expnd0\expndtw0 0:00:10,066\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 o que est\'e1 acontecendo?\
+5\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 0:00:10,212\cf0 \expnd0\expndtw0\kerning0
+ --> \cf2 \kerning1\expnd0\expndtw0 0:00:11,920\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 Eu fui uma das escolhidas\
+6\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 0:00:12,029\cf0 \expnd0\expndtw0\kerning0
+ --> \cf2 \kerning1\expnd0\expndtw0 0:00:13,773\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 para uma nova receita de hamb\'farguer. \
+7\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 0:00:14,246\cf0 \expnd0\expndtw0\kerning0
+ --> \cf2 \kerning1\expnd0\expndtw0 0:00:16,281\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 No laborat\'f3rio de cria\'e7\'e3o de comidas\
+8\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 0:00:16,390\cf0 \expnd0\expndtw0\kerning0
+ --> \cf2 \kerning1\expnd0\expndtw0 0:00:17,335\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 Eu vi a verdade sobre \
+9\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 0:00:17,444\cf0 \expnd0\expndtw0\kerning0
+ --> \cf2 \kerning1\expnd0\expndtw0 0:00:18,934\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 o mundo dos humanos\
+10\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 0:00:19,370\cf0 \expnd0\expndtw0\kerning0
+ --> \cf2 \kerning1\expnd0\expndtw0 0:00:20,460\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 Eu vi tristeza\
+11\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 0:00:20,569\cf0 \expnd0\expndtw0\kerning0
+ --> \cf2 \kerning1\expnd0\expndtw0 0:00:21,623\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 doentes\
+12\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 0:00:21,732\cf0 \expnd0\expndtw0\kerning0
+ --> \cf2 \kerning1\expnd0\expndtw0 0:00:23,803\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 todos tomando muitos rem\'e9dios\
+13\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 0:00:23,912\cf0 \expnd0\expndtw0\kerning0
+ --> \cf2 \kerning1\expnd0\expndtw0 0:00:25,729\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 No fim, a \'fanica coisa que pude fazer \
+14\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 0:00:25,802\cf0 \expnd0\expndtw0\kerning0
+ --> \cf2 \kerning1\expnd0\expndtw0 0:00:27,583\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 foi fugir deles. \
+15\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 0:00:27,692\cf0 \expnd0\expndtw0\kerning0
+ --> \cf2 \kerning1\expnd0\expndtw0 0:00:29,472\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 Eu estava l\'e1 no in\'edcio\
+16\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 0:00:29,581\cf0 \expnd0\expndtw0\kerning0
+ --> \cf2 \kerning1\expnd0\expndtw0 0:00:31,217\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 lutei contra eles \
+17\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 0:00:32,016\cf0 \expnd0\expndtw0\kerning0
+ --> \cf2 \kerning1\expnd0\expndtw0 0:00:33,797\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 mas eu falhei\
+18\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 0:00:33,906\cf0 \expnd0\expndtw0\kerning0
+ --> \cf2 \kerning1\expnd0\expndtw0 0:00:35,759\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 e agora, meu tempo acabou\
+19\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 0:00:36,668\cf0 \expnd0\expndtw0\kerning0
+ --> \cf2 \kerning1\expnd0\expndtw0 0:00:38,412\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 mas o seu, est\'e1 s\'f3 come\'e7ando\
+20\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 0:00:39.539\cf0 \expnd0\expndtw0\kerning0
+ --> \cf2 \kerning1\expnd0\expndtw0 0:00:41.392\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 Me deixe te ensinar tudo que sei!\
+21\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf2 \kerning1\expnd0\expndtw0 0:00:42.555\cf0 \expnd0\expndtw0\kerning0
+ --> \cf2 \kerning1\expnd0\expndtw0 0:00:46,444\cf0 \expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 Continua\'85}

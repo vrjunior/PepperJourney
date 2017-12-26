@@ -1,6 +1,0 @@
-framework module Pods_PepperJourney {
-  umbrella header "Pods-PepperJourney-umbrella.h"
-
-  export *
-  module * { export * }
-}

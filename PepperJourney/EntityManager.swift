@@ -17,6 +17,7 @@ enum EnemyTypes : String {
 }
 
 class EntityManager {
+    public static var sharedInstance = EntityManager()
     private var scene: SCNScene!
     private weak var soundController: SoundController!
     private var chasedTargetAgent: GKAgent3D!
@@ -38,8 +39,13 @@ class EntityManager {
 
     /// Keeps track of the time for use in the update method.
     var previousUpdateTime: TimeInterval = 0
+    
+    // Private init of the Singleton
+    private init() {
+        
+    }
 
-    init (scene: SCNScene, gameController: GameController, soundController: SoundController)
+    func initEntityManager (scene: SCNScene, gameController: GameController, soundController: SoundController)
     {
         self.scene = scene
         self.soundController = soundController
@@ -110,39 +116,21 @@ class EntityManager {
         self.entityCleanerComponentSystem.addComponent(component)
     }
 
-
     // Creates a potato chasing Pepper
-    func createPursuitEnemy(type: String, position: SCNVector3)
+    func createEnemy(type: String, position: SCNVector3, persecutionBehavior: Bool, maxSpeed: Float? = nil, maxAcceleration: Float? = nil)
     {
         var enemy: GKEntity
         
         switch type {
             case EnemyTypes.potato.rawValue :
-                enemy = PotatoEntity(model: PotatoType.model1 , scene: self.scene, position: position, trakingAgent: self.chasedTargetAgent)
+                enemy = PotatoEntity(model: PotatoType.model1, scene: self.scene, position: position, persecutedTarget: self.chasedTargetAgent, maxSpeed: maxSpeed, maxAcceleration: maxAcceleration,persecutionBehavior: persecutionBehavior)
             
             case EnemyTypes.potatoSpear.rawValue :
                 enemy = PotatoSpearEntity(model: PotatoType.model1, scene: self.scene, position: position, trakingAgent: self.chasedTargetAgent)
             
             default:
-                enemy = PotatoEntity(model: PotatoType.model1 , scene: self.scene, position: position, trakingAgent: self.chasedTargetAgent)
+                 enemy = PotatoEntity(model: PotatoType.model1, scene: self.scene, position: position, persecutedTarget: self.chasedTargetAgent, maxSpeed: maxSpeed, maxAcceleration: maxAcceleration,persecutionBehavior: persecutionBehavior)
         }
-
-        // Create a seek component
-        let seekComponent = enemy.component(ofType: SeekComponent.self)!
-        self.seekComponentSystem.addComponent(seekComponent)
-
-		let soundRandomComponent = enemy.component(ofType: SoundRandomComponent.self)!
-		self.soundRandomComponentSystem.addComponent(soundRandomComponent)
-
-        // Add the component that enable the potato sink in water
-        guard let potatoNode = enemy.component(ofType: ModelComponent.self)?.modelNode else {fatalError("Error getting the node")}
-
-        let sinkComponent = SinkComponent(soundController: self.soundController, node: potatoNode, entity: enemy)
-        
-        enemy.addComponent(sinkComponent)
-
-        // add the sinkComponent to ComponentSystem
-        self.sinkComponentSystem.addComponent(sinkComponent)
 
         // Add the potato entity to array of potatoes
         if let enemyEnity = enemy as? EnemyEntity {
@@ -203,7 +191,7 @@ class EntityManager {
         for enemy in readyEnemies
         {
             let enemyType = enemy.name ?? ""
-            self.createPursuitEnemy(type: enemyType, position: enemy.position)
+            self.createEnemy(type: enemyType, position: enemy.position, persecutionBehavior: true)
         }
 
         self.previousUpdateTime = time

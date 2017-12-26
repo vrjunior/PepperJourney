@@ -120,6 +120,10 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         let keepAltitude = SCNTransformConstraint.positionConstraint(inWorldSpace: true) { (node: SCNNode, position: SCNVector3) -> SCNVector3 in
             var position = float3(position)
             position.y = self.character.characterNode.presentation.position.y + 20
+            if position.y < 10
+            {
+                position.y = 10
+            }
             return SCNVector3(position)
         }
         

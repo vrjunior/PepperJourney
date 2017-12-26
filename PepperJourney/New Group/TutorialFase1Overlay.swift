@@ -8,6 +8,7 @@
 
 import Foundation
 import SpriteKit
+import SceneKit
 
 
 class TutorialFase1Overlay: SKScene {
@@ -27,7 +28,9 @@ extension TutorialFase1Overlay : SKButtonDelegate {
     func buttonPressed(target: SKButton) {
 //        self.gameOptionsDelegate?.skipTutorial()
 		self.gameOptionsDelegate?.resume()
-		self.fase1GameController?.generatePotatoCrowd()
+        
+		self.fase1GameController?.generatePotatoCrowd(position: SCNVector3(0, 50, 265))
+        
 //		print("Pressed")
     }
 
