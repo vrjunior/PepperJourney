@@ -27,15 +27,22 @@ class SubtitleController {
         self.subtitles = [
             "F1_Pepper_1": ["I have to run!".localized,
                             "Otherwise they’ll catch me".localized],
+            
             "F1_Pepper_2": ["If I could I would make a".localized,
                             "smashed potato of them".localized],
+            
             "F1_Pepper_3": ["I’ll never let".localized,
                             "you catch me!".localized],
+            
             "F1_Potato_1": ["Don’t let her escape!".localized,
                             "She knows too much".localized],
-            "F1_Potato_2": ["Sir, we got her!".localized,  "She'll never pass throw this islands".localized],
+            
+            "F1_Potato_2": ["Sir, we got her!".localized,
+                            "She'll never pass throw this islands".localized],
+            
             "F1_Pepper_4": ["Hurry, help me jump".localized,
                             "throw those islands!".localized],
+            
             "F1_Pepper_5": ["I know someone who can".localized,
                             "helps us, we’re almost there.".localized]
         ]

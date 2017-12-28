@@ -153,7 +153,7 @@ class Fase1GameController: GameController {
     func generatePotatoCrowd(position: SCNVector3 = SCNVector3(2,50, 285), maxSpeed: Float? = nil, maxAcceleration: Float? = nil) {
         // Create new potatoes
     
-        var i = 10
+        var i = 0
         while i > 0 {
             entityManager.createEnemy(type: EnemyTypes.potato.rawValue, position: position, persecutionBehavior: true, maxSpeed: maxSpeed, maxAcceleration: maxAcceleration)
             i -= 1
