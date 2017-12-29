@@ -150,13 +150,17 @@ class Fase1GameController: GameController {
         
     }
     
-    func generatePotatoCrowd(position: SCNVector3 = SCNVector3(2,50, 285), maxSpeed: Float? = nil, maxAcceleration: Float? = nil) {
+    func generatePotatoCrowd(markerName: String, amount: Int, maxSpeed: Float? = nil, maxAcceleration: Float? = nil) {
+        
         // Create new potatoes
-    
-        var i = 0
-        while i > 0 {
-            entityManager.createEnemy(type: EnemyTypes.potato.rawValue, position: position, persecutionBehavior: true, maxSpeed: maxSpeed, maxAcceleration: maxAcceleration)
-            i -= 1
+        guard let markersNode = self.scene.rootNode.childNode(withName: "markers", recursively: false),
+                let spawnPosition = markersNode.childNode(withName: markerName, recursively: false)?.position else {
+                    print("Error getting \(markerName) marker!")
+                    return
+        }
+        
+        for _ in 0 ..< amount {
+            entityManager.createEnemy(type: EnemyTypes.potato.rawValue, position: spawnPosition, persecutionBehavior: true, maxSpeed: maxSpeed, maxAcceleration: maxAcceleration)
         }
     }
     
@@ -181,23 +185,26 @@ class Fase1GameController: GameController {
         //here we can hidden indicators
         controlsOverlay?.isAttackHidden = true
         
+        // Reset do marcador de final da fase
+        self.isWinner = false
+        
 		//Start the tutorial
-		if firstTimePlayingTutorial{
-            self.generatePotatoCrowd(maxSpeed: 10, maxAcceleration: 1)
+        if firstTimePlayingTutorial{
+            self.generatePotatoCrowd(markerName: "starterSpawnPoint", amount: 10, maxSpeed: 10, maxAcceleration: 1)
             let removeEnimiesAction = SCNAction.sequence([
                                                     SCNAction.wait(duration: 5),
                                                     SCNAction.run({ (node) in
                                                         self.entityManager.killAllPotatoes()
                                                     })
                 ])
-            
+
             self.scene.rootNode.runAction(removeEnimiesAction)
-            
-			tutorial()
-			self.firstTimePlayingTutorial = false
-		}
+
+            tutorial()
+            self.firstTimePlayingTutorial = false
+        }
         else {
-            generatePotatoCrowd()
+            generatePotatoCrowd(markerName: "starterSpawnPoint", amount: 10)
         }
         
     }
