@@ -277,6 +277,7 @@
 		9CFDF86E1F9A36C6009385A7 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				9CD635A21FD8CEB90016CC7B /* PrisonerBox.swift */,
 				D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */,
 				D25160E31F93FA0800BF756A /* Character */,
 				9C73792F1FEC8303005D0A72 /* PotatoEntity.swift */,
@@ -456,7 +457,6 @@
 				9C6D3DEA1F93252500B8FA2A /* Game.scnassets */,
 				D2EC85851F83F1240093F009 /* Assets.xcassets */,
 				D2C7654B1FD0782000EC7D9B /* VideoStoryboard.storyboard */,
-				9CD635A21FD8CEB90016CC7B /* PrisonerBox.swift */,
 				D25AD5AB1F87EAC800F2093E /* GameController.swift */,
 				9C0350F91FD5CA2800970006 /* MenuViewController.swift */,
 				9C0350F51FD59EA800970006 /* Fase1GameController.swift */,

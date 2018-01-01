@@ -14,6 +14,8 @@ class VideoViewController: AVPlayerViewController {
     
     public var cutScenePath: String = ""
     public var cutSceneSubtitlePath: String  = ""
+    public var blockAfterVideo: (() -> Void)?
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +53,7 @@ class VideoViewController: AVPlayerViewController {
     }
     
     func goBackToGame() {
+        self.blockAfterVideo!()
         self.dismiss(animated: true, completion: nil)
     }
     

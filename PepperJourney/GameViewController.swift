@@ -13,7 +13,13 @@ import SpriteKit
 
 
 protocol CutSceneDelegate : NSObjectProtocol {
-    func playCutScene(videoPath: String, subtitlePath: String?)
+    func playCutScene(videoSender: VideoSender)
+}
+
+struct VideoSender {
+    var blockAfterVideo: () -> Void
+    var cutScenePath: String
+    var cutSceneSubtitlePath: String
 }
 
 class GameViewController: UIViewController {
@@ -68,17 +74,22 @@ class GameViewController: UIViewController {
 
 extension GameViewController: CutSceneDelegate {
     
-    func playCutScene(videoPath: String, subtitlePath: String?) {
-        self.performSegue(withIdentifier: "playVideo", sender: (videoPath, subtitlePath))
+    func playCutScene(videoSender: VideoSender) {
+        self.performSegue(withIdentifier: "playVideo", sender: videoSender)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "playVideo" {
-            let paths = sender as! (String, String)
+            guard let videoSender = sender as? VideoSender else {
+                print("Error getting videoSender")
+                return
+            }
+            
             let videoStoryboard = segue.destination as! VideoViewController
-            videoStoryboard.cutScenePath = paths.0
-            videoStoryboard.cutSceneSubtitlePath = paths.1
+            videoStoryboard.cutScenePath = videoSender.cutScenePath
+            videoStoryboard.cutSceneSubtitlePath = videoSender.cutSceneSubtitlePath
+            videoStoryboard.blockAfterVideo = videoSender.blockAfterVideo
         }
     }
 }

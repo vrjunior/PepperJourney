@@ -43,6 +43,7 @@ class EnemyGeneratorSystem: GKEntity {
     // Use this function to reset the points of creation
     func setupPotatoGeneratorSystem() {
         self.enemiesToGenerate = self.originalEnemiesList
+        
     }
     
     override func update(deltaTime seconds: TimeInterval)

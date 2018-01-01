@@ -75,6 +75,8 @@ class EntityManager {
     // Use this function ever in game initialization or restart
     func setupGameInitialization()
     {
+        self.killAllPotatoes()
+        
         // Configuration of the potato generator system
         self.potatoGeneratorSystem.setupPotatoGeneratorSystem()
 

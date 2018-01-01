@@ -155,15 +155,15 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     
     func initializeTheGame () {
         
-        // Show de character
+        // Show the character
         self.character.characterNode.isHidden = false
+        
+        self.character.setupCharacter()
 
         self.entityManager.setupGameInitialization()
         
         // Reset of all the sounds
         self.resetSounds()
-        
-        self.character.setupCharacter()
         
         self.cameraNode.position = self.cameraInitialPosition
 		
@@ -227,7 +227,6 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         }
         
         self.scnView.overlaySKScene = controlsOverlay
-        
         gameStateMachine.enter(PlayState.self)
         characterStateMachine.enter(StandingState.self)
     }
@@ -264,6 +263,7 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     }
     
     func restart() {
+        
         //reset lifebar
         self.overlayDelegate?.resetLifeIndicator()
         

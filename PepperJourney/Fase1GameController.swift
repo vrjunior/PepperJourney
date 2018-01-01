@@ -98,20 +98,11 @@ class Fase1GameController: GameController {
     }
     
     override func initializeTheGame () {
-        // Show de character
-        self.character.characterNode.isHidden = false
-        
-        self.entityManager.setupGameInitialization()
-        
-        // Reset of all the sounds
-        self.resetSounds()
-        
-        self.character.setupCharacter()
+        super.initializeTheGame()
         
 //        self.cameraNode.position = self.cameraInitialPosition
 		
 		gameStateMachine.enter(TutorialFase1State.self)
-		
     }
     
     override func setupTapToStart() {
@@ -166,16 +157,24 @@ class Fase1GameController: GameController {
     
     override func setupFinishLevel() {
         self.prepereToStartGame()
-        self.soundController.playSoundEffect(soundName: "FinishLevelSound", loops: false, node: self.cameraNode)
+  
+        let videoSender = VideoSender(blockAfterVideo: self.prepareToNextLevel, cutScenePath: "cutscene1.mp4", cutSceneSubtitlePath: "cutscene1.srt".localized)
+        self.cutSceneDelegate?.playCutScene(videoSender: videoSender)
         
         let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks") as! FinishOverlay
         finishLevelOverlay.gameOptionsDelegate = self
         finishLevelOverlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = finishLevelOverlay
         
-        self.gameStateMachine.enter(PauseState.self)
+        gameStateMachine.enter(PauseState.self)
         
-        self.cutSceneDelegate?.playCutScene(videoPath: "cutscene1.mp4", subtitlePath: "cutscene1.srt".localized)
+    }
+    
+    // Atenção não pode pausar a cena senão o audio não será executado.
+    func prepareToNextLevel() {
+  
+        gameStateMachine.enter(PlayState.self)
+        self.soundController.playSoundEffect(soundName: "FinishLevelSound", loops: false, node: self.cameraNode)
     }
     
     override func startGame() {

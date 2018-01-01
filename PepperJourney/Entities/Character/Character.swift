@@ -69,6 +69,7 @@ class Character: GKEntity {
     }
     
     func setupCharacter() {
+        
         self.characterNode.position = SCNVector3(self.initialPosition)
         self.lastDirection = float3(0,0,1)
         
