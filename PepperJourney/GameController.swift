@@ -102,6 +102,15 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
             ])
         
     }
+    func addNotifications() {
+        let nc = NotificationCenter.default
+        let pauseNotification = Notification.Name("pauseNotification")
+        nc.addObserver(self, selector: #selector(GameController.setPauseByNotification), name: pauseNotification, object: nil)
+    }
+    
+    @objc func setPauseByNotification() {
+        self.pause()
+    }
     
     func setupCamera() {
         self.followingCamera = self.scene.rootNode.childNode(withName: "followingCamera", recursively: true)
@@ -151,6 +160,7 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         //self.scnView.debugOptions = SCNDebugOptions.showPhysicsShapes
         self.scnView.showsStatistics = true
         
+        self.addNotifications()
     }
     
     func initializeTheGame () {
@@ -237,11 +247,13 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         // update characters
         character!.update(atTime: time, with: renderer)
         self.updateFollowingCamera()
+        self.entityManager.update(atTime: time)
+        
+        //TODO: TRATAR ALGUM DIA SE FOR NECESSÁRIO
         if  !self.scene.rootNode.isPaused {
-            self.entityManager.update(atTime: time)
+            
             SubtitleController.sharedInstance.update(systemTime: time)
         }
-        
     }
     
     func handleWithPhysicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
