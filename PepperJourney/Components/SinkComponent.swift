@@ -56,11 +56,6 @@ class SinkComponent: GKComponent
             if SinkComponent.isSoundEnable() {
                 self.soundController.playSoundEffect(soundName: self.soundName, loops: false, node: self.node)
             }
-            else {
-                print("faillllllllllllllllllllllllllllllll")
-            }
-          
-            
         }
     }
 
