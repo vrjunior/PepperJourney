@@ -156,24 +156,25 @@ class Fase1GameController: GameController {
     }
     
     override func setupFinishLevel() {
+        gameStateMachine.enter(PauseState.self)
+        
         self.prepereToStartGame()
   
         let videoSender = VideoSender(blockAfterVideo: self.prepareToNextLevel, cutScenePath: "cutscene1.mp4", cutSceneSubtitlePath: "cutscene1.srt".localized)
         self.cutSceneDelegate?.playCutScene(videoSender: videoSender)
-        
-        let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks") as! FinishOverlay
-        finishLevelOverlay.gameOptionsDelegate = self
-        finishLevelOverlay.scaleMode = .aspectFill
-        self.scnView.overlaySKScene = finishLevelOverlay
-        
-        gameStateMachine.enter(PauseState.self)
-        
     }
     
     // Atenção não pode pausar a cena senão o audio não será executado.
     func prepareToNextLevel() {
   
+        let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks") as! FinishOverlay
+        finishLevelOverlay.gameOptionsDelegate = self
+        finishLevelOverlay.scaleMode = .aspectFill
+        self.scnView.overlaySKScene = finishLevelOverlay
+        
+        // Play the scene to reproduce the sound
         gameStateMachine.enter(PlayState.self)
+        
         self.soundController.playSoundEffect(soundName: "FinishLevelSound", loops: false, node: self.cameraNode)
     }
     

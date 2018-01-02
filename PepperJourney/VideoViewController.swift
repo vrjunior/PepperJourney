@@ -23,6 +23,9 @@ class VideoViewController: AVPlayerViewController {
         self.playCutScene()
         
     }
+    override func viewDidDisappear(_ animated: Bool) {
+         self.goBackToGame()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -47,14 +50,13 @@ class VideoViewController: AVPlayerViewController {
             self.player?.play()
         }
     }
-    
+   
     @objc func videoDidEnd(notification: Notification) {
-        self.goBackToGame()
+        self.dismiss(animated: true, completion: nil)
     }
     
     func goBackToGame() {
         self.blockAfterVideo!()
-        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func skipVideo(_ sender: UIButton) {

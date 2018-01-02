@@ -20,6 +20,7 @@ class SinkComponent: GKComponent
     private weak var soundController: SoundController!
     private weak var node: SCNNode!
     private var soundName: String!
+    private static var lastSinkTimeSystem: TimeInterval = 0
     
     init(node: SCNNode, entity: GKEntity) {
         super.init()
@@ -28,7 +29,8 @@ class SinkComponent: GKComponent
         self.soundName = "sinkComponent-" + entity.description
         
         // Load the audio source in the memory
-        self.soundController.loadSound(fileName: "splashingWater.wav", soundName: soundName)
+        
+        self.soundController.loadSound(fileName: "splashingWater.wav", soundName: soundName, volume: 30)
     }
     
     
@@ -51,9 +53,30 @@ class SinkComponent: GKComponent
 //            self.node.physicsBody?.damping = 0.9
             
             // Executes the sound
-            self.soundController.playSoundEffect(soundName: self.soundName, loops: false, node: self.node)
+            if SinkComponent.isSoundEnable() {
+                self.soundController.playSoundEffect(soundName: self.soundName, loops: false, node: self.node)
+            }
+            else {
+                print("faillllllllllllllllllllllllllllllll")
+            }
+          
             
         }
+    }
+
+    static func isSoundEnable() -> Bool {
+        var soundEnable = false
+        let currentTime = Date.timeIntervalSinceReferenceDate
+        
+        // Duration of the current sink in water sound
+        let soundDuration: TimeInterval = 2.21
+        
+        if (currentTime - self.lastSinkTimeSystem) > (soundDuration / 2) {
+            soundEnable = true
+        }
+        self.lastSinkTimeSystem = currentTime
+        
+        return soundEnable
     }
     func resetComponent()
     {
