@@ -381,7 +381,9 @@ extension GameController : Controls {
     func padOverlayVirtualStickInteractionDidEnd(_ padNode: PadOverlay) {
         characterDirection = [0, 0]
         
-        self.characterStateMachine.enter(StandingState.self)
+        if !self.character.isJumping {
+            self.characterStateMachine.enter(StandingState.self)
+        }
     }
     
     
