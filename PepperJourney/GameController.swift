@@ -35,8 +35,8 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     var followingCamera: SCNNode!
     var overlayDelegate: UpdateIndicators?
     
-    open var scnView: SCNView!
-    open var scene: SCNScene!
+    public var scnView: SCNView!
+    public var scene: SCNScene!
     private weak var sceneRenderer: SCNSceneRenderer?
     
     //overlays
@@ -47,10 +47,10 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     public weak var cutSceneDelegate: CutSceneDelegate?
     
     // Camera and targets
-    open var cameraInitialPosition: SCNVector3!
-	open var cameraInitialPresentation: SCNNode!
-    open var cameraNode: SCNNode!
-    open var pepperNode: SCNNode!
+    public var cameraInitialPosition: SCNNode!
+    public var followingCameraInitialPosition: SCNNode!
+    public var cameraNode: SCNNode!
+    public var cameraInitialPresentation: SCNNode!
 	
 	// Sound Player
     open let soundController = SoundController.sharedInstance
@@ -115,9 +115,11 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     func setupCamera() {
         self.followingCamera = self.scene.rootNode.childNode(withName: "followingCamera", recursively: true)
         
-        self.cameraNode = self.scene.rootNode.childNode(withName: "camera", recursively: true)!
-        self.cameraInitialPosition = cameraNode.presentation.position
+        self.cameraNode = self.scene.rootNode.childNode(withName: "camera", recursively: true)
         
+        self.followingCameraInitialPosition = self.scene.rootNode.childNode(withName: "followingCameraInitialPosition", recursively: false)
+        self.cameraInitialPosition = self.followingCameraInitialPosition.childNode(withName: "cameraInitialPosition", recursively: false)
+
         let lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
         lookAtConstraint.isGimbalLockEnabled = true
         lookAtConstraint.influenceFactor = 1
@@ -175,8 +177,22 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         // Reset of all the sounds
         self.resetSounds()
         
-        self.cameraNode.position = self.cameraInitialPosition
-		
+    }
+    
+    func resetCamera() {
+
+        self.cameraNode.constraints = nil
+        
+        self.followingCamera.position = self.followingCameraInitialPosition.position
+        self.followingCamera.eulerAngles = self.followingCameraInitialPosition.eulerAngles
+        self.followingCamera.orientation = self.followingCameraInitialPosition.orientation
+        
+        self.cameraNode.position = self.cameraInitialPosition.position
+        self.cameraNode.eulerAngles = self.cameraInitialPosition.eulerAngles
+        self.cameraNode.orientation = self.cameraInitialPosition.orientation
+        
+        self.setupCamera()
+        
     }
    
     func setupTapToStart() {
@@ -191,6 +207,7 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         
     }
     func prepereToStartGame() {
+
         self.stopSounds()
         
         entityManager.killAllPotatoes()
@@ -286,6 +303,8 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         self.controlsOverlay?.isPausedControl = false
         
         self.startGame()
+        
+        self.resetCamera()
     }
     
     func resume() {
