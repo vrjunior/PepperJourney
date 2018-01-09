@@ -119,8 +119,6 @@ class Fase2GameController: GameController {
         
         self.character.setupCharacter()
         
-        self.cameraNode.position = self.cameraInitialPosition
-        
     }
     
     override func setupTapToStart() {
