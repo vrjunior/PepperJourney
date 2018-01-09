@@ -31,6 +31,7 @@
 		9C991DAF1FCC5CB600DEE3D6 /* FinishLevel-jingle-win-00.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C991DAC1FCC5CB500DEE3D6 /* FinishLevel-jingle-win-00.wav */; };
 		9C991DB31FCC99DE00DEE3D6 /* AttackComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C991DB21FCC99DE00DEE3D6 /* AttackComponent.swift */; };
 		9C991DB91FCD9F5300DEE3D6 /* Yell - small-fairy-hit-moan.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C991DB71FCD9F5300DEE3D6 /* Yell - small-fairy-hit-moan.wav */; };
+		9CAF1BB01FFFEB6000D9D70A /* RewardAdvertisement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CAF1BAF1FFFEB6000D9D70A /* RewardAdvertisement.swift */; };
 		9CC26F651FD9369500292099 /* EntityCleanerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC26F641FD9369500292099 /* EntityCleanerComponent.swift */; };
 		9CC26F671FD95A5700292099 /* PowerLevelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC26F661FD95A5700292099 /* PowerLevelComponent.swift */; };
 		9CC26F691FD960B300292099 /* AttackLimiterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC26F681FD960B300292099 /* AttackLimiterComponent.swift */; };
@@ -130,6 +131,7 @@
 		9C991DAC1FCC5CB500DEE3D6 /* FinishLevel-jingle-win-00.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "FinishLevel-jingle-win-00.wav"; sourceTree = "<group>"; };
 		9C991DB21FCC99DE00DEE3D6 /* AttackComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackComponent.swift; sourceTree = "<group>"; };
 		9C991DB71FCD9F5300DEE3D6 /* Yell - small-fairy-hit-moan.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Yell - small-fairy-hit-moan.wav"; sourceTree = "<group>"; };
+		9CAF1BAF1FFFEB6000D9D70A /* RewardAdvertisement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardAdvertisement.swift; sourceTree = "<group>"; };
 		9CC26F641FD9369500292099 /* EntityCleanerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityCleanerComponent.swift; sourceTree = "<group>"; };
 		9CC26F661FD95A5700292099 /* PowerLevelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerLevelComponent.swift; sourceTree = "<group>"; };
 		9CC26F681FD960B300292099 /* AttackLimiterComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackLimiterComponent.swift; sourceTree = "<group>"; };
@@ -244,7 +246,9 @@
 		9C774A611FE1996200A388CC /* Controlers */ = {
 			isa = PBXGroup;
 			children = (
+				9CAF1BAF1FFFEB6000D9D70A /* RewardAdvertisement.swift */,
 				9C774A621FE1997C00A388CC /* SubtitleController.swift */,
+				9CE0FF421FC765B9004AF735 /* SoundController.swift */,
 			);
 			path = Controlers;
 			sourceTree = "<group>";
@@ -459,7 +463,6 @@
 				9C0350F91FD5CA2800970006 /* MenuViewController.swift */,
 				9C0350F51FD59EA800970006 /* Fase1GameController.swift */,
 				9C0350F71FD59ED200970006 /* Fase2GameController.swift */,
-				9CE0FF421FC765B9004AF735 /* SoundController.swift */,
 				D2C7654E1FD0891100EC7D9B /* VideoViewController.swift */,
 				D2EC857C1F83F1240093F009 /* AppDelegate.swift */,
 				D2DDAD511FBA2913009FA2B0 /* GameOptions.swift */,
@@ -600,7 +603,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		170788B227114C8BD217D750 /* [CP] Copy Pods Resources */ = {
@@ -664,6 +667,7 @@
 				D2983A541FF2CBAA00979A52 /* String+Localized.swift in Sources */,
 				9C03A2421F9A33DD008F191A /* EntityManager.swift in Sources */,
 				B0676A301FE143E30001BA27 /* MoveAlong.swift in Sources */,
+				9CAF1BB01FFFEB6000D9D70A /* RewardAdvertisement.swift in Sources */,
 				D25BAE261FC60864000ED0EC /* SettingsOverlay.swift in Sources */,
 				9CD635A31FD8CEB90016CC7B /* PrisonerBox.swift in Sources */,
 				B095F5D41FE0240300B4F386 /* TutorialFase1State.swift in Sources */,
@@ -895,7 +899,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J5KQYDNX5E;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = PepperJourney/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vrmassoni.SpicyHero;
@@ -911,7 +915,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J5KQYDNX5E;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = PepperJourney/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vrmassoni.SpicyHero;

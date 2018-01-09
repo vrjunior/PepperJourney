@@ -10,10 +10,15 @@ import UIKit
 import QuartzCore
 import SceneKit
 import SpriteKit
+import GoogleMobileAds
 
 
 protocol CutSceneDelegate : NSObjectProtocol {
     func playCutScene(videoSender: VideoSender)
+}
+
+protocol AdvertisingDelegate: NSObjectProtocol {
+    func showAd()
 }
 
 struct VideoSender {
@@ -23,7 +28,9 @@ struct VideoSender {
 }
 
 class GameViewController: UIViewController {
+    
     public var fase: Int = 1
+    private var rewardAd: RewardAdvertisement!
     
     var gameView: SCNView {
         return view as! SCNView
@@ -42,11 +49,17 @@ class GameViewController: UIViewController {
         {
             gameController = Fase2GameController(scnView: gameView)
         }
-      
+        
+        // Video delegates
         gameController?.cutSceneDelegate = self
+        gameController?.adVideoDelegate = self
+        
+        // Ads objects
+        self.rewardAd = RewardAdvertisement(gameViewController: self)
+        
         // Configure the view
         gameView.backgroundColor = UIColor.black
-		
+        
     }
     
     override var shouldAutorotate: Bool {
@@ -69,14 +82,6 @@ class GameViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
-
-}
-
-extension GameViewController: CutSceneDelegate {
-    
-    func playCutScene(videoSender: VideoSender) {
-        self.performSegue(withIdentifier: "playVideo", sender: videoSender)
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -91,5 +96,19 @@ extension GameViewController: CutSceneDelegate {
             videoStoryboard.cutSceneSubtitlePath = videoSender.cutSceneSubtitlePath
             videoStoryboard.blockAfterVideo = videoSender.blockAfterVideo
         }
+    }
+
+}
+
+extension GameViewController: AdvertisingDelegate {
+    func showAd() {
+        //self.rewardAd.showAdWhenReady()
+    }
+}
+
+extension GameViewController: CutSceneDelegate {
+    
+    func playCutScene(videoSender: VideoSender) {
+        self.performSegue(withIdentifier: "playVideo", sender: videoSender)
     }
 }

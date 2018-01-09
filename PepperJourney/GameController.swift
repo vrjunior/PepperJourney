@@ -45,6 +45,7 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
 	open var tutorialFase1Overlay: TutorialFase1Overlay?
 	
     public weak var cutSceneDelegate: CutSceneDelegate?
+    public weak var adVideoDelegate: AdvertisingDelegate?
     
     // Camera and targets
     open var cameraInitialPosition: SCNVector3!
@@ -199,6 +200,7 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     }
     
     func setupGameOver() {
+       
         
         // Do the setup to restart the game
         self.prepereToStartGame()
@@ -210,7 +212,9 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         gameOverOverlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = gameOverOverlay
         
-         //self.gameStateMachine.enter(PauseState.self)
+        self.gameStateMachine.enter(PauseState.self)
+        
+        self.adVideoDelegate?.showAd()
         
     }
     
@@ -333,6 +337,8 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
 //    func skipTutorial() {
 //        self.resume()
 //    }
+    func showRewardAd() {
+    }
 }
 
 extension GameController : Controls {
