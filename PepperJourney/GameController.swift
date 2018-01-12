@@ -35,8 +35,8 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     var followingCamera: SCNNode!
     var overlayDelegate: UpdateIndicators?
     
-    open var scnView: SCNView!
-    open var scene: SCNScene!
+    public var scnView: SCNView!
+    public var scene: SCNScene!
     private weak var sceneRenderer: SCNSceneRenderer?
     
     //overlays
@@ -45,12 +45,13 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
 	open var tutorialFase1Overlay: TutorialFase1Overlay?
 	
     public weak var cutSceneDelegate: CutSceneDelegate?
+    public weak var adVideoDelegate: AdvertisingDelegate?
     
     // Camera and targets
-    open var cameraInitialPosition: SCNVector3!
-	open var cameraInitialPresentation: SCNNode!
-    open var cameraNode: SCNNode!
-    open var pepperNode: SCNNode!
+    public var cameraInitialPosition: SCNNode!
+    public var followingCameraInitialPosition: SCNNode!
+    public var cameraNode: SCNNode!
+    public var cameraInitialPresentation: SCNNode!
 	
 	// Sound Player
     open let soundController = SoundController.sharedInstance
@@ -102,13 +103,24 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
             ])
         
     }
+    func addNotifications() {
+        let nc = NotificationCenter.default
+        let pauseNotification = Notification.Name("pauseNotification")
+        nc.addObserver(self, selector: #selector(GameController.setPauseByNotification), name: pauseNotification, object: nil)
+    }
+    
+    @objc func setPauseByNotification() {
+        self.pause()
+    }
     
     func setupCamera() {
         self.followingCamera = self.scene.rootNode.childNode(withName: "followingCamera", recursively: true)
         
-        self.cameraNode = self.scene.rootNode.childNode(withName: "camera", recursively: true)!
-        self.cameraInitialPosition = cameraNode.presentation.position
+        self.cameraNode = self.scene.rootNode.childNode(withName: "camera", recursively: true)
         
+        self.followingCameraInitialPosition = self.scene.rootNode.childNode(withName: "followingCameraInitialPosition", recursively: false)
+        self.cameraInitialPosition = self.followingCameraInitialPosition.childNode(withName: "cameraInitialPosition", recursively: false)
+
         let lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
         lookAtConstraint.isGimbalLockEnabled = true
         lookAtConstraint.influenceFactor = 1
@@ -149,8 +161,9 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         sceneRenderer!.delegate = self
         
         //self.scnView.debugOptions = SCNDebugOptions.showPhysicsShapes
-        self.scnView.showsStatistics = true
+        //self.scnView.showsStatistics = true
         
+        self.addNotifications()
     }
     
     func initializeTheGame () {
@@ -165,8 +178,22 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         // Reset of all the sounds
         self.resetSounds()
         
-        self.cameraNode.position = self.cameraInitialPosition
-		
+    }
+    
+    func resetCamera() {
+
+        self.cameraNode.constraints = nil
+        
+        self.followingCamera.position = self.followingCameraInitialPosition.position
+        self.followingCamera.eulerAngles = self.followingCameraInitialPosition.eulerAngles
+        self.followingCamera.orientation = self.followingCameraInitialPosition.orientation
+        
+        self.cameraNode.position = self.cameraInitialPosition.position
+        self.cameraNode.eulerAngles = self.cameraInitialPosition.eulerAngles
+        self.cameraNode.orientation = self.cameraInitialPosition.orientation
+        
+        self.setupCamera()
+        
     }
    
     func setupTapToStart() {
@@ -181,6 +208,7 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         
     }
     func prepereToStartGame() {
+
         self.stopSounds()
         
         entityManager.killAllPotatoes()
@@ -189,6 +217,7 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     }
     
     func setupGameOver() {
+       
         
         // Do the setup to restart the game
         self.prepereToStartGame()
@@ -200,7 +229,9 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         gameOverOverlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = gameOverOverlay
         
-         //self.gameStateMachine.enter(PauseState.self)
+        self.gameStateMachine.enter(PauseState.self)
+        
+        self.adVideoDelegate?.showAd()
         
     }
     
@@ -237,11 +268,13 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         // update characters
         character!.update(atTime: time, with: renderer)
         self.updateFollowingCamera()
+        self.entityManager.update(atTime: time)
+        
+        //TODO: TRATAR ALGUM DIA SE FOR NECESSÁRIO
         if  !self.scene.rootNode.isPaused {
-            self.entityManager.update(atTime: time)
+            
             SubtitleController.sharedInstance.update(systemTime: time)
         }
-        
     }
     
     func handleWithPhysicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
@@ -274,6 +307,8 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         self.controlsOverlay?.isPausedControl = false
         
         self.startGame()
+        
+        self.resetCamera()
     }
     
     func resume() {
@@ -321,6 +356,8 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
 //    func skipTutorial() {
 //        self.resume()
 //    }
+    func showRewardAd() {
+    }
 }
 
 extension GameController : Controls {
@@ -350,7 +387,9 @@ extension GameController : Controls {
     func padOverlayVirtualStickInteractionDidEnd(_ padNode: PadOverlay) {
         characterDirection = [0, 0]
         
-        self.characterStateMachine.enter(StandingState.self)
+        if !self.character.isJumping {
+            self.characterStateMachine.enter(StandingState.self)
+        }
     }
     
     

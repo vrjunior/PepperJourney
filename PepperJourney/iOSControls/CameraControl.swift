@@ -16,6 +16,10 @@ class CameraControl: SKSpriteNode {
             if isPausedControl == true {
                 self.destroyControl()
             }
+            else {
+                self.line?.alpha = 1
+                self.mark?.alpha = 1
+            }
         }
     }
     private var lineSize: CGSize!
@@ -32,13 +36,11 @@ class CameraControl: SKSpriteNode {
         
         self.isUserInteractionEnabled = true
        
-        self.lineSize = CGSize(width: 540, height: 18)
-        self.line = SKSpriteNode(color: UIColor.gray, size: self.lineSize)
-        self.addChild(line!)
+        self.line = self.childNode(withName: "line") as? SKSpriteNode
+        self.lineSize = self.line?.size
         
-        self.markSize = CGSize(width: 18, height: 60)
-        self.mark = SKSpriteNode(color: UIColor.black, size: self.markSize)
-        self.addChild(mark!)
+        self.mark = self.childNode(withName: "mark") as? SKSpriteNode
+        self.markSize = self.mark?.size
         
         self.destroyControl()
         
@@ -120,8 +122,10 @@ class CameraControl: SKSpriteNode {
     private func getAngle(byDistance distance: CGFloat) -> CGFloat {
         let maxX: CGFloat = self.lineSize.width / 2
         let minX: CGFloat = -(self.lineSize.width / 2)
-        let a: CGFloat = -CGFloat.pi
-        let b: CGFloat = CGFloat.pi
+        
+        //TO get the entire circle is 2 pi
+        let a: CGFloat = -(CGFloat.pi / 2)
+        let b: CGFloat = CGFloat.pi / 2
         
         let result = (b - a) * ((distance - minX) / (maxX - minX)) + a
         

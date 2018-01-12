@@ -119,8 +119,6 @@ class Fase2GameController: GameController {
         
         self.character.setupCharacter()
         
-        self.cameraNode.position = self.cameraInitialPosition
-        
     }
     
     override func setupTapToStart() {
@@ -143,21 +141,6 @@ class Fase2GameController: GameController {
         self.character.characterNode.isHidden = true
     }
     
-    override func setupGameOver() {
-        
-        // Do the setup to restart the game
-        self.prepereToStartGame()
-        
-        self.soundController.playSoundEffect(soundName: "gameOverSound", loops: false, node: self.cameraNode)
-        
-        let gameOverOverlay = SKScene(fileNamed: "GameOverOverlay.sks") as! GameOverOverlay
-        gameOverOverlay.gameOptionsDelegate = self
-        gameOverOverlay.scaleMode = .aspectFill
-        self.scnView.overlaySKScene = gameOverOverlay
-        
-        //self.gameStateMachine.enter(PauseState.self)
-        
-    }
     
     override func setupFinishLevel() {
         self.prepereToStartGame()
