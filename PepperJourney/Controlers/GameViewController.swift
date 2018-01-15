@@ -28,15 +28,37 @@ struct VideoSender {
     var cutSceneSubtitlePath: String
 }
 
+struct Comic {
+    var name: String
+    var previousComic: String?
+    var nextComic: String?
+    var runComic: (() -> Void)
+}
+
 class GameViewController: UIViewController {
     
     public var fase: Int = 1
     private var rewardAd: RewardAdvertisement!
+    private var comics: [Comic]!
+    public private(set) var currentComic: Comic!
     
     var gameView: SCNView {
         return view as! SCNView
     }
-    
+    func setupComics() {
+        let level1     = Comic(name: "level1", previousComic: nil, nextComic: "cutscene1", runComic: self.level1)
+        
+        let cutscene1 = Comic(name: "cutscene1", previousComic: "level1", nextComic: "cutscene2", runComic: self.cutscene1)
+        
+        let cutscene2 = Comic(name: "cutscene2", previousComic: "cutscene1", nextComic: "level2", runComic: self.cutscene2)
+        
+        let level2     = Comic(name: "level2", previousComic: "cutscene2", nextComic: "cutscene3", runComic: self.level2)
+        
+        let cutscene3 = Comic(name: "cutscene3", previousComic: "level2", nextComic: nil, runComic: self.cutscene3)
+        
+        self.comics = [level1, cutscene1, cutscene2, level2, cutscene3]
+        
+    }
     var gameController: GameController?
     
     override func viewDidLoad() {
@@ -62,7 +84,34 @@ class GameViewController: UIViewController {
         gameView.backgroundColor = UIColor.black
         
     }
+    func setComic(named: String) {
+        for comic in self.comics {
+            if comic.name == named {
+                self.currentComic = comic
+                self.currentComic.runComic()
+                return
+            }
+        }
+    }
     
+    func runNextComic() {
+        self.setComic(named: currentComic.name)
+    }
+    func level1() {
+        
+    }
+    func level2() {
+        
+    }
+    func cutscene1() {
+        
+    }
+    func cutscene2() {
+        
+    }
+    func cutscene3() {
+        
+    }
     override var shouldAutorotate: Bool {
         return true
     }
@@ -99,6 +148,10 @@ class GameViewController: UIViewController {
         }
     }
 
+    func changeLevel(controller: GameController) {
+        // roda cutscene
+        gameController = controller
+    }
 }
 
 extension GameViewController: AdvertisingDelegate {

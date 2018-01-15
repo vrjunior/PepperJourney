@@ -190,6 +190,8 @@ class Fase2GameController: GameController {
             
             self.cameraNode.runAction(SCNAction.repeatForever(sequence))
         }
+        self.gameStateMachine.enter(PauseState.self)
+        self.playCutscene()
         
         // Inittialize the game with the defaults settings.
     }
@@ -211,9 +213,16 @@ class Fase2GameController: GameController {
         }
     }
     
-    func tutorialLevel2() {
+    func playCutscene() {
+        
+        let videoSender = VideoSender(blockAfterVideo: self.tutorialLevel2, cutScenePath: "cutscene2.mp4", cutSceneSubtitlePath: "cutscene2.srt".localized)
+        self.cutSceneDelegate?.playCutScene(videoSender: videoSender)
 //        self.entityManager.
     }
+    func tutorialLevel2() {
+        self.gameStateMachine.enter(PlayState.self)
+    }
+    
     override func handleWithPhysicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         var characterNode: SCNNode?
         var anotherNode: SCNNode?
