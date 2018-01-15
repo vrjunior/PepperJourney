@@ -14,6 +14,10 @@ class RewardAdvertisement: NSObject, GADRewardBasedVideoAdDelegate {
     private var rewardAd: GADRewardBasedVideoAd!
     private var request = GADRequest()
     private var gameViewController: GameViewController!
+    private var blockToRunAfter: ((Bool) -> Void)!
+    private var loadedVideoFeedback: (() -> Void)!
+    public  var isWaiting: Bool = false
+    private var wonReward = false
     
     init(gameViewController: GameViewController) {
         super.init()
@@ -29,32 +33,58 @@ class RewardAdvertisement: NSObject, GADRewardBasedVideoAdDelegate {
         request.testDevices?.append("4d173bbf6661dc905c024b9d7b0b6af3") // DC
     }
     
-    func showAdWhenReady() {
+    func showAdWhenReady(blockToRunAfter: @escaping (Bool) -> Void, loadedVideoFeedback:  @escaping () -> Void) {
 
+        if self.isWaiting {
+            return
+        }
+        self.isWaiting = true
+        
+        self.wonReward = false
+        
+        // save the function that will be called
+        self.blockToRunAfter = blockToRunAfter
+        self.loadedVideoFeedback = loadedVideoFeedback
+        
         // load the ad video
         self.rewardAd.load(request, withAdUnitID: "ca-app-pub-5001378685265172/5465280027")
     }
     
+    // Ganhou recompensa
     func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd, didRewardUserWith reward: GADAdReward) {
-        print("vai fechar")
-        
+        self.wonReward = true
     }
     
+    // deu erro
     func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd, didFailToLoadWithError error: Error) {
-        print("Error loading video ad")
+        self.loadedVideoFeedback()
+        print("Error loading video ad!")
         print(error.localizedDescription)
     }
     
-    func rewardBasedVideoAdDidReceive(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
+    func rewardBasedVideoAdDidClose(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
+        // Restaura os indicadores de que o vídeo está carregando
+        self.loadedVideoFeedback()
         
-        if self.rewardAd.isReady {
-            
-            self.rewardAd.present(fromRootViewController: self.gameViewController)
-            
+        if self.wonReward {
+             self.blockToRunAfter(true)
         }
-        else {
+    }
+    
+    func rewardBasedVideoAdDidReceive(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
+        guard self.rewardAd.isReady else {
             print("Error! Video isn't ready")
+            return
         }
+        guard self.isWaiting else {
+            print("Video load was cancel")
+            return
+        }
+        
+        self.isWaiting = false
+        // Play the video
+        self.rewardAd.present(fromRootViewController: self.gameViewController)
+        
     }
 }
 

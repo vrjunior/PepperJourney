@@ -11,11 +11,13 @@ import SpriteKit
 
 protocol SKButtonDelegate {
     func buttonPressed(target: SKButton)
+    func buttonReleased(target: SKButton)
 }
 
 class SKButton : SKSpriteNode {
     
     public var delegate : SKButtonDelegate?
+    let defaultColorBlendFactor: CGFloat = 0.2
 	
 	var isPausedControls: Bool = false {
 		didSet {
@@ -36,6 +38,14 @@ class SKButton : SKSpriteNode {
    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.delegate?.buttonPressed(target: self)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.delegate?.buttonReleased(target: self)
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.delegate?.buttonReleased(target: self)
     }
     
 }

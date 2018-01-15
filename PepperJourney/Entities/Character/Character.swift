@@ -68,9 +68,15 @@ class Character: GKEntity {
         self.loadComponents(scene: scene, soundController: soundController)
     }
     
-    func setupCharacter() {
+    func setupCharacter(initialPosition: SCNVector3? = nil) {
         
-        self.characterNode.position = SCNVector3(self.initialPosition)
+        if let position = initialPosition {
+            self.characterNode.position = position
+        }
+        else {
+            self.characterNode.position = SCNVector3(self.initialPosition)
+        }
+        
         self.lastDirection = float3(0,0,1)
         
         // Reset the power Level to the default

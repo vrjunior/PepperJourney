@@ -253,13 +253,16 @@ class EntityManager {
             }
         }
 
-        if let index = enemyToBeRemoved {
+        if let index = enemyToBeRemoved, index < enemyEntities.count {
             let enemy = self.enemyEntities[index]
 
             enemy.killEnemy()
             
             enemyEntities.remove(at: index)
             return true
+        }
+        else {
+            print("Deu ruim em killAnEnemy. enemyToBeRemoved index: \(enemyToBeRemoved) e enemyEntities.count: \(enemyEntities.count)")
         }
 
         return false

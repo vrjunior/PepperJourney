@@ -13,6 +13,8 @@ protocol GameOptions  {
     func restart()
     func pause()
     func resume()
+    func loadAd(loadedVideoFeedback: @escaping () -> Void)
+    func cancelAd()
 	func tutorialFase1(fase1: Fase1GameController)
 //    func skipTutorial()
 }

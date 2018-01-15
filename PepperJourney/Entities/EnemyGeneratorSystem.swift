@@ -50,6 +50,10 @@ class EnemyGeneratorSystem: GKEntity {
     {
         let characterPosition = self.characterNode.presentation.position
         
+        guard !self.characterNode.isPaused else {
+            return
+        }
+        
         self.readyEnemies.removeAll()
         
         var index = 0

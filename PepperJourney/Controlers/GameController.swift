@@ -21,8 +21,9 @@ enum CategoryMaskType: Int {
     case obstacle     = 0b10000     // 16
     case finalLevel   = 0b100000    // 32
     case fireBall     = 64
-    case box          = 128  // 128
-    case characters   = 0b100000000 // 256
+    case box          = 128
+    case characters   = 256
+    case checkPoint   = 512
 }
 
 
@@ -57,7 +58,11 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     open let soundController = SoundController.sharedInstance
     
     var subtitleController = SubtitleController.sharedInstance
-	
+    
+	// Check point island
+    var lastCheckPoint: SCNNode?
+    var continueGameEnable: Bool = false
+    
     // MARK: - Controling the character
     
     var characterDirection: vector_float2 {
@@ -166,19 +171,7 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         self.addNotifications()
     }
     
-    func initializeTheGame () {
-        
-        // Show the character
-        self.character.characterNode.isHidden = false
-        
-        self.character.setupCharacter()
-
-        self.entityManager.setupGameInitialization()
-        
-        // Reset of all the sounds
-        self.resetSounds()
-        
-    }
+    
     
     func resetCamera() {
 
@@ -207,6 +200,26 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         self.scnView.overlaySKScene = tapOverlay
         
     }
+    func endedAd(wonReward: Bool) {
+        if wonReward {
+            //reset lifebar
+            self.overlayDelegate?.resetLifeIndicator()
+            
+            //unpause controls
+            self.controlsOverlay?.isPausedControl = false
+            
+            self.continueGameEnable = true
+            
+            self.startGame()
+            
+            self.resetCamera()
+        }
+        // Não ganhou recompensa pq desistiu do video ou houve problema
+        else {
+            restart()
+        }
+    }
+    
     func prepereToStartGame() {
 
         self.stopSounds()
@@ -217,26 +230,67 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     }
     
     func setupGameOver() {
-       
         
-        // Do the setup to restart the game
-        self.prepereToStartGame()
-       
-        self.soundController.playSoundEffect(soundName: "gameOverSound", loops: false, node: self.cameraNode)
+        self.stopSounds()
+        
+//        self.soundController.playSoundEffect(soundName: "gameOverSound", loops: false, node: self.cameraNode)
         
         let gameOverOverlay = SKScene(fileNamed: "GameOverOverlay.sks") as! GameOverOverlay
         gameOverOverlay.gameOptionsDelegate = self
         gameOverOverlay.scaleMode = .aspectFill
+        
+        if self.lastCheckPoint == nil {
+            gameOverOverlay.setupAds(enableAds: false)
+        }
+        else {
+            gameOverOverlay.setupAds(enableAds: true)
+        }
         self.scnView.overlaySKScene = gameOverOverlay
         
         self.gameStateMachine.enter(PauseState.self)
-        
-        self.adVideoDelegate?.showAd()
-        
+    
     }
     
     func setupFinishLevel() {
-
+        
+    }
+    
+    func initializeTheGame () {
+        
+        // Show the character
+        self.character.characterNode.isHidden = false
+        
+        // ganhou premio de um ad
+        if self.continueGameEnable,
+            let checkPoint = self.lastCheckPoint?.parent,
+            let potatoesSpawnPosition = checkPoint.childNode(withName: "potatoesPosition", recursively: false)?.worldPosition
+        {
+            
+            let potatoesNumber = self.entityManager.enemyEntities.count
+            self.entityManager.killAllPotatoes()
+            
+            self.character.setupCharacter(initialPosition: checkPoint.worldPosition)
+            
+            for _ in 0 ..< potatoesNumber {
+                entityManager.createEnemy(type: EnemyTypes.potato.rawValue, position: potatoesSpawnPosition, persecutionBehavior: true)
+            }
+            
+        }
+        // Usuario nao usou um ad pra continuar
+        else {
+            self.lastCheckPoint = nil
+            // Clean the sounds
+            self.stopSounds()
+            
+            self.character.setupCharacter()
+            
+            self.entityManager.setupGameInitialization()
+        }
+        
+        // Reset of this flag
+        self.continueGameEnable = false
+        
+        self.resetSounds()
     }
     
     func startGame() {
@@ -337,6 +391,19 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         }
         
     }
+
+    // Cancela a exibição do Ad
+    func cancelAd() {
+        self.adVideoDelegate?.cancelAd()
+    }
+    
+    func loadAd(loadedVideoFeedback: @escaping () -> Void) {
+        // load and show a rewar ad
+        self.adVideoDelegate?.showAd(blockToRunAfter: self.endedAd, loadedVideoFeedback: loadedVideoFeedback)
+        
+        //Mark:  Use isso para testar sem ter que ver ads
+//        self.endedAd(wonReward: true)//apagar delete
+    }
     
 	func tutorialFase1(fase1: Fase1GameController) {
         
@@ -353,11 +420,6 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         }
     }
     
-//    func skipTutorial() {
-//        self.resume()
-//    }
-    func showRewardAd() {
-    }
 }
 
 extension GameController : Controls {
