@@ -37,8 +37,8 @@ class PauseOverlay: SKScene {
 }
 
 extension PauseOverlay : SKButtonDelegate {
-    
-    func buttonPressed(target: SKButton) {
+    func buttonReleased(target: SKButton) {
+        target.colorBlendFactor = 0
         
         if target == restartButton {
             self.gameOptionsDelegate?.restart()
@@ -52,7 +52,12 @@ extension PauseOverlay : SKButtonDelegate {
         else if target == settingsButton {
             //TODO handle settingsButton
         }
+    }
+    
+    func buttonPressed(target: SKButton) {
         
+        target.colorBlendFactor = target.defaultColorBlendFactor
+
     }
     
 }

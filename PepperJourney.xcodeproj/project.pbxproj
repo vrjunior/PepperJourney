@@ -38,6 +38,7 @@
 		9CD635A31FD8CEB90016CC7B /* PrisonerBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD635A21FD8CEB90016CC7B /* PrisonerBox.swift */; };
 		9CD635A61FD8CEDE0016CC7B /* TimeAlarmComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD635A41FD8CEDD0016CC7B /* TimeAlarmComponent.swift */; };
 		9CD635A71FD8CEDE0016CC7B /* DistanceAlarmComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD635A51FD8CEDE0016CC7B /* DistanceAlarmComponent.swift */; };
+		9CD8547A2008C611009C7218 /* CheckPointController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD854792008C611009C7218 /* CheckPointController.swift */; };
 		9CE0FF431FC765B9004AF735 /* SoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE0FF421FC765B9004AF735 /* SoundController.swift */; };
 		9CE0FF491FC854B2004AF735 /* splashingWater.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9CE0FF481FC854B1004AF735 /* splashingWater.wav */; };
 		9CE4A50B1FD08D3800A02DE5 /* F1_Pepper_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9CE4A50A1FD08D3800A02DE5 /* F1_Pepper_1.wav */; };
@@ -138,6 +139,7 @@
 		9CD635A21FD8CEB90016CC7B /* PrisonerBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrisonerBox.swift; sourceTree = "<group>"; };
 		9CD635A41FD8CEDD0016CC7B /* TimeAlarmComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeAlarmComponent.swift; sourceTree = "<group>"; };
 		9CD635A51FD8CEDE0016CC7B /* DistanceAlarmComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceAlarmComponent.swift; sourceTree = "<group>"; };
+		9CD854792008C611009C7218 /* CheckPointController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPointController.swift; sourceTree = "<group>"; };
 		9CE0FF421FC765B9004AF735 /* SoundController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
 		9CE0FF481FC854B1004AF735 /* splashingWater.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splashingWater.wav; sourceTree = "<group>"; };
 		9CE4A50A1FD08D3800A02DE5 /* F1_Pepper_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = F1_Pepper_1.wav; sourceTree = "<group>"; };
@@ -246,9 +248,16 @@
 		9C774A611FE1996200A388CC /* Controlers */ = {
 			isa = PBXGroup;
 			children = (
+				D25AD5AB1F87EAC800F2093E /* GameController.swift */,
+				D2EC85801F83F1240093F009 /* GameViewController.swift */,
+				9C0350F91FD5CA2800970006 /* MenuViewController.swift */,
+				9C0350F51FD59EA800970006 /* Fase1GameController.swift */,
+				9C0350F71FD59ED200970006 /* Fase2GameController.swift */,
+				D2C7654E1FD0891100EC7D9B /* VideoViewController.swift */,
 				9CAF1BAF1FFFEB6000D9D70A /* RewardAdvertisement.swift */,
 				9C774A621FE1997C00A388CC /* SubtitleController.swift */,
 				9CE0FF421FC765B9004AF735 /* SoundController.swift */,
+				9CD854792008C611009C7218 /* CheckPointController.swift */,
 			);
 			path = Controlers;
 			sourceTree = "<group>";
@@ -459,14 +468,8 @@
 				9C6D3DEA1F93252500B8FA2A /* Game.scnassets */,
 				D2EC85851F83F1240093F009 /* Assets.xcassets */,
 				D2C7654B1FD0782000EC7D9B /* VideoStoryboard.storyboard */,
-				D25AD5AB1F87EAC800F2093E /* GameController.swift */,
-				9C0350F91FD5CA2800970006 /* MenuViewController.swift */,
-				9C0350F51FD59EA800970006 /* Fase1GameController.swift */,
-				9C0350F71FD59ED200970006 /* Fase2GameController.swift */,
-				D2C7654E1FD0891100EC7D9B /* VideoViewController.swift */,
 				D2EC857C1F83F1240093F009 /* AppDelegate.swift */,
 				D2DDAD511FBA2913009FA2B0 /* GameOptions.swift */,
-				D2EC85801F83F1240093F009 /* GameViewController.swift */,
 				D2EC85821F83F1240093F009 /* Main.storyboard */,
 				D2EC85871F83F1240093F009 /* LaunchScreen.storyboard */,
 				D2EC858A1F83F1240093F009 /* Info.plist */,
@@ -658,6 +661,7 @@
 				9C0350FA1FD5CA2800970006 /* MenuViewController.swift in Sources */,
 				D25AD5AE1F87ECF900F2093E /* Character.swift in Sources */,
 				9C774A631FE1997C00A388CC /* SubtitleController.swift in Sources */,
+				9CD8547A2008C611009C7218 /* CheckPointController.swift in Sources */,
 				D2050A7D1FCC99D9001EC7FE /* JumpButton.swift in Sources */,
 				D207CFC71F8EA5370084240E /* Stick.swift in Sources */,
 				9CC26F651FD9369500292099 /* EntityCleanerComponent.swift in Sources */,
@@ -899,7 +903,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = J5KQYDNX5E;
 				INFOPLIST_FILE = PepperJourney/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vrmassoni.SpicyHero;
@@ -915,7 +919,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = J5KQYDNX5E;
 				INFOPLIST_FILE = PepperJourney/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vrmassoni.SpicyHero;

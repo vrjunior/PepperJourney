@@ -164,6 +164,10 @@ class Fase1GameController: GameController {
         super.startGame()
         // Inittialize the game with the defaults settings.
         
+        // caso self.lastCheckPoint nao seja nil quer dizer que o jogo vai comecar por continueGame
+        guard self.lastCheckPoint == nil else {
+            return
+        }
         //here we can hidden indicators
         controlsOverlay?.isAttackHidden = true
         
@@ -172,7 +176,7 @@ class Fase1GameController: GameController {
         
 		//Start the tutorial
         if firstTimePlayingTutorial{
-            self.generatePotatoCrowd(markerName: "starterSpawnPoint", amount: 10, maxSpeed: 10, maxAcceleration: 1)
+            self.generatePotatoCrowd(markerName: "starterSpawnPoint", amount: 1, maxSpeed: 10, maxAcceleration: 1)
             let removeEnimiesAction = SCNAction.sequence([
                                                     SCNAction.wait(duration: 5),
                                                     SCNAction.run({ (node) in
@@ -186,7 +190,7 @@ class Fase1GameController: GameController {
             self.firstTimePlayingTutorial = false
         }
         else {
-            generatePotatoCrowd(markerName: "starterSpawnPoint", amount: 10)
+            generatePotatoCrowd(markerName: "starterSpawnPoint", amount: 1)
         }
         
     }
@@ -367,6 +371,12 @@ class Fase1GameController: GameController {
                         self.setupFinishLevel()
                     }
                 }
+                
+            }
+            // If have contact with the checkpoint
+            else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.checkPoint.rawValue {
+
+                self.lastCheckPoint = anotherNode
                 
             }
             // ja resolveu o que tinha que fazer aqui com o character

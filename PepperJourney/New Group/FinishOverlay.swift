@@ -49,6 +49,10 @@ class FinishOverlay: SKScene {
 }
 
 extension FinishOverlay : SKButtonDelegate {
+    func buttonReleased(target: SKButton) {
+        
+    }
+    
     
     func buttonPressed(target: SKButton) {
         

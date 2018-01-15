@@ -18,7 +18,8 @@ protocol CutSceneDelegate : NSObjectProtocol {
 }
 
 protocol AdvertisingDelegate: NSObjectProtocol {
-    func showAd()
+    func showAd(blockToRunAfter: @escaping (Bool) -> Void, loadedVideoFeedback:  @escaping () -> Void)
+    func cancelAd()
 }
 
 struct VideoSender {
@@ -101,8 +102,12 @@ class GameViewController: UIViewController {
 }
 
 extension GameViewController: AdvertisingDelegate {
-    func showAd() {
-        //self.rewardAd.showAdWhenReady()
+    func cancelAd() {
+        self.rewardAd.isWaiting = false
+    }
+    
+    func showAd(blockToRunAfter: @escaping (Bool) -> Void, loadedVideoFeedback:  @escaping () -> Void) {
+        self.rewardAd.showAdWhenReady(blockToRunAfter: blockToRunAfter, loadedVideoFeedback: loadedVideoFeedback)
     }
 }
 

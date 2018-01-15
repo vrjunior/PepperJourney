@@ -24,12 +24,16 @@ class TutorialFase1Overlay: SKScene {
 }
 
 extension TutorialFase1Overlay : SKButtonDelegate {
+    func buttonReleased(target: SKButton) {
+        
+    }
+    
 
     func buttonPressed(target: SKButton) {
 //        self.gameOptionsDelegate?.skipTutorial()
 		self.gameOptionsDelegate?.resume()
         
-		self.fase1GameController?.generatePotatoCrowd(markerName: "tutorialSpawnPoint", amount: 10)
+		self.fase1GameController?.generatePotatoCrowd(markerName: "tutorialSpawnPoint", amount: 1)
         
 //		print("Pressed")
     }
