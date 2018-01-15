@@ -15,17 +15,30 @@ class EnemyGeneratorSystem: GKEntity {
     var enemiesToGenerate = [SCNNode]()
     var readyEnemies = [SCNNode]()
     
-    let distanceToGenerate:Float = 150
+    var distanceToGenerate:Float = 150
     weak var characterNode: SCNNode!
     
-    init(scene: SCNScene, characterNode: SCNNode)
+    init(scene: SCNScene, characterNode: SCNNode, generationNodes: SCNNode? = nil, distanceToGenerate: Float? = nil)
     {
         super.init()
         
-        guard let generationPointsNode = scene.rootNode.childNode(withName: "generationPoints" ,recursively: false) else
-        {
-            fatalError("Error at find generationPoints node")
+        if distanceToGenerate != nil {
+            self.distanceToGenerate = distanceToGenerate!
         }
+        var generationPointsNode: SCNNode
+        
+        if generationNodes != nil {
+            generationPointsNode = generationNodes!
+        }
+        else {
+            guard let generationPoints = scene.rootNode.childNode(withName: "generationPoints" ,recursively: false) else
+            {
+                fatalError("Error at find generationPoints node")
+            }
+            generationPointsNode = generationPoints
+        }
+        
+            
         self.characterNode = characterNode
         
         let generationPoints = generationPointsNode.childNodes
@@ -57,9 +70,10 @@ class EnemyGeneratorSystem: GKEntity {
         self.readyEnemies.removeAll()
         
         var index = 0
+        
         while index < self.enemiesToGenerate.count
         {
-            let potatoPosition = self.enemiesToGenerate[index].position
+            let potatoPosition = self.enemiesToGenerate[index].worldPosition
             
             if self.potatoIsReady(characterPosition: characterPosition, potatoPosition: potatoPosition)
             {

@@ -40,6 +40,9 @@ class EntityManager {
     /// Keeps track of the time for use in the update method.
     var previousUpdateTime: TimeInterval = 0
     
+    
+    // Level 2
+    public var tutorialEnemyGeneration: EnemyGeneratorSystem?
     // Private init of the Singleton
     private init() {
         
@@ -187,6 +190,8 @@ class EntityManager {
 
         // Verify the potato generator points
         self.potatoGeneratorSystem.update(deltaTime: deltaTime)
+        
+        
 
         // Create points that are needed.
         let readyEnemies = self.potatoGeneratorSystem.getReadyPotatoes()
@@ -196,6 +201,20 @@ class EntityManager {
             self.createEnemy(type: enemyType, position: enemy.position, persecutionBehavior: true)
         }
 
+        // tutorial potato generation
+        if let tutorialEnemyGeneration = self.tutorialEnemyGeneration {
+            tutorialEnemyGeneration.update(deltaTime: deltaTime)
+            // Create points that are needed.
+            
+            let readyEnemies = tutorialEnemyGeneration.getReadyPotatoes()
+            for enemy in readyEnemies
+            {
+                let enemyType = enemy.name ?? ""
+                self.createEnemy(type: enemyType, position: enemy.position, persecutionBehavior: true, maxSpeed: 30, maxAcceleration: 3)
+            }
+        }
+        
+        
         self.previousUpdateTime = time
 
         /* Character update */

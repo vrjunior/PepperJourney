@@ -461,6 +461,12 @@ extension GameController : Controls {
     }
     
     func attack() {
+        // usado para parar de piscar o botao de attack
+        if !(self.controlsOverlay?.tutorialEnded)! {
+            self.controlsOverlay?.tutorialEnded = true
+            self.cameraNode.removeAllActions()
+        }
+        
         self.characterStateMachine.enter(AttackState.self)
     }
     
