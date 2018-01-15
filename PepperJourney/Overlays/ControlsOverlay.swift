@@ -41,6 +41,7 @@ class ControlsOverlay: SKScene {
         didSet {
             self.attackButton.isHidden = self.isAttackHidden
             self.attackIndicator.isHidden = self.isAttackHidden
+            
         }
     }
 
@@ -56,7 +57,13 @@ class ControlsOverlay: SKScene {
 
     private var attackIndicatorFullWidth: CGFloat!
     private var attackIndicator: SKSpriteNode!
+    public var tutorialEnded = false
 
+    public func setupAttackButton(hiden: Bool) {
+        
+        self.attackButton.isHidden = hiden
+    }
+    
     public var isPausedControl:Bool = false {
         didSet {
             self.padOverlay.isPausedControl = self.isPausedControl
@@ -91,6 +98,7 @@ class ControlsOverlay: SKScene {
 
         // disable interation in scenekit
         self.isUserInteractionEnabled = false
+        
 
     }
 

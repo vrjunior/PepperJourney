@@ -95,6 +95,13 @@ class Fase2GameController: GameController {
         // Add all the prisoner boxes
         self.addPrisonerBoxes()
         
+        // Potatoes to the tutorial
+        if let markers = self.scene.rootNode.childNode(withName: "markers", recursively: false),
+            let tutorial = markers.childNode(withName: "tutorial", recursively: false),
+            let generationPoints = tutorial.childNode(withName: "potatoes", recursively: false) {
+            
+            self.entityManager.tutorialEnemyGeneration = EnemyGeneratorSystem(scene: self.scene, characterNode: self.character.characterNode, generationNodes: generationPoints, distanceToGenerate: 200)
+        }
         
     }
     
@@ -109,6 +116,10 @@ class Fase2GameController: GameController {
         
         self.entityManager.setupGameInitialization()
         
+        // Reset the tutorial
+        // Configuration of the potato generator system
+        self.entityManager.tutorialEnemyGeneration?.setupPotatoGeneratorSystem()
+
         // Reset of all the sounds
         self.resetSounds()
         
@@ -158,6 +169,30 @@ class Fase2GameController: GameController {
     
     override func startGame() {
         super.startGame()
+        
+        // tutorial
+        if !(self.controlsOverlay?.tutorialEnded)! {
+            let sequence = SCNAction.sequence([
+                                               
+                                               SCNAction.run({ (node) in
+                                                self.controlsOverlay?.setupAttackButton(hiden: false)
+                                               }),
+                                                SCNAction.wait(duration: 0.9),
+            
+            
+            
+                                            SCNAction.run({ (node) in
+                                                //hide the button
+                                                self.controlsOverlay?.setupAttackButton(hiden: true)
+                                                }),
+            
+                                            SCNAction.wait(duration: 0.3)])
+            
+            self.cameraNode.runAction(SCNAction.repeatForever(sequence))
+        }
+        self.gameStateMachine.enter(PauseState.self)
+        self.playCutscene()
+        
         // Inittialize the game with the defaults settings.
     }
     
@@ -176,6 +211,16 @@ class Fase2GameController: GameController {
             
             self.overlayDelegate?.updateAttackIndicator(percentage: lastPowerLeverPorcento)
         }
+    }
+    
+    func playCutscene() {
+        
+        let videoSender = VideoSender(blockAfterVideo: self.tutorialLevel2, cutScenePath: "cutscene2.mp4", cutSceneSubtitlePath: "cutscene2.srt".localized)
+        self.cutSceneDelegate?.playCutScene(videoSender: videoSender)
+//        self.entityManager.
+    }
+    func tutorialLevel2() {
+        self.gameStateMachine.enter(PlayState.self)
     }
     
     override func handleWithPhysicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
