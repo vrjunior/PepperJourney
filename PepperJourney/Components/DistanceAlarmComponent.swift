@@ -13,20 +13,25 @@ import SceneKit
  WARNING:
  The entity must implement DistanceAlarmProtocol
  */
-protocol DistanceAlarmProtocol {
-    func fireDistanceAlarm()
+protocol DistanceAlarmDelegate {
+    func fireDistanceAlarm(modelComponent: ModelComponent)
 }
+
+// Atenção: a entidade precisar ter um ModelComponent
 
 class DistanceAlarmComponent: GKComponent {
     private var targetPosition: SCNVector3!
     private var alarmTriggerRadius: Float!
     private var isAlarmFired: Bool = false
-    private weak var entityManager: EntityManager?
-    init(targetPosition: SCNVector3, alarmTriggerRadius: Float, entityManager: EntityManager) {
+    private var entityManager = EntityManager.sharedInstance
+    private var distanceAlarmDelegate: DistanceAlarmDelegate!
+    
+    
+    init(targetPosition: SCNVector3, alarmTriggerRadius: Float, distanceAlarmDelegate: DistanceAlarmDelegate) {
         super.init()
         self.targetPosition = targetPosition
         self.alarmTriggerRadius = alarmTriggerRadius
-        self.entityManager = entityManager
+        self.distanceAlarmDelegate = distanceAlarmDelegate
     }
     
     override func update(deltaTime seconds: TimeInterval) {
@@ -47,8 +52,7 @@ class DistanceAlarmComponent: GKComponent {
                 fatalError("Error getting entity of DistanceAlarmComponent")
             }
             
-            guard let entityCleanerComponent = entity.component(ofType: EntityCleanerComponent.self) else {fatalError()}
-            entityCleanerComponent.prepareToCleanEntity()
+            self.distanceAlarmDelegate.fireDistanceAlarm(modelComponent: modelComponent)
             
             // fire the alarm
             self.isAlarmFired = true

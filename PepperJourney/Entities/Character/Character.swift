@@ -31,7 +31,7 @@ class Character: GKEntity {
     public var initialPosition = float3(0, 0, 0)
 
     // Entity Manager
-    private weak var entityManager: EntityManager?
+    private var entityManager = EntityManager.sharedInstance
     
     // actions
     private let jumpImpulse:Float = 800
@@ -58,11 +58,10 @@ class Character: GKEntity {
     var trackingAgentComponent: GKAgent3D!
     
     // MARK: - Initialization
-    init(scene: SCNScene, jumpDelegate: JumpDelegate?, entityManager: EntityManager, soundController: SoundController) {
+    init(scene: SCNScene, jumpDelegate: JumpDelegate?, soundController: SoundController) {
         super.init()
         
         self.jumpDelegate = jumpDelegate
-        self.entityManager = entityManager
         self.loadCharacter(scene: scene)
         self.loadAnimations()
         self.loadComponents(scene: scene, soundController: soundController)
@@ -140,7 +139,7 @@ class Character: GKEntity {
         // Attack Limiter Component
         let attackLimiterComponent = AttackLimiterComponent(rechargeInterval: 1.5, chargeRate: 1, dischargeRate: 1)
         self.addComponent(attackLimiterComponent)
-        self.entityManager?.loadComponentSystem(component: attackLimiterComponent)
+        self.entityManager.loadComponentSystem(component: attackLimiterComponent)
         
         //Life component
         let lifeComponent = LifeComponent()

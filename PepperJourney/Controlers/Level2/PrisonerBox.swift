@@ -14,34 +14,42 @@ enum PrisonerType {
     case Avocado
     case Tomato
 }
+
+struct Prisoner {
+    var type: PrisonerType
+    var talkAudioName: String?
+    var talkTime: TimeInterval
+}
 // melhorar nome da classe
-class PrisonerBox {
+class PrisonerBox: DistanceAlarmDelegate {
     var scene: SCNScene!
     var initialPosition: SCNVector3!
     var finalPoint: SCNNode!
     var isBoxOpen: Bool = false
     var characters = [GKEntity]()
-    var visualTarget: SCNNode!
+    var pepperNode: SCNNode!
     var box = GKEntity()
     var destinationPoint = GKAgent3D()
     var characterTypeArray: [PrisonerType]
-    weak var entityManager: EntityManager?
+    var entityManager = EntityManager.sharedInstance
     // Sound
     weak var soundController: SoundController!
     var talkAudioName: String!
     var boxName: String
-
-    init (boxName: String, scene: SCNScene, entityManager: EntityManager, initialPoint: SCNNode, finalPoint:SCNNode, characterTypeArray: [PrisonerType], visualTarget: SCNNode, talkTime: TimeInterval, talkAudioName: String, soundController: SoundController)  {
+    var prisonerDelegate: PrisonerDelegate!
+    
+    init (boxName: String, scene: SCNScene, initialPoint: SCNNode, finalPoint:SCNNode, characterTypeArray: [PrisonerType],
+            pepperNode: SCNNode, talkTime: TimeInterval, talkAudioName: String, prisonerDelegate: PrisonerDelegate)  {
         
         self.scene = scene
-        self.entityManager = entityManager
         self.initialPosition = initialPoint.position
         self.boxName = boxName
         self.finalPoint = finalPoint
-        self.visualTarget = visualTarget
-        self.soundController = soundController
+        self.pepperNode = pepperNode
+        self.soundController = SoundController.sharedInstance
         self.talkAudioName = talkAudioName
         self.characterTypeArray = characterTypeArray
+        self.prisonerDelegate = prisonerDelegate
         
         // Create all the entities to this box
         for _ in self.characterTypeArray {
@@ -58,12 +66,22 @@ class PrisonerBox {
         self.addEntityCleaners()
         
     }
+    
+    func fireDistanceAlarm(modelComponent: ModelComponent) {
+        
+        if let entity = modelComponent.entity,
+            let entityCleanerComponent = entity.component(ofType: EntityCleanerComponent.self) {
+            
+            entityCleanerComponent.prepareToCleanEntity()
+        }
+    }
+    
     func addEntityCleaners() {
         for character in characters {
-            guard let entityManager = self.entityManager else { fatalError() }
-            let entityCleanerComponent = EntityCleanerComponent(entityManager: entityManager)
+            
+            let entityCleanerComponent = EntityCleanerComponent(entityManager: EntityManager.sharedInstance)
             character.addComponent(entityCleanerComponent)
-            self.entityManager?.loadEntityCleanerComponent(component: entityCleanerComponent)
+            self.entityManager.loadEntityCleanerComponent(component: entityCleanerComponent)
         }
     }
  
@@ -132,7 +150,7 @@ class PrisonerBox {
         
         // Spawn the characters looking to the Pepper in the beggining
         for index in 0 ..< self.characters.count {
-            loadCharacter(characterIndex: index, typeCharacter: self.characterTypeArray[index], visualTarget: self.visualTarget)
+            loadCharacter(characterIndex: index, typeCharacter: self.characterTypeArray[index], visualTarget: self.pepperNode)
         }
         // Update the flag
         self.isBoxOpen = true
@@ -171,13 +189,13 @@ class PrisonerBox {
             // Remove de seek component
             let seekComponet = character.component(ofType: SeekComponent.self)
             if seekComponet != nil {
-                self.entityManager?.removeSeekComponent(entity: character)
+                self.entityManager.removeSeekComponent(entity: character)
                 character.removeComponent(ofType: SeekComponent.self)
             }
             // Remove distanceAlarmComponent
             let distanceAlarmComponent = character.component(ofType: DistanceAlarmComponent.self)
             if distanceAlarmComponent != nil {
-                self.entityManager?.removeDistanceAlarm(entity: character)
+                self.entityManager.removeDistanceAlarm(entity: character)
                 character.removeComponent(ofType: DistanceAlarmComponent.self)
             }
         }
@@ -190,13 +208,14 @@ class PrisonerBox {
     }
     
     func charactersEcape() {
+        self.prisonerDelegate.prisionerReleased()
         var characterIndex: Int = 0
         for character in characters {
             
             // Add seek component
             let seekComponent = SeekComponent(target: self.destinationPoint, maxSpeed: 50, maxAcceleration: 5)
             character.addComponent(seekComponent)
-            self.entityManager?.loadSeekComponent(component: seekComponent)
+            self.entityManager.loadSeekComponent(component: seekComponent)
 
             // Setup the new look at constraint
             let modelComponent = self.getModelComponent(entity: character)
@@ -206,9 +225,10 @@ class PrisonerBox {
             self.playAnimation(type: .running, characterIndex: characterIndex)
             
             guard self.entityManager != nil else {fatalError()}
-            let distanceAlarm = DistanceAlarmComponent(targetPosition: self.finalPoint.position, alarmTriggerRadius: 5, entityManager: self.entityManager!)
+            let distanceAlarm = DistanceAlarmComponent(targetPosition: self.finalPoint.position, alarmTriggerRadius: 5, distanceAlarmDelegate: self)
+            
             character.addComponent(distanceAlarm)
-            self.entityManager?.loadDistanceAlarmComponent(component: distanceAlarm)
+            self.entityManager.loadDistanceAlarmComponent(component: distanceAlarm)
             characterIndex += 1
         }
     }
