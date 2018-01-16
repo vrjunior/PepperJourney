@@ -21,7 +21,6 @@
 		9C1B829D1F9E2FD300173FF3 /* SeekComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B829C1F9E2FD300173FF3 /* SeekComponent.swift */; };
 		9C1B829F1F9FADD300173FF3 /* ModelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */; };
 		9C1B82A11FA0D09800173FF3 /* TrigonometryLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B82A01FA0D09600173FF3 /* TrigonometryLib.swift */; };
-		9C287649200D015700B09DE6 /* cutscene2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9C287648200D015700B09DE6 /* cutscene2.mp4 */; };
 		9C28764B200D024800B09DE6 /* cutscene2.str in Sources */ = {isa = PBXBuildFile; fileRef = 9C28764A200D024800B09DE6 /* cutscene2.str */; };
 		9C4806811FC88A2700168571 /* SinkComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4806801FC88A2700168571 /* SinkComponent.swift */; };
 		9C4806851FCC505000168571 /* splashingWater2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C4806841FCC504F00168571 /* splashingWater2.wav */; };
@@ -124,7 +123,6 @@
 		9C1B829C1F9E2FD300173FF3 /* SeekComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekComponent.swift; sourceTree = "<group>"; };
 		9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelComponent.swift; sourceTree = "<group>"; };
 		9C1B82A01FA0D09600173FF3 /* TrigonometryLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrigonometryLib.swift; sourceTree = "<group>"; };
-		9C287648200D015700B09DE6 /* cutscene2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = cutscene2.mp4; path = ../../../../../../../../Downloads/cutscene2.mp4; sourceTree = "<group>"; };
 		9C28764A200D024800B09DE6 /* cutscene2.str */ = {isa = PBXFileReference; lastKnownFileType = text; path = cutscene2.str; sourceTree = "<group>"; };
 		9C4806801FC88A2700168571 /* SinkComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinkComponent.swift; sourceTree = "<group>"; };
 		9C4806841FCC504F00168571 /* splashingWater2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splashingWater2.wav; sourceTree = "<group>"; };
@@ -391,7 +389,6 @@
 		D26035F41FCDDB2F00E4F069 /* Videos */ = {
 			isa = PBXGroup;
 			children = (
-				9C287648200D015700B09DE6 /* cutscene2.mp4 */,
 				D26035F51FCDDB4100E4F069 /* cutscene1.mp4 */,
 				AAAAED071FF2B9C9005E992F /* cutscene1_ptbr.srt */,
 				D216F4ED1FEC10EF00F6059D /* cutscene1.srt */,
@@ -584,7 +581,6 @@
 				D20108931FBE11D9007660E3 /* GameOverOverlay.sks in Resources */,
 				D25BAE221FC60443000ED0EC /* SettingsOverlay.sks in Resources */,
 				9C0350E81FD0A52800970006 /* F1_Potato_1.wav in Resources */,
-				9C287649200D015700B09DE6 /* cutscene2.mp4 in Resources */,
 				D2983A401FF2C8AE00979A52 /* PauseOverlay.sks in Resources */,
 				9C0350EA1FD0A52800970006 /* F1_Pepper_4.wav in Resources */,
 				D2B8BBB81FBB64D70042F873 /* Burrito.TTF in Resources */,
@@ -613,7 +609,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		170788B227114C8BD217D750 /* [CP] Copy Pods Resources */ = {
