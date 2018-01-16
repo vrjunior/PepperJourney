@@ -21,7 +21,6 @@
 		9C1B829D1F9E2FD300173FF3 /* SeekComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B829C1F9E2FD300173FF3 /* SeekComponent.swift */; };
 		9C1B829F1F9FADD300173FF3 /* ModelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */; };
 		9C1B82A11FA0D09800173FF3 /* TrigonometryLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B82A01FA0D09600173FF3 /* TrigonometryLib.swift */; };
-		9C287649200D015700B09DE6 /* cutscene2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9C287648200D015700B09DE6 /* cutscene2.mp4 */; };
 		9C28764B200D024800B09DE6 /* cutscene2.str in Sources */ = {isa = PBXBuildFile; fileRef = 9C28764A200D024800B09DE6 /* cutscene2.str */; };
 		9C2FEE8A200D2801006A5274 /* NewMissionOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C2FEE8C200D2801006A5274 /* NewMissionOverlay.sks */; };
 		9C2FEE8F200D2978006A5274 /* NewMissionOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FEE8E200D2978006A5274 /* NewMissionOverlay.swift */; };
@@ -48,6 +47,22 @@
 		9CE0FF491FC854B2004AF735 /* splashingWater.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9CE0FF481FC854B1004AF735 /* splashingWater.wav */; };
 		9CE4A50B1FD08D3800A02DE5 /* F1_Pepper_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9CE4A50A1FD08D3800A02DE5 /* F1_Pepper_1.wav */; };
 		AAAAED081FF2B9C9005E992F /* cutscene1_ptbr.srt in Resources */ = {isa = PBXBuildFile; fileRef = AAAAED071FF2B9C9005E992F /* cutscene1_ptbr.srt */; };
+		AAAF8D9A200E54EB00408114 /* F2_Pepper_13.wav in Resources */ = {isa = PBXBuildFile; fileRef = AAAF8D8B200E54EA00408114 /* F2_Pepper_13.wav */; };
+		AAAF8D9B200E54EB00408114 /* F2_Pepper_2.wav in Resources */ = {isa = PBXBuildFile; fileRef = AAAF8D8C200E54EA00408114 /* F2_Pepper_2.wav */; };
+		AAAF8D9C200E54EB00408114 /* F2_Pepper_11.wav in Resources */ = {isa = PBXBuildFile; fileRef = AAAF8D8D200E54EA00408114 /* F2_Pepper_11.wav */; };
+		AAAF8D9D200E54EB00408114 /* F2_Pepper_5.wav in Resources */ = {isa = PBXBuildFile; fileRef = AAAF8D8E200E54EA00408114 /* F2_Pepper_5.wav */; };
+		AAAF8D9E200E54EB00408114 /* F2_Pepper_12.wav in Resources */ = {isa = PBXBuildFile; fileRef = AAAF8D8F200E54EA00408114 /* F2_Pepper_12.wav */; };
+		AAAF8D9F200E54EB00408114 /* F2_Pepper_9.wav in Resources */ = {isa = PBXBuildFile; fileRef = AAAF8D90200E54EA00408114 /* F2_Pepper_9.wav */; };
+		AAAF8DA0200E54EB00408114 /* F2_Pepper_4.wav in Resources */ = {isa = PBXBuildFile; fileRef = AAAF8D91200E54EA00408114 /* F2_Pepper_4.wav */; };
+		AAAF8DA1200E54EB00408114 /* F2_Pepper_7.wav in Resources */ = {isa = PBXBuildFile; fileRef = AAAF8D92200E54EA00408114 /* F2_Pepper_7.wav */; };
+		AAAF8DA2200E54EB00408114 /* F2_Pepper_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = AAAF8D93200E54EA00408114 /* F2_Pepper_1.wav */; };
+		AAAF8DA3200E54EB00408114 /* F2_Pepper_15.wav in Resources */ = {isa = PBXBuildFile; fileRef = AAAF8D94200E54EB00408114 /* F2_Pepper_15.wav */; };
+		AAAF8DA4200E54EB00408114 /* F2_Pepper_3.wav in Resources */ = {isa = PBXBuildFile; fileRef = AAAF8D95200E54EB00408114 /* F2_Pepper_3.wav */; };
+		AAAF8DA5200E54EB00408114 /* F2_Pepper_14.wav in Resources */ = {isa = PBXBuildFile; fileRef = AAAF8D96200E54EB00408114 /* F2_Pepper_14.wav */; };
+		AAAF8DA6200E54EB00408114 /* F2_Pepper_8.wav in Resources */ = {isa = PBXBuildFile; fileRef = AAAF8D97200E54EB00408114 /* F2_Pepper_8.wav */; };
+		AAAF8DA7200E54EB00408114 /* F2_Pepper_6.wav in Resources */ = {isa = PBXBuildFile; fileRef = AAAF8D98200E54EB00408114 /* F2_Pepper_6.wav */; };
+		AAAF8DA8200E54EB00408114 /* F2_Pepper_10.wav in Resources */ = {isa = PBXBuildFile; fileRef = AAAF8D99200E54EB00408114 /* F2_Pepper_10.wav */; };
+		AAAF8DAA200E656E00408114 /* F2_Potato_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = AAAF8DA9200E656E00408114 /* F2_Potato_1.wav */; };
 		B0465F0D1FC444A2002B8FE8 /* SoundRandomComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0465F0B1FC444A1002B8FE8 /* SoundRandomComponent.swift */; };
 		B0676A301FE143E30001BA27 /* MoveAlong.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0676A2F1FE143E30001BA27 /* MoveAlong.swift */; };
 		B06FCD6A1FD8EC6E00EFFA31 /* PotatoSpearEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06FCD691FD8EC6E00EFFA31 /* PotatoSpearEntity.swift */; };
@@ -127,7 +142,6 @@
 		9C1B829C1F9E2FD300173FF3 /* SeekComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekComponent.swift; sourceTree = "<group>"; };
 		9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelComponent.swift; sourceTree = "<group>"; };
 		9C1B82A01FA0D09600173FF3 /* TrigonometryLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrigonometryLib.swift; sourceTree = "<group>"; };
-		9C287648200D015700B09DE6 /* cutscene2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = cutscene2.mp4; path = ../../../../../../../../Downloads/cutscene2.mp4; sourceTree = "<group>"; };
 		9C28764A200D024800B09DE6 /* cutscene2.str */ = {isa = PBXFileReference; lastKnownFileType = text; path = cutscene2.str; sourceTree = "<group>"; };
 		9C2FEE8B200D2801006A5274 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Base; path = Base.lproj/NewMissionOverlay.sks; sourceTree = "<group>"; };
 		9C2FEE8D200D280C006A5274 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = "pt-BR"; path = "pt-BR.lproj/NewMissionOverlay.sks"; sourceTree = "<group>"; };
@@ -155,6 +169,22 @@
 		9CE0FF481FC854B1004AF735 /* splashingWater.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splashingWater.wav; sourceTree = "<group>"; };
 		9CE4A50A1FD08D3800A02DE5 /* F1_Pepper_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = F1_Pepper_1.wav; sourceTree = "<group>"; };
 		AAAAED071FF2B9C9005E992F /* cutscene1_ptbr.srt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cutscene1_ptbr.srt; sourceTree = "<group>"; };
+		AAAF8D8B200E54EA00408114 /* F2_Pepper_13.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = F2_Pepper_13.wav; path = "Arts/Voices/Fase 2/Audios Editados/F2_Pepper_13.wav"; sourceTree = SOURCE_ROOT; };
+		AAAF8D8C200E54EA00408114 /* F2_Pepper_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = F2_Pepper_2.wav; path = "Arts/Voices/Fase 2/Audios Editados/F2_Pepper_2.wav"; sourceTree = SOURCE_ROOT; };
+		AAAF8D8D200E54EA00408114 /* F2_Pepper_11.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = F2_Pepper_11.wav; path = "Arts/Voices/Fase 2/Audios Editados/F2_Pepper_11.wav"; sourceTree = SOURCE_ROOT; };
+		AAAF8D8E200E54EA00408114 /* F2_Pepper_5.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = F2_Pepper_5.wav; path = "Arts/Voices/Fase 2/Audios Editados/F2_Pepper_5.wav"; sourceTree = SOURCE_ROOT; };
+		AAAF8D8F200E54EA00408114 /* F2_Pepper_12.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = F2_Pepper_12.wav; path = "Arts/Voices/Fase 2/Audios Editados/F2_Pepper_12.wav"; sourceTree = SOURCE_ROOT; };
+		AAAF8D90200E54EA00408114 /* F2_Pepper_9.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = F2_Pepper_9.wav; path = "Arts/Voices/Fase 2/Audios Editados/F2_Pepper_9.wav"; sourceTree = SOURCE_ROOT; };
+		AAAF8D91200E54EA00408114 /* F2_Pepper_4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = F2_Pepper_4.wav; path = "Arts/Voices/Fase 2/Audios Editados/F2_Pepper_4.wav"; sourceTree = SOURCE_ROOT; };
+		AAAF8D92200E54EA00408114 /* F2_Pepper_7.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = F2_Pepper_7.wav; path = "Arts/Voices/Fase 2/Audios Editados/F2_Pepper_7.wav"; sourceTree = SOURCE_ROOT; };
+		AAAF8D93200E54EA00408114 /* F2_Pepper_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = F2_Pepper_1.wav; path = "Arts/Voices/Fase 2/Audios Editados/F2_Pepper_1.wav"; sourceTree = SOURCE_ROOT; };
+		AAAF8D94200E54EB00408114 /* F2_Pepper_15.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = F2_Pepper_15.wav; path = "Arts/Voices/Fase 2/Audios Editados/F2_Pepper_15.wav"; sourceTree = SOURCE_ROOT; };
+		AAAF8D95200E54EB00408114 /* F2_Pepper_3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = F2_Pepper_3.wav; path = "Arts/Voices/Fase 2/Audios Editados/F2_Pepper_3.wav"; sourceTree = SOURCE_ROOT; };
+		AAAF8D96200E54EB00408114 /* F2_Pepper_14.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = F2_Pepper_14.wav; path = "Arts/Voices/Fase 2/Audios Editados/F2_Pepper_14.wav"; sourceTree = SOURCE_ROOT; };
+		AAAF8D97200E54EB00408114 /* F2_Pepper_8.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = F2_Pepper_8.wav; path = "Arts/Voices/Fase 2/Audios Editados/F2_Pepper_8.wav"; sourceTree = SOURCE_ROOT; };
+		AAAF8D98200E54EB00408114 /* F2_Pepper_6.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = F2_Pepper_6.wav; path = "Arts/Voices/Fase 2/Audios Editados/F2_Pepper_6.wav"; sourceTree = SOURCE_ROOT; };
+		AAAF8D99200E54EB00408114 /* F2_Pepper_10.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = F2_Pepper_10.wav; path = "Arts/Voices/Fase 2/Audios Editados/F2_Pepper_10.wav"; sourceTree = SOURCE_ROOT; };
+		AAAF8DA9200E656E00408114 /* F2_Potato_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = F2_Potato_1.wav; path = "Arts/Voices/Fase 2/Audios Editados/F2_Potato_1.wav"; sourceTree = SOURCE_ROOT; };
 		B0465F0B1FC444A1002B8FE8 /* SoundRandomComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundRandomComponent.swift; sourceTree = "<group>"; };
 		B0676A2F1FE143E30001BA27 /* MoveAlong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveAlong.swift; sourceTree = "<group>"; };
 		B06FCD691FD8EC6E00EFFA31 /* PotatoSpearEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotatoSpearEntity.swift; sourceTree = "<group>"; };
@@ -319,10 +349,34 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
+		AAAF8D8A200E528C00408114 /* Fase 2 */ = {
+			isa = PBXGroup;
+			children = (
+				AAAF8D93200E54EA00408114 /* F2_Pepper_1.wav */,
+				AAAF8D8C200E54EA00408114 /* F2_Pepper_2.wav */,
+				AAAF8D95200E54EB00408114 /* F2_Pepper_3.wav */,
+				AAAF8D91200E54EA00408114 /* F2_Pepper_4.wav */,
+				AAAF8D8E200E54EA00408114 /* F2_Pepper_5.wav */,
+				AAAF8D98200E54EB00408114 /* F2_Pepper_6.wav */,
+				AAAF8D92200E54EA00408114 /* F2_Pepper_7.wav */,
+				AAAF8D97200E54EB00408114 /* F2_Pepper_8.wav */,
+				AAAF8D90200E54EA00408114 /* F2_Pepper_9.wav */,
+				AAAF8D99200E54EB00408114 /* F2_Pepper_10.wav */,
+				AAAF8D8D200E54EA00408114 /* F2_Pepper_11.wav */,
+				AAAF8D8F200E54EA00408114 /* F2_Pepper_12.wav */,
+				AAAF8D8B200E54EA00408114 /* F2_Pepper_13.wav */,
+				AAAF8D96200E54EB00408114 /* F2_Pepper_14.wav */,
+				AAAF8D94200E54EB00408114 /* F2_Pepper_15.wav */,
+				AAAF8DA9200E656E00408114 /* F2_Potato_1.wav */,
+			);
+			path = "Fase 2";
+			sourceTree = "<group>";
+		};
 		B0465F171FC4C743002B8FE8 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
 				B06FCD541FD05E1400EFFA31 /* Fase1 */,
+				AAAF8D8A200E528C00408114 /* Fase 2 */,
 				9C991DB71FCD9F5300DEE3D6 /* Yell - small-fairy-hit-moan.wav */,
 				9C991DAC1FCC5CB500DEE3D6 /* FinishLevel-jingle-win-00.wav */,
 				9C991DA71FCC588A00DEE3D6 /* GameOver-Game_over.wav */,
@@ -409,7 +463,6 @@
 		D26035F41FCDDB2F00E4F069 /* Videos */ = {
 			isa = PBXGroup;
 			children = (
-				9C287648200D015700B09DE6 /* cutscene2.mp4 */,
 				D26035F51FCDDB4100E4F069 /* cutscene1.mp4 */,
 				AAAAED071FF2B9C9005E992F /* cutscene1_ptbr.srt */,
 				D216F4ED1FEC10EF00F6059D /* cutscene1.srt */,
@@ -583,34 +636,49 @@
 				D2EC85891F83F1240093F009 /* LaunchScreen.storyboard in Resources */,
 				D2983A481FF2C93900979A52 /* TutorialFase1Overlay.sks in Resources */,
 				D26FCCFE1FC88640003EBFDF /* jump.wav in Resources */,
+				AAAF8DAA200E656E00408114 /* F2_Potato_1.wav in Resources */,
 				9C991DB91FCD9F5300DEE3D6 /* Yell - small-fairy-hit-moan.wav in Resources */,
 				D2C7654C1FD0782000EC7D9B /* VideoStoryboard.storyboard in Resources */,
 				9C991DAA1FCC588B00DEE3D6 /* GameOver-Game_over.wav in Resources */,
+				AAAF8D9C200E54EB00408114 /* F2_Pepper_11.wav in Resources */,
+				AAAF8DA0200E54EB00408114 /* F2_Pepper_4.wav in Resources */,
 				9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */,
 				D216F4EE1FEC10EF00F6059D /* cutscene1.srt in Resources */,
 				AAAAED081FF2B9C9005E992F /* cutscene1_ptbr.srt in Resources */,
+				AAAF8DA7200E54EB00408114 /* F2_Pepper_6.wav in Resources */,
 				9C774A651FE2314E00A388CC /* ControlsOverlay.sks in Resources */,
 				D2983A441FF2C8E300979A52 /* StartOverlay.sks in Resources */,
 				D2983A4E1FF2CA4E00979A52 /* Localizable.strings in Resources */,
+				AAAF8DA8200E54EB00408114 /* F2_Pepper_10.wav in Resources */,
 				B08B911F1FC4CABD00304E46 /* gameBackground.mp3 in Resources */,
 				9C0350F21FD0D4EA00970006 /* F1_Potato_2.wav in Resources */,
+				AAAF8D9E200E54EB00408114 /* F2_Pepper_12.wav in Resources */,
+				AAAF8DA1200E54EB00408114 /* F2_Pepper_7.wav in Resources */,
 				9C991DAF1FCC5CB600DEE3D6 /* FinishLevel-jingle-win-00.wav in Resources */,
 				9C2FEE8A200D2801006A5274 /* NewMissionOverlay.sks in Resources */,
 				D26035F61FCDE53D00E4F069 /* cutscene1.mp4 in Resources */,
+				AAAF8D9A200E54EB00408114 /* F2_Pepper_13.wav in Resources */,
+				AAAF8D9B200E54EB00408114 /* F2_Pepper_2.wav in Resources */,
 				D2EC85861F83F1240093F009 /* Assets.xcassets in Resources */,
 				9C0350EE1FD0A69800970006 /* F1_Pepper_2.wav in Resources */,
 				D2EC85841F83F1240093F009 /* Main.storyboard in Resources */,
 				D20108931FBE11D9007660E3 /* GameOverOverlay.sks in Resources */,
+				AAAF8DA5200E54EB00408114 /* F2_Pepper_14.wav in Resources */,
 				D25BAE221FC60443000ED0EC /* SettingsOverlay.sks in Resources */,
 				9C0350E81FD0A52800970006 /* F1_Potato_1.wav in Resources */,
-				9C287649200D015700B09DE6 /* cutscene2.mp4 in Resources */,
+				AAAF8D9F200E54EB00408114 /* F2_Pepper_9.wav in Resources */,
 				D2983A401FF2C8AE00979A52 /* PauseOverlay.sks in Resources */,
+				AAAF8DA3200E54EB00408114 /* F2_Pepper_15.wav in Resources */,
 				9C0350EA1FD0A52800970006 /* F1_Pepper_4.wav in Resources */,
 				D2B8BBB81FBB64D70042F873 /* Burrito.TTF in Resources */,
 				D2983A331FF2C09F00979A52 /* FinishOverlay.sks in Resources */,
 				9C0350F11FD0D4EA00970006 /* F1_Pepper_5.wav in Resources */,
 				9C4806851FCC505000168571 /* splashingWater2.wav in Resources */,
 				9CE0FF491FC854B2004AF735 /* splashingWater.wav in Resources */,
+				AAAF8DA2200E54EB00408114 /* F2_Pepper_1.wav in Resources */,
+				AAAF8DA6200E54EB00408114 /* F2_Pepper_8.wav in Resources */,
+				AAAF8DA4200E54EB00408114 /* F2_Pepper_3.wav in Resources */,
+				AAAF8D9D200E54EB00408114 /* F2_Pepper_5.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,7 +700,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		170788B227114C8BD217D750 /* [CP] Copy Pods Resources */ = {
@@ -941,7 +1009,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = BJ4PHJU9L8;
 				INFOPLIST_FILE = PepperJourney/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vrmassoni.SpicyHero;
@@ -957,7 +1025,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = BJ4PHJU9L8;
 				INFOPLIST_FILE = PepperJourney/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vrmassoni.SpicyHero;

@@ -1,0 +1,97 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="Personagens_data" version="1.3.0" audacityversion="2.2.0" sel0="0.0000000000" sel1="0.0000000000" vpos="0" h="0.0000000000" zoom="38.6528730110" rate="48000.0" snapto="off" selectionformat="hh:mm:ss + milissegundos" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags/>
+	<wavetrack name="Personagens" channel="2" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="48000" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="524288" sampleformat="131073" numsamples="57124">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000c4e.au" len="57124" min="-0.830322" max="0.738312" rms="0.213572"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Personagens" channel="2" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="48000" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="524288" sampleformat="131073" numsamples="52157">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000208.au" len="52157" min="-0.743286" max="0.483612" rms="0.168887"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Personagens" channel="2" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="0" rate="48000" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="524288" sampleformat="131073" numsamples="52157">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000ae2.au" len="52157" min="-0.992371" max="0.989288" rms="0.210172"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Personagens" channel="2" linked="0" mute="1" solo="0" height="150" minimized="0" isSelected="0" rate="48000" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="524288" sampleformat="131073" numsamples="90653">
+				<waveblock start="0">
+					<simpleblockfile filename="e00005bd.au" len="90653" min="-1.0" max="0.898987" rms="0.192349"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Personagens" channel="2" linked="0" mute="1" solo="0" height="150" minimized="0" isSelected="0" rate="48000" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="524288" sampleformat="131073" numsamples="255815">
+				<waveblock start="0">
+					<simpleblockfile filename="e00000cb.au" len="58366" min="-0.830322" max="0.738312" rms="0.211294"/>
+				</waveblock>
+				<waveblock start="58366">
+					<simpleblockfile filename="e0000481.au" len="197449" min="-1.0" max="0.989288" rms="0.190246"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Personagens" channel="2" linked="0" mute="1" solo="0" height="150" minimized="0" isSelected="0" rate="48000" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="524288" sampleformat="131073" numsamples="255815">
+				<waveblock start="0">
+					<simpleblockfile filename="e00000cb.au" len="58366" min="-0.830322" max="0.738312" rms="0.211294"/>
+				</waveblock>
+				<waveblock start="58366">
+					<simpleblockfile filename="e0000481.au" len="197449" min="-1.0" max="0.989288" rms="0.190246"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Personagens" channel="2" linked="0" mute="1" solo="0" height="150" minimized="0" isSelected="0" rate="48000" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="524288" sampleformat="131073" numsamples="255815">
+				<waveblock start="0">
+					<simpleblockfile filename="e00000cb.au" len="58366" min="-0.830322" max="0.738312" rms="0.211294"/>
+				</waveblock>
+				<waveblock start="58366">
+					<simpleblockfile filename="e0000481.au" len="197449" min="-1.0" max="0.989288" rms="0.190246"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Personagens" channel="2" linked="0" mute="1" solo="0" height="150" minimized="0" isSelected="0" rate="48000" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="524288" sampleformat="131073" numsamples="255815">
+				<waveblock start="0">
+					<simpleblockfile filename="e00000cb.au" len="58366" min="-0.830322" max="0.738312" rms="0.211294"/>
+				</waveblock>
+				<waveblock start="58366">
+					<simpleblockfile filename="e0000481.au" len="197449" min="-1.0" max="0.989288" rms="0.190246"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>
