@@ -49,7 +49,11 @@ class MissionController: PrisonerDelegate {
     func loadMissionSounds() {
         // Prisioner sounds
         self.soundController.loadSound(fileName: "Prisoner1.wav", soundName: "Prisoner1Sound", volume: 50.0)
-        self.soundController.loadSound(fileName: "d", soundName: "Prisoner1Sound", volume: 30.0)
+        self.soundController.loadSound(fileName: "acuteYeah.wav", soundName: "PrisonerSound", volume: 50.0)
+        self.soundController.loadSound(fileName: "BigBox.wav", soundName: "rumorsAboutBigBox", volume: 50.0)
+        self.soundController.loadSound(fileName: "WarriorAvocado.wav", soundName: "WarriorAvocado", volume: 50.0)
+        
+        
     }
     
     func breakBox(boxNode: SCNNode) {
@@ -67,39 +71,42 @@ class MissionController: PrisonerDelegate {
         
         switch self.missionState {
         case .beforeBoxOne:
-            let prisoner1 = Prisoner(type: .Tomato, talkAudioName: "Prisoner1Sound")
-            let prisoner2 = Prisoner(type: .Avocado, talkAudioName: "PrisonerSound")
-            let prisoner3 = Prisoner(type: .Avocado, talkAudioName: "PrisonerSound")
-            prisoners = [prisoner1, prisoner2, prisoner3]
             self.missionState = .openedBox1
+            let prisoner1 = Prisoner(type: .Tomato, talkAudioName: "Prisoner1Sound")
+            let prisoner2 = Prisoner(type: .RegularAvocado, talkAudioName: "PrisonerSound")
+            let prisoner3 = Prisoner(type: .Tomato, talkAudioName: "PrisonerSound")
+            prisoners = [prisoner1, prisoner2, prisoner3]
+            
             
         case .openedBox1:
-            let prisoner1 = Prisoner(type: .Avocado, talkAudioName: "PrisonerSound")
-            let prisoner2 = Prisoner(type: .Avocado, talkAudioName: nil)
+            self.missionState = .openedBox2
+            let prisoner1 = Prisoner(type: .Tomato, talkAudioName: "PrisonerSound")
+            let prisoner2 = Prisoner(type: .RegularAvocado, talkAudioName: nil)
             
             prisoners = [prisoner1, prisoner2]
-            self.missionState = .openedBox2
+            
          
         case .openedBox2:
-            let prisoner1 = Prisoner(type: .Tomato, talkAudioName: "PrisonerSound")
-            let prisoner2 = Prisoner(type: .Avocado, talkAudioName: nil)
-            let prisoner3 = Prisoner(type: .Avocado, talkAudioName: nil)
-            prisoners = [prisoner1, prisoner2, prisoner3]
             self.missionState = .openedBox3
+            let prisoner1 = Prisoner(type: .Tomato, talkAudioName: "PrisonerSound")
+            let prisoner2 = Prisoner(type: .Tomato, talkAudioName: nil)
+            let prisoner3 = Prisoner(type: .Tomato, talkAudioName: nil)
+            prisoners = [prisoner1, prisoner2, prisoner3]
+            
         
         case .openedBox3:
-            let prisoner1 = Prisoner(type: .Tomato, talkAudioName: "PrisonerSound")
-            let prisoner2 = Prisoner(type: .Avocado, talkAudioName: nil)
-            let prisoner3 = Prisoner(type: .Avocado, talkAudioName: nil)
-            prisoners = [prisoner1, prisoner2, prisoner3]
             self.missionState = .openedBox4
+            let prisoner1 = Prisoner(type: .Tomato, talkAudioName: "rumorsAboutBigBox")
+            let prisoner2 = Prisoner(type: .RegularAvocado, talkAudioName: nil)
+            let prisoner3 = Prisoner(type: .RegularAvocado, talkAudioName: nil)
+            prisoners = [prisoner1, prisoner2, prisoner3]
+            
             
         case .openedBox4:
-            let prisoner1 = Prisoner(type: .Tomato, talkAudioName: "PrisonerSound")
-            let prisoner2 = Prisoner(type: .Avocado, talkAudioName: nil)
-            let prisoner3 = Prisoner(type: .Avocado, talkAudioName: nil)
-            prisoners = [prisoner1, prisoner2, prisoner3]
             self.missionState = .openedBox5
+            let warriorAvocado = Prisoner(type: .WarriorAvocado, talkAudioName: "WarriorAvocado")
+            prisoners = [warriorAvocado]
+            
             
         default:
             let prisoner1 = Prisoner(type: .Tomato, talkAudioName: nil)
@@ -110,14 +117,17 @@ class MissionController: PrisonerDelegate {
         }
         prisonerBox.breakBox(prisoners: prisoners)
     }
+    
+    // Executa depois que o prisioneiro foi liberto
     func prisionerReleased() {
-        if self.openBoxCounter == 0 {
+        if self.missionState == .openedBox1 {
             self.missionDelegate.showNewMission()
+            self.initialBarrier.isHidden = true
         }
         
         self.openBoxCounter += 1
         let text = "\(self.openBoxCounter) / 5"
-//        self.missionDelegate.updateMissionCounter(hide: false, label: text)
+        self.missionDelegate.updateMissionCounter(hide: false, label: text)
         
     }
     
