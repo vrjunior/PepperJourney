@@ -36,7 +36,8 @@ class SoundController
         
         guard self.sounds[soundName] == nil else
         {
-            fatalError("This sound Name yet exists")
+            print("This sound Name yet exists")
+            return
         }
         guard let audioSource = SCNAudioSource(fileNamed: fileName) else {
             fatalError("Error in find the sound \(fileName)")

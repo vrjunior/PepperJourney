@@ -16,45 +16,35 @@ enum PrisonerType {
 }
 
 struct Prisoner {
+    let entity = GKEntity()
     var type: PrisonerType
     var talkAudioName: String?
-    var talkTime: TimeInterval
 }
+
 // melhorar nome da classe
 class PrisonerBox: DistanceAlarmDelegate {
     var scene: SCNScene!
     var initialPosition: SCNVector3!
     var finalPoint: SCNNode!
     var isBoxOpen: Bool = false
-    var characters = [GKEntity]()
     var pepperNode: SCNNode!
     var box = GKEntity()
     var destinationPoint = GKAgent3D()
-    var characterTypeArray: [PrisonerType]
+    var prisoners = [Prisoner]()
     var entityManager = EntityManager.sharedInstance
+    
     // Sound
-    weak var soundController: SoundController!
-    var talkAudioName: String!
-    var boxName: String
+    private var soundController = SoundController.sharedInstance
     var prisonerDelegate: PrisonerDelegate!
     
-    init (boxName: String, scene: SCNScene, initialPoint: SCNNode, finalPoint:SCNNode, characterTypeArray: [PrisonerType],
-            pepperNode: SCNNode, talkTime: TimeInterval, talkAudioName: String, prisonerDelegate: PrisonerDelegate)  {
+    init (scene: SCNScene, initialPoint: SCNNode, finalPoint:SCNNode,
+            pepperNode: SCNNode, prisonerDelegate: PrisonerDelegate)  {
         
         self.scene = scene
         self.initialPosition = initialPoint.position
-        self.boxName = boxName
         self.finalPoint = finalPoint
         self.pepperNode = pepperNode
-        self.soundController = SoundController.sharedInstance
-        self.talkAudioName = talkAudioName
-        self.characterTypeArray = characterTypeArray
         self.prisonerDelegate = prisonerDelegate
-        
-        // Create all the entities to this box
-        for _ in self.characterTypeArray {
-            self.characters.append(GKEntity())
-        }
         
         //  Destination point (GKAgent3D
         self.destinationPoint.position = float3(self.finalPoint.position)
@@ -68,7 +58,6 @@ class PrisonerBox: DistanceAlarmDelegate {
     }
     
     func fireDistanceAlarm(modelComponent: ModelComponent) {
-        
         if let entity = modelComponent.entity,
             let entityCleanerComponent = entity.component(ofType: EntityCleanerComponent.self) {
             
@@ -77,15 +66,15 @@ class PrisonerBox: DistanceAlarmDelegate {
     }
     
     func addEntityCleaners() {
-        for character in characters {
+        for prisoner in self.prisoners {
             
             let entityCleanerComponent = EntityCleanerComponent(entityManager: EntityManager.sharedInstance)
-            character.addComponent(entityCleanerComponent)
+            prisoner.entity.addComponent(entityCleanerComponent)
             self.entityManager.loadEntityCleanerComponent(component: entityCleanerComponent)
         }
     }
  
-    func getCharecterScene(type: PrisonerType) -> String {
+    func getPrisonerScene(type: PrisonerType) -> String {
         var characterScene: String
         
         switch type {
@@ -97,26 +86,26 @@ class PrisonerBox: DistanceAlarmDelegate {
         return characterScene
     }
 
-    func loadCharacter(characterIndex: Int, typeCharacter: PrisonerType, visualTarget: SCNNode)
+    func loadPrisoner(prisoner: Prisoner)
     {
-        // Add the captive character
-        let path = self.getCharecterScene(type: typeCharacter)
+        // Add the prisoner to the scene
+        let path = self.getPrisonerScene(type: prisoner.type)
         
         // Create a model component
-        let modelComponent = ModelComponent(modelPath: path, scene: scene, position: self.initialPosition)
+        let modelComponent = ModelComponent(modelPath: path, scene: self.scene, position: self.initialPosition)
         
         // get the node
         guard let modelNode = modelComponent.modelNode else {
             return
         }
-        modelNode.name = self.boxName + "CharacterModelNode"
-        self.characters[characterIndex].addComponent(modelComponent)
+        
+        prisoner.entity.addComponent(modelComponent)
         
         // Add look at constraint
-        self.setLookAtConstraint(visualTarget: visualTarget, nodeToApply: modelNode)
+        self.setLookAtConstraint(visualTarget: self.pepperNode, nodeToApply: modelNode)
         
         // Load animations
-        self.loadAnimations(characterIndex: characterIndex)
+        self.loadAnimations(prisonerModelComponent: modelComponent)
         
     }
  
@@ -132,12 +121,13 @@ class PrisonerBox: DistanceAlarmDelegate {
     func loadBox() {
         let path = "Game.scnassets/scenario/box/box.scn"
         let modelComponent = ModelComponent(modelPath: path, scene: self.scene, position: self.initialPosition)
-        modelComponent.modelNode.name = self.boxName + "ModelNode"
         
         self.box.addComponent(modelComponent)
     }
-    func breakBox()
+    func breakBox(prisoners: [Prisoner])
     {
+        self.prisoners = prisoners
+        
         // verifica se a caixa já foi aberta
         if self.isBoxOpen { return }
         
@@ -149,17 +139,25 @@ class PrisonerBox: DistanceAlarmDelegate {
         self.box.removeComponent(ofType: ModelComponent.self)
         
         // Spawn the characters looking to the Pepper in the beggining
-        for index in 0 ..< self.characters.count {
-            loadCharacter(characterIndex: index, typeCharacter: self.characterTypeArray[index], visualTarget: self.pepperNode)
+        for prisoner in self.prisoners {
+            self.loadPrisoner(prisoner: prisoner)
         }
         // Update the flag
         self.isBoxOpen = true
         
         // Run the conversation
-        let characterNode = getModelComponent(entity: self.characters[0]).modelNode
+        
         
         // Run audio conversation and after run charactersEcape function
-        self.soundController.playSoundEffect(soundName: self.talkAudioName, loops: false, node: characterNode!, block: self.charactersEcape)
+        let prisoner = self.prisoners[0]
+        if let soundName = prisoner.talkAudioName,
+            let prisonerNode = self.getModelComponent(entity: prisoner.entity).modelNode {
+            
+            self.soundController.playSoundEffect(soundName: soundName, loops: false, node: prisonerNode, block: self.charactersEcape)
+            SubtitleController.sharedInstance.setupSubtitle(subName: soundName)
+
+        }
+        
     }
     
     func getModelComponent(entity: GKEntity) -> ModelComponent {
@@ -176,27 +174,27 @@ class PrisonerBox: DistanceAlarmDelegate {
         if !self.isBoxOpen { return }
         
         // Reset all components
-        for character in self.characters {
+        for prisoner in self.prisoners {
             
             // Remove the character
-            let modelComponent = character.component(ofType: ModelComponent.self)
+            let modelComponent = prisoner.entity.component(ofType: ModelComponent.self)
             if modelComponent != nil {
                 // Remove node of scene
                 modelComponent!.removeModel()
                 // Remove component from box entity
-                character.removeComponent(ofType: ModelComponent.self)
+                prisoner.entity.removeComponent(ofType: ModelComponent.self)
             }
             // Remove de seek component
-            let seekComponet = character.component(ofType: SeekComponent.self)
+            let seekComponet = prisoner.entity.component(ofType: SeekComponent.self)
             if seekComponet != nil {
-                self.entityManager.removeSeekComponent(entity: character)
-                character.removeComponent(ofType: SeekComponent.self)
+                self.entityManager.removeSeekComponent(entity: prisoner.entity)
+                prisoner.entity.removeComponent(ofType: SeekComponent.self)
             }
             // Remove distanceAlarmComponent
-            let distanceAlarmComponent = character.component(ofType: DistanceAlarmComponent.self)
+            let distanceAlarmComponent = prisoner.entity.component(ofType: DistanceAlarmComponent.self)
             if distanceAlarmComponent != nil {
-                self.entityManager.removeDistanceAlarm(entity: character)
-                character.removeComponent(ofType: DistanceAlarmComponent.self)
+                self.entityManager.removeDistanceAlarm(entity: prisoner.entity)
+                prisoner.entity.removeComponent(ofType: DistanceAlarmComponent.self)
             }
         }
         
@@ -208,52 +206,61 @@ class PrisonerBox: DistanceAlarmDelegate {
     }
     
     func charactersEcape() {
-        self.prisonerDelegate.prisionerReleased()
-        var characterIndex: Int = 0
-        for character in characters {
-            
-            // Add seek component
-            let seekComponent = SeekComponent(target: self.destinationPoint, maxSpeed: 50, maxAcceleration: 5)
-            character.addComponent(seekComponent)
-            self.entityManager.loadSeekComponent(component: seekComponent)
-
-            // Setup the new look at constraint
-            let modelComponent = self.getModelComponent(entity: character)
-            self.setLookAtConstraint(visualTarget: self.finalPoint, nodeToApply: modelComponent.modelNode)
-            
-            // Play animation
-            self.playAnimation(type: .running, characterIndex: characterIndex)
-            
-            guard self.entityManager != nil else {fatalError()}
-            let distanceAlarm = DistanceAlarmComponent(targetPosition: self.finalPoint.position, alarmTriggerRadius: 5, distanceAlarmDelegate: self)
-            
-            character.addComponent(distanceAlarm)
-            self.entityManager.loadDistanceAlarmComponent(component: distanceAlarm)
-            characterIndex += 1
+        
+        let prisonerEscapeAction = SCNAction.run { (node) in
+            for prisoner in self.prisoners {
+                
+                // Add seek component
+                let seekComponent = SeekComponent(target: self.destinationPoint, maxSpeed: 50, maxAcceleration: 5)
+                prisoner.entity.addComponent(seekComponent)
+                self.entityManager.loadSeekComponent(component: seekComponent)
+                
+                // Setup the new look at constraint
+                let modelComponent = self.getModelComponent(entity: prisoner.entity)
+                self.setLookAtConstraint(visualTarget: self.finalPoint, nodeToApply: modelComponent.modelNode)
+                
+                // Play animation
+                self.playAnimation(type: .running, prisonerEntity: prisoner.entity)
+                
+                // Set distance alarm
+                let distanceAlarm = DistanceAlarmComponent(targetPosition: self.finalPoint.position, alarmTriggerRadius: 5, distanceAlarmDelegate: self)
+                prisoner.entity.addComponent(distanceAlarm)
+                self.entityManager.loadDistanceAlarmComponent(component: distanceAlarm)
+            }
         }
+        let updatePrisonerStatusAction = SCNAction.run { (node) in
+            self.prisonerDelegate.prisionerReleased()
+        }
+        
+        self.scene.rootNode.runAction(SCNAction.sequence([
+            prisonerEscapeAction,
+            SCNAction.wait(duration: 0.5),
+            updatePrisonerStatusAction]))
     }
     
     //Load all animation of the Character
-    private func loadAnimations(characterIndex: Int)
+    private func loadAnimations(prisonerModelComponent: ModelComponent)
     {
+        guard let modelNode = prisonerModelComponent.modelNode else { return }
+        
         let animations:[AnimationType] = [.running]
         
         for anim in animations {
             let animation = SCNAnimationPlayer.withScene(named: "Game.scnassets/characters/tomato/\(anim.rawValue).dae")
             
             animation.stop()
-            guard let modelNode = getModelComponent(entity: self.characters[characterIndex]).modelNode else { return }
+            
             modelNode.addAnimationPlayer(animation, forKey: anim.rawValue)
         }
     }
     
-    func playAnimation(type: AnimationType, characterIndex: Int) {
-        guard let modelNode = getModelComponent(entity: self.characters[characterIndex]).modelNode else { return }
+    func playAnimation(type: AnimationType, prisonerEntity: GKEntity) {
+        guard let modelNode = prisonerEntity.component(ofType: ModelComponent.self)?.modelNode else { return }
         modelNode.animationPlayer(forKey: type.rawValue)?.play()
     }
     
-    func stopAnimation(type: AnimationType, characterIndex: Int) {
-         guard let modelNode = getModelComponent(entity: self.characters[characterIndex]).modelNode else { return }
+    func stopAnimation(type: AnimationType, prisonerEntity: GKEntity) {
+        guard let modelNode = prisonerEntity.component(ofType: ModelComponent.self)?.modelNode else { return }
         modelNode.animationPlayer(forKey: type.rawValue)?.stop()
     }
 

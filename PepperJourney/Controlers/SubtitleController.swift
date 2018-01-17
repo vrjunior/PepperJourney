@@ -9,61 +9,78 @@
 import Foundation
 import GameplayKit
 
-struct SubtitleStruct {
+struct SubtitlePart {
     var subtitle: String
     var duration: TimeInterval!
+}
+
+struct Subtitle {
+    var name: String
+    var duration: TimeInterval!
+    var text: [String]
 }
 class SubtitleController {
     let fadeInDuration: TimeInterval = 0
     let fadeOutDuration: TimeInterval = 0
     var subtitleIsVisible: Bool = false
-    private var subtitles: [String: [String]]!
+    private var subtitles = [Subtitle]()
     var overlayDelegate: SubtitleProtocol?
-    var subtitleQueue = [SubtitleStruct]()
+    var subtitleQueue = [SubtitlePart]()
     static var sharedInstance = SubtitleController()
     var lastEndTime: TimeInterval = 0
     
     init() {
-        self.subtitles = [
-            "F1_Pepper_1": ["I have to run!".localized,
-                            "Otherwise they’ll catch me".localized],
+        self.subtitles.append(Subtitle(name: "F1_Pepper_1", duration: 2.66, text: ["I have to run!".localized,
+                                                                                                       "Otherwise they’ll catch me".localized]))
+        
+        self.subtitles.append(Subtitle(name: "F1_Pepper_2", duration: 3.51, text: ["If I could I would make a".localized,
+                                                                                                       "smashed potato of them".localized]))
+        
+        self.subtitles.append(Subtitle(name: "F1_Pepper_3", duration: 1.56, text: ["I’ll never let".localized,
+                                                                                                       "you catch me!".localized]))
+        
+        self.subtitles.append(Subtitle(name: "F1_Potato_1", duration: 2.51, text: ["Don’t let her escape!".localized,
+                                                                                    "She knows too much".localized]))
+        
+        self.subtitles.append(Subtitle(name: "F1_Potato_2", duration: 3.17, text: ["Sir, we got her!".localized,
+                                                                                    "She'll never pass throw this islands".localized]))
+        
+        self.subtitles.append(Subtitle(name: "F1_Pepper_4", duration: 2.47, text: ["Hurry, help me jump".localized,
+                                                                                    "throw those islands!".localized]))
+        
+        self.subtitles.append(Subtitle(name: "F1_Pepper_5", duration: 2.81, text: ["I know someone who can".localized,
+                                                                                    "helps us, we’re almost there.".localized]))
+        
+        self.subtitles.append(Subtitle(name:  "Prisoner1Sound", duration: , text: ["Thank you so much for saving us!".localized,
+                                                                                        "Pepper, there are other prisoners in the whole kingdom, please help them!".localized]))
             
-            "F1_Pepper_2": ["If I could I would make a".localized,
-                            "smashed potato of them".localized],
-            
-            "F1_Pepper_3": ["I’ll never let".localized,
-                            "you catch me!".localized],
-            
-            "F1_Potato_1": ["Don’t let her escape!".localized,
-                            "She knows too much".localized],
-            
-            "F1_Potato_2": ["Sir, we got her!".localized,
-                            "She'll never pass throw this islands".localized],
-            
-            "F1_Pepper_4": ["Hurry, help me jump".localized,
-                            "throw those islands!".localized],
-            
-            "F1_Pepper_5": ["I know someone who can".localized,
-                            "helps us, we’re almost there.".localized]
-        ]
+
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    func setupSubtitle(subName: String, audioDuration: TimeInterval)
+    func setupSubtitle(subName: String)
     {
-        guard let subtitle = self.subtitles[subName] else {
+        var subtitleFound: Subtitle?
+        for sub in self.subtitles {
+            if sub.name == subName {
+                subtitleFound = sub
+                break
+            }
+        }
+        guard let subtitle = subtitleFound else {
             print("Subtitle with name \(subName)not found ")
             return
         }
-        for text in subtitle {
+        
+        for text in subtitle.text {
             // cria uma nova linha de legenda
             // com a duração dependendo da quantidade de linhas necessárias
             // quanto mais linhas menor o tempo que elas ficarão visíveis
-            let subDuration = (audioDuration / TimeInterval(subtitle.count))
+            let subDuration = (subtitle.duration / TimeInterval(subtitle.text.count))
             
-            let newSubtitle = SubtitleStruct(subtitle: text, duration: subDuration)
+            let newSubtitle = SubtitlePart(subtitle: text, duration: subDuration)
             // Adiciona a fila de exibição de legendas
             self.subtitleQueue.append(newSubtitle)
         }

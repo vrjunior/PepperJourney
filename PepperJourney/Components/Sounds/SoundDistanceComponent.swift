@@ -18,7 +18,6 @@ import UIKit
 struct SoundSettings {
     var fileName: String
     var soundName: String
-    var duration: TimeInterval = 0
 }
 class SoundDistanceComponent: GKComponent
 {
@@ -43,7 +42,6 @@ class SoundDistanceComponent: GKComponent
         self.radius = minRadius
 		self.soundController = SoundController.sharedInstance
 		self.soundName = soundSettings.soundName
-        self.duration = soundSettings.duration
 		self.node = node
 		
 		// Load the audio source in the memory
@@ -77,7 +75,7 @@ class SoundDistanceComponent: GKComponent
 
                 // Executes the sound
                 self.soundController.playSoundEffect(soundName: self.soundName, loops: false, node: self.node)
-                SubtitleController.sharedInstance.setupSubtitle(subName: soundName, audioDuration: self.duration)
+                SubtitleController.sharedInstance.setupSubtitle(subName: soundName)
                 
             }
         }

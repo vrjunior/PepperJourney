@@ -45,9 +45,6 @@ class Fase2GameController: GameController, MissionDelegate {
         //setup character sounds
         self.soundController.loadSound(fileName: "jump.wav", soundName: "jump", volume: 30.0)
         
-        // Prisioner sounds
-        self.soundController.loadSound(fileName: "F1_3.wav", soundName: "PrisonerSound", volume: 30.0)
-        
         // Add the sound points
        // self.addPepperSoundPoints()
         

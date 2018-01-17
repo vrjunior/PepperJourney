@@ -55,7 +55,7 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     public var cameraInitialPresentation: SCNNode!
 	
 	// Sound Player
-    open let soundController = SoundController.sharedInstance
+    let soundController = SoundController.sharedInstance
     
     var subtitleController = SubtitleController.sharedInstance
     
