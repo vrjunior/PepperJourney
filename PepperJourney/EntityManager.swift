@@ -58,7 +58,7 @@ class EntityManager {
         self.componentSystems.append(componentSystem)
 
         // Create the character entity
-        self.character = Character(scene: self.scene, jumpDelegate: gameController, entityManager: self , soundController: self.soundController)
+        self.character = Character(scene: self.scene, jumpDelegate: gameController, soundController: self.soundController)
 
         // Add the sinkComponent to a component system
         guard let sinkCompnent = self.character.component(ofType: SinkComponent.self) else

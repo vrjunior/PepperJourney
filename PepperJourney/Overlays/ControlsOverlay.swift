@@ -51,6 +51,8 @@ class ControlsOverlay: SKScene {
     private var padOverlay: PadOverlay!
     private var pauseButton: SKButton!
     private var cameraControl: CameraControl!
+    
+    public var missionCounterLabel: SKLabelNode!
 
     private var lifeIndicatorFullWidth: CGFloat!
     private var lifeIndicator: SKSpriteNode!
@@ -81,6 +83,9 @@ class ControlsOverlay: SKScene {
     
         self.subtitleLabel = self.childNode(withName: "subtitleLabel") as! SKLabelNode
         self.subtitleLabel.colorBlendFactor = 1
+        
+        self.missionCounterLabel = self.childNode(withName: "missionCounterLabel") as! SKLabelNode
+        self.updateMissionCounter(hide: true, label: nil)
 
         self.padOverlay = self.childNode(withName: "padOverlay") as! PadOverlay
         self.jumpButton = self.childNode(withName: "jumpButton") as! JumpButton
@@ -99,9 +104,22 @@ class ControlsOverlay: SKScene {
         // disable interation in scenekit
         self.isUserInteractionEnabled = false
         
-
     }
-
+    
+    // quando is hidden ignora o label
+    public func updateMissionCounter(hide: Bool, label: String?) {
+        
+        if hide {
+            self.missionCounterLabel.isHidden = true
+        }
+        else if let label = label {
+            self.missionCounterLabel.text = label
+            if missionCounterLabel.isHidden {
+                self.missionCounterLabel.isHidden = false
+            }
+            
+        }
+    }
 }
 
 extension ControlsOverlay: UpdateIndicators {

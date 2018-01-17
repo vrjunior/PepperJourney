@@ -12,9 +12,10 @@ import SceneKit
 import SpriteKit
 import GameplayKit
 
-class Fase2GameController: GameController {
-    
-    private var prisonerBoxes = [PrisonerBox]()
+class Fase2GameController: GameController, MissionDelegate {
+   
+    private var missionController: MissionController!
+    open var newMissionOverlay: NewMissionOverlay?
     
     override func resetSounds()
     {
@@ -92,9 +93,6 @@ class Fase2GameController: GameController {
         // Pre-load all the audios of the game in the memory
         self.setupSounds()
         
-        // Add all the prisoner boxes
-        self.addPrisonerBoxes()
-        
         // Potatoes to the tutorial
         if let markers = self.scene.rootNode.childNode(withName: "markers", recursively: false),
             let tutorial = markers.childNode(withName: "tutorial", recursively: false),
@@ -102,6 +100,8 @@ class Fase2GameController: GameController {
             
             self.entityManager.tutorialEnemyGeneration = EnemyGeneratorSystem(scene: self.scene, characterNode: self.character.characterNode, generationNodes: generationPoints, distanceToGenerate: 200)
         }
+        
+        self.missionController = MissionController(scene: self.scene, pepperNode: self.character.characterNode, missionDelegate: self)
         
     }
     
@@ -123,10 +123,8 @@ class Fase2GameController: GameController {
         // Reset of all the sounds
         self.resetSounds()
         
-        // Reset all the prisoner boxes for the new play
-        for prisonerBox in self.prisonerBoxes {
-            prisonerBox.resetPrisonerBox()
-        }
+        // reset of mission things
+        self.missionController.resetMission()
         
         self.character.setupCharacter()
         
@@ -222,6 +220,32 @@ class Fase2GameController: GameController {
     func tutorialLevel2() {
         self.gameStateMachine.enter(PlayState.self)
     }
+    
+    func showNewMission() {
+        
+        if self.newMissionOverlay == nil {
+            self.newMissionOverlay = SKScene(fileNamed: "NewMissionOverlay.sks") as? NewMissionOverlay
+
+            self.newMissionOverlay?.scaleMode = .aspectFill
+            self.newMissionOverlay?.gameOptionsDelegate = self
+        }
+
+        self.scnView.overlaySKScene = self.newMissionOverlay
+        self.gameStateMachine.enter(PauseState.self)
+
+        //pause controls
+        self.controlsOverlay?.isPausedControl = true
+    }
+    
+    
+    func updateMissionCounter(hide: Bool, label: String?) {
+        
+        self.controlsOverlay?.updateMissionCounter(hide: hide, label: label)
+        
+    }
+    
+    
+    
     
     override func handleWithPhysicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         var characterNode: SCNNode?
@@ -356,59 +380,7 @@ class Fase2GameController: GameController {
             boxNode = contact.nodeB
         }
         if let boxNode = boxNode {
-            for prisonerBox in self.prisonerBoxes {
-                if let modelNode = prisonerBox.box.component(ofType: ModelComponent.self)?.modelNode {
-                    if modelNode == boxNode {
-                        prisonerBox.breakBox()
-                    }
-                }
-            }
-        }
-    }
-    
-    func addPrisonerBoxes() {
-        guard let prisonerBoxesNode = self.scene.rootNode.childNode(withName: "prisonerBoxes", recursively: false) else {
-            fatalError("Error getting prisonerBoxes node")
-        }
-        let prisonerBoxesNodePosition = prisonerBoxesNode.presentation.position
-        
-        let boxNodes = prisonerBoxesNode.childNodes
-        
-        for boxNode in boxNodes {
-            
-            // box position relative at the scene world
-            let initialPoint = SCNNode()
-            initialPoint.position.x =  prisonerBoxesNodePosition.x + boxNode.presentation.position.x
-            initialPoint.position.y =  prisonerBoxesNodePosition.y + boxNode.presentation.position.y
-            initialPoint.position.z =  prisonerBoxesNodePosition.z + boxNode.presentation.position.z
-            
-            // Character final position
-            guard let destinationPoint = boxNode.childNode(withName: "destinationPoint", recursively: false) else {
-                fatalError("Error getting destinationPoint node to PrisonerBox")
-            }
-            // Final position relative at the scene world
-            let finalPoint = SCNNode()
-            finalPoint.position.x = initialPoint.position.x + destinationPoint.position.x
-            finalPoint.position.y = initialPoint.position.y + destinationPoint.position.y
-            finalPoint.position.z = initialPoint.position.z + destinationPoint.position.z
-            
-            let characters: [PrisonerType] = [.Avocado, .Tomato, .Tomato]
-            
-            var boxName = ""
-            if boxNode.name != nil {
-                boxName = boxNode.name!
-            }
-            // create a box with prisoners
-            let box = PrisonerBox(boxName: boxName, scene: self.scene,
-                                   entityManager: self.entityManager,
-                                   initialPoint: initialPoint,
-                                   finalPoint: finalPoint,
-                                   characterTypeArray: characters,
-                                   visualTarget: self.character.characterNode,
-                                   talkTime: 0,
-                                   talkAudioName: "PrisonerSound",
-                                   soundController: self.soundController)
-            self.prisonerBoxes.append(box)
+            self.missionController.breakBox(boxNode: boxNode)
         }
     }
 }
