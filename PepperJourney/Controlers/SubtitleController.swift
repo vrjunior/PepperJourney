@@ -51,8 +51,9 @@ class SubtitleController {
         self.subtitles.append(Subtitle(name: "F1_Pepper_5", duration: 2.81, text: ["I know someone who can".localized,
                                                                                     "helps us, we’re almost there.".localized]))
         
-        self.subtitles.append(Subtitle(name:  "Prisoner1Sound", duration: , text: ["Thank you so much for saving us!".localized,
-                                                                                        "Pepper, there are other prisoners in the whole kingdom, please help them!".localized]))
+        self.subtitles.append(Subtitle(name:  "Prisoner1Sound", duration: 6.0, text: ["Thank you so much for saving us!".localized,
+                                                                                        "Pepper, there are other prisoners in".localized,
+                                                                                        "the whole kingdom, please help them!".localized]))
             
 
     }

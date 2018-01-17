@@ -29,11 +29,21 @@ class MissionController: PrisonerDelegate {
     private var prisonerBoxes = [PrisonerBox]()
     private var soundController = SoundController.sharedInstance
     
+    private var initialBarrier: SCNNode!
+    
     init(scene: SCNScene, pepperNode: SCNNode, missionDelegate: MissionDelegate) {
         self.addPrisonerBoxes(scene: scene, pepperNode: pepperNode)
         self.missionDelegate = missionDelegate
         
         self.loadMissionSounds()
+        
+//         barrier reference
+        guard let missionNode = scene.rootNode.childNode(withName: "mission", recursively: false),
+            let barrierNode = missionNode.childNode(withName: "barriers", recursively: false) else {
+                print("Error getting barriers node")
+                return
+        }
+        self.initialBarrier = barrierNode
     }
     
     func loadMissionSounds() {
@@ -107,7 +117,7 @@ class MissionController: PrisonerDelegate {
         
         self.openBoxCounter += 1
         let text = "\(self.openBoxCounter) / 5"
-        self.missionDelegate.updateMissionCounter(hide: false, label: text)
+//        self.missionDelegate.updateMissionCounter(hide: false, label: text)
         
     }
     

@@ -210,7 +210,7 @@ class Fase2GameController: GameController, MissionDelegate {
     
     func playCutscene() {
         
-        let videoSender = VideoSender(blockAfterVideo: self.tutorialLevel2, cutScenePath: "cutscene2.mp4", cutSceneSubtitlePath: "cutscene2.srt".localized)
+        let videoSender = VideoSender(blockAfterVideo: self.tutorialLevel2, cutScenePath: "cutScene2.mp4", cutSceneSubtitlePath: "cutscene2.srt".localized)
         self.cutSceneDelegate?.playCutScene(videoSender: videoSender)
 //        self.entityManager.
     }

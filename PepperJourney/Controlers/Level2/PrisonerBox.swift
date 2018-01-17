@@ -207,35 +207,28 @@ class PrisonerBox: DistanceAlarmDelegate {
     
     func charactersEcape() {
         
-        let prisonerEscapeAction = SCNAction.run { (node) in
-            for prisoner in self.prisoners {
-                
-                // Add seek component
-                let seekComponent = SeekComponent(target: self.destinationPoint, maxSpeed: 50, maxAcceleration: 5)
-                prisoner.entity.addComponent(seekComponent)
-                self.entityManager.loadSeekComponent(component: seekComponent)
-                
-                // Setup the new look at constraint
-                let modelComponent = self.getModelComponent(entity: prisoner.entity)
-                self.setLookAtConstraint(visualTarget: self.finalPoint, nodeToApply: modelComponent.modelNode)
-                
-                // Play animation
-                self.playAnimation(type: .running, prisonerEntity: prisoner.entity)
-                
-                // Set distance alarm
-                let distanceAlarm = DistanceAlarmComponent(targetPosition: self.finalPoint.position, alarmTriggerRadius: 5, distanceAlarmDelegate: self)
-                prisoner.entity.addComponent(distanceAlarm)
-                self.entityManager.loadDistanceAlarmComponent(component: distanceAlarm)
-            }
-        }
-        let updatePrisonerStatusAction = SCNAction.run { (node) in
-            self.prisonerDelegate.prisionerReleased()
+        for prisoner in self.prisoners {
+            
+            // Add seek component
+            let seekComponent = SeekComponent(target: self.destinationPoint, maxSpeed: 50, maxAcceleration: 5)
+            prisoner.entity.addComponent(seekComponent)
+            self.entityManager.loadSeekComponent(component: seekComponent)
+            
+            // Setup the new look at constraint
+            let modelComponent = self.getModelComponent(entity: prisoner.entity)
+            self.setLookAtConstraint(visualTarget: self.finalPoint, nodeToApply: modelComponent.modelNode)
+            
+            // TODO: Arrumar essa animação!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            // Play animation
+//                self.playAnimation(type: .running, prisonerEntity: prisoner.entity)
+            
+            // Set distance alarm
+            let distanceAlarm = DistanceAlarmComponent(targetPosition: self.finalPoint.position, alarmTriggerRadius: 5, distanceAlarmDelegate: self)
+            prisoner.entity.addComponent(distanceAlarm)
+            self.entityManager.loadDistanceAlarmComponent(component: distanceAlarm)
         }
         
-        self.scene.rootNode.runAction(SCNAction.sequence([
-            prisonerEscapeAction,
-            SCNAction.wait(duration: 0.5),
-            updatePrisonerStatusAction]))
+            self.prisonerDelegate.prisionerReleased()
     }
     
     //Load all animation of the Character
