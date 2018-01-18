@@ -46,7 +46,7 @@ class Fase2GameController: GameController, MissionDelegate {
         self.soundController.loadSound(fileName: "jump.wav", soundName: "jump", volume: 30.0)
         
         // Add the sound points
-       // self.addPepperSoundPoints()
+        self.setupAudioPoints()
         
     }
     
@@ -98,7 +98,7 @@ class Fase2GameController: GameController, MissionDelegate {
             self.entityManager.tutorialEnemyGeneration = EnemyGeneratorSystem(scene: self.scene, characterNode: self.character.characterNode, generationNodes: generationPoints, distanceToGenerate: 200)
         }
         
-        self.missionController = MissionController(scene: self.scene, pepperNode: self.character.characterNode, missionDelegate: self)
+        self.missionController = MissionController(scene: self.scene, pepperNode: self.character.visualTarget, missionDelegate: self)
         
     }
     
@@ -234,15 +234,79 @@ class Fase2GameController: GameController, MissionDelegate {
         self.controlsOverlay?.isPausedControl = true
     }
     
+    func updateMissionCounter(label: String) {
+        self.controlsOverlay?.updateMissionCounter(label: label)
+    }
     
-    func updateMissionCounter(hide: Bool, label: String?) {
-        
-        self.controlsOverlay?.updateMissionCounter(hide: hide, label: label)
-        
+    func setMissionCouterVisibility(isHidden: Bool) {
+        self.controlsOverlay?.setMissionCouterVisibility(isHidden: isHidden)
     }
     
     
-    
+    func setupAudioPoints() {
+        
+        let soundPoints = self.scene.rootNode.childNode(withName: "levelAudioPoints", recursively: false)?.childNodes
+        var distanceComponentArray = [SoundDistanceComponent]()
+        
+        for soundPoint in soundPoints!
+        {
+            let x = soundPoint.presentation.position.x
+            let z = soundPoint.presentation.position.z
+            
+            let point = float2(x, z)
+            if let soundName = soundPoint.name {
+                
+                var fireDistance: Float
+                
+                switch soundName {
+                    
+                case "F2_Pepper_1":
+                    fireDistance = 150
+                    
+                case "F2_Pepper_2":
+                    fireDistance = 150
+                    
+                case "F2_Pepper_3":
+                    fireDistance = 150
+                    
+                case "F2_Pepper_4":
+                    fireDistance = 150
+                    
+                case "F2_Pepper_5":
+                    fireDistance = 150
+                    
+                case "F2_Pepper_6":
+                    fireDistance = 150
+                    
+                case "F2_Pepper_7":
+                    fireDistance = 150
+                    
+                case "F2_Pepper_12":
+                    fireDistance = 150
+                    
+                case "F2_Pepper_13":
+                    fireDistance = 150
+                    
+                case "F2_Pepper_14":
+                    fireDistance = 150
+                    
+                case "F2_Pepper_15":
+                    fireDistance = 150
+                    
+                case "F2_Potato_1":
+                    fireDistance = 150
+                    
+                default:
+                    fireDistance = 150
+                }
+                
+                let sound = SoundSettings(fileName: (soundName + ".wav"), soundName: soundName)
+                distanceComponentArray.append(SoundDistanceComponent(soundSettings: sound, actionPoint: point, minRadius: fireDistance, entity: self.character!, node: (character?.characterNode)!))
+            }
+        }
+        
+        self.entityManager.addPepperSoundPoints(distanceComponentArray: distanceComponentArray)
+    }
     
     override func handleWithPhysicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         var characterNode: SCNNode?

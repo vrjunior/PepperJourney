@@ -54,8 +54,11 @@ class SubtitleController {
         self.subtitles.append(Subtitle(name:  "Prisoner1Sound", duration: 7.2, text: ["Thank you so much for saving us!".localized,
                                                                                         "Pepper, there are other prisoners in".localized,
                                                                                         "the whole kingdom, please help them!".localized]))
-            
-
+        self.subtitles.append(Subtitle(name: "rumorsAboutBigBox", duration: 3.28, text: ["There are rumors about a".localized,
+                                                                                        "big box across the ruge bridge!".localized]))
+        
+        self.subtitles.append(Subtitle(name: "WarriorAvocado", duration: 5.55, text: ["Thank you little Pepper, you have a big".localized,
+                                                                                        "challenge ahead, I wish you good luck!".localized]))
     }
     
     required init?(coder aDecoder: NSCoder) {

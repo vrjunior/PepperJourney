@@ -85,7 +85,7 @@ class ControlsOverlay: SKScene {
         self.subtitleLabel.colorBlendFactor = 1
         
         self.missionCounterLabel = self.childNode(withName: "missionCounterLabel") as! SKLabelNode
-        self.updateMissionCounter(hide: true, label: nil)
+        self.missionCounterLabel.isHidden = true
 
         self.padOverlay = self.childNode(withName: "padOverlay") as! PadOverlay
         self.jumpButton = self.childNode(withName: "jumpButton") as! JumpButton
@@ -106,19 +106,12 @@ class ControlsOverlay: SKScene {
         
     }
     
-    // quando is hidden ignora o label
-    public func updateMissionCounter(hide: Bool, label: String?) {
-        
-        if hide {
-            self.missionCounterLabel.isHidden = true
-        }
-        else if let label = label {
-            self.missionCounterLabel.text = label
-            if missionCounterLabel.isHidden {
-                self.missionCounterLabel.isHidden = false
-            }
-            
-        }
+    func updateMissionCounter(label: String) {
+        self.missionCounterLabel.text = label
+    }
+    
+    func setMissionCouterVisibility(isHidden: Bool) {
+        self.missionCounterLabel.isHidden = isHidden
     }
 }
 

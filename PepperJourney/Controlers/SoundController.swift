@@ -31,7 +31,7 @@ class SoundController
         // verifica botoes internos
     }
     
-    func loadSound (fileName: String, soundName: String, volume: Float) {
+    func loadSound (fileName: String, soundName: String, volume: Float, isPositional: Bool = true) {
         // Avoid that add two audios with the same soundName
         
         guard self.sounds[soundName] == nil else
@@ -47,7 +47,7 @@ class SoundController
         audioSource.volume = volume
         
         // Varia com a posição
-        audioSource.isPositional = true
+        audioSource.isPositional = isPositional
         
         // Não vai precisar pq vai fazer pro-load na memória
         audioSource.shouldStream = false

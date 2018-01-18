@@ -15,7 +15,8 @@ protocol PrisonerDelegate {
 
 protocol MissionDelegate {
     func showNewMission()
-    func updateMissionCounter(hide: Bool, label: String?)
+    func updateMissionCounter(label: String)
+    func setMissionCouterVisibility(isHidden: Bool)
 }
 
 enum MissionState {
@@ -23,35 +24,48 @@ enum MissionState {
 }
 
 class MissionController: PrisonerDelegate {
-    var openBoxCounter: Int = 0
     var missionState: MissionState = MissionState.beforeBoxOne
     var missionDelegate: MissionDelegate!
     private var prisonerBoxes = [PrisonerBox]()
     private var soundController = SoundController.sharedInstance
+    var missionNode: SCNNode!
     
     private var initialBarrier: SCNNode!
     
     init(scene: SCNScene, pepperNode: SCNNode, missionDelegate: MissionDelegate) {
-        self.addPrisonerBoxes(scene: scene, pepperNode: pepperNode)
+        
         self.missionDelegate = missionDelegate
+        
+        // Mission node
+        guard let missionNode = scene.rootNode.childNode(withName: "mission", recursively: false) else {
+            fatalError("Error getting mission node")
+        }
+        
+        self.missionNode = missionNode
+        
+        //barrier reference
+        guard let barrierNode = self.missionNode.childNode(withName: "barriers", recursively: false) else {
+            fatalError("Error getting barriers node")
+        }
+        self.initialBarrier = barrierNode
+        
+        guard let visualTarget = pepperNode.childNode(withName: "prisonerVisualTarget", recursively: false) else {
+            fatalError("Error getting prisonerVisualTarget")
+        }
+        // Create the boxes in the scene
+        self.addPrisonerBoxes(scene: scene, pepperNode: visualTarget)
         
         self.loadMissionSounds()
         
-//         barrier reference
-        guard let missionNode = scene.rootNode.childNode(withName: "mission", recursively: false),
-            let barrierNode = missionNode.childNode(withName: "barriers", recursively: false) else {
-                print("Error getting barriers node")
-                return
-        }
-        self.initialBarrier = barrierNode
+        
     }
     
     func loadMissionSounds() {
         // Prisioner sounds
-        self.soundController.loadSound(fileName: "Prisoner1.wav", soundName: "Prisoner1Sound", volume: 50.0)
-        self.soundController.loadSound(fileName: "acuteYeah.wav", soundName: "PrisonerSound", volume: 50.0)
-        self.soundController.loadSound(fileName: "BigBox.wav", soundName: "rumorsAboutBigBox", volume: 50.0)
-        self.soundController.loadSound(fileName: "WarriorAvocado.wav", soundName: "WarriorAvocado", volume: 50.0)
+        self.soundController.loadSound(fileName: "Prisoner1.wav", soundName: "Prisoner1Sound", volume: 1, isPositional: false)
+        self.soundController.loadSound(fileName: "acuteYeah.wav", soundName: "PrisonerSound", volume: 1, isPositional: false)
+        self.soundController.loadSound(fileName: "Rumors.wav", soundName: "rumorsAboutBigBox", volume: 1, isPositional: false)
+        self.soundController.loadSound(fileName: "WarriorAvocado.wav", soundName: "WarriorAvocado", volume: 1, isPositional: false)
         
         
     }
@@ -116,6 +130,11 @@ class MissionController: PrisonerDelegate {
             print("Error mission state")
         }
         prisonerBox.breakBox(prisoners: prisoners)
+        
+        // update box counter
+        let text = "\(self.missionState.hashValue) / 5"
+        self.missionDelegate.updateMissionCounter(label: text)
+        
     }
     
     // Executa depois que o prisioneiro foi liberto
@@ -123,27 +142,22 @@ class MissionController: PrisonerDelegate {
         if self.missionState == .openedBox1 {
             self.missionDelegate.showNewMission()
             self.initialBarrier.isHidden = true
+            self.missionDelegate.setMissionCouterVisibility(isHidden: false)
         }
-        
-        self.openBoxCounter += 1
-        let text = "\(self.openBoxCounter) / 5"
-        self.missionDelegate.updateMissionCounter(hide: false, label: text)
-        
     }
     
     public func resetMission() {
-        self.openBoxCounter = 0
         self.missionState = .beforeBoxOne
         // Reset all the prisoner boxes for the new play
         for prisonerBox in self.prisonerBoxes {
             prisonerBox.resetPrisonerBox()
         }
         
-        self.missionDelegate.updateMissionCounter(hide: true, label: nil)
+        self.missionDelegate.setMissionCouterVisibility(isHidden: true)
     }
     
     func addPrisonerBoxes(scene: SCNScene, pepperNode: SCNNode) {
-        guard let prisonerBoxesNode = scene.rootNode.childNode(withName: "prisonerBoxes", recursively: false) else {
+        guard let prisonerBoxesNode = self.missionNode.childNode(withName: "prisonerBoxes", recursively: false) else {
             fatalError("Error getting prisonerBoxes node")
         }
         let prisonerBoxesNodePosition = prisonerBoxesNode.presentation.position
@@ -168,12 +182,16 @@ class MissionController: PrisonerDelegate {
             finalPoint.position.y = initialPoint.position.y + destinationPoint.position.y
             finalPoint.position.z = initialPoint.position.z + destinationPoint.position.z
             
+            var isBigBox = false
+            if boxNode.name == "box5" {
+                isBigBox = true
+            }
             // create a box without prisoners
             let box = PrisonerBox(scene: scene,
                                   initialPoint: initialPoint,
                                   finalPoint: finalPoint,
                                   pepperNode: pepperNode,
-                                  prisonerDelegate: self)
+                                  prisonerDelegate: self, isBigBox: isBigBox)
             
 
             self.prisonerBoxes.append(box)

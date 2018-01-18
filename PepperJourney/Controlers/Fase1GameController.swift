@@ -45,7 +45,7 @@ class Fase1GameController: GameController {
         
         
         // Add the sound points
-        self.entityManager.addPepperSoundPoints()
+        self.setupAudioPoints()
         
     }
     
@@ -283,7 +283,57 @@ class Fase1GameController: GameController {
 		let actionSequence = SCNAction.sequence(actions)
 		self.cameraNode.runAction(actionSequence)
 	}
+    
+    func setupAudioPoints() {
         
+        let soundPoints = self.scene.rootNode.childNode(withName: "levelAudioPoints", recursively: false)?.childNodes
+        var distanceComponentArray = [SoundDistanceComponent]()
+        
+        for soundPoint in soundPoints!
+        {
+            let x = soundPoint.presentation.position.x
+            let z = soundPoint.presentation.position.z
+            
+            let point = float2(x, z)
+            if let soundName = soundPoint.name {
+                
+                let fireDistance: Float
+                
+                switch soundName {
+                    
+                case "F1_Pepper_1":
+                    fireDistance = 165
+                    
+                case "F1_Pepper_2":
+                    fireDistance = 20
+                    
+                case "F1_Pepper_3":
+                    fireDistance = 20
+                    
+                case "F1_Pepper_4":
+                    fireDistance = 40
+                    
+                case "F1_Pepper_5":
+                    fireDistance = 20
+                    
+                case "F1_Potato_1":
+                    fireDistance = 50
+                    
+                case "F1_Potato_2":
+                    fireDistance = 50
+                    
+                default:
+                    fireDistance = 20
+                }
+                
+                let sound = SoundSettings(fileName: (soundName + ".wav"), soundName: soundName)
+                distanceComponentArray.append(SoundDistanceComponent(soundSettings: sound, actionPoint: point, minRadius: fireDistance, entity: self.character!, node: (character?.characterNode)!))
+            }
+        }
+        
+        self.entityManager.addPepperSoundPoints(distanceComponentArray: distanceComponentArray)
+    }
+    
     override func handleWithPhysicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         
         var characterNode: SCNNode?
