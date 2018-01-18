@@ -11,7 +11,8 @@ import GameplayKit
 import SceneKit
 
 enum PrisonerType {
-    case Avocado
+    case RegularAvocado
+    case WarriorAvocado
     case Tomato
 }
 
@@ -78,8 +79,12 @@ class PrisonerBox: DistanceAlarmDelegate {
         var characterScene: String
         
         switch type {
-        case PrisonerType.Avocado:
+        case PrisonerType.WarriorAvocado:
             characterScene = "Game.scnassets/characters/avocado/avocado.scn"
+            
+        case PrisonerType.RegularAvocado:
+            characterScene = "Game.scnassets/characters/avocado/avocado.scn"
+            
         case PrisonerType.Tomato:
             characterScene = "Game.scnassets/characters/tomato/tomato.scn"
         }
@@ -99,6 +104,10 @@ class PrisonerBox: DistanceAlarmDelegate {
             return
         }
         
+        if prisoner.type == .WarriorAvocado {
+            modelNode.geometry?.firstMaterial = modelNode.geometry?.materials[1]
+        }
+            
         prisoner.entity.addComponent(modelComponent)
         
         // Add look at constraint
@@ -228,7 +237,11 @@ class PrisonerBox: DistanceAlarmDelegate {
             self.entityManager.loadDistanceAlarmComponent(component: distanceAlarm)
         }
         
+        // Wait time ending talk
+//        self.scene.rootNode.runAction(SCNAction.wait(duration: 0.5)) {
             self.prisonerDelegate.prisionerReleased()
+//        }
+        
     }
     
     //Load all animation of the Character
