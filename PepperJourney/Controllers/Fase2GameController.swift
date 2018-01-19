@@ -15,7 +15,9 @@ import GameplayKit
 class Fase2GameController: GameController, MissionDelegate {
    
     private var missionController: MissionController!
+    private var finalFightController: FinalFightController!
     open var newMissionOverlay: NewMissionOverlay?
+    
     
     override func resetSounds()
     {
@@ -99,6 +101,8 @@ class Fase2GameController: GameController, MissionDelegate {
         }
         
         self.missionController = MissionController(scene: self.scene, pepperNode: self.character.visualTarget, missionDelegate: self)
+        self.finalFightController = FinalFightController(scene: self.scene)
+        
         
     }
     
@@ -122,6 +126,9 @@ class Fase2GameController: GameController, MissionDelegate {
         
         // reset of mission things
         self.missionController.resetMission()
+        
+        // Reset final fight controller
+        self.finalFightController.resetFinalFight()
         
         self.character.setupCharacter()
         
@@ -235,7 +242,16 @@ class Fase2GameController: GameController, MissionDelegate {
     }
     
     func updateMissionCounter(label: String) {
-        self.controlsOverlay?.updateMissionCounter(label: label)
+//        self.controlsOverlay?.updateMissionCounter(label: label)
+        // apagar
+        if apagar == 0 {
+            self.finalFightController.lowerTheBigBridge()
+            apagar = 1
+        }
+//        if apagar == 1 {
+//            self.finalFightController.resetBridge()
+//            apagar = 0
+//        }
     }
     
     func setMissionCouterVisibility(isHidden: Bool) {
@@ -307,7 +323,7 @@ class Fase2GameController: GameController, MissionDelegate {
         
         self.entityManager.addPepperSoundPoints(distanceComponentArray: distanceComponentArray)
     }
-    
+    var apagar = 0
     override func handleWithPhysicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         var characterNode: SCNNode?
         var anotherNode: SCNNode?
@@ -346,6 +362,8 @@ class Fase2GameController: GameController, MissionDelegate {
                 
                 //go to standing state mode
                 self.characterStateMachine.enter(StandingState.self)
+                
+                
             }
             // foi pego por uma batata
             else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue {

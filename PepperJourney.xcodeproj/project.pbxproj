@@ -65,6 +65,7 @@
 		9CE0FF431FC765B9004AF735 /* SoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE0FF421FC765B9004AF735 /* SoundController.swift */; };
 		9CE0FF491FC854B2004AF735 /* splashingWater.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9CE0FF481FC854B1004AF735 /* splashingWater.wav */; };
 		9CE4A50B1FD08D3800A02DE5 /* F1_Pepper_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9CE4A50A1FD08D3800A02DE5 /* F1_Pepper_1.wav */; };
+		9CE88A3120121DE100627D14 /* FinalFightController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE88A3020121DE100627D14 /* FinalFightController.swift */; };
 		AAAAED081FF2B9C9005E992F /* cutscene1_ptbr.srt in Resources */ = {isa = PBXBuildFile; fileRef = AAAAED071FF2B9C9005E992F /* cutscene1_ptbr.srt */; };
 		B0465F0D1FC444A2002B8FE8 /* SoundRandomComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0465F0B1FC444A1002B8FE8 /* SoundRandomComponent.swift */; };
 		B0676A301FE143E30001BA27 /* MoveAlong.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0676A2F1FE143E30001BA27 /* MoveAlong.swift */; };
@@ -190,6 +191,7 @@
 		9CE0FF421FC765B9004AF735 /* SoundController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
 		9CE0FF481FC854B1004AF735 /* splashingWater.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splashingWater.wav; sourceTree = "<group>"; };
 		9CE4A50A1FD08D3800A02DE5 /* F1_Pepper_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = F1_Pepper_1.wav; sourceTree = "<group>"; };
+		9CE88A3020121DE100627D14 /* FinalFightController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalFightController.swift; sourceTree = "<group>"; };
 		AAAAED071FF2B9C9005E992F /* cutscene1_ptbr.srt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cutscene1_ptbr.srt; sourceTree = "<group>"; };
 		B0465F0B1FC444A1002B8FE8 /* SoundRandomComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundRandomComponent.swift; sourceTree = "<group>"; };
 		B0676A2F1FE143E30001BA27 /* MoveAlong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveAlong.swift; sourceTree = "<group>"; };
@@ -320,13 +322,14 @@
 		9C2FEE90200D2C89006A5274 /* Level2 */ = {
 			isa = PBXGroup;
 			children = (
+				9CE88A3020121DE100627D14 /* FinalFightController.swift */,
 				9CD635A21FD8CEB90016CC7B /* PrisonerBox.swift */,
 				9C2FEE91200D2C9D006A5274 /* MissionController.swift */,
 			);
 			path = Level2;
 			sourceTree = "<group>";
 		};
-		9C774A611FE1996200A388CC /* Controlers */ = {
+		9C774A611FE1996200A388CC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				9C2FEE90200D2C89006A5274 /* Level2 */,
@@ -341,7 +344,7 @@
 				9CE0FF421FC765B9004AF735 /* SoundController.swift */,
 				9CD854792008C611009C7218 /* CheckPointController.swift */,
 			);
-			path = Controlers;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		9CE0FF411FC7656E004AF735 /* Sounds */ = {
@@ -540,7 +543,7 @@
 			isa = PBXGroup;
 			children = (
 				D2983A501FF2CA4E00979A52 /* Localizable.strings */,
-				9C774A611FE1996200A388CC /* Controlers */,
+				9C774A611FE1996200A388CC /* Controllers */,
 				D26035F41FCDDB2F00E4F069 /* Videos */,
 				B0465F171FC4C743002B8FE8 /* Sounds */,
 				D20108841FBE11BE007660E3 /* Overlays */,
@@ -765,6 +768,7 @@
 				D25160EC1F940ACF00BF756A /* StandingState.swift in Sources */,
 				D2E0A8981F993B5D00FCC255 /* JumpComponent.swift in Sources */,
 				9C0350FA1FD5CA2800970006 /* MenuViewController.swift in Sources */,
+				9CE88A3120121DE100627D14 /* FinalFightController.swift in Sources */,
 				D25AD5AE1F87ECF900F2093E /* Character.swift in Sources */,
 				9C774A631FE1997C00A388CC /* SubtitleController.swift in Sources */,
 				9CD8547A2008C611009C7218 /* CheckPointController.swift in Sources */,
