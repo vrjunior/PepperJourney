@@ -130,10 +130,11 @@ class OverPotatoSceneController {
                 self.changeToCamera(cameraName: "camera3")
 
                 self.lowerTheBigBridge()
+                SoundController.sharedInstance.playSoundEffect(soundName: "Drawbridge", loops: false, node: self.cameras[2])
             },
             
             // wait the bridge
-            SCNAction.wait(duration: 3),
+            SCNAction.wait(duration: 4),
             
             SCNAction.run{ _ in
                 // Attack order
@@ -144,22 +145,24 @@ class OverPotatoSceneController {
             },
             
             // run march army action
-            self.getNodeActionsFromBase(nodeName: "army"),
+            SCNAction.run{ _ in
+                self.troopNode.runAction(self.getNodeActionsFromBase(nodeName: "army"))
+            },
             
-//
-//            // Change to the camera 4
-//            SCNAction.run { _ in
-//                self.changeToCamera(cameraName: "camera4")
-//            },
             
-//
+            // Change to the camera 4
+            SCNAction.run { _ in
+                self.changeToCamera(cameraName: "camera4")
+            },
+            
+            // wait the bridge
+            SCNAction.wait(duration: 4),
+
             // Level controller handle with the scene
             SCNAction.run { _ in
                 completition()
             },
             
-            // Restart camera 1 position and orientation
-            self.resetCameraAction(),
             
             //Restore the original camera
             SCNAction.run { _ in
@@ -178,7 +181,10 @@ class OverPotatoSceneController {
 
             cameraPivot.runAction(SCNAction.move(to: self.camera1StartPosition, duration: 0))
             cameraPivot.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0))
+            
+            self.resetBridge()
         })
+        
         
         return resetCameraAction
     }
@@ -196,10 +202,6 @@ class OverPotatoSceneController {
         }
         
         return action
-    }
-    
-    let troopMarchAction = SCNAction.run { _ in
-        
     }
         
     func getNodes(scene: SCNScene) {

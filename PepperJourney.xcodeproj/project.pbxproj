@@ -49,6 +49,7 @@
 		9C7379301FEC8303005D0A72 /* PotatoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C73792F1FEC8303005D0A72 /* PotatoEntity.swift */; };
 		9C774A631FE1997C00A388CC /* SubtitleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C774A621FE1997C00A388CC /* SubtitleController.swift */; };
 		9C774A651FE2314E00A388CC /* ControlsOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C774A641FE2314E00A388CC /* ControlsOverlay.sks */; };
+		9C8CEBB5201E7BF200446C97 /* bridge.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C8CEBB4201E7BF100446C97 /* bridge.wav */; };
 		9C991DAA1FCC588B00DEE3D6 /* GameOver-Game_over.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C991DA71FCC588A00DEE3D6 /* GameOver-Game_over.wav */; };
 		9C991DAF1FCC5CB600DEE3D6 /* FinishLevel-jingle-win-00.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C991DAC1FCC5CB500DEE3D6 /* FinishLevel-jingle-win-00.wav */; };
 		9C991DB31FCC99DE00DEE3D6 /* AttackComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C991DB21FCC99DE00DEE3D6 /* AttackComponent.swift */; };
@@ -177,6 +178,7 @@
 		9C73792F1FEC8303005D0A72 /* PotatoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotatoEntity.swift; sourceTree = "<group>"; };
 		9C774A621FE1997C00A388CC /* SubtitleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleController.swift; sourceTree = "<group>"; };
 		9C774A641FE2314E00A388CC /* ControlsOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ControlsOverlay.sks; sourceTree = "<group>"; };
+		9C8CEBB4201E7BF100446C97 /* bridge.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bridge.wav; sourceTree = "<group>"; };
 		9C991DA71FCC588A00DEE3D6 /* GameOver-Game_over.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "GameOver-Game_over.wav"; sourceTree = "<group>"; };
 		9C991DAC1FCC5CB500DEE3D6 /* FinishLevel-jingle-win-00.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "FinishLevel-jingle-win-00.wav"; sourceTree = "<group>"; };
 		9C991DB21FCC99DE00DEE3D6 /* AttackComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackComponent.swift; sourceTree = "<group>"; };
@@ -301,6 +303,7 @@
 		9C06C566200F8887001A6A1C /* Fase2 */ = {
 			isa = PBXGroup;
 			children = (
+				9C8CEBB4201E7BF100446C97 /* bridge.wav */,
 				9CCC6B3220165903009937E6 /* WarDrumLoop.wav */,
 				9C1E5D33200FD4320080AF92 /* WarriorAvocado.wav */,
 				9C1E5D32200FD4320080AF92 /* Rumors.wav */,
@@ -676,6 +679,7 @@
 				9CD4917F200FBAE5009EF2B0 /* Prisoner1.wav in Resources */,
 				9C774A651FE2314E00A388CC /* ControlsOverlay.sks in Resources */,
 				D2983A441FF2C8E300979A52 /* StartOverlay.sks in Resources */,
+				9C8CEBB5201E7BF200446C97 /* bridge.wav in Resources */,
 				D2983A4E1FF2CA4E00979A52 /* Localizable.strings in Resources */,
 				B08B911F1FC4CABD00304E46 /* gameBackground.mp3 in Resources */,
 				9C0350F21FD0D4EA00970006 /* F1_Potato_2.wav in Resources */,

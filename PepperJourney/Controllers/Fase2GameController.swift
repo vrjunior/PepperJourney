@@ -54,6 +54,7 @@ class Fase2GameController: GameController, MissionDelegate {
         self.soundController.loadSound(fileName: "WarDrumLoop.wav", soundName: "drumWar", volume: 5.0)
         self.soundController.loadSound(fileName: "F1_Potato_1.wav", soundName: "generalSpeech", volume: 30.0)
         self.soundController.loadSound(fileName: "F1_Potato_1.wav", soundName: "attackOrder", volume: 30.0)
+        self.soundController.loadSound(fileName: "bridge.wav", soundName: "Drawbridge", volume: 30.0)
         
         
     }
@@ -253,6 +254,7 @@ class Fase2GameController: GameController, MissionDelegate {
 //        self.finalFightController.lowerTheBigBridge()
         self.controlsOverlay?.isHidden = true
         self.soundController.stopSoundsFromNode(node: self.cameraNode)
+        self.cameraNode.camera?.zFar = 1800
         
         self.overPotatoSceneController.runActionScene(nextCamera: self.cameraNode) {
             self.controlsOverlay?.isHidden = false
