@@ -15,7 +15,7 @@ import GameplayKit
 class Fase2GameController: GameController, MissionDelegate {
    
     private var missionController: MissionController!
-    private var finalFightController: FinalFightController!
+    private var overPotatoSceneController: OverPotatoSceneController!
     open var newMissionOverlay: NewMissionOverlay?
     
     
@@ -49,6 +49,12 @@ class Fase2GameController: GameController, MissionDelegate {
         
         // Add the sound points
         self.setupAudioPoints()
+        
+        // Over Potato Scene
+        self.soundController.loadSound(fileName: "WarDrumLoop.wav", soundName: "drumWar", volume: 5.0)
+        self.soundController.loadSound(fileName: "F1_Potato_1.wav", soundName: "generalSpeech", volume: 30.0)
+        self.soundController.loadSound(fileName: "F1_Potato_1.wav", soundName: "attackOrder", volume: 30.0)
+        
         
     }
     
@@ -101,7 +107,7 @@ class Fase2GameController: GameController, MissionDelegate {
         }
         
         self.missionController = MissionController(scene: self.scene, pepperNode: self.character.visualTarget, missionDelegate: self)
-        self.finalFightController = FinalFightController(scene: self.scene)
+        self.overPotatoSceneController = OverPotatoSceneController(scnView: self.scnView, scene: self.scene)
         
         
     }
@@ -128,7 +134,7 @@ class Fase2GameController: GameController, MissionDelegate {
         self.missionController.resetMission()
         
         // Reset final fight controller
-        self.finalFightController.resetFinalFight()
+        self.overPotatoSceneController.resetSceneState()
         
         self.character.setupCharacter()
         
@@ -240,18 +246,22 @@ class Fase2GameController: GameController, MissionDelegate {
         //pause controls
         self.controlsOverlay?.isPausedControl = true
     }
+    override func pause() {
+        overPotato()
+    }
+    func overPotato() {
+//        self.finalFightController.lowerTheBigBridge()
+        self.controlsOverlay?.isHidden = true
+        self.soundController.stopSoundsFromNode(node: self.cameraNode)
+        
+        self.overPotatoSceneController.runActionScene(nextCamera: self.cameraNode) {
+            self.controlsOverlay?.isHidden = false
+            self.soundController.playbackgroundMusic(soundName: "backgroundMusic", loops: true, node: self.cameraNode)
+        }
+    }
     
     func updateMissionCounter(label: String) {
-//        self.controlsOverlay?.updateMissionCounter(label: label)
-        // apagar
-        if apagar == 0 {
-            self.finalFightController.lowerTheBigBridge()
-            apagar = 1
-        }
-//        if apagar == 1 {
-//            self.finalFightController.resetBridge()
-//            apagar = 0
-//        }
+        self.controlsOverlay?.updateMissionCounter(label: label)
     }
     
     func setMissionCouterVisibility(isHidden: Bool) {
@@ -323,7 +333,7 @@ class Fase2GameController: GameController, MissionDelegate {
         
         self.entityManager.addPepperSoundPoints(distanceComponentArray: distanceComponentArray)
     }
-    var apagar = 0
+    
     override func handleWithPhysicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         var characterNode: SCNNode?
         var anotherNode: SCNNode?
@@ -459,6 +469,7 @@ class Fase2GameController: GameController, MissionDelegate {
             boxNode = contact.nodeB
         }
         if let boxNode = boxNode {
+            
             self.missionController.breakBox(boxNode: boxNode)
         }
     }

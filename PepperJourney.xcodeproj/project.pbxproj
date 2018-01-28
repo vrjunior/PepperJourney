@@ -38,6 +38,7 @@
 		9C1E5D31200FD0FE0080AF92 /* acuteYeah.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C1E5D30200FD0FD0080AF92 /* acuteYeah.wav */; };
 		9C1E5D34200FD4320080AF92 /* Rumors.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C1E5D32200FD4320080AF92 /* Rumors.wav */; };
 		9C1E5D35200FD4320080AF92 /* WarriorAvocado.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C1E5D33200FD4320080AF92 /* WarriorAvocado.wav */; };
+		9C2306852017652100B1240F /* LicenseAdds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2306842017652100B1240F /* LicenseAdds.swift */; };
 		9C28764B200D024800B09DE6 /* cutscene2.str in Sources */ = {isa = PBXBuildFile; fileRef = 9C28764A200D024800B09DE6 /* cutscene2.str */; };
 		9C2FEE8A200D2801006A5274 /* NewMissionOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C2FEE8C200D2801006A5274 /* NewMissionOverlay.sks */; };
 		9C2FEE8F200D2978006A5274 /* NewMissionOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FEE8E200D2978006A5274 /* NewMissionOverlay.swift */; };
@@ -56,6 +57,7 @@
 		9CC26F651FD9369500292099 /* EntityCleanerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC26F641FD9369500292099 /* EntityCleanerComponent.swift */; };
 		9CC26F671FD95A5700292099 /* PowerLevelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC26F661FD95A5700292099 /* PowerLevelComponent.swift */; };
 		9CC26F691FD960B300292099 /* AttackLimiterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC26F681FD960B300292099 /* AttackLimiterComponent.swift */; };
+		9CCC6B3320165903009937E6 /* WarDrumLoop.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9CCC6B3220165903009937E6 /* WarDrumLoop.wav */; };
 		9CD4917D200F9F91009EF2B0 /* cutScene2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9CD4917C200F9F90009EF2B0 /* cutScene2.mp4 */; };
 		9CD4917F200FBAE5009EF2B0 /* Prisoner1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9CD4917E200FBAE5009EF2B0 /* Prisoner1.wav */; };
 		9CD635A31FD8CEB90016CC7B /* PrisonerBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD635A21FD8CEB90016CC7B /* PrisonerBox.swift */; };
@@ -65,7 +67,7 @@
 		9CE0FF431FC765B9004AF735 /* SoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE0FF421FC765B9004AF735 /* SoundController.swift */; };
 		9CE0FF491FC854B2004AF735 /* splashingWater.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9CE0FF481FC854B1004AF735 /* splashingWater.wav */; };
 		9CE4A50B1FD08D3800A02DE5 /* F1_Pepper_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9CE4A50A1FD08D3800A02DE5 /* F1_Pepper_1.wav */; };
-		9CE88A3120121DE100627D14 /* FinalFightController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE88A3020121DE100627D14 /* FinalFightController.swift */; };
+		9CE88A3120121DE100627D14 /* OverPotatoSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE88A3020121DE100627D14 /* OverPotatoSceneController.swift */; };
 		AAAAED081FF2B9C9005E992F /* cutscene1_ptbr.srt in Resources */ = {isa = PBXBuildFile; fileRef = AAAAED071FF2B9C9005E992F /* cutscene1_ptbr.srt */; };
 		B0465F0D1FC444A2002B8FE8 /* SoundRandomComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0465F0B1FC444A1002B8FE8 /* SoundRandomComponent.swift */; };
 		B0676A301FE143E30001BA27 /* MoveAlong.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0676A2F1FE143E30001BA27 /* MoveAlong.swift */; };
@@ -163,6 +165,7 @@
 		9C1E5D30200FD0FD0080AF92 /* acuteYeah.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = acuteYeah.wav; sourceTree = "<group>"; };
 		9C1E5D32200FD4320080AF92 /* Rumors.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Rumors.wav; sourceTree = "<group>"; };
 		9C1E5D33200FD4320080AF92 /* WarriorAvocado.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = WarriorAvocado.wav; sourceTree = "<group>"; };
+		9C2306842017652100B1240F /* LicenseAdds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseAdds.swift; sourceTree = "<group>"; };
 		9C28764A200D024800B09DE6 /* cutscene2.str */ = {isa = PBXFileReference; lastKnownFileType = text; path = cutscene2.str; sourceTree = "<group>"; };
 		9C2FEE8B200D2801006A5274 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Base; path = Base.lproj/NewMissionOverlay.sks; sourceTree = "<group>"; };
 		9C2FEE8D200D280C006A5274 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = "pt-BR"; path = "pt-BR.lproj/NewMissionOverlay.sks"; sourceTree = "<group>"; };
@@ -182,6 +185,7 @@
 		9CC26F641FD9369500292099 /* EntityCleanerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityCleanerComponent.swift; sourceTree = "<group>"; };
 		9CC26F661FD95A5700292099 /* PowerLevelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerLevelComponent.swift; sourceTree = "<group>"; };
 		9CC26F681FD960B300292099 /* AttackLimiterComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttackLimiterComponent.swift; sourceTree = "<group>"; };
+		9CCC6B3220165903009937E6 /* WarDrumLoop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = WarDrumLoop.wav; sourceTree = "<group>"; };
 		9CD4917C200F9F90009EF2B0 /* cutScene2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = cutScene2.mp4; sourceTree = "<group>"; };
 		9CD4917E200FBAE5009EF2B0 /* Prisoner1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Prisoner1.wav; sourceTree = "<group>"; };
 		9CD635A21FD8CEB90016CC7B /* PrisonerBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrisonerBox.swift; sourceTree = "<group>"; };
@@ -191,7 +195,7 @@
 		9CE0FF421FC765B9004AF735 /* SoundController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
 		9CE0FF481FC854B1004AF735 /* splashingWater.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splashingWater.wav; sourceTree = "<group>"; };
 		9CE4A50A1FD08D3800A02DE5 /* F1_Pepper_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = F1_Pepper_1.wav; sourceTree = "<group>"; };
-		9CE88A3020121DE100627D14 /* FinalFightController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalFightController.swift; sourceTree = "<group>"; };
+		9CE88A3020121DE100627D14 /* OverPotatoSceneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverPotatoSceneController.swift; sourceTree = "<group>"; };
 		AAAAED071FF2B9C9005E992F /* cutscene1_ptbr.srt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cutscene1_ptbr.srt; sourceTree = "<group>"; };
 		B0465F0B1FC444A1002B8FE8 /* SoundRandomComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundRandomComponent.swift; sourceTree = "<group>"; };
 		B0676A2F1FE143E30001BA27 /* MoveAlong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveAlong.swift; sourceTree = "<group>"; };
@@ -297,6 +301,7 @@
 		9C06C566200F8887001A6A1C /* Fase2 */ = {
 			isa = PBXGroup;
 			children = (
+				9CCC6B3220165903009937E6 /* WarDrumLoop.wav */,
 				9C1E5D33200FD4320080AF92 /* WarriorAvocado.wav */,
 				9C1E5D32200FD4320080AF92 /* Rumors.wav */,
 				9C1E5D30200FD0FD0080AF92 /* acuteYeah.wav */,
@@ -319,10 +324,18 @@
 			path = Fase2;
 			sourceTree = "<group>";
 		};
+		9C2306862017656C00B1240F /* Licenses */ = {
+			isa = PBXGroup;
+			children = (
+				9C2306842017652100B1240F /* LicenseAdds.swift */,
+			);
+			path = Licenses;
+			sourceTree = "<group>";
+		};
 		9C2FEE90200D2C89006A5274 /* Level2 */ = {
 			isa = PBXGroup;
 			children = (
-				9CE88A3020121DE100627D14 /* FinalFightController.swift */,
+				9CE88A3020121DE100627D14 /* OverPotatoSceneController.swift */,
 				9CD635A21FD8CEB90016CC7B /* PrisonerBox.swift */,
 				9C2FEE91200D2C9D006A5274 /* MissionController.swift */,
 			);
@@ -542,6 +555,7 @@
 		D2EC857B1F83F1240093F009 /* PepperJourney */ = {
 			isa = PBXGroup;
 			children = (
+				9C2306862017656C00B1240F /* Licenses */,
 				D2983A501FF2CA4E00979A52 /* Localizable.strings */,
 				9C774A611FE1996200A388CC /* Controllers */,
 				D26035F41FCDDB2F00E4F069 /* Videos */,
@@ -694,6 +708,7 @@
 				9C4806851FCC505000168571 /* splashingWater2.wav in Resources */,
 				9CE0FF491FC854B2004AF735 /* splashingWater.wav in Resources */,
 				9C06C5C8200F895E001A6A1C /* F2_Pepper_10.wav in Resources */,
+				9CCC6B3320165903009937E6 /* WarDrumLoop.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -768,7 +783,7 @@
 				D25160EC1F940ACF00BF756A /* StandingState.swift in Sources */,
 				D2E0A8981F993B5D00FCC255 /* JumpComponent.swift in Sources */,
 				9C0350FA1FD5CA2800970006 /* MenuViewController.swift in Sources */,
-				9CE88A3120121DE100627D14 /* FinalFightController.swift in Sources */,
+				9CE88A3120121DE100627D14 /* OverPotatoSceneController.swift in Sources */,
 				D25AD5AE1F87ECF900F2093E /* Character.swift in Sources */,
 				9C774A631FE1997C00A388CC /* SubtitleController.swift in Sources */,
 				9CD8547A2008C611009C7218 /* CheckPointController.swift in Sources */,
@@ -797,6 +812,7 @@
 				9C0350F81FD59ED200970006 /* Fase2GameController.swift in Sources */,
 				B0465F0D1FC444A2002B8FE8 /* SoundRandomComponent.swift in Sources */,
 				9C7379301FEC8303005D0A72 /* PotatoEntity.swift in Sources */,
+				9C2306852017652100B1240F /* LicenseAdds.swift in Sources */,
 				9C1B829F1F9FADD300173FF3 /* ModelComponent.swift in Sources */,
 				D2F53D751F9A88FF00422F24 /* WalkingState.swift in Sources */,
 				D236731F1FE0396C00FFDE77 /* EnemyEntity.swift in Sources */,
@@ -1025,7 +1041,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = J5KQYDNX5E;
 				INFOPLIST_FILE = PepperJourney/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vrmassoni.SpicyHero;
@@ -1041,7 +1057,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = J5KQYDNX5E;
 				INFOPLIST_FILE = PepperJourney/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vrmassoni.SpicyHero;

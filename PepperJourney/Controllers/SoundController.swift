@@ -91,7 +91,7 @@ class SoundController
 //        print("tocou: \(soundName)")
         sound.loops = loops
         
-        let actionSequence = SCNAction.sequence([SCNAction.playAudio(sound, waitForCompletion: true),
+        let actionSequence = SCNAction.sequence([SCNAction.playAudio(sound, waitForCompletion: false),
 //                                                 SCNAction.wait(duration: 2.0),
                                                  SCNAction.run({ (node) in
                                                     block()
@@ -135,26 +135,17 @@ class SoundController
         self.sounds.removeValue(forKey: soundName)
     }
     
-    //===================================================================================
-    //    func muteSound() {
-    //        var player: AVAudioNode
-    //
-    //        player = AVAudioPlayerNode()
-    //        self.audioPlayer = SCNAudioPlayer(source: audioSource)
-    //        self.audioPlayer.audioNode!.engine?.attach(player)
-    //        self.audioPlayer.audioNode!.engine?.mainMixerNode.outputVolume = 0
-    //    }
-    //
-    //    func unmuteSound()
-    //    {
-    //        self.audioSource.volume = self.volume
-    //    }
-    //
-    //
-    //    func stopSound()
-    //    {
-    //        self.node.removeAudioPlayer(self.audioPlayer)
-    //    }
-    
+    public func getSoundAction(soundName: String, waitForCompletion: Bool = false, loops: Bool, node: SCNNode) -> SCNAction {
+        guard let sound = self.sounds[soundName] else
+        {
+            fatalError("Error at get the audio source \(soundName)")
+            
+        }
+        //        print("tocou: \(soundName)")
+        sound.loops = loops
+        
+        let audioAction = SCNAction.playAudio(sound, waitForCompletion: waitForCompletion)
+        
+        return audioAction
+    }
 }
-
