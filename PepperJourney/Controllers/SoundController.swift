@@ -135,7 +135,7 @@ class SoundController
         self.sounds.removeValue(forKey: soundName)
     }
     
-    public func getSoundAction(soundName: String, waitForCompletion: Bool = false, loops: Bool, node: SCNNode) -> SCNAction {
+    public func getSoundAction(soundName: String, waitForCompletion: Bool = false, loops: Bool) -> SCNAction {
         guard let sound = self.sounds[soundName] else
         {
             fatalError("Error at get the audio source \(soundName)")

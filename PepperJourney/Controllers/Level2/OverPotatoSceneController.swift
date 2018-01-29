@@ -64,9 +64,9 @@ class OverPotatoSceneController {
     
     func cleanActions() {
         
-        // clean camera 1
-        if self.cameras.count > 0 {
-            self.cameras[0].removeAllActions()
+        // clean cameras actions
+        for camera in self.cameras {
+            camera.removeAllActions()
         }
         
         // clean army action
@@ -99,30 +99,30 @@ class OverPotatoSceneController {
             // Change to the camera 1
             SCNAction.run { _ in
                 self.changeToCamera(cameraName: "camera1")
-                
+
                 // play the drum sound
                 SoundController.sharedInstance.playSoundEffect(soundName: "drumWar", loops: true, node: self.cameras[0])
             },
-            
-            
+
+
             // Run camera1 actions
             self.getNodeActionsFromBase(nodeName: "camera1"),
-            
+
             // Part 2
             SCNAction.run { _ in
-                
+
                 // Stop the drums
                 SoundController.sharedInstance.stopSoundsFromNode(node: self.cameras[0])
-                
+
                 // Change to the camera 2
                 self.changeToCamera(cameraName: "camera2")
-                
+
                 SoundController.sharedInstance.playSoundEffect(soundName: "generalSpeech", loops: false, node: self.cameras[1])
-                
+
             },
-            
+
             // wait the speech
-            SCNAction.wait(duration: 3),
+            SCNAction.wait(duration: 5),
             
             SCNAction.run{ _ in
 
@@ -134,36 +134,63 @@ class OverPotatoSceneController {
             },
             
             // wait the bridge
-            SCNAction.wait(duration: 4),
+            SCNAction.wait(duration: 3.25),
             
             SCNAction.run{ _ in
-                // Attack order
-                SoundController.sharedInstance.playSoundEffect(soundName: "attackOrder", loops: false, node: self.cameras[3])
-                
-                // Change to the camera 4
-                self.changeToCamera(cameraName: "camera4")
+                // run shaking camera
+                self.cameras[2].runAction(self.getNodeActionsFromBase(nodeName: "camera3"))
             },
+            
+            // wait the shake camera
+            SCNAction.wait(duration: 0.75),
+            
+            SCNAction.run{ _ in
+                
+                // Attack order
+                SoundController.sharedInstance.playSoundEffect(soundName: "attackOrder", loops: false, node: self.cameras[2])
+            },
+            
+            // wait the attack order
+            SCNAction.wait(duration: 2.5),
             
             // run march army action
             SCNAction.run{ _ in
-                self.troopNode.runAction(self.getNodeActionsFromBase(nodeName: "army"))
-            },
-            
-            
-            // Change to the camera 4
-            SCNAction.run { _ in
+                
+                // Change to the camera 4
                 self.changeToCamera(cameraName: "camera4")
+                
+                // run marching action
+                self.troopNode.runAction(self.getNodeActionsFromBase(nodeName: "army"))
+                
+                // play the marching sound
+                SoundController.sharedInstance.playSoundEffect(soundName: "marching", loops: false, node: self.cameras[3])
+                
+                // run shaking camera
+                self.cameras[3].runAction(self.getNodeActionsFromBase(nodeName: "camera4"))
+                
+                // Change to the camera 4
+                self.changeToCamera(cameraName: "camera4")
+               
             },
             
-            // wait the bridge
-            SCNAction.wait(duration: 4),
+            // wait the march
+            SCNAction.wait(duration: 8.77),
+            
+            SCNAction.run{ _ in
+                // stop shaking camera
+                self.cameras[3].removeAllActions()
+
+            },
+            
+            // wait the visualization of the army
+            SCNAction.wait(duration: 1),
 
             // Level controller handle with the scene
             SCNAction.run { _ in
+
                 completition()
             },
-            
-            
+
             //Restore the original camera
             SCNAction.run { _ in
 

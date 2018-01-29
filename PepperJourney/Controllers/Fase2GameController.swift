@@ -52,9 +52,10 @@ class Fase2GameController: GameController, MissionDelegate {
         
         // Over Potato Scene
         self.soundController.loadSound(fileName: "WarDrumLoop.wav", soundName: "drumWar", volume: 5.0)
-        self.soundController.loadSound(fileName: "F1_Potato_1.wav", soundName: "generalSpeech", volume: 30.0)
-        self.soundController.loadSound(fileName: "F1_Potato_1.wav", soundName: "attackOrder", volume: 30.0)
+        self.soundController.loadSound(fileName: "GeneralSpeech.wav", soundName: "generalSpeech", volume: 30.0)
+        self.soundController.loadSound(fileName: "AttackOrder.wav", soundName: "attackOrder", volume: 30.0)
         self.soundController.loadSound(fileName: "bridge.wav", soundName: "Drawbridge", volume: 30.0)
+        self.soundController.loadSound(fileName: "marching-concrete-loop.aiff", soundName: "marching", volume: 30.0)
         
         
     }
