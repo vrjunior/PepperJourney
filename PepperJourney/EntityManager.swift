@@ -47,7 +47,12 @@ class EntityManager {
     private init() {
         
     }
+    /***************************************************************************************************/
+    func getPotatoesNumber() -> Int {
+        return self.enemyEntities.count
+    }
 
+    /***************************************************************************************************/
     func initEntityManager (scene: SCNScene, gameController: GameController, soundController: SoundController)
     {
         self.scene = scene

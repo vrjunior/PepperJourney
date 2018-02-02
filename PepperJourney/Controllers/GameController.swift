@@ -63,6 +63,10 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     var lastCheckPoint: SCNNode?
     var continueGameEnable: Bool = false
     
+    /// Keeps track of the time for use in the update method.
+    var previousUpdateTime: TimeInterval = 0
+    
+    
     // MARK: - Controling the character
     
     var characterDirection: vector_float2 {
@@ -78,7 +82,7 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
             character!.direction = direction
         }
     }
-	
+    
     func resetSounds() {
         // Restart the background music
         self.soundController.playbackgroundMusic(soundName: "backgroundMusic", loops: true, node: self.cameraNode)
@@ -316,6 +320,18 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         characterStateMachine.enter(StandingState.self)
     }
     
+    
+    public func getDeltaTime(updateAtTime: TimeInterval) -> TimeInterval {
+        if previousUpdateTime == 0.0 {
+            previousUpdateTime = updateAtTime
+        }
+        
+        let deltaTime = updateAtTime - previousUpdateTime
+        
+        
+        self.previousUpdateTime = updateAtTime
+        return deltaTime
+    }
     // MARK: - Update
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {

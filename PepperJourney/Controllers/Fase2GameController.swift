@@ -12,10 +12,10 @@ import SceneKit
 import SpriteKit
 import GameplayKit
 
-class Fase2GameController: GameController, MissionDelegate {
-   
+class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
+ 
     private var missionController: MissionController!
-    private var overPotatoSceneController: OverPotatoSceneController!
+    private var bigBridgeBattleController: BigBridgeBattleController!
     open var newMissionOverlay: NewMissionOverlay?
     
     
@@ -109,8 +109,7 @@ class Fase2GameController: GameController, MissionDelegate {
         }
         
         self.missionController = MissionController(scene: self.scene, pepperNode: self.character.visualTarget, missionDelegate: self)
-        self.overPotatoSceneController = OverPotatoSceneController(scnView: self.scnView, scene: self.scene)
-        
+        self.bigBridgeBattleController = BigBridgeBattleController(scnView: self.scnView, scene: self.scene, delegate: self)
         
     }
     
@@ -135,8 +134,8 @@ class Fase2GameController: GameController, MissionDelegate {
         // reset of mission things
         self.missionController.resetMission()
         
-        // Reset final fight controller
-        self.overPotatoSceneController.resetSceneState()
+        // Reset battle
+        self.bigBridgeBattleController.resetBattle()
         
         self.character.setupCharacter()
         
@@ -221,6 +220,10 @@ class Fase2GameController: GameController, MissionDelegate {
             
             self.overlayDelegate?.updateAttackIndicator(percentage: lastPowerLeverPorcento)
         }
+        
+        let deltaTime = self.getDeltaTime(updateAtTime: time)
+        
+        self.bigBridgeBattleController.update(deltaTime: deltaTime)
     }
     
     func playCutscene() {
@@ -248,19 +251,9 @@ class Fase2GameController: GameController, MissionDelegate {
         //pause controls
         self.controlsOverlay?.isPausedControl = true
     }
-    override func pause() {
-        overPotato()
-    }
-    func overPotato() {
-//        self.finalFightController.lowerTheBigBridge()
-        self.controlsOverlay?.isHidden = true
-        self.soundController.stopSoundsFromNode(node: self.cameraNode)
-        self.cameraNode.camera?.zFar = 1800
-        
-        self.overPotatoSceneController.runActionScene(nextCamera: self.cameraNode) {
-            self.controlsOverlay?.isHidden = false
-            self.soundController.playbackgroundMusic(soundName: "backgroundMusic", loops: true, node: self.cameraNode)
-        }
+    
+    func enableBigBridgeBattle() {
+        self.bigBridgeBattleController.startBigBattle()
     }
     
     func updateMissionCounter(label: String) {
@@ -271,7 +264,33 @@ class Fase2GameController: GameController, MissionDelegate {
         self.controlsOverlay?.setMissionCouterVisibility(isHidden: isHidden)
     }
     
+    /* Battle Delegate functions */
+    func prepareToTheBattle() {
+        self.controlsOverlay?.isHidden = true
+        self.soundController.stopSoundsFromNode(node: self.cameraNode)
+        self.cameraNode.camera?.zFar = 1800
+    }
     
+    func runAfterBattle() {
+        self.controlsOverlay?.isHidden = false
+        self.soundController.playbackgroundMusic(soundName: "backgroundMusic", loops: true, node: self.cameraNode)
+    }
+    
+    func kiilPreviousPotatoes() {
+        self.entityManager.killAllPotatoes()
+    }
+    
+    func getPotatoesNumber() -> Int {
+        return self.entityManager.getPotatoesNumber()
+    }
+    
+    func createPotato(position: SCNVector3) {
+            self.entityManager.createEnemy(type: "model1", position: position, persecutionBehavior: true)
+    }
+    
+    func getPepperPosition() -> SCNVector3 {
+        return self.character.characterNode.presentation.position
+    }
     func setupAudioPoints() {
         
         let soundPoints = self.scene.rootNode.childNode(withName: "levelAudioPoints", recursively: false)?.childNodes

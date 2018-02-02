@@ -17,6 +17,7 @@ protocol MissionDelegate {
     func showNewMission()
     func updateMissionCounter(label: String)
     func setMissionCouterVisibility(isHidden: Bool)
+    func enableBigBridgeBattle()
 }
 
 enum MissionState {
@@ -24,7 +25,7 @@ enum MissionState {
 }
 
 class MissionController: PrisonerDelegate {
-    var missionState: MissionState = MissionState.beforeBoxOne
+    public var missionState: MissionState = MissionState.beforeBoxOne
     var missionDelegate: MissionDelegate!
     private var prisonerBoxes = [PrisonerBox]()
     private var soundController = SoundController.sharedInstance
@@ -114,6 +115,7 @@ class MissionController: PrisonerDelegate {
             let prisoner2 = Prisoner(type: .RegularAvocado, talkAudioName: nil)
             let prisoner3 = Prisoner(type: .RegularAvocado, talkAudioName: nil)
             prisoners = [prisoner1, prisoner2, prisoner3]
+            self.missionDelegate.enableBigBridgeBattle()
             
             
         case .openedBox4:

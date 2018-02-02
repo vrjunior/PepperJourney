@@ -32,6 +32,7 @@
 		9C06C5C6200F895E001A6A1C /* F2_Pepper_7.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C06C5B5200F895D001A6A1C /* F2_Pepper_7.wav */; };
 		9C06C5C7200F895E001A6A1C /* F2_Pepper_8.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C06C5B6200F895D001A6A1C /* F2_Pepper_8.wav */; };
 		9C06C5C8200F895E001A6A1C /* F2_Pepper_10.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C06C5B7200F895E001A6A1C /* F2_Pepper_10.wav */; };
+		9C13D4DB202402C600515235 /* BigBridgeBattleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C13D4DA202402C600515235 /* BigBridgeBattleController.swift */; };
 		9C1B829D1F9E2FD300173FF3 /* SeekComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B829C1F9E2FD300173FF3 /* SeekComponent.swift */; };
 		9C1B829F1F9FADD300173FF3 /* ModelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */; };
 		9C1B82A11FA0D09800173FF3 /* TrigonometryLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B82A01FA0D09600173FF3 /* TrigonometryLib.swift */; };
@@ -164,6 +165,7 @@
 		9C06C5B5200F895D001A6A1C /* F2_Pepper_7.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = F2_Pepper_7.wav; sourceTree = "<group>"; };
 		9C06C5B6200F895D001A6A1C /* F2_Pepper_8.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = F2_Pepper_8.wav; sourceTree = "<group>"; };
 		9C06C5B7200F895E001A6A1C /* F2_Pepper_10.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = F2_Pepper_10.wav; sourceTree = "<group>"; };
+		9C13D4DA202402C600515235 /* BigBridgeBattleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigBridgeBattleController.swift; sourceTree = "<group>"; };
 		9C1B829C1F9E2FD300173FF3 /* SeekComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekComponent.swift; sourceTree = "<group>"; };
 		9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelComponent.swift; sourceTree = "<group>"; };
 		9C1B82A01FA0D09600173FF3 /* TrigonometryLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrigonometryLib.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 				9CE88A3020121DE100627D14 /* OverPotatoSceneController.swift */,
 				9CD635A21FD8CEB90016CC7B /* PrisonerBox.swift */,
 				9C2FEE91200D2C9D006A5274 /* MissionController.swift */,
+				9C13D4DA202402C600515235 /* BigBridgeBattleController.swift */,
 			);
 			path = Level2;
 			sourceTree = "<group>";
@@ -809,6 +812,7 @@
 				9CD8547A2008C611009C7218 /* CheckPointController.swift in Sources */,
 				D2050A7D1FCC99D9001EC7FE /* JumpButton.swift in Sources */,
 				D207CFC71F8EA5370084240E /* Stick.swift in Sources */,
+				9C13D4DB202402C600515235 /* BigBridgeBattleController.swift in Sources */,
 				9CC26F651FD9369500292099 /* EntityCleanerComponent.swift in Sources */,
 				D20108901FBE11D9007660E3 /* GameOverOverlay.swift in Sources */,
 				9C1B82A11FA0D09800173FF3 /* TrigonometryLib.swift in Sources */,

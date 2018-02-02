@@ -76,8 +76,8 @@ class OverPotatoSceneController {
     
    
     
-    func runActionScene(nextCamera: SCNNode, completition: @escaping () -> Void) {
-        
+    func runActionScene(completition: @escaping () -> Void) {
+        let nextCamera = self.scnView?.pointOfView
         guard self.cameras.count == 4 else {
             print("Error finding the 4 cameras")
             return
