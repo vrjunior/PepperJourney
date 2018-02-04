@@ -124,6 +124,8 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         
         // Show de character
         self.character.characterNode.isHidden = false
+        self.cameraNode.camera?.zFar = 700
+
         
         self.entityManager.setupGameInitialization()
         
@@ -273,7 +275,7 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
     func prepareToTheBattle() {
         self.controlsOverlay?.isHidden = true
         self.soundController.stopSoundsFromNode(node: self.cameraNode)
-        self.cameraNode.camera?.zFar = 1800
+        self.cameraNode.camera?.zFar = 500
     }
     
     func runAfterBattle() {
