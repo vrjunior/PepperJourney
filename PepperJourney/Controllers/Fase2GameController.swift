@@ -51,6 +51,7 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         self.setupAudioPoints()
         
         // Over Potato Scene
+         self.soundController.loadSound(fileName: "F2_Potato_1.wav", soundName: "F2_Potato_1", volume: 30.0)
         self.soundController.loadSound(fileName: "WarDrumLoop.wav", soundName: "drumWar", volume: 5.0)
         self.soundController.loadSound(fileName: "GeneralSpeech.wav", soundName: "generalSpeech", volume: 30.0)
         self.soundController.loadSound(fileName: "AttackOrder.wav", soundName: "attackOrder", volume: 30.0)
@@ -110,6 +111,8 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         
         self.missionController = MissionController(scene: self.scene, pepperNode: self.character.visualTarget, missionDelegate: self)
         self.bigBridgeBattleController = BigBridgeBattleController(scnView: self.scnView, scene: self.scene, delegate: self)
+        
+        self.memoryOptimization = MemoryOptimizationController(scene: self.scene)
         
     }
     
@@ -224,13 +227,15 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         let deltaTime = self.getDeltaTime(updateAtTime: time)
         
         self.bigBridgeBattleController.update(deltaTime: deltaTime)
+        
+        self.memoryOptimization.update(pepperPosition: self.character.characterNode.worldPosition, deltaTime: deltaTime)
     }
     
     func playCutscene() {
         
         let videoSender = VideoSender(blockAfterVideo: self.tutorialLevel2, cutScenePath: "cutScene2.mp4", cutSceneSubtitlePath: "cutscene2.srt".localized)
         self.cutSceneDelegate?.playCutScene(videoSender: videoSender)
-//        self.entityManager.
+
     }
     func tutorialLevel2() {
         self.gameStateMachine.enter(PlayState.self)
@@ -339,9 +344,6 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
                     fireDistance = 150
                     
                 case "F2_Pepper_15":
-                    fireDistance = 150
-                    
-                case "F2_Potato_1":
                     fireDistance = 150
                     
                 default:

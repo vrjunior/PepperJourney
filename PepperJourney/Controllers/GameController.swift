@@ -35,6 +35,7 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     var gameStateMachine: GKStateMachine!
     var followingCamera: SCNNode!
     var overlayDelegate: UpdateIndicators?
+    var memoryOptimization: MemoryOptimizationController!
     
     public var scnView: SCNView!
     public var scene: SCNScene!
@@ -169,7 +170,7 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         sceneRenderer = scnView
         sceneRenderer!.delegate = self
         
-//        self.scnView.debugOptions = SCNDebugOptions.showPhysicsShapes
+        self.scnView.debugOptions = SCNDebugOptions.showPhysicsShapes
         self.scnView.showsStatistics = true
         
         self.addNotifications()
@@ -345,6 +346,7 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
             
             SubtitleController.sharedInstance.update(systemTime: time)
         }
+        
     }
     
     func handleWithPhysicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {

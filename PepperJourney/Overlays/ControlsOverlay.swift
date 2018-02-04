@@ -153,10 +153,12 @@ extension ControlsOverlay : SKButtonDelegate {
         if target == pauseButton {
             self.gameOptionsDelegate?.pause()
         }
+       
     }
     
 
     func buttonPressed(target: SKButton) {
+      
 
         
 

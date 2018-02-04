@@ -44,6 +44,8 @@
 		9C2FEE8A200D2801006A5274 /* NewMissionOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C2FEE8C200D2801006A5274 /* NewMissionOverlay.sks */; };
 		9C2FEE8F200D2978006A5274 /* NewMissionOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FEE8E200D2978006A5274 /* NewMissionOverlay.swift */; };
 		9C2FEE92200D2C9D006A5274 /* MissionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FEE91200D2C9D006A5274 /* MissionController.swift */; };
+		9C3ADB2720263D0F004360CF /* MemoryOptimizationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3ADB2620263D0F004360CF /* MemoryOptimizationController.swift */; };
+		9C3ADB2920264714004360CF /* SCNMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3ADB2820264714004360CF /* SCNMath.swift */; };
 		9C4806811FC88A2700168571 /* SinkComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4806801FC88A2700168571 /* SinkComponent.swift */; };
 		9C4806851FCC505000168571 /* splashingWater2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C4806841FCC504F00168571 /* splashingWater2.wav */; };
 		9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C6D3DEA1F93252500B8FA2A /* Game.scnassets */; };
@@ -178,6 +180,8 @@
 		9C2FEE8D200D280C006A5274 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = "pt-BR"; path = "pt-BR.lproj/NewMissionOverlay.sks"; sourceTree = "<group>"; };
 		9C2FEE8E200D2978006A5274 /* NewMissionOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMissionOverlay.swift; sourceTree = "<group>"; };
 		9C2FEE91200D2C9D006A5274 /* MissionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionController.swift; sourceTree = "<group>"; };
+		9C3ADB2620263D0F004360CF /* MemoryOptimizationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryOptimizationController.swift; sourceTree = "<group>"; };
+		9C3ADB2820264714004360CF /* SCNMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNMath.swift; sourceTree = "<group>"; };
 		9C4806801FC88A2700168571 /* SinkComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinkComponent.swift; sourceTree = "<group>"; };
 		9C4806841FCC504F00168571 /* splashingWater2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splashingWater2.wav; sourceTree = "<group>"; };
 		9C6D3DEA1F93252500B8FA2A /* Game.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Game.scnassets; sourceTree = "<group>"; };
@@ -356,6 +360,7 @@
 				9CD635A21FD8CEB90016CC7B /* PrisonerBox.swift */,
 				9C2FEE91200D2C9D006A5274 /* MissionController.swift */,
 				9C13D4DA202402C600515235 /* BigBridgeBattleController.swift */,
+				9C3ADB2620263D0F004360CF /* MemoryOptimizationController.swift */,
 			);
 			path = Level2;
 			sourceTree = "<group>";
@@ -397,6 +402,7 @@
 				D26035F21FCDC66C00E4F069 /* CGPoint+FromUIView.swift */,
 				D26610191FD5BD55006B1455 /* UIColor+NewColors.swift */,
 				D2983A531FF2CBAA00979A52 /* String+Localized.swift */,
+				9C3ADB2820264714004360CF /* SCNMath.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -817,6 +823,7 @@
 				D20108901FBE11D9007660E3 /* GameOverOverlay.swift in Sources */,
 				9C1B82A11FA0D09800173FF3 /* TrigonometryLib.swift in Sources */,
 				D266101C1FD5DEE0006B1455 /* Controls.swift in Sources */,
+				9C3ADB2720263D0F004360CF /* MemoryOptimizationController.swift in Sources */,
 				D2983A541FF2CBAA00979A52 /* String+Localized.swift in Sources */,
 				9C2FEE92200D2C9D006A5274 /* MissionController.swift in Sources */,
 				9C03A2421F9A33DD008F191A /* EntityManager.swift in Sources */,
@@ -841,6 +848,7 @@
 				D2F53D751F9A88FF00422F24 /* WalkingState.swift in Sources */,
 				D236731F1FE0396C00FFDE77 /* EnemyEntity.swift in Sources */,
 				D2EC857D1F83F1240093F009 /* AppDelegate.swift in Sources */,
+				9C3ADB2920264714004360CF /* SCNMath.swift in Sources */,
 				D2A584341FDEF71200082174 /* AttackState.swift in Sources */,
 				D20108941FBE11D9007660E3 /* StartOverlay.swift in Sources */,
 				D291BB541F8E976A00B2D111 /* SimdExtensions.swift in Sources */,

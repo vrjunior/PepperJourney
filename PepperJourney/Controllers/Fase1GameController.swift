@@ -176,7 +176,7 @@ class Fase1GameController: GameController {
         
 		//Start the tutorial
         if firstTimePlayingTutorial{
-            self.generatePotatoCrowd(markerName: "starterSpawnPoint", amount: 1, maxSpeed: 10, maxAcceleration: 1)
+            self.generatePotatoCrowd(markerName: "starterSpawnPoint", amount: 3, maxSpeed: 10, maxAcceleration: 1)
             let removeEnimiesAction = SCNAction.sequence([
                                                     SCNAction.wait(duration: 5),
                                                     SCNAction.run({ (node) in
@@ -190,7 +190,7 @@ class Fase1GameController: GameController {
             self.firstTimePlayingTutorial = false
         }
         else {
-            generatePotatoCrowd(markerName: "starterSpawnPoint", amount: 1)
+            generatePotatoCrowd(markerName: "starterSpawnPoint", amount: 3)
         }
         
     }

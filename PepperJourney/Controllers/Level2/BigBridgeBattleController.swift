@@ -27,24 +27,27 @@ enum BattleState {
 }
 
 class BigBridgeBattleController {
+    weak var scnView: SCNView!
     var battleState: BattleState = .releasingPrisoners
     var spearPotatoes = [PotatoEntity]()
     
     var potatoesToCreate: Float = 0
-    let totalPotatoNumber:Float = 15
+    let totalPotatoNumber:Float = 2//15
     
     var generationPoints = [SCNVector3]()
     
     var actionSceneController: OverPotatoSceneController!
     var bigBattleDelegate: BigBattleDelegate!
     var bigBattleNode: SCNNode!
+    
     var trapPoint:SCNVector3!
+    var trapBridge: SCNNode!
     var generationTime: TimeInterval = 0
     var timeCounter: TimeInterval = 0
     
     init(scnView: SCNView, scene: SCNScene, delegate: BigBattleDelegate) {
         self.bigBattleDelegate = delegate
-        
+        self.scnView = scnView
         self.actionSceneController = OverPotatoSceneController(scnView: scnView, scene: scene)
         
         guard let markersNode = scene.rootNode.childNode(withName: "markers", recursively: false),
@@ -62,6 +65,14 @@ class BigBridgeBattleController {
         self.bigBattleNode = bigBattle
         self.trapPoint = trapPoint
         
+        
+        guard let map = scene.rootNode.childNode(withName: "map", recursively: false),
+        let bridges = map.childNode(withName: "bridges", recursively: false),
+        let trapBridge = bridges.childNode(withName: "trapBridge", recursively: false) else {
+            fatalError("Error getting trapBridge")
+        }
+        
+        self.trapBridge = trapBridge
     }
     
     public func resetBattle() {
@@ -70,6 +81,7 @@ class BigBridgeBattleController {
         self.potatoesToCreate = self.totalPotatoNumber
         self.timeCounter = 0
         self.generationTime = self.getNewGenerationTime()
+        self.trapBridge.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0))
     }
     
     public func startBigBattle() {
@@ -81,7 +93,8 @@ class BigBridgeBattleController {
         if self.battleState == .releasingPrisoners {
             return
         }
-        if self.battleState == .releasingPrisoners {
+        
+        if self.battleState == .waitingPepper {
             let peperPosition = self.bigBattleDelegate.getPepperPosition()
             
             let deltaX = peperPosition.x - self.trapPoint.x
@@ -91,7 +104,12 @@ class BigBridgeBattleController {
             
             if distance < 200 {
                 self.battleState = .disarmadPotatoesFight
+                
+                let angle = CGFloat(20 * 180 / Float.pi)
+                self.trapBridge.runAction(SCNAction.rotateTo(x: angle , y: 0, z: 0, duration: 2))
+                SoundController.sharedInstance.playSoundEffect(soundName: "F2_Potato_1", loops: false, node: self.scnView.pointOfView!)
             }
+            return
         }
         
         let alivePotatoesNumber = self.bigBattleDelegate.getPotatoesNumber()

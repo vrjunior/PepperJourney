@@ -33,7 +33,7 @@ extension TutorialFase1Overlay : SKButtonDelegate {
 //        self.gameOptionsDelegate?.skipTutorial()
 		self.gameOptionsDelegate?.resume()
         
-		self.fase1GameController?.generatePotatoCrowd(markerName: "tutorialSpawnPoint", amount: 1)
+		self.fase1GameController?.generatePotatoCrowd(markerName: "tutorialSpawnPoint", amount: 3)
         
 //		print("Pressed")
     }

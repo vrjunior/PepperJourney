@@ -17,7 +17,7 @@ protocol SKButtonDelegate {
 class SKButton : SKSpriteNode {
     
     public var delegate : SKButtonDelegate?
-    let defaultColorBlendFactor: CGFloat = 0.2
+    public let defaultColorBlendFactor: CGFloat = 0.2
 	
 	var isPausedControls: Bool = false {
 		didSet {

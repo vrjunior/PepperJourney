@@ -18,8 +18,6 @@ class GameOverOverlay: SKScene {
     
     public var enableAds: Bool = true
     private var showAdButton: SKButton!
-    private var loadingButton: SKButton!
-    private var cancelAdButton: SKButton!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -32,29 +30,22 @@ class GameOverOverlay: SKScene {
 //        self.menuButton.delegate = self
 
         // Video ad buttons
-        self.showAdButton = self.childNode(withName: "buttonsNode/ad/showAdButton") as! SKButton
+        self.showAdButton = self.childNode(withName: "buttonsNode/showAdButton") as! SKButton
         self.showAdButton.delegate = self
         
-        self.cancelAdButton = self.childNode(withName: "buttonsNode/ad/cancelAdButton") as! SKButton
-        self.cancelAdButton.delegate = self
-        
-//        self.loadingButton = self.childNode(withName: "buttonsNode/ad/loading") as! SKButton
-        
-        self.showAdButtonEnable()
+        self.showAdButton.isHidden = true
     }
     public func setupAds(enableAds: Bool) {
         self.enableAds = enableAds
         if enableAds {
             self.restartButton.position.x = 160
-            self.showAdButtonEnable()
+            self.showAdButton.isHidden = false
         }
         else {
             self.restartButton.position.x = 0
             self.showAdButton.isHidden = true
-            self.cancelAdButton.isHidden = true
         }
     }
-    
 }
 
 extension GameOverOverlay : SKButtonDelegate {
@@ -80,32 +71,16 @@ extension GameOverOverlay : SKButtonDelegate {
         else if target == self.showAdButton {
 
             // Change button
-            self.cancelAdButtonEnable()
+            self.showAdButton.colorBlendFactor = target.defaultColorBlendFactor
             
             gameOptionsDelegate?.loadAd(loadedVideoFeedback: self.adLoaded)
         }
-    
-        else if target == self.cancelAdButton {
-            self.showAdButtonEnable()
-            gameOptionsDelegate?.cancelAd()
-        }
     }
-    func cancelAdButtonEnable() {
-        self.showAdButton.isHidden = true
-        self.cancelAdButton.isHidden = false
-//        self.loadingButton.isHidden = false
-//        self.loadingButton.run(SKAction.repeatForever(SKAction.rotate(byAngle: -360, duration: 2)))
-    }
+   
     
-    func showAdButtonEnable() {
-        // Change button
-        self.showAdButton.isHidden = false
-        self.cancelAdButton.isHidden = true
-//        self.loadingButton.isHidden = true
-    }
-    
+    // Go to the initial state
     func adLoaded() {
-        self.showAdButtonEnable()
+        self.showAdButton.colorBlendFactor = 0
     }
     
     func buttonPressed(target: SKButton) {
