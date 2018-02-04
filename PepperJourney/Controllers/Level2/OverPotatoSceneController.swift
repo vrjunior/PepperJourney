@@ -17,13 +17,15 @@ class OverPotatoSceneController {
     var cameras = [SCNNode]()
     var camera1StartPosition: SCNVector3!
     var troopStartPosition: SCNVector3!
-    var troopNode: SCNNode!
+    public var troopNode: SCNNode!
     
     private var actionsScene: SCNScene!
 
     private weak var scnView: SCNView?
     private var action: SCNAction!
     private var potatoesNode: SCNNode!
+    private var drumPotatoes: SCNNode!
+    private var generalNode: SCNNode!
     
     init(scnView: SCNView, scene: SCNScene) {
         self.scnView = scnView
@@ -189,6 +191,8 @@ class OverPotatoSceneController {
             SCNAction.run { _ in
 
                 completition()
+                self.drumPotatoes.isHidden = true
+                self.generalNode.isHidden = true
             },
 
             //Restore the original camera
@@ -267,10 +271,14 @@ class OverPotatoSceneController {
         self.cameras = [camera1, camera2, camera3, camera4]
         
         guard let potatoesNode = self.overPotatoSceneNode.childNode(withName: "potatoes", recursively: false),
+        let drumPotatoes = potatoesNode.childNode(withName: "drumPotatoes", recursively: false),
+        let general = potatoesNode.childNode(withName: "general", recursively: false),
             let potatoesArmy = potatoesNode.childNode(withName: "army", recursively: false) else {
                 fatalError("Error getting potatoes in the level 2 over potato scene")
         }
         self.potatoesNode = potatoesNode
+        self.generalNode = general
+        self.drumPotatoes = drumPotatoes
         self.troopNode = potatoesArmy
     }
     

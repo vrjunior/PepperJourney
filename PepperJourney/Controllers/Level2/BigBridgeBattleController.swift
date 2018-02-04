@@ -23,7 +23,7 @@ protocol BigBattleDelegate {
  ativar batatas somente quando a pimenta chegar na ilha
  */
 enum BattleState {
-    case releasingPrisoners, waitingPepper, disarmadPotatoesFight, actionSCene,spearPotatoesFight
+    case releasingPrisoners, waitingPepper, disarmadPotatoesFight, actionSCene, spearPotatoesFight
 }
 
 class BigBridgeBattleController {
@@ -44,6 +44,7 @@ class BigBridgeBattleController {
     var trapBridge: SCNNode!
     var generationTime: TimeInterval = 0
     var timeCounter: TimeInterval = 0
+    var troop: SCNNode!
     
     init(scnView: SCNView, scene: SCNScene, delegate: BigBattleDelegate) {
         self.bigBattleDelegate = delegate
@@ -67,8 +68,7 @@ class BigBridgeBattleController {
         
         
         guard let map = scene.rootNode.childNode(withName: "map", recursively: false),
-        let bridges = map.childNode(withName: "bridges", recursively: false),
-        let trapBridge = bridges.childNode(withName: "trapBridge", recursively: false) else {
+        let trapBridge = map.childNode(withName: "trapBridge", recursively: false) else {
             fatalError("Error getting trapBridge")
         }
         
@@ -81,7 +81,8 @@ class BigBridgeBattleController {
         self.potatoesToCreate = self.totalPotatoNumber
         self.timeCounter = 0
         self.generationTime = self.getNewGenerationTime()
-        self.trapBridge.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0))
+        self.trapBridge.isHidden = false
+//        self.trapBridge.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0))
     }
     
     public func startBigBattle() {
@@ -104,9 +105,9 @@ class BigBridgeBattleController {
             
             if distance < 200 {
                 self.battleState = .disarmadPotatoesFight
-                
-                let angle = CGFloat(20 * 180 / Float.pi)
-                self.trapBridge.runAction(SCNAction.rotateTo(x: angle , y: 0, z: 0, duration: 2))
+                self.trapBridge.isHidden = true
+//                let angle = CGFloat(20 * Float.pi / 180)
+//                self.trapBridge.runAction(SCNAction.rotateTo(x: angle , y: 0, z: 0, duration: 2))
                 SoundController.sharedInstance.playSoundEffect(soundName: "F2_Potato_1", loops: false, node: self.scnView.pointOfView!)
             }
             return
@@ -120,6 +121,9 @@ class BigBridgeBattleController {
                 self.bigBattleDelegate.prepareToTheBattle()
                 self.actionSceneController.runActionScene(completition: {
                     self.bigBattleDelegate.runAfterBattle()
+                    self.battleState = .spearPotatoesFight
+                    self.troop = self.actionSceneController.troopNode
+                    
                 })
                 return
             }

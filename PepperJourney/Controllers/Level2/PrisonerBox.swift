@@ -70,7 +70,6 @@ class PrisonerBox: DistanceAlarmDelegate {
     
     func addEntityCleaners() {
         for prisoner in self.prisoners {
-            
             let entityCleanerComponent = EntityCleanerComponent(entityManager: EntityManager.sharedInstance)
             prisoner.entity.addComponent(entityCleanerComponent)
             self.entityManager.loadEntityCleanerComponent(component: entityCleanerComponent)
@@ -177,8 +176,8 @@ class PrisonerBox: DistanceAlarmDelegate {
             SubtitleController.sharedInstance.setupSubtitle(subName: soundName)
 
         }
-        print(self.pepperNode.presentation.position)
-        
+        // Add the components responsable by cleaning the entity
+        self.addEntityCleaners()
     }
     
     func getModelComponent(entity: GKEntity) -> ModelComponent {
@@ -246,7 +245,7 @@ class PrisonerBox: DistanceAlarmDelegate {
     //                self.playAnimation(type: .running, prisonerEntity: prisoner.entity)
                 
                 // Set distance alarm
-                let distanceAlarm = DistanceAlarmComponent(targetPosition: self.finalPoint.position, alarmTriggerRadius: 5, distanceAlarmDelegate: self)
+                let distanceAlarm = DistanceAlarmComponent(targetPosition: self.finalPoint.position, alarmTriggerRadius: 6, distanceAlarmDelegate: self)
                 prisoner.entity.addComponent(distanceAlarm)
                 self.entityManager.loadDistanceAlarmComponent(component: distanceAlarm)
             }
