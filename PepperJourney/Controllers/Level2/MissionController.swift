@@ -18,6 +18,7 @@ protocol MissionDelegate {
     func updateMissionCounter(label: String)
     func setMissionCouterVisibility(isHidden: Bool)
     func enableBigBridgeBattle()
+    func releasedAllPrisoners()
 }
 
 enum MissionState {
@@ -145,6 +146,9 @@ class MissionController: PrisonerDelegate {
             self.missionDelegate.showNewMission()
             self.initialBarrier.isHidden = true
             self.missionDelegate.setMissionCouterVisibility(isHidden: false)
+        }
+        if self.missionState == .openedBox5 {
+            self.missionDelegate.releasedAllPrisoners()
         }
     }
     

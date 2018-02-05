@@ -70,12 +70,13 @@ class PrisonerBox: DistanceAlarmDelegate {
     
     func addEntityCleaners() {
         for prisoner in self.prisoners {
+            
             let entityCleanerComponent = EntityCleanerComponent(entityManager: EntityManager.sharedInstance)
             prisoner.entity.addComponent(entityCleanerComponent)
             self.entityManager.loadEntityCleanerComponent(component: entityCleanerComponent)
         }
     }
- 
+    
     func getPrisonerScene(type: PrisonerType) -> String {
         var characterScene: String
         
@@ -91,7 +92,7 @@ class PrisonerBox: DistanceAlarmDelegate {
         }
         return characterScene
     }
-
+    
     func loadPrisoner(prisoner: Prisoner)
     {
         // Add the prisoner to the scene
@@ -108,7 +109,7 @@ class PrisonerBox: DistanceAlarmDelegate {
         if prisoner.type == .WarriorAvocado {
             modelNode.geometry?.firstMaterial = modelNode.geometry?.materials[1]
         }
-            
+        
         prisoner.entity.addComponent(modelComponent)
         
         // Add look at constraint
@@ -118,9 +119,9 @@ class PrisonerBox: DistanceAlarmDelegate {
         self.loadAnimations(prisonerModelComponent: modelComponent)
         
     }
- 
+    
     func setLookAtConstraint(visualTarget: SCNNode, nodeToApply: SCNNode) {
-
+        
         let lookAtConstraint = SCNLookAtConstraint(target: visualTarget)
         lookAtConstraint.isGimbalLockEnabled = true
         lookAtConstraint.influenceFactor = 1
@@ -134,7 +135,7 @@ class PrisonerBox: DistanceAlarmDelegate {
         if self.isBigBox {
             path = "Game.scnassets/scenario/box/bigBox.scn"
         }
-        // regular box
+            // regular box
         else {
             path = "Game.scnassets/scenario/box/box.scn"
         }
@@ -174,10 +175,10 @@ class PrisonerBox: DistanceAlarmDelegate {
             
             self.soundController.playSoundEffect(soundName: soundName, loops: false, node: prisonerNode, block: self.charactersEcape)
             SubtitleController.sharedInstance.setupSubtitle(subName: soundName)
-
+            
         }
-        // Add the components responsable by cleaning the entity
-        self.addEntityCleaners()
+        print(self.pepperNode.presentation.position)
+        
     }
     
     func getModelComponent(entity: GKEntity) -> ModelComponent {
@@ -205,10 +206,9 @@ class PrisonerBox: DistanceAlarmDelegate {
                 prisoner.entity.removeComponent(ofType: ModelComponent.self)
             }
             // Remove de seek component
-            let seekComponet = prisoner.entity.component(ofType: SeekComponent.self)
-            if seekComponet != nil {
-                self.entityManager.removeSeekComponent(entity: prisoner.entity)
-                prisoner.entity.removeComponent(ofType: SeekComponent.self)
+            if let pursueComponent = prisoner.entity.component(ofType: PursueComponent.self) {
+                self.entityManager.removeOfComponentSystem(component: pursueComponent)
+                prisoner.entity.removeComponent(ofType: PursueComponent.self)
             }
             // Remove distanceAlarmComponent
             let distanceAlarmComponent = prisoner.entity.component(ofType: DistanceAlarmComponent.self)
@@ -232,9 +232,9 @@ class PrisonerBox: DistanceAlarmDelegate {
             for prisoner in self.prisoners {
                 
                 // Add seek component
-                let seekComponent = SeekComponent(target: self.destinationPoint, maxSpeed: 50, maxAcceleration: 5)
-                prisoner.entity.addComponent(seekComponent)
-                self.entityManager.loadSeekComponent(component: seekComponent)
+                let pursueComponent = PursueComponent(target: self.destinationPoint, maxSpeed: 50, maxAcceleration: 5)
+                prisoner.entity.addComponent(pursueComponent)
+                self.entityManager.loadToComponentSystem(component: pursueComponent)
                 
                 // Setup the new look at constraint
                 let modelComponent = self.getModelComponent(entity: prisoner.entity)
@@ -242,17 +242,17 @@ class PrisonerBox: DistanceAlarmDelegate {
                 
                 // TODO: Arrumar essa animação!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 // Play animation
-    //                self.playAnimation(type: .running, prisonerEntity: prisoner.entity)
+                //                self.playAnimation(type: .running, prisonerEntity: prisoner.entity)
                 
                 // Set distance alarm
-                let distanceAlarm = DistanceAlarmComponent(targetPosition: self.finalPoint.position, alarmTriggerRadius: 6, distanceAlarmDelegate: self)
+                let distanceAlarm = DistanceAlarmComponent(targetPosition: self.finalPoint.position, alarmTriggerRadius: 5, distanceAlarmDelegate: self)
                 prisoner.entity.addComponent(distanceAlarm)
                 self.entityManager.loadDistanceAlarmComponent(component: distanceAlarm)
             }
         }
         // update the status
         self.prisonerDelegate.prisionerReleased()
-    
+        
     }
     
     //Load all animation of the Character
@@ -280,8 +280,9 @@ class PrisonerBox: DistanceAlarmDelegate {
         guard let modelNode = prisonerEntity.component(ofType: ModelComponent.self)?.modelNode else { return }
         modelNode.animationPlayer(forKey: type.rawValue)?.stop()
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+

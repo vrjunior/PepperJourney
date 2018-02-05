@@ -15,7 +15,7 @@ import GameplayKit
 class Fase1GameController: GameController {
     
     private var isWinner:Bool = false
-	private var firstTimePlayingTutorial:Bool = true
+    private var firstTimePlayingTutorial:Bool = true
     
     override func resetSounds() {
         // Restart the background music
@@ -64,12 +64,22 @@ class Fase1GameController: GameController {
     }
     
     // MARK: Initializer
-    override init(scnView: SCNView) {
-        super.init(scnView: scnView)
-
+    init(scnView: SCNView, levelSelector: LevelSelectorDelegate) {
+        super.init(scnView: scnView, levelIdentifier: "level1", levelSelector: levelSelector)
+        
         
         //load the main scene
         self.scene = SCNScene(named: "Game.scnassets/fases/fase1.scn")
+        
+        // Get the entity manager instance
+        self.entityManager = EntityManager.sharedInstance
+        self.entityManager.character = Character(scene: self.scene, jumpDelegate: self, soundController: self.soundController)
+        self.entityManager.initEntityManager(scene: self.scene, gameController: self, soundController: self.soundController)
+        
+        // Add component systems to the entity manager
+        let pursueComponentSystem = GKComponentSystem(componentClass: PursueComponent.self)
+        let sinkComponentSystem = GKComponentSystem(componentClass: SinkComponent.self)
+        self.entityManager.createComponentSystems(componentSystems: [pursueComponentSystem, sinkComponentSystem])
         
         //setup game state machine
         self.setupGame()
@@ -78,28 +88,27 @@ class Fase1GameController: GameController {
         
         scnView.scene = scene
         
-        // Get the entity manager instance
-        self.entityManager = EntityManager.sharedInstance
-        self.entityManager.initEntityManager(scene: self.scene, gameController: self, soundController: self.soundController)
-        
         //load the character
         self.setupCharacter()
         
         self.setupCamera()
-		
+        
         //setup tap to start
         self.setupTapToStart()
         
         // Pre-load all the audios of the game in the memory
         self.setupSounds()
         
+        sceneRenderer = scnView
+        sceneRenderer!.delegate = self
+        
         
     }
     
     override func initializeTheGame () {
         super.initializeTheGame()
-		
-		gameStateMachine.enter(TutorialFase1State.self)
+        
+        gameStateMachine.enter(TutorialFase1State.self)
     }
     
     override func setupTapToStart() {
@@ -112,7 +121,7 @@ class Fase1GameController: GameController {
         tapOverlay.scaleMode = .aspectFill
         self.scnView.overlaySKScene = tapOverlay
     }
-	
+    
     override func prepereToStartGame()
     {
         self.stopSounds()
@@ -127,13 +136,13 @@ class Fase1GameController: GameController {
         
         // Create new potatoes
         guard let markersNode = self.scene.rootNode.childNode(withName: "markers", recursively: false),
-                let spawnPosition = markersNode.childNode(withName: markerName, recursively: false)?.position else {
-                    print("Error getting \(markerName) marker!")
-                    return
+            let spawnPosition = markersNode.childNode(withName: markerName, recursively: false)?.position else {
+                print("Error getting \(markerName) marker!")
+                return
         }
         
         for _ in 0 ..< amount {
-            entityManager.createEnemy(type: EnemyTypes.potato.rawValue, position: spawnPosition, persecutionBehavior: true, maxSpeed: maxSpeed, maxAcceleration: maxAcceleration)
+            entityManager.createEnemy(potatoType: PotatoType.disarmad , position: spawnPosition, persecutionBehavior: true, maxSpeed: maxSpeed, maxAcceleration: maxAcceleration)
         }
     }
     
@@ -141,17 +150,18 @@ class Fase1GameController: GameController {
         gameStateMachine.enter(PauseState.self)
         
         self.prepereToStartGame()
-  
+        
         let videoSender = VideoSender(blockAfterVideo: self.prepareToNextLevel, cutScenePath: "cutscene1.mp4", cutSceneSubtitlePath: "cutscene1.srt".localized)
         self.cutSceneDelegate?.playCutScene(videoSender: videoSender)
     }
     
     // Atenção não pode pausar a cena senão o audio não será executado.
     func prepareToNextLevel() {
-  
+        
         let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks") as! FinishOverlay
         finishLevelOverlay.gameOptionsDelegate = self
         finishLevelOverlay.scaleMode = .aspectFill
+        finishLevelOverlay.setForwardMode()
         self.scnView.overlaySKScene = finishLevelOverlay
         
         // Play the scene to reproduce the sound
@@ -174,18 +184,18 @@ class Fase1GameController: GameController {
         // Reset do marcador de final da fase
         self.isWinner = false
         
-		//Start the tutorial
+        //Start the tutorial
         if firstTimePlayingTutorial{
             self.generatePotatoCrowd(markerName: "starterSpawnPoint", amount: 3, maxSpeed: 10, maxAcceleration: 1)
             let removeEnimiesAction = SCNAction.sequence([
-                                                    SCNAction.wait(duration: 5),
-                                                    SCNAction.run({ (node) in
-                                                        self.entityManager.killAllPotatoes()
-                                                    })
+                SCNAction.wait(duration: 5),
+                SCNAction.run({ (node) in
+                    self.entityManager.killAllPotatoes()
+                })
                 ])
-
+            
             self.scene.rootNode.runAction(removeEnimiesAction)
-
+            
             tutorial()
             self.firstTimePlayingTutorial = false
         }
@@ -195,94 +205,95 @@ class Fase1GameController: GameController {
         
     }
     
-	func tutorial(){
+    
+    func tutorial(){
         
         //pause controls
         self.controlsOverlay?.isPausedControl = true
-		//hide the play button also, so you cannot use it
-		
-		
-		//Get the Camera points to form the path
-		guard let pathPointsNode = scene.rootNode.childNode(withName: "CameraPathT1" ,recursively: false) else {
-			fatalError("Error CameraPathT1 node not found")
-		}
-		
-		guard let lookAtNode = scene.rootNode.childNode(withName: "LookAt" ,recursively: false) else {
-			fatalError("Error LookAt node not found")
-		}
-		
-		let originalCameraPosition = self.cameraNode.presentation.position
-		let generationPoints = pathPointsNode.childNodes
-		print(generationPoints)
-		
-		var actions = [SCNAction]()
-		actions.append(SCNAction.run({ _ in
-			let lookAtConstraint = SCNLookAtConstraint(target: lookAtNode)
-			lookAtConstraint.isGimbalLockEnabled = true
-			lookAtConstraint.influenceFactor = 1
-			self.cameraNode.constraints = [lookAtConstraint]
-			self.controlsOverlay?.isPausedControl = true
+        //hide the play button also, so you cannot use it
+        
+        
+        //Get the Camera points to form the path
+        guard let pathPointsNode = scene.rootNode.childNode(withName: "CameraPathT1" ,recursively: false) else {
+            fatalError("Error CameraPathT1 node not found")
+        }
+        
+        guard let lookAtNode = scene.rootNode.childNode(withName: "LookAt" ,recursively: false) else {
+            fatalError("Error LookAt node not found")
+        }
+        
+        let originalCameraPosition = self.cameraNode.presentation.position
+        let generationPoints = pathPointsNode.childNodes
+        print(generationPoints)
+        
+        var actions = [SCNAction]()
+        actions.append(SCNAction.run({ _ in
+            let lookAtConstraint = SCNLookAtConstraint(target: lookAtNode)
+            lookAtConstraint.isGimbalLockEnabled = true
+            lookAtConstraint.influenceFactor = 1
+            self.cameraNode.constraints = [lookAtConstraint]
+            self.controlsOverlay?.isPausedControl = true
             
             // Mata as batatas do tutorial e cria novas
             
-		}))
-		
-		for point in generationPoints
-		{
-			let vector3 = SCNVector3(point.position.x, point.position.y, point.position.z)
-			let action = SCNAction.move(to: vector3, duration: 0.25)
-			actions.append(action)
-		}
-		
-		actions.append(SCNAction.wait(duration: 0.5))
-		actions.append(SCNAction.run({ _ in
-			self.cameraNode.constraints = []
-		}))
-		actions.append(SCNAction.rotateBy(x: 0, y: CGFloat.pi, z: 0, duration: 1))
-		actions.append(SCNAction.run({ _ in
-			let lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
-			lookAtConstraint.isGimbalLockEnabled = true
-			lookAtConstraint.influenceFactor = 1
-			self.cameraNode.constraints = [lookAtConstraint]
-		}))
-		actions.append(SCNAction.move(to: originalCameraPosition, duration: 2))
-		actions.append(SCNAction.rotateBy(x: 0, y: -CGFloat.pi, z: 0, duration: 0))
-		actions.append(SCNAction.run({ _ in
-			
-			self.cameraNode.removeAllActions()
-			
-			let lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
-			lookAtConstraint.isGimbalLockEnabled = true
-			lookAtConstraint.influenceFactor = 1
-			self.cameraNode.constraints = [lookAtConstraint]
-			
-			let distanceConstraint = SCNDistanceConstraint(target: self.character.characterNode)
-			distanceConstraint.minimumDistance = 45
-			distanceConstraint.maximumDistance = 45
-			
-			let keepAltitude = SCNTransformConstraint.positionConstraint(inWorldSpace: true) { (node: SCNNode, position: SCNVector3) -> SCNVector3 in
-				var position = float3(position)
-				position.y = self.character.characterNode.presentation.position.y + 20
+        }))
+        
+        for point in generationPoints
+        {
+            let vector3 = SCNVector3(point.position.x, point.position.y, point.position.z)
+            let action = SCNAction.move(to: vector3, duration: 0.25)
+            actions.append(action)
+        }
+        
+        actions.append(SCNAction.wait(duration: 0.5))
+        actions.append(SCNAction.run({ _ in
+            self.cameraNode.constraints = []
+        }))
+        actions.append(SCNAction.rotateBy(x: 0, y: CGFloat.pi, z: 0, duration: 1))
+        actions.append(SCNAction.run({ _ in
+            let lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
+            lookAtConstraint.isGimbalLockEnabled = true
+            lookAtConstraint.influenceFactor = 1
+            self.cameraNode.constraints = [lookAtConstraint]
+        }))
+        actions.append(SCNAction.move(to: originalCameraPosition, duration: 2))
+        actions.append(SCNAction.rotateBy(x: 0, y: -CGFloat.pi, z: 0, duration: 0))
+        actions.append(SCNAction.run({ _ in
+            
+            self.cameraNode.removeAllActions()
+            
+            let lookAtConstraint = SCNLookAtConstraint(target: self.character.visualTarget)
+            lookAtConstraint.isGimbalLockEnabled = true
+            lookAtConstraint.influenceFactor = 1
+            self.cameraNode.constraints = [lookAtConstraint]
+            
+            let distanceConstraint = SCNDistanceConstraint(target: self.character.characterNode)
+            distanceConstraint.minimumDistance = 45
+            distanceConstraint.maximumDistance = 45
+            
+            let keepAltitude = SCNTransformConstraint.positionConstraint(inWorldSpace: true) { (node: SCNNode, position: SCNVector3) -> SCNVector3 in
+                var position = float3(position)
+                position.y = self.character.characterNode.presentation.position.y + 20
                 if position.y < 20
                 {
                     position.y = 20
                 }
-				return SCNVector3(position)
-			}
-			
-			self.cameraNode.constraints = [lookAtConstraint, distanceConstraint , keepAltitude]
-			
-			self.tutorialFase1(fase1: self)
-		}))
-		actions.append(SCNAction.run({ _ in
-			
-			self.cameraNode.presentation.eulerAngles = self.cameraInitialPresentation.eulerAngles
-			self.cameraNode.presentation.position = self.cameraInitialPresentation.position
-			self.cameraNode.presentation.orientation = self.cameraInitialPresentation.orientation
-		}))
-		let actionSequence = SCNAction.sequence(actions)
-		self.cameraNode.runAction(actionSequence)
-	}
+                return SCNVector3(position)
+            }
+            
+            self.cameraNode.constraints = [lookAtConstraint, distanceConstraint , keepAltitude]
+            
+            self.tutorialFase1(fase1: self)
+        }))
+        actions.append(SCNAction.run({ _ in
+            
+            self.cameraNode.presentation.eulerAngles = self.cameraInitialPresentation.eulerAngles
+            self.cameraNode.presentation.position = self.cameraInitialPresentation.position
+            self.cameraNode.presentation.orientation = self.cameraInitialPresentation.orientation
+        }))
+        let actionSequence = SCNAction.sequence(actions)
+        self.cameraNode.runAction(actionSequence)
+    }
     
     func setupAudioPoints() {
         
@@ -412,7 +423,7 @@ class Fase1GameController: GameController {
                 }
             }
                 
-            // venceu a fase
+                // venceu a fase
             else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.finalLevel.rawValue {
                 
                 if !isWinner {
@@ -423,9 +434,9 @@ class Fase1GameController: GameController {
                 }
                 
             }
-            // If have contact with the checkpoint
+                // If have contact with the checkpoint
             else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.checkPoint.rawValue {
-
+                
                 self.lastCheckPoint = anotherNode
                 
             }
@@ -456,10 +467,10 @@ class Fase1GameController: GameController {
             else if lakeNode.name == "lakeSurface"
             {
                 // If the potato yet exists it will be found
-                if let potatoEntity = self.entityManager.getEnemyEntity(node: potatoNode) {
+                if let potatoEntity = self.entityManager.getPotatoEntity(node: potatoNode) {
                     let sinkComponent = self.entityManager.getComponent(entity: potatoEntity, ofType: SinkComponent.self) as! SinkComponent
                     sinkComponent.sinkInWater()
-                    potatoEntity.removeComponent(ofType: SeekComponent.self)
+                    potatoEntity.removeComponent(ofType: PursueComponent.self)
                 }
             }
         }
@@ -475,10 +486,14 @@ class Fase1GameController: GameController {
     }
     
     
-//    override func skipTutorial() {
-//        super.skipTutorial()
-////        self.generatePotatoCrowd()
-//    }
+    //    override func skipTutorial() {
+    //        super.skipTutorial()
+    ////        self.generatePotatoCrowd()
+    //    }
+    
+    deinit {
+        
+    }
 }
 
 

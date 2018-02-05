@@ -20,7 +20,5 @@ class MenuViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let fase = sender as! Int
         let gameViewController = segue.destination as! GameViewController
-        
-        gameViewController.fase = fase
     }
 }

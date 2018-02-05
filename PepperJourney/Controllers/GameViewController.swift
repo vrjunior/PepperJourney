@@ -35,9 +35,13 @@ struct Comic {
     var runComic: (() -> Void)
 }
 
-class GameViewController: UIViewController {
+protocol LevelSelectorDelegate: NSObjectProtocol {
+    func runNextComic()
+    func setComic(named: String)
+}
+
+class GameViewController: UIViewController, LevelSelectorDelegate {
     
-    public var fase: Int = 1
     private var rewardAd: RewardAdvertisement!
     private var comics: [Comic]!
     public private(set) var currentComic: Comic!
@@ -64,18 +68,9 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if self.fase == 1
-        {
-           gameController = Fase1GameController(scnView: gameView)
-        }
-        else if self.fase == 2
-        {
-            gameController = Fase2GameController(scnView: gameView)
-        }
+        self.setupComics()
         
-        // Video delegates
-        gameController?.cutSceneDelegate = self
-        gameController?.adVideoDelegate = self
+        self.setComic(named: "level1")
         
         // Ads objects
         self.rewardAd = RewardAdvertisement(gameViewController: self)
@@ -98,10 +93,17 @@ class GameViewController: UIViewController {
         self.setComic(named: currentComic.name)
     }
     func level1() {
+        self.gameController = Fase1GameController(scnView: self.gameView, levelSelector: self)
+        // Video delegates
+        gameController?.cutSceneDelegate = self
+        gameController?.adVideoDelegate = self
         
     }
     func level2() {
-        
+        self.gameController = Fase2GameController(scnView: self.gameView, levelSelector: self)
+        // Video delegates
+        gameController?.cutSceneDelegate = self
+        gameController?.adVideoDelegate = self
     }
     func cutscene1() {
         

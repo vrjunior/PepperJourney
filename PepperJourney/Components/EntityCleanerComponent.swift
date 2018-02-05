@@ -33,9 +33,9 @@ class EntityCleanerComponent: GKComponent {
                 entity.removeComponent(ofType: ModelComponent.self)
             }
             
-            if entity.component(ofType: SeekComponent.self) != nil {
-                self.entityManager?.removeSeekComponent(entity: entity)
-                entity.removeComponent(ofType: SeekComponent.self)
+            if let pursueComponent = entity.component(ofType: PursueComponent.self) {
+                EntityManager.sharedInstance.removeOfComponentSystem(component: pursueComponent)
+                entity.removeComponent(ofType: PursueComponent.self)
             }
             
             if entity.component(ofType: DistanceAlarmComponent.self) != nil {
@@ -50,3 +50,4 @@ class EntityCleanerComponent: GKComponent {
         self.readyToClean = true
     }
 }
+

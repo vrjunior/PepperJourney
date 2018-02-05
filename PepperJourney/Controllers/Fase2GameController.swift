@@ -13,7 +13,7 @@ import SpriteKit
 import GameplayKit
 
 class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
- 
+   
     private var missionController: MissionController!
     private var bigBridgeBattleController: BigBridgeBattleController!
     open var newMissionOverlay: NewMissionOverlay?
@@ -71,24 +71,32 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
     
     
     // MARK: Initializer
-    override init(scnView: SCNView) {
-        super.init(scnView: scnView)
+    init(scnView: SCNView, levelSelector: LevelSelectorDelegate) {
+        super.init(scnView: scnView, levelIdentifier: "level2", levelSelector: levelSelector)
         
         //load the main scene
         guard let scene = SCNScene(named: "Game.scnassets/fases/fase2.scn") else {
             fatalError("Error loading fase2.scn")
         }
         self.scene = scene
+        
+        // Get the entity manager instance
+        self.entityManager = EntityManager.sharedInstance
+        self.entityManager.character = Character(scene: self.scene, jumpDelegate: self, soundController: self.soundController)
+        self.entityManager.initEntityManager(scene: self.scene, gameController: self, soundController: self.soundController)
+        
+        // Add component systems to the entity manager
+        let componentSystems = [GKComponentSystem(componentClass: PursueComponent.self), GKComponentSystem(componentClass: SinkComponent.self), GKComponentSystem(componentClass: AttackLimiterComponent.self)]
+        
+        self.entityManager.createComponentSystems(componentSystems: componentSystems)
+        
         //setup game state machine
         self.setupGame()
         
         self.scene.physicsWorld.contactDelegate = self
         
         scnView.scene = scene
-        
-        // Get the entity manager instance
-        self.entityManager = EntityManager.sharedInstance
-        self.entityManager.initEntityManager(scene: self.scene, gameController: self, soundController: self.soundController)
+        scnView.delegate = self
         
         //load the character
         self.setupCharacter()
@@ -110,10 +118,12 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         }
         
         self.missionController = MissionController(scene: self.scene, pepperNode: self.character.visualTarget, missionDelegate: self)
-        self.bigBridgeBattleController = BigBridgeBattleController(scnView: self.scnView, scene: self.scene, delegate: self)
+        self.bigBridgeBattleController = BigBridgeBattleController(scnView: self.scnView, scene: self.scene, delegate: self, persecutedTarget: self.character.trackingAgentComponent)
         
         self.memoryOptimization = MemoryOptimizationController(scene: self.scene)
         
+        sceneRenderer = scnView
+        sceneRenderer!.delegate = self
     }
     
     override func initializeTheGame () {
@@ -122,6 +132,7 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         //            fatalError("Character node not found")
         //        }
         
+        super.initializeTheGame()
         // Show de character
         self.character.characterNode.isHidden = false
         self.cameraNode.camera?.zFar = 700
@@ -141,7 +152,6 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         
         // Reset battle
         self.bigBridgeBattleController.resetBattle()
-        
         self.character.setupCharacter()
         
     }
@@ -167,18 +177,29 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
     }
     
     
+    
     override func setupFinishLevel() {
+        gameStateMachine.enter(PauseState.self)
+        
         self.prepereToStartGame()
-        self.soundController.playSoundEffect(soundName: "FinishLevelSound", loops: false, node: self.cameraNode)
+        
+        let videoSender = VideoSender(blockAfterVideo: self.prepareToNextLevel, cutScenePath: "cutscene3.mp4", cutSceneSubtitlePath: "cutscene2.srt".localized)
+        self.cutSceneDelegate?.playCutScene(videoSender: videoSender)
+
+    }
+    
+    func prepareToNextLevel() {
         
         let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks") as! FinishOverlay
         finishLevelOverlay.gameOptionsDelegate = self
         finishLevelOverlay.scaleMode = .aspectFill
+        finishLevelOverlay.setBackwardMode()
         self.scnView.overlaySKScene = finishLevelOverlay
         
-        self.gameStateMachine.enter(PauseState.self)
+        // Play the scene to reproduce the sound
+        gameStateMachine.enter(PlayState.self)
         
-        //self.cutSceneDelegate?.playCutScene(videoPath: "cutscene1.mp4", subtitlePath: "cuscene1.srt")
+        self.soundController.playSoundEffect(soundName: "FinishLevelSound", loops: false, node: self.cameraNode)
     }
     
     override func startGame() {
@@ -204,6 +225,7 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
             
             self.cameraNode.runAction(SCNAction.repeatForever(sequence))
         }
+        
         self.gameStateMachine.enter(PauseState.self)
         self.playCutscene()
         
@@ -234,7 +256,6 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
     }
     
     func playCutscene() {
-        
         let videoSender = VideoSender(blockAfterVideo: self.tutorialLevel2, cutScenePath: "cutScene2.mp4", cutSceneSubtitlePath: "cutscene2.srt".localized)
         self.cutSceneDelegate?.playCutScene(videoSender: videoSender)
 
@@ -242,7 +263,9 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
     func tutorialLevel2() {
         self.gameStateMachine.enter(PlayState.self)
     }
-    
+    func releasedAllPrisoners() {
+        self.setupFinishLevel()
+    }
     func showNewMission() {
         
         if self.newMissionOverlay == nil {
@@ -283,7 +306,7 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         self.soundController.playbackgroundMusic(soundName: "backgroundMusic", loops: true, node: self.cameraNode)
     }
     
-    func kiilPreviousPotatoes() {
+    func killPreviousPotatoes() {
         self.entityManager.killAllPotatoes()
     }
     
@@ -291,9 +314,13 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         return self.entityManager.getPotatoesNumber()
     }
     
-    func createPotato(position: SCNVector3) {
-            self.entityManager.createEnemy(type: "model1", position: position, persecutionBehavior: true)
+    func createPotato(potatoType: PotatoType, position: SCNVector3, persecutionBehavior: Bool, tag: String?) {
+        self.entityManager.createEnemy(potatoType: potatoType, position: position, persecutionBehavior: persecutionBehavior, tag: tag)
     }
+    func getPotato(tag: String) -> [PotatoEntity] {
+        return self.entityManager.getPotatoEntity(wantedTag: tag)
+    }
+    
     
     func getPepperPosition() -> SCNVector3 {
         return self.character.characterNode.presentation.position
@@ -438,14 +465,7 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
                 }
             }
                 
-                // venceu a fase
-            else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.finalLevel.rawValue {
-                
-                DispatchQueue.main.async { [unowned self] in
-                    self.setupFinishLevel()
-                }
-                
-            }
+            
             // ja resolveu o que tinha que fazer aqui com o character
             return
         }
@@ -471,10 +491,10 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
             }
             else if lakeNode.name == "lakeSurface" {
                 // If the potato yet exists it will be found
-                if let potatoEntity = self.entityManager.getEnemyEntity(node: potatoNode) {
+                if let potatoEntity = self.entityManager.getPotatoEntity(node: potatoNode) {
                     let sinkComponent = self.entityManager.getComponent(entity: potatoEntity, ofType: SinkComponent.self) as! SinkComponent
                     sinkComponent.sinkInWater()
-                    potatoEntity.removeComponent(ofType: SeekComponent.self)
+                    potatoEntity.removeComponent(ofType: PursueComponent.self)
                 }
             }
             return

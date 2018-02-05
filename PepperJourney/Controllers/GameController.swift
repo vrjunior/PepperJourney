@@ -36,10 +36,11 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     var followingCamera: SCNNode!
     var overlayDelegate: UpdateIndicators?
     var memoryOptimization: MemoryOptimizationController!
+    var levelIdentifier: String!
     
     public var scnView: SCNView!
     public var scene: SCNScene!
-    private weak var sceneRenderer: SCNSceneRenderer?
+    public weak var sceneRenderer: SCNSceneRenderer?
     
     //overlays
     open var controlsOverlay: ControlsOverlay?
@@ -48,6 +49,7 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
 	
     public weak var cutSceneDelegate: CutSceneDelegate?
     public weak var adVideoDelegate: AdvertisingDelegate?
+    public weak var levelSelector: LevelSelectorDelegate?
     
     // Camera and targets
     public var cameraInitialPosition: SCNNode!
@@ -161,16 +163,15 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     }
     
     // MARK: Initializer
-    init(scnView: SCNView) {
+    init(scnView: SCNView, levelIdentifier: String, levelSelector: LevelSelectorDelegate) {
         super.init()
         
         //set scnView
         self.scnView = scnView
+        self.levelIdentifier = levelIdentifier
+        self.levelSelector = levelSelector
         
-        sceneRenderer = scnView
-        sceneRenderer!.delegate = self
-        
-        self.scnView.debugOptions = SCNDebugOptions.showPhysicsShapes
+//        self.scnView.debugOptions = SCNDebugOptions.showPhysicsShapes
         self.scnView.showsStatistics = true
         
         self.addNotifications()
@@ -271,13 +272,13 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
             let potatoesSpawnPosition = checkPoint.childNode(withName: "potatoesPosition", recursively: false)?.worldPosition
         {
             
-            let potatoesNumber = self.entityManager.enemyEntities.count
+            let potatoesNumber = self.entityManager.getPotatoesNumber()
             self.entityManager.killAllPotatoes()
             
             self.character.setupCharacter(initialPosition: checkPoint.worldPosition)
             
             for _ in 0 ..< potatoesNumber {
-                entityManager.createEnemy(type: EnemyTypes.potato.rawValue, position: potatoesSpawnPosition, persecutionBehavior: true)
+                entityManager.createEnemy(potatoType: .disarmad, position: potatoesSpawnPosition, persecutionBehavior: true)
             }
             
         }
@@ -336,7 +337,12 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     // MARK: - Update
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        
         // update characters
+        if character == nil {
+            print("ERROR getting character")
+            return
+        }
         character!.update(atTime: time, with: renderer)
         self.updateFollowingCamera()
         self.entityManager.update(atTime: time)
@@ -413,6 +419,22 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     // Cancela a exibição do Ad
     func cancelAd() {
         self.adVideoDelegate?.cancelAd()
+    }
+    func nextLevel() {
+        self.sceneRenderer = nil
+        if self.levelIdentifier == "level1" {
+            self.levelSelector?.setComic(named: "level2")
+        }
+      
+        
+    }
+    
+    func previousLevel() {
+         self.sceneRenderer = nil
+        if self.levelIdentifier == "level2" {
+            self.levelSelector?.setComic(named: "level1")
+        }
+       
     }
     
     func loadAd(loadedVideoFeedback: @escaping () -> Void) {

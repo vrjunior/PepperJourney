@@ -33,9 +33,11 @@
 		9C06C5C7200F895E001A6A1C /* F2_Pepper_8.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C06C5B6200F895D001A6A1C /* F2_Pepper_8.wav */; };
 		9C06C5C8200F895E001A6A1C /* F2_Pepper_10.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C06C5B7200F895E001A6A1C /* F2_Pepper_10.wav */; };
 		9C13D4DB202402C600515235 /* BigBridgeBattleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C13D4DA202402C600515235 /* BigBridgeBattleController.swift */; };
-		9C1B829D1F9E2FD300173FF3 /* SeekComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B829C1F9E2FD300173FF3 /* SeekComponent.swift */; };
 		9C1B829F1F9FADD300173FF3 /* ModelComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */; };
 		9C1B82A11FA0D09800173FF3 /* TrigonometryLib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1B82A01FA0D09600173FF3 /* TrigonometryLib.swift */; };
+		9C1DD987202754CC00895923 /* PotatoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1DD985202754CB00895923 /* PotatoEntity.swift */; };
+		9C1DD988202754CC00895923 /* PotatoStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1DD986202754CB00895923 /* PotatoStateMachine.swift */; };
+		9C1DD98A20275C3000895923 /* PursueComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1DD98920275C3000895923 /* PursueComponent.swift */; };
 		9C1E5D31200FD0FE0080AF92 /* acuteYeah.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C1E5D30200FD0FD0080AF92 /* acuteYeah.wav */; };
 		9C1E5D34200FD4320080AF92 /* Rumors.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C1E5D32200FD4320080AF92 /* Rumors.wav */; };
 		9C1E5D35200FD4320080AF92 /* WarriorAvocado.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C1E5D33200FD4320080AF92 /* WarriorAvocado.wav */; };
@@ -49,9 +51,9 @@
 		9C4806811FC88A2700168571 /* SinkComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4806801FC88A2700168571 /* SinkComponent.swift */; };
 		9C4806851FCC505000168571 /* splashingWater2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C4806841FCC504F00168571 /* splashingWater2.wav */; };
 		9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C6D3DEA1F93252500B8FA2A /* Game.scnassets */; };
-		9C7379301FEC8303005D0A72 /* PotatoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C73792F1FEC8303005D0A72 /* PotatoEntity.swift */; };
 		9C774A631FE1997C00A388CC /* SubtitleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C774A621FE1997C00A388CC /* SubtitleController.swift */; };
 		9C774A651FE2314E00A388CC /* ControlsOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C774A641FE2314E00A388CC /* ControlsOverlay.sks */; };
+		9C7DE8602028A7B600C4D2A2 /* cutscene3.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9C7DE85F2028A7B600C4D2A2 /* cutscene3.mp4 */; };
 		9C8CEBB5201E7BF200446C97 /* bridge.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C8CEBB4201E7BF100446C97 /* bridge.wav */; };
 		9C8CEBB7201F375800446C97 /* marching-concrete-loop.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 9C8CEBB6201F375700446C97 /* marching-concrete-loop.aiff */; };
 		9C8CEBB9201F39FC00446C97 /* Foot Stomp A.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C8CEBB8201F39FB00446C97 /* Foot Stomp A.wav */; };
@@ -94,7 +96,6 @@
 		D207CFC51F8EA2D10084240E /* Dpad.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207CFC41F8EA2D10084240E /* Dpad.swift */; };
 		D207CFC71F8EA5370084240E /* Stick.swift in Sources */ = {isa = PBXBuildFile; fileRef = D207CFC61F8EA5370084240E /* Stick.swift */; };
 		D216F4EE1FEC10EF00F6059D /* cutscene1.srt in Resources */ = {isa = PBXBuildFile; fileRef = D216F4ED1FEC10EF00F6059D /* cutscene1.srt */; };
-		D236731F1FE0396C00FFDE77 /* EnemyEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D236731E1FE0396C00FFDE77 /* EnemyEntity.swift */; };
 		D25160E51F93FA3400BF756A /* BaseState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25160E41F93FA3400BF756A /* BaseState.swift */; };
 		D25160E81F93FB7F00BF756A /* RunningState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25160E71F93FB7F00BF756A /* RunningState.swift */; };
 		D25160EA1F94063400BF756A /* SCNAnimationPlayer + Load Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25160E91F94063400BF756A /* SCNAnimationPlayer + Load Animation.swift */; };
@@ -168,9 +169,11 @@
 		9C06C5B6200F895D001A6A1C /* F2_Pepper_8.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = F2_Pepper_8.wav; sourceTree = "<group>"; };
 		9C06C5B7200F895E001A6A1C /* F2_Pepper_10.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = F2_Pepper_10.wav; sourceTree = "<group>"; };
 		9C13D4DA202402C600515235 /* BigBridgeBattleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigBridgeBattleController.swift; sourceTree = "<group>"; };
-		9C1B829C1F9E2FD300173FF3 /* SeekComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekComponent.swift; sourceTree = "<group>"; };
 		9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelComponent.swift; sourceTree = "<group>"; };
 		9C1B82A01FA0D09600173FF3 /* TrigonometryLib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrigonometryLib.swift; sourceTree = "<group>"; };
+		9C1DD985202754CB00895923 /* PotatoEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PotatoEntity.swift; sourceTree = "<group>"; };
+		9C1DD986202754CB00895923 /* PotatoStateMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PotatoStateMachine.swift; sourceTree = "<group>"; };
+		9C1DD98920275C3000895923 /* PursueComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PursueComponent.swift; sourceTree = "<group>"; };
 		9C1E5D30200FD0FD0080AF92 /* acuteYeah.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = acuteYeah.wav; sourceTree = "<group>"; };
 		9C1E5D32200FD4320080AF92 /* Rumors.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Rumors.wav; sourceTree = "<group>"; };
 		9C1E5D33200FD4320080AF92 /* WarriorAvocado.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = WarriorAvocado.wav; sourceTree = "<group>"; };
@@ -185,9 +188,9 @@
 		9C4806801FC88A2700168571 /* SinkComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinkComponent.swift; sourceTree = "<group>"; };
 		9C4806841FCC504F00168571 /* splashingWater2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splashingWater2.wav; sourceTree = "<group>"; };
 		9C6D3DEA1F93252500B8FA2A /* Game.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Game.scnassets; sourceTree = "<group>"; };
-		9C73792F1FEC8303005D0A72 /* PotatoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PotatoEntity.swift; sourceTree = "<group>"; };
 		9C774A621FE1997C00A388CC /* SubtitleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleController.swift; sourceTree = "<group>"; };
 		9C774A641FE2314E00A388CC /* ControlsOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ControlsOverlay.sks; sourceTree = "<group>"; };
+		9C7DE85F2028A7B600C4D2A2 /* cutscene3.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = cutscene3.mp4; sourceTree = "<group>"; };
 		9C8CEBB4201E7BF100446C97 /* bridge.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bridge.wav; sourceTree = "<group>"; };
 		9C8CEBB6201F375700446C97 /* marching-concrete-loop.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "marching-concrete-loop.aiff"; sourceTree = "<group>"; };
 		9C8CEBB8201F39FB00446C97 /* Foot Stomp A.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Foot Stomp A.wav"; sourceTree = "<group>"; };
@@ -231,7 +234,6 @@
 		D207CFC41F8EA2D10084240E /* Dpad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dpad.swift; sourceTree = "<group>"; };
 		D207CFC61F8EA5370084240E /* Stick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stick.swift; sourceTree = "<group>"; };
 		D216F4ED1FEC10EF00F6059D /* cutscene1.srt */ = {isa = PBXFileReference; lastKnownFileType = text; path = cutscene1.srt; sourceTree = "<group>"; };
-		D236731E1FE0396C00FFDE77 /* EnemyEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyEntity.swift; sourceTree = "<group>"; };
 		D25160E41F93FA3400BF756A /* BaseState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseState.swift; sourceTree = "<group>"; };
 		D25160E71F93FB7F00BF756A /* RunningState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningState.swift; sourceTree = "<group>"; };
 		D25160E91F94063400BF756A /* SCNAnimationPlayer + Load Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNAnimationPlayer + Load Animation.swift"; sourceTree = "<group>"; };
@@ -345,6 +347,17 @@
 			path = Fase2;
 			sourceTree = "<group>";
 		};
+		9C1DD984202754BD00895923 /* potato */ = {
+			isa = PBXGroup;
+			children = (
+				9C1DD985202754CB00895923 /* PotatoEntity.swift */,
+				9C1DD986202754CB00895923 /* PotatoStateMachine.swift */,
+				D2FBD29D1FE1900900F47A9F /* EnemyGeneratorSystem.swift */,
+				B06FCD691FD8EC6E00EFFA31 /* PotatoSpearEntity.swift */,
+			);
+			path = potato;
+			sourceTree = "<group>";
+		};
 		9C2306862017656C00B1240F /* Licenses */ = {
 			isa = PBXGroup;
 			children = (
@@ -410,12 +423,9 @@
 		9CFDF86E1F9A36C6009385A7 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				9C1DD984202754BD00895923 /* potato */,
 				D25160E31F93FA0800BF756A /* Character */,
 				D2719D8F1FA0EBDA00FCB61F /* AnimationType.swift */,
-				9C73792F1FEC8303005D0A72 /* PotatoEntity.swift */,
-				D2FBD29D1FE1900900F47A9F /* EnemyGeneratorSystem.swift */,
-				B06FCD691FD8EC6E00EFFA31 /* PotatoSpearEntity.swift */,
-				D236731E1FE0396C00FFDE77 /* EnemyEntity.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -511,6 +521,7 @@
 		D26035F41FCDDB2F00E4F069 /* Videos */ = {
 			isa = PBXGroup;
 			children = (
+				9C7DE85F2028A7B600C4D2A2 /* cutscene3.mp4 */,
 				9CD4917C200F9F90009EF2B0 /* cutScene2.mp4 */,
 				D26035F51FCDDB4100E4F069 /* cutscene1.mp4 */,
 				AAAAED071FF2B9C9005E992F /* cutscene1_ptbr.srt */,
@@ -542,12 +553,12 @@
 		D2E0A8961F993B4800FCC255 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				9C1DD98920275C3000895923 /* PursueComponent.swift */,
 				9CE0FF411FC7656E004AF735 /* Sounds */,
 				9CD635A51FD8CEDE0016CC7B /* DistanceAlarmComponent.swift */,
 				9CD635A41FD8CEDD0016CC7B /* TimeAlarmComponent.swift */,
 				D2E0A8971F993B5D00FCC255 /* JumpComponent.swift */,
 				9C1B829E1F9FADD300173FF3 /* ModelComponent.swift */,
-				9C1B829C1F9E2FD300173FF3 /* SeekComponent.swift */,
 				9C4806801FC88A2700168571 /* SinkComponent.swift */,
 				D26D7B681FD952D700CCA3C1 /* LifeComponent.swift */,
 				9C991DB21FCC99DE00DEE3D6 /* AttackComponent.swift */,
@@ -738,6 +749,7 @@
 				9CE0FF491FC854B2004AF735 /* splashingWater.wav in Resources */,
 				9C06C5C8200F895E001A6A1C /* F2_Pepper_10.wav in Resources */,
 				9CCC6B3320165903009937E6 /* WarDrumLoop.wav in Resources */,
+				9C7DE8602028A7B600C4D2A2 /* cutscene3.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -818,12 +830,14 @@
 				9CD8547A2008C611009C7218 /* CheckPointController.swift in Sources */,
 				D2050A7D1FCC99D9001EC7FE /* JumpButton.swift in Sources */,
 				D207CFC71F8EA5370084240E /* Stick.swift in Sources */,
+				9C1DD987202754CC00895923 /* PotatoEntity.swift in Sources */,
 				9C13D4DB202402C600515235 /* BigBridgeBattleController.swift in Sources */,
 				9CC26F651FD9369500292099 /* EntityCleanerComponent.swift in Sources */,
 				D20108901FBE11D9007660E3 /* GameOverOverlay.swift in Sources */,
 				9C1B82A11FA0D09800173FF3 /* TrigonometryLib.swift in Sources */,
 				D266101C1FD5DEE0006B1455 /* Controls.swift in Sources */,
 				9C3ADB2720263D0F004360CF /* MemoryOptimizationController.swift in Sources */,
+				9C1DD988202754CC00895923 /* PotatoStateMachine.swift in Sources */,
 				D2983A541FF2CBAA00979A52 /* String+Localized.swift in Sources */,
 				9C2FEE92200D2C9D006A5274 /* MissionController.swift in Sources */,
 				9C03A2421F9A33DD008F191A /* EntityManager.swift in Sources */,
@@ -837,16 +851,15 @@
 				B095F5D21FE01FF100B4F386 /* TutorialFase1Overlay.swift in Sources */,
 				D2C7654F1FD0891100EC7D9B /* VideoViewController.swift in Sources */,
 				D26035F31FCDC66C00E4F069 /* CGPoint+FromUIView.swift in Sources */,
+				9C1DD98A20275C3000895923 /* PursueComponent.swift in Sources */,
 				9CC26F671FD95A5700292099 /* PowerLevelComponent.swift in Sources */,
 				9C28764B200D024800B09DE6 /* cutscene2.str in Sources */,
 				D2FBD29E1FE1900900F47A9F /* EnemyGeneratorSystem.swift in Sources */,
 				9C0350F81FD59ED200970006 /* Fase2GameController.swift in Sources */,
 				B0465F0D1FC444A2002B8FE8 /* SoundRandomComponent.swift in Sources */,
-				9C7379301FEC8303005D0A72 /* PotatoEntity.swift in Sources */,
 				9C2306852017652100B1240F /* LicenseAdds.swift in Sources */,
 				9C1B829F1F9FADD300173FF3 /* ModelComponent.swift in Sources */,
 				D2F53D751F9A88FF00422F24 /* WalkingState.swift in Sources */,
-				D236731F1FE0396C00FFDE77 /* EnemyEntity.swift in Sources */,
 				D2EC857D1F83F1240093F009 /* AppDelegate.swift in Sources */,
 				9C3ADB2920264714004360CF /* SCNMath.swift in Sources */,
 				D2A584341FDEF71200082174 /* AttackState.swift in Sources */,
@@ -857,7 +870,6 @@
 				D25AD5A61F87E1B100F2093E /* PadOverlay.swift in Sources */,
 				D25160E81F93FB7F00BF756A /* RunningState.swift in Sources */,
 				9CD635A71FD8CEDE0016CC7B /* DistanceAlarmComponent.swift in Sources */,
-				9C1B829D1F9E2FD300173FF3 /* SeekComponent.swift in Sources */,
 				D25160EA1F94063400BF756A /* SCNAnimationPlayer + Load Animation.swift in Sources */,
 				9C4806811FC88A2700168571 /* SinkComponent.swift in Sources */,
 				D25160E51F93FA3400BF756A /* BaseState.swift in Sources */,

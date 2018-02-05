@@ -23,8 +23,8 @@ class FinishOverlay: SKScene {
     }
     
     private var restartButton: SKButton!
-    private var menuButton: SKButton!
-    private var fowardButton: SKButton!
+    private var backwardButton: SKButton!
+    private var forwardButton: SKButton!
     
     private var video: SKVideoNode!
     
@@ -36,35 +36,48 @@ class FinishOverlay: SKScene {
     }
     
     func setupNodes() {
-        self.menuButton = self.childNode(withName: "menuButton") as! SKButton
-        self.menuButton.delegate = self
+        self.backwardButton = self.childNode(withName: "buttons/backwardButton") as! SKButton
+        self.backwardButton.delegate = self
         
-        self.restartButton = self.childNode(withName: "restartButton") as! SKButton
+        self.restartButton = self.childNode(withName: "buttons/restartButton") as! SKButton
         self.restartButton.delegate = self
+        self.restartButton.isHidden = false
         
-        self.fowardButton = self.childNode(withName: "fowardButton") as! SKButton
-        self.fowardButton.delegate = self
+        self.forwardButton = self.childNode(withName: "buttons/forwardButton") as! SKButton
+        self.forwardButton.delegate = self
+    }
+    
+    func setBackwardMode() {
+        self.forwardButton.isHidden = true
+        self.backwardButton.position.x = -150
+        self.restartButton.position.x = 150
+    }
+    func setForwardMode() {
+        self.backwardButton.isHidden = true
+        self.forwardButton.position.x = 150
+        self.restartButton.position.x = -150
     }
     
 }
 
 extension FinishOverlay : SKButtonDelegate {
     func buttonReleased(target: SKButton) {
-        
+        if target == restartButton {
+            gameOptionsDelegate?.restart()
+        }
+        else if target == forwardButton {
+            gameOptionsDelegate?.nextLevel()
+        }
+        else if target == backwardButton {
+            gameOptionsDelegate?.previousLevel()
+        }
     }
     
     
     func buttonPressed(target: SKButton) {
         
-        if target == restartButton {
-            gameOptionsDelegate?.restart()
-        }
-        else if target == fowardButton {
-            //TODO handle fowardbutton
-        }
-        else if target == menuButton {
-            //TODO handle menuButton
-        }
+       
+
         
     }
     

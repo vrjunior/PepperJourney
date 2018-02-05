@@ -13,26 +13,27 @@ import GameplayKit
 protocol BigBattleDelegate {
     func prepareToTheBattle()
     func runAfterBattle()
-    func kiilPreviousPotatoes()
+    func killPreviousPotatoes()
     func getPepperPosition() -> SCNVector3
-    func createPotato(position: SCNVector3)
+    func createPotato(potatoType: PotatoType, position: SCNVector3, persecutionBehavior: Bool, tag: String?)
     func getPotatoesNumber() -> Int
+    func getPotato(tag: String) -> [PotatoEntity]
 }
 /*
  matar todas as outras batatas antes de comecar a gerar essas e colocar tudo no entity manager
  ativar batatas somente quando a pimenta chegar na ilha
  */
 enum BattleState {
-    case releasingPrisoners, waitingPepper, disarmadPotatoesFight, actionSCene, spearPotatoesFight
+    case releasingPrisoners, waitingPepper, disarmadPotatoesFight, actionSCene, spearPotatoesFight, finishedBattle
 }
+
 
 class BigBridgeBattleController {
     weak var scnView: SCNView!
     var battleState: BattleState = .releasingPrisoners
-    var spearPotatoes = [PotatoEntity]()
     
     var potatoesToCreate: Float = 0
-    let totalPotatoNumber:Float = 2//15
+    let totalPotatoNumber:Float = 1//15
     
     var generationPoints = [SCNVector3]()
     
@@ -44,16 +45,21 @@ class BigBridgeBattleController {
     var trapBridge: SCNNode!
     var generationTime: TimeInterval = 0
     var timeCounter: TimeInterval = 0
-    var troop: SCNNode!
+    var currentBattalion = 1
+    var lastPotatoNumber = 0
+    weak var persecutedTarget: GKAgent3D!
+    var barrier: SCNNode!
     
-    init(scnView: SCNView, scene: SCNScene, delegate: BigBattleDelegate) {
+    init(scnView: SCNView, scene: SCNScene, delegate: BigBattleDelegate, persecutedTarget: GKAgent3D) {
         self.bigBattleDelegate = delegate
         self.scnView = scnView
+        self.persecutedTarget = persecutedTarget
         self.actionSceneController = OverPotatoSceneController(scnView: scnView, scene: scene)
         
         guard let markersNode = scene.rootNode.childNode(withName: "markers", recursively: false),
         let bigBattle = markersNode.childNode(withName: "bigBattle", recursively: false),
         let trapPoint = bigBattle.childNode(withName: "trapPoint", recursively: false)?.position,
+        let barrier = bigBattle.childNode(withName: "barrier", recursively: false),
         let generationPoints = bigBattle.childNode(withName: "generationPoints", recursively: false)?.childNodes else {
                 fatalError("Error getting nodes in big battle")
         }
@@ -65,6 +71,7 @@ class BigBridgeBattleController {
         
         self.bigBattleNode = bigBattle
         self.trapPoint = trapPoint
+        self.barrier = barrier
         
         
         guard let map = scene.rootNode.childNode(withName: "map", recursively: false),
@@ -82,7 +89,9 @@ class BigBridgeBattleController {
         self.timeCounter = 0
         self.generationTime = self.getNewGenerationTime()
         self.trapBridge.isHidden = false
-//        self.trapBridge.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0))
+        self.currentBattalion = 0
+        // enable the barrier
+        self.barrier.isHidden = false
     }
     
     public func startBigBattle() {
@@ -104,11 +113,15 @@ class BigBridgeBattleController {
             let distance = sqrt(deltaX * deltaX + deltaZ * deltaZ)
             
             if distance < 200 {
-                self.battleState = .disarmadPotatoesFight
                 self.trapBridge.isHidden = true
 //                let angle = CGFloat(20 * Float.pi / 180)
 //                self.trapBridge.runAction(SCNAction.rotateTo(x: angle , y: 0, z: 0, duration: 2))
+                
                 SoundController.sharedInstance.playSoundEffect(soundName: "F2_Potato_1", loops: false, node: self.scnView.pointOfView!)
+                
+                self.bigBattleDelegate.killPreviousPotatoes()
+                
+                self.battleState = .disarmadPotatoesFight
             }
             return
         }
@@ -119,10 +132,17 @@ class BigBridgeBattleController {
             if alivePotatoesNumber == 0 && self.potatoesToCreate == 0 {
                 self.battleState = .actionSCene
                 self.bigBattleDelegate.prepareToTheBattle()
+                
+                // run action scene
                 self.actionSceneController.runActionScene(completition: {
+                    
                     self.bigBattleDelegate.runAfterBattle()
+                    
+                    
+                    self.createSpearPotatoTroop()
+                    
                     self.battleState = .spearPotatoesFight
-                    self.troop = self.actionSceneController.troopNode
+                    self.lastPotatoNumber = self.bigBattleDelegate.getPotatoesNumber()
                     
                 })
                 return
@@ -139,9 +159,32 @@ class BigBridgeBattleController {
                     self.timeCounter = 0
                     
                     let position = self.getRandoPosition()
-                    self.bigBattleDelegate.createPotato(position: position)
+                    self.bigBattleDelegate.createPotato(potatoType: .disarmad, position: position, persecutionBehavior: true, tag: nil)
                     
                     self.potatoesToCreate -= 1
+                }
+            }
+        }
+        
+        if self.battleState == .spearPotatoesFight {
+            if alivePotatoesNumber == 25 - (currentBattalion * 5) {
+                if currentBattalion < 5 {
+                    self.currentBattalion += 1
+                    
+                    let battalionName = "battalion" + String(self.currentBattalion)
+                    let potatoes = self.bigBattleDelegate.getPotato(tag: battalionName)
+                    
+                    for potato in potatoes {
+                        potato.setPersecutionBehavior(persecutedTarget: self.persecutedTarget)
+                        potato.playAnimation(type: .running)
+                    }
+                    self.lastPotatoNumber = self.bigBattleDelegate.getPotatoesNumber()
+                }
+                else {
+                    battleState = .finishedBattle
+                    
+                    // relaese the barrier
+                    self.barrier.isHidden = true
                 }
             }
         }
@@ -163,4 +206,56 @@ class BigBridgeBattleController {
         return min + randomTime
     }
     
+
+    func createSpearPotatoTroop() {
+        guard let battalions = self.actionSceneController.battalions else {
+            print("Error getting battalions from action scene")
+            return
+        }
+        
+        for battalion in battalions {
+            
+            let potatoes = battalion.childNodes
+            for potato in potatoes {
+                guard let name = battalion.name else {
+                    print("Error getting battalion name")
+                    return
+                    
+                }
+                self.bigBattleDelegate.createPotato(potatoType: .disarmad, position: potato.presentation.worldPosition, persecutionBehavior: false, tag: name)
+            }
+            
+        }
+      
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

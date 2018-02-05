@@ -29,7 +29,7 @@ class Character: GKEntity {
     //speed multiplier
     static private let speedFactor: CGFloat = 100
     public var initialPosition = float3(0, 0, 0)
-
+    
     // Entity Manager
     private var entityManager = EntityManager.sharedInstance
     
@@ -39,7 +39,7 @@ class Character: GKEntity {
     var walkSpeed: CGFloat = 1.0
     var isWalking: Bool = false
     var isJumping: Bool = false
-	static let walkRunPercentage: Float = 0.7
+    static let walkRunPercentage: Float = 0.7
     
     // Direction
     private var previousUpdateTime: TimeInterval = 0
@@ -97,7 +97,7 @@ class Character: GKEntity {
         /// Load character from external file
         self.characterNode = scene.rootNode.childNode(withName: "character", recursively: false)
         self.visualTarget = self.characterNode.childNode(withName: "visualTarget", recursively: false)
-		
+        
         self.initialPosition = float3(self.characterNode.position)
     }
     
@@ -125,26 +125,28 @@ class Character: GKEntity {
         trackingAgentComponent.position = float3(self.characterNode.presentation.position)
         self.addComponent(trackingAgentComponent)
         
+        // sink component
         let sinkComponent = SinkComponent(node: self.characterNode, entity: self)
         self.addComponent(sinkComponent)
+        EntityManager.sharedInstance.loadToComponentSystem(component: sinkComponent)
         
         // Attack component
         let attackComponent = AttackComponent(scene: scene)
         self.addComponent(attackComponent)
         
         // Power Level Component
-        let powerLevelComponent = PowerLevelCompoenent(MaxPower: 10, defaultPowerLevel: 5)
+        let powerLevelComponent = PowerLevelCompoenent(MaxPower: 30, defaultPowerLevel: 30)
         self.addComponent(powerLevelComponent)
         
         // Attack Limiter Component
-        let attackLimiterComponent = AttackLimiterComponent(rechargeInterval: 1.5, chargeRate: 1, dischargeRate: 1)
+        let attackLimiterComponent = AttackLimiterComponent(rechargeInterval: 5, chargeRate: 1, dischargeRate: 1)
         self.addComponent(attackLimiterComponent)
-        self.entityManager.loadComponentSystem(component: attackLimiterComponent)
+        self.entityManager.loadToComponentSystem(component: attackLimiterComponent)
         
         //Life component
         let lifeComponent = LifeComponent()
         self.addComponent(lifeComponent)
-
+        
     }
     
     // MARK: Animatins Functins
@@ -172,7 +174,7 @@ class Character: GKEntity {
         didSet {
             self.characterNode.runAction(
                 SCNAction.rotateTo(x: 0.0, y: directionAngle, z: 0.0, duration: 0.1, usesShortestUnitArc:true))// 0.1
-       }
+        }
     }
     
     var num = 0
@@ -196,17 +198,17 @@ class Character: GKEntity {
             characterVelocity = direction * Float(characterSpeed)
             let runModifier = Float(1.0)
             walkSpeed = CGFloat(runModifier * simd_length(direction))
-			
+            
             // move character
             directionAngle = CGFloat(atan2f(direction.x, direction.z))
-			
-			// moving type
-			if simd_length(direction) < Character.walkRunPercentage {
-				isWalking = true
-			}else {
-				isWalking = false
-			}
-		}
+            
+            // moving type
+            if simd_length(direction) < Character.walkRunPercentage {
+                isWalking = true
+            }else {
+                isWalking = false
+            }
+        }
         
         if simd_length_squared(characterVelocity) > 10E-4 * 10E-4 {
             let startPosition = self.characterNode.presentation.simdWorldPosition
@@ -247,14 +249,14 @@ class Character: GKEntity {
         
         let start = start
         let velocity = velocity
-
+        
         while !stop {
             replacementPoint = start + velocity
             stop = true
         }
         self.characterNode.simdWorldPosition = replacementPoint
     }
-
+    
     func resetCharacterPosition() {
         self.characterNode.simdPosition = self.initialPosition
     }
@@ -264,3 +266,4 @@ class Character: GKEntity {
     }
     
 }
+

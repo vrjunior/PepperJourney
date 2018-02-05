@@ -17,7 +17,9 @@ class OverPotatoSceneController {
     var cameras = [SCNNode]()
     var camera1StartPosition: SCNVector3!
     var troopStartPosition: SCNVector3!
+    
     public var troopNode: SCNNode!
+    public var battalions: [SCNNode]!
     
     private var actionsScene: SCNScene!
 
@@ -54,7 +56,11 @@ class OverPotatoSceneController {
     }
     
     func resetSceneState() {
+      
         self.resetBridge()
+        
+        // Reset nodes
+        self.resetNodes()
         
         // Clean all actions
         self.cleanActions()
@@ -81,7 +87,7 @@ class OverPotatoSceneController {
     func runActionScene(completition: @escaping () -> Void) {
         let nextCamera = self.scnView?.pointOfView
         guard self.cameras.count == 4 else {
-            print("Error finding the 4 cameras")
+            print("Error finding the 5 cameras")
             return
         }
         
@@ -89,14 +95,11 @@ class OverPotatoSceneController {
         self.cleanActions()
         
          let sequence = [
-            self.resetCameraAction(),
            
             SCNAction.run { _ in
                 // show Potatoes
                 self.potatoesNode.isHidden = false
             },
-            
-            self.resetCameraAction(),
             
             // Change to the camera 1
             SCNAction.run { _ in
@@ -125,7 +128,7 @@ class OverPotatoSceneController {
 
             // wait the speech
             SCNAction.wait(duration: 5),
-            
+
             SCNAction.run{ _ in
 
                 // Change to the camera 3
@@ -134,71 +137,80 @@ class OverPotatoSceneController {
                 self.lowerTheBigBridge()
                 SoundController.sharedInstance.playSoundEffect(soundName: "Drawbridge", loops: false, node: self.cameras[2])
             },
-            
+
             // wait the bridge
             SCNAction.wait(duration: 3.25),
-            
+
             SCNAction.run{ _ in
                 // run shaking camera
                 self.cameras[2].runAction(self.getNodeActionsFromBase(nodeName: "camera3"))
             },
-            
+
             // wait the shake camera
             SCNAction.wait(duration: 0.75),
-            
+
             SCNAction.run{ _ in
-                
+
                 // Attack order
                 SoundController.sharedInstance.playSoundEffect(soundName: "attackOrder", loops: false, node: self.cameras[2])
             },
-            
+
             // wait the attack order
             SCNAction.wait(duration: 2.5),
-            
+
             // run march army action
             SCNAction.run{ _ in
-                
+
                 // Change to the camera 4
                 self.changeToCamera(cameraName: "camera4")
-                
+
+                // play running animation
+                self.loadAnimations(animationList: [AnimationType.running])
+
                 // run marching action
-                self.troopNode.runAction(self.getNodeActionsFromBase(nodeName: "army"))
-                
+                self.troopNode.runAction(self.getNodeActionsFromBase(nodeName: "army"), completionHandler: {
+                    self.stopAnimation(type: .running)
+                })
+
+
                 // play the marching sound
                 SoundController.sharedInstance.playSoundEffect(soundName: "marching", loops: false, node: self.cameras[3])
-                
+
                 // run shaking camera
                 self.cameras[3].runAction(self.getNodeActionsFromBase(nodeName: "camera4"))
-                
+
                 // Change to the camera 4
                 self.changeToCamera(cameraName: "camera4")
-               
+
             },
-            
+
             // wait the march
             SCNAction.wait(duration: 8.77),
-            
+
             SCNAction.run{ _ in
-                // stop shaking camera
+                // stop shaking of camera 4
                 self.cameras[3].removeAllActions()
 
             },
-            
-            // wait the visualization of the army
-            SCNAction.wait(duration: 1),
 
             // Level controller handle with the scene
             SCNAction.run { _ in
-
+                
+                self.potatoesNode.isHidden = true
                 completition()
-                self.drumPotatoes.isHidden = true
-                self.generalNode.isHidden = true
+                
             },
+            
+            
 
             //Restore the original camera
             SCNAction.run { _ in
-
-            self.scnView?.pointOfView = nextCamera
+                
+                self.scnView?.pointOfView = nextCamera
+            },
+            
+            SCNAction.run{ _ in
+                
             }
         ]
         
@@ -206,18 +218,13 @@ class OverPotatoSceneController {
     
     }
     
-    func resetCameraAction() -> SCNAction {
+    func resetNodes() {
+        // Cameras
+        self.cameras[0].runAction(SCNAction.move(to: self.camera1StartPosition, duration: 0))
+        self.cameras[0].runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0))
         
-        let resetCameraAction = SCNAction.run({ (cameraPivot) in
-
-            cameraPivot.runAction(SCNAction.move(to: self.camera1StartPosition, duration: 0))
-            cameraPivot.runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0))
-            
-            self.resetBridge()
-        })
-        
-        
-        return resetCameraAction
+        // army
+        self.troopNode.runAction(SCNAction.move(to: self.troopStartPosition, duration: 0))
     }
     
     func getNodeActionsFromBase(nodeName: String) -> SCNAction {
@@ -273,13 +280,16 @@ class OverPotatoSceneController {
         guard let potatoesNode = self.overPotatoSceneNode.childNode(withName: "potatoes", recursively: false),
         let drumPotatoes = potatoesNode.childNode(withName: "drumPotatoes", recursively: false),
         let general = potatoesNode.childNode(withName: "general", recursively: false),
-            let potatoesArmy = potatoesNode.childNode(withName: "army", recursively: false) else {
+        let potatoesArmy = potatoesNode.childNode(withName: "army", recursively: false),
+        let armyRef = potatoesArmy.childNode(withName: "potatoArmy reference", recursively: false) else {
                 fatalError("Error getting potatoes in the level 2 over potato scene")
         }
         self.potatoesNode = potatoesNode
         self.generalNode = general
         self.drumPotatoes = drumPotatoes
         self.troopNode = potatoesArmy
+        self.troopStartPosition = self.troopNode.position
+        self.battalions = armyRef.childNodes
     }
     
     func changeToCamera(cameraName: String) {
@@ -296,6 +306,55 @@ class OverPotatoSceneController {
             self.scnView?.pointOfView = cameraNode
         }
     }
-        
-
+    
+    func loadAnimations(animationList: [AnimationType]) {
+        for battalion in self.battalions {
+            for potato in battalion.childNodes {
+                
+                for anim in animationList {
+                    let animationPlayer = SCNAnimationPlayer.withScene(named: "Game.scnassets/characters/potato/disarmadPotato/\(anim.rawValue).dae")
+//                    animationPlayer.speed = 0.8
+                    
+                   potato.addAnimationPlayer(animationPlayer, forKey: anim.rawValue)
+                }
+            }
+        }
+    }
+    
+    func stopAnimation(type: AnimationType) {
+        for battalion in self.battalions {
+            for potato in battalion.childNodes {
+                
+                potato.animationPlayer(forKey: type.rawValue)?.stop()
+            }
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
