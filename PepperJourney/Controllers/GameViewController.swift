@@ -12,16 +12,6 @@ import SceneKit
 import SpriteKit
 import GoogleMobileAds
 
-
-protocol CutSceneDelegate : NSObjectProtocol {
-    func playCutScene(videoSender: VideoSender)
-}
-
-protocol AdvertisingDelegate: NSObjectProtocol {
-    func showAd(blockToRunAfter: @escaping (Bool) -> Void, loadedVideoFeedback:  @escaping () -> Void)
-    func cancelAd()
-}
-
 struct VideoSender {
     var blockAfterVideo: () -> Void
     var cutScenePath: String
@@ -35,12 +25,19 @@ struct Comic {
     var runComic: (() -> Void)
 }
 
-protocol LevelSelectorDelegate: NSObjectProtocol {
+protocol GameViewControllerDelagate: NSObjectProtocol {
     func runNextComic()
     func setComic(named: String)
+    
+    // Ads
+    func showAd(blockToRunAfter: @escaping (Bool) -> Void, loadedVideoFeedback:  @escaping () -> Void)
+    func cancelAd()
+    
+    // video player
+    func playCutScene(videoSender: VideoSender)
 }
 
-class GameViewController: UIViewController, LevelSelectorDelegate {
+class GameViewController: UIViewController {
     
     private var rewardAd: RewardAdvertisement!
     private var comics: [Comic]!
@@ -93,17 +90,14 @@ class GameViewController: UIViewController, LevelSelectorDelegate {
         self.setComic(named: currentComic.name)
     }
     func level1() {
-        self.gameController = Fase1GameController(scnView: self.gameView, levelSelector: self)
-        // Video delegates
-        gameController?.cutSceneDelegate = self
-        gameController?.adVideoDelegate = self
+        self.gameController = Fase1GameController(scnView: self.gameView, gameControllerDelegate: self)
         
     }
     func level2() {
-        self.gameController = Fase2GameController(scnView: self.gameView, levelSelector: self)
+        self.gameController = Fase2GameController(scnView: self.gameView, gameControllerDelegate: self)
         // Video delegates
-        gameController?.cutSceneDelegate = self
-        gameController?.adVideoDelegate = self
+        
+        
     }
     func cutscene1() {
         
@@ -156,7 +150,7 @@ class GameViewController: UIViewController, LevelSelectorDelegate {
     }
 }
 
-extension GameViewController: AdvertisingDelegate {
+extension GameViewController: GameViewControllerDelagate {
     func cancelAd() {
         self.rewardAd.isWaiting = false
     }
@@ -164,9 +158,7 @@ extension GameViewController: AdvertisingDelegate {
     func showAd(blockToRunAfter: @escaping (Bool) -> Void, loadedVideoFeedback:  @escaping () -> Void) {
         self.rewardAd.showAdWhenReady(blockToRunAfter: blockToRunAfter, loadedVideoFeedback: loadedVideoFeedback)
     }
-}
-
-extension GameViewController: CutSceneDelegate {
+    
     
     func playCutScene(videoSender: VideoSender) {
         self.performSegue(withIdentifier: "playVideo", sender: videoSender)

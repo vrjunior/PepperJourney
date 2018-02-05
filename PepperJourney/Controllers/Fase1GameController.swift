@@ -64,8 +64,8 @@ class Fase1GameController: GameController {
     }
     
     // MARK: Initializer
-    init(scnView: SCNView, levelSelector: LevelSelectorDelegate) {
-        super.init(scnView: scnView, levelIdentifier: "level1", levelSelector: levelSelector)
+    init(scnView: SCNView, gameControllerDelegate: GameViewControllerDelagate) {
+        super.init(scnView: scnView, levelIdentifier: "level1", gameControllerDelegate: gameControllerDelegate)
         
         
         //load the main scene
@@ -152,7 +152,7 @@ class Fase1GameController: GameController {
         self.prepereToStartGame()
         
         let videoSender = VideoSender(blockAfterVideo: self.prepareToNextLevel, cutScenePath: "cutscene1.mp4", cutSceneSubtitlePath: "cutscene1.srt".localized)
-        self.cutSceneDelegate?.playCutScene(videoSender: videoSender)
+        self.gameControllerDelegate?.playCutScene(videoSender: videoSender)
     }
     
     // Atenção não pode pausar a cena senão o audio não será executado.

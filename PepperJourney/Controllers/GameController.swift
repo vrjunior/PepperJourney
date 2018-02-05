@@ -47,9 +47,7 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     open var pauseOverlay: PauseOverlay?
 	open var tutorialFase1Overlay: TutorialFase1Overlay?
 	
-    public weak var cutSceneDelegate: CutSceneDelegate?
-    public weak var adVideoDelegate: AdvertisingDelegate?
-    public weak var levelSelector: LevelSelectorDelegate?
+    public weak var gameControllerDelegate: GameViewControllerDelagate?
     
     // Camera and targets
     public var cameraInitialPosition: SCNNode!
@@ -163,13 +161,13 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     }
     
     // MARK: Initializer
-    init(scnView: SCNView, levelIdentifier: String, levelSelector: LevelSelectorDelegate) {
+    init(scnView: SCNView, levelIdentifier: String, gameControllerDelegate: GameViewControllerDelagate) {
         super.init()
         
         //set scnView
         self.scnView = scnView
         self.levelIdentifier = levelIdentifier
-        self.levelSelector = levelSelector
+        self.gameControllerDelegate = gameControllerDelegate
         
 //        self.scnView.debugOptions = SCNDebugOptions.showPhysicsShapes
         self.scnView.showsStatistics = true
@@ -418,12 +416,12 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
 
     // Cancela a exibição do Ad
     func cancelAd() {
-        self.adVideoDelegate?.cancelAd()
+        self.gameControllerDelegate?.cancelAd()
     }
     func nextLevel() {
         self.sceneRenderer = nil
         if self.levelIdentifier == "level1" {
-            self.levelSelector?.setComic(named: "level2")
+            self.gameControllerDelegate?.setComic(named: "level2")
         }
       
         
@@ -432,14 +430,14 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     func previousLevel() {
          self.sceneRenderer = nil
         if self.levelIdentifier == "level2" {
-            self.levelSelector?.setComic(named: "level1")
+            self.gameControllerDelegate?.setComic(named: "level1")
         }
        
     }
     
     func loadAd(loadedVideoFeedback: @escaping () -> Void) {
         // load and show a rewar ad
-        self.adVideoDelegate?.showAd(blockToRunAfter: self.endedAd, loadedVideoFeedback: loadedVideoFeedback)
+        self.gameControllerDelegate?.showAd(blockToRunAfter: self.endedAd, loadedVideoFeedback: loadedVideoFeedback)
         
         //Mark:  Use isso para testar sem ter que ver ads
 //        self.endedAd(wonReward: true)//apagar delete

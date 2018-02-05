@@ -71,8 +71,8 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
     
     
     // MARK: Initializer
-    init(scnView: SCNView, levelSelector: LevelSelectorDelegate) {
-        super.init(scnView: scnView, levelIdentifier: "level2", levelSelector: levelSelector)
+    init(scnView: SCNView, gameControllerDelegate: GameViewControllerDelagate) {
+        super.init(scnView: scnView, levelIdentifier: "level2", gameControllerDelegate:  gameControllerDelegate)
         
         //load the main scene
         guard let scene = SCNScene(named: "Game.scnassets/fases/fase2.scn") else {
@@ -103,9 +103,6 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         
         self.setupCamera()
         
-        //setup tap to start
-        self.setupTapToStart()
-        
         // Pre-load all the audios of the game in the memory
         self.setupSounds()
         
@@ -124,6 +121,13 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         
         sceneRenderer = scnView
         sceneRenderer!.delegate = self
+        
+        
+        // Do the setup to restart the game
+        self.prepereToStartGame()
+        
+        self.playCutscene2()
+        
     }
     
     override func initializeTheGame () {
@@ -156,17 +160,7 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         
     }
     
-    override func setupTapToStart() {
-        
-        // Do the setup to restart the game
-        self.prepereToStartGame()
-        
-        let tapOverlay = SKScene(fileNamed: "StartOverlay.sks") as! StartOverlay
-        tapOverlay.gameOptionsDelegate = self
-        tapOverlay.scaleMode = .aspectFill
-        self.scnView.overlaySKScene = tapOverlay
-        
-    }
+    
     override func prepereToStartGame()
     {
         self.stopSounds()
@@ -184,7 +178,7 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         self.prepereToStartGame()
         
         let videoSender = VideoSender(blockAfterVideo: self.prepareToNextLevel, cutScenePath: "cutscene3.mp4", cutSceneSubtitlePath: "cutscene2.srt".localized)
-        self.cutSceneDelegate?.playCutScene(videoSender: videoSender)
+        self.gameControllerDelegate?.playCutScene(videoSender: videoSender)
 
     }
     
@@ -226,9 +220,6 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
             self.cameraNode.runAction(SCNAction.repeatForever(sequence))
         }
         
-        self.gameStateMachine.enter(PauseState.self)
-        self.playCutscene()
-        
         // Inittialize the game with the defaults settings.
     }
     
@@ -255,13 +246,13 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         self.memoryOptimization.update(pepperPosition: self.character.characterNode.worldPosition, deltaTime: deltaTime)
     }
     
-    func playCutscene() {
+    func playCutscene2() {
         let videoSender = VideoSender(blockAfterVideo: self.tutorialLevel2, cutScenePath: "cutScene2.mp4", cutSceneSubtitlePath: "cutscene2.srt".localized)
-        self.cutSceneDelegate?.playCutScene(videoSender: videoSender)
+        self.gameControllerDelegate?.playCutScene(videoSender: videoSender)
 
     }
     func tutorialLevel2() {
-        self.gameStateMachine.enter(PlayState.self)
+        self.startGame()
     }
     func releasedAllPrisoners() {
         self.setupFinishLevel()
