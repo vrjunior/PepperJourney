@@ -118,6 +118,7 @@ class BigBridgeBattleController {
 //                self.trapBridge.runAction(SCNAction.rotateTo(x: angle , y: 0, z: 0, duration: 2))
                 
                 SoundController.sharedInstance.playSoundEffect(soundName: "F2_Potato_1", loops: false, node: self.scnView.pointOfView!)
+                SubtitleController.sharedInstance.setupSubtitle(subName: "F2_Potato_1")
                 
                 self.bigBattleDelegate.killPreviousPotatoes()
                 

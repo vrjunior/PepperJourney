@@ -124,8 +124,8 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         
         
         // Do the setup to restart the game
+        self.scnView.overlaySKScene?.isHidden = true
         self.prepereToStartGame()
-        
         self.playCutscene2()
         
     }
@@ -219,6 +219,10 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
             
             self.cameraNode.runAction(SCNAction.repeatForever(sequence))
         }
+        else
+        {
+            self.controlsOverlay?.setupAttackButton(hiden: false)
+        }
         
         // Inittialize the game with the defaults settings.
     }
@@ -248,6 +252,7 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
     
     func playCutscene2() {
         let videoSender = VideoSender(blockAfterVideo: self.tutorialLevel2, cutScenePath: "cutScene2.mp4", cutSceneSubtitlePath: "cutscene2.srt".localized)
+        
         self.gameControllerDelegate?.playCutScene(videoSender: videoSender)
 
     }
