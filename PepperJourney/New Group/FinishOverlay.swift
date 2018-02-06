@@ -27,12 +27,14 @@ class FinishOverlay: SKScene {
     private var forwardButton: SKButton!
     
     private var video: SKVideoNode!
+    public private(set) var levelSelected: Bool!
     
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         self.setupNodes()
+        self.levelSelected = false
     }
     
     func setupNodes() {
@@ -61,15 +63,20 @@ class FinishOverlay: SKScene {
 }
 
 extension FinishOverlay : SKButtonDelegate {
+    
     func buttonReleased(target: SKButton) {
-        if target == restartButton {
+        if target == restartButton, !self.levelSelected {
             gameOptionsDelegate?.restart()
             self.restartButton.colorBlendFactor = target.defaultColorBlendFactor
         }
-        else if target == forwardButton {
+            
+        else if target == forwardButton, !self.levelSelected {
+            self.levelSelected = true
             gameOptionsDelegate?.nextLevel()
         }
-        else if target == backwardButton {
+            
+        else if target == backwardButton, !self.levelSelected {
+            self.levelSelected = true
             gameOptionsDelegate?.previousLevel()
         }
     }

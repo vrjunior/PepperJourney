@@ -163,29 +163,9 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         self.character.characterNode.isHidden = true
     }
     
-    func playCutscene3() {
-         gameStateMachine.enter(PauseState.self)
-        
-        let videoSender = VideoSender(blockAfterVideo: self.setuptFinishLevel, cutScenePath: "cutscene3.mp4", cutSceneSubtitlePath: "cutscene3.srt".localized)
-        self.gameControllerDelegate?.playCutScene(videoSender: videoSender)
-    }
+   
     
-    func setuptFinishLevel() {
-        self.prepereToStartGame()
-        
-        let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks") as! FinishOverlay
-        finishLevelOverlay.gameOptionsDelegate = self
-        finishLevelOverlay.scaleMode = .aspectFill
-        finishLevelOverlay.setBackwardMode()
-        self.scnView.overlaySKScene = finishLevelOverlay
-        
-        // Play the scene to reproduce the sound
-        gameStateMachine.enter(PlayState.self)
-        
-        self.soundController.playSoundEffect(soundName: "FinishLevelSound", loops: false, node: self.cameraNode)
-        
-        
-    }
+   
     
     override func startGame() {
         super.startGame()
@@ -247,6 +227,15 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         self.gameControllerDelegate?.playCutScene(videoSender: videoSender)
 
     }
+    func playCutscene3() {
+        gameStateMachine.enter(PauseState.self)
+        
+        self.prepereToStartGame()
+        
+        let videoSender = VideoSender(blockAfterVideo: self.setuptFinishLevel, cutScenePath: "cutscene3.mp4", cutSceneSubtitlePath: "cutscene3.srt".localized)
+        self.gameControllerDelegate?.playCutScene(videoSender: videoSender)
+    }
+    
     func tutorialLevel2() {
         self.startGame()
     }
@@ -512,6 +501,24 @@ extension Fase2GameController: LevelDelegate {
     func tutorialEnded() {
         
     }
+    
+    func setuptFinishLevel() {
+        self.prepereToStartGame()
+        
+        let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks") as! FinishOverlay
+        finishLevelOverlay.gameOptionsDelegate = self
+        finishLevelOverlay.scaleMode = .aspectFill
+        finishLevelOverlay.setBackwardMode()
+        self.scnView.overlaySKScene = finishLevelOverlay
+        
+        // Play the scene to reproduce the sound
+        gameStateMachine.enter(PlayState.self)
+        
+        self.soundController.playSoundEffect(soundName: "FinishLevelSound", loops: false, node: self.cameraNode)
+        
+        
+    }
+    
     
     func resetSounds() {
         // Restart the background music

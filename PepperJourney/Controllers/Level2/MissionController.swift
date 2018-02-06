@@ -46,7 +46,7 @@ class MissionController: PrisonerDelegate {
         self.missionNode = missionNode
         
         //barrier reference
-        guard let barrierNode = self.missionNode.childNode(withName: "barriers", recursively: false) else {
+        guard let barrierNode = self.missionNode.childNode(withName: "barrier", recursively: false) else {
             fatalError("Error getting barriers node")
         }
         self.initialBarrier = barrierNode
@@ -89,8 +89,8 @@ class MissionController: PrisonerDelegate {
         case .beforeBoxOne:
             self.missionState = .openedBox1
             let prisoner1 = Prisoner(type: .Tomato, talkAudioName: "Prisoner1Sound")
-            let prisoner2 = Prisoner(type: .RegularAvocado, talkAudioName: "PrisonerSound")
-            let prisoner3 = Prisoner(type: .Tomato, talkAudioName: "PrisonerSound")
+            let prisoner2 = Prisoner(type: .RegularAvocado, talkAudioName: nil)
+            let prisoner3 = Prisoner(type: .Tomato, talkAudioName: nil)
             prisoners = [prisoner1, prisoner2, prisoner3]
             
             
@@ -154,6 +154,7 @@ class MissionController: PrisonerDelegate {
     
     public func resetMission() {
         self.missionState = .beforeBoxOne
+        self.initialBarrier.isHidden = false
         // Reset all the prisoner boxes for the new play
         for prisonerBox in self.prisonerBoxes {
             prisonerBox.resetPrisonerBox()

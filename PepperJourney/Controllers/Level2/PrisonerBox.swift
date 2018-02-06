@@ -146,10 +146,14 @@ class PrisonerBox: DistanceAlarmDelegate {
     }
     func breakBox(prisoners: [Prisoner])
     {
+        print("breakBox")
         self.prisoners = prisoners
         
         // verifica se a caixa já foi aberta
         if self.isBoxOpen { return }
+        
+        // Update the flag
+        self.isBoxOpen = true
         
         // Remove the box
         let boxModelComponent = self.getModelComponent(entity: self.box)
@@ -162,8 +166,7 @@ class PrisonerBox: DistanceAlarmDelegate {
         for prisoner in self.prisoners {
             self.loadPrisoner(prisoner: prisoner)
         }
-        // Update the flag
-        self.isBoxOpen = true
+       
         
         // Run the conversation
         
@@ -173,12 +176,17 @@ class PrisonerBox: DistanceAlarmDelegate {
         if let soundName = prisoner.talkAudioName,
             let prisonerNode = self.getModelComponent(entity: prisoner.entity).modelNode {
             
-            self.soundController.playSoundEffect(soundName: soundName, loops: false, node: prisonerNode, block: self.charactersEcape)
+            let sequence = [
+                            self.soundController.getSoundAction(soundName: soundName, waitForCompletion: true, loops: false),
+                            SCNAction.run{ _ in
+                                self.charactersEcape()
+                            }
+            ]
+            
             SubtitleController.sharedInstance.setupSubtitle(subName: soundName)
             
+            prisonerNode.runAction(SCNAction.sequence(sequence))
         }
-        print(self.pepperNode.presentation.position)
-        
     }
     
     func getModelComponent(entity: GKEntity) -> ModelComponent {
@@ -226,7 +234,6 @@ class PrisonerBox: DistanceAlarmDelegate {
     }
     
     func charactersEcape() {
-        
         if !self.isBigBox {
             
             for prisoner in self.prisoners {
