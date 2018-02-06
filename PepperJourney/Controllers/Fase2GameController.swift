@@ -193,7 +193,10 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         // Play the scene to reproduce the sound
         gameStateMachine.enter(PlayState.self)
         
-        self.soundController.playSoundEffect(soundName: "FinishLevelSound", loops: false, node: self.cameraNode)
+        let soundAction = self.soundController.getSoundAction(soundName: "FinishLevelSound", loops: false)
+        self.cameraNode.runAction(soundAction) {
+            self.soundController.removeAllSound()
+        }
     }
     
     override func startGame() {

@@ -18,7 +18,7 @@ class SoundController
     
     static let sharedInstance = SoundController()
     
-    private var sounds: [String: SCNAudioSource] = [:]
+    public private(set) var sounds: [String: SCNAudioSource] = [:]
     
     private init() {
         self.areSoundEffectsMute = false
@@ -125,14 +125,19 @@ class SoundController
         }
     }
     
-    func stopSoundsFromNode(node: SCNNode)
+    public func stopSoundsFromNode(node: SCNNode)
     {
         node.removeAllAudioPlayers()
     }
     
-    func removeSoundFromMemory(soundName: String)
+    public func removeSoundFromMemory(soundName: String)
     {
         self.sounds.removeValue(forKey: soundName)
+    }
+    
+    public func removeAllSound() {
+        self.sounds.removeAll()
+        
     }
     
     public func getSoundAction(soundName: String, waitForCompletion: Bool = false, loops: Bool) -> SCNAction {
