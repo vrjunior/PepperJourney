@@ -15,7 +15,6 @@ class TutorialFase1Overlay: SKScene {
 	
 	var gameOptionsDelegate:GameOptions?
 	private var resumeButton: SKButton!
-	public var fase1GameController: Fase1GameController?
 	
 	override func sceneDidLoad() {
 		self.resumeButton = self.childNode(withName: "resumeButton") as! SKButton
@@ -30,12 +29,10 @@ extension TutorialFase1Overlay : SKButtonDelegate {
     
 
     func buttonPressed(target: SKButton) {
-//        self.gameOptionsDelegate?.skipTutorial()
+
 		self.gameOptionsDelegate?.resume()
+        self.gameOptionsDelegate?.tutorialClosed()
         
-		self.fase1GameController?.generatePotatoCrowd(markerName: "tutorialSpawnPoint", amount: 3)
-        
-//		print("Pressed")
     }
 
 }

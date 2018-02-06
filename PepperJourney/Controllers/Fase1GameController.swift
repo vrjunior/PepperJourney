@@ -14,15 +14,10 @@ import GameplayKit
 
 class Fase1GameController: GameController {
     
+    
     private var isWinner:Bool = false
     private var firstTimePlayingTutorial:Bool = true
-    
-    func resetSounds() {
-        // Restart the background music
-        self.soundController.playbackgroundMusic(soundName: "backgroundMusic", loops: true, node: self.cameraNode)
-
-    }
-    
+       
     override func stopSounds() {
         // Clean all the sounds
         soundController.stopSoundsFromNode(node: self.cameraNode)
@@ -42,6 +37,8 @@ class Fase1GameController: GameController {
         
         //setup character sounds
         self.soundController.loadSound(fileName: "jump.wav", soundName: "jump", volume: 30.0)
+        
+        self.soundController.loadSound(fileName: "F1_Pepper_1.wav", soundName: "F1_Pepper_1", volume: 30.0)
         
         
         // Add the sound points
@@ -65,7 +62,7 @@ class Fase1GameController: GameController {
     
     // MARK: Initializer
     init(scnView: SCNView, gameControllerDelegate: GameViewControllerDelagate) {
-        super.init(scnView: scnView, levelIdentifier: "level1", gameControllerDelegate: gameControllerDelegate)
+        super.init(scnView: scnView, levelIdentifier: "level1", gameControllerDelegate: gameControllerDelegate, levelDelegate: self)
         
         
         //load the main scene
@@ -155,21 +152,6 @@ class Fase1GameController: GameController {
         self.gameControllerDelegate?.playCutScene(videoSender: videoSender)
     }
     
-    // Atenção não pode pausar a cena senão o audio não será executado.
-    func setuptFinishLevel() {
-        
-        let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks") as! FinishOverlay
-        finishLevelOverlay.gameOptionsDelegate = self
-        finishLevelOverlay.scaleMode = .aspectFill
-        finishLevelOverlay.setForwardMode()
-        self.scnView.overlaySKScene = finishLevelOverlay
-        
-        // Play the scene to reproduce the sound
-        gameStateMachine.enter(PlayState.self)
-        
-         self.soundController.playSoundEffect(soundName: "FinishLevelSound", loops: false, node: self.cameraNode)
-    }
-    
     override func startGame() {
         super.startGame()
         // Inittialize the game with the defaults settings.
@@ -185,7 +167,7 @@ class Fase1GameController: GameController {
         self.isWinner = false
         
         //Start the tutorial
-        if firstTimePlayingTutorial{
+        if firstTimePlayingTutorial {
             self.generatePotatoCrowd(markerName: "starterSpawnPoint", amount: 3, maxSpeed: 10, maxAcceleration: 1)
             let removeEnimiesAction = SCNAction.sequence([
                 SCNAction.wait(duration: 5),
@@ -201,8 +183,15 @@ class Fase1GameController: GameController {
         }
         else {
             generatePotatoCrowd(markerName: "starterSpawnPoint", amount: 3)
+            self.playFirstPepperAudio()
         }
         
+    }
+    
+    func playFirstPepperAudio() {
+        // Executes the sound
+        self.soundController.playSoundEffect(soundName: "F1_Pepper_1", loops: false, node: self.character.characterNode)
+        SubtitleController.sharedInstance.setupSubtitle(subName: "F1_Pepper_1")
     }
     
     
@@ -283,7 +272,7 @@ class Fase1GameController: GameController {
             
             self.cameraNode.constraints = [lookAtConstraint, distanceConstraint , keepAltitude]
             
-            self.tutorialFase1(fase1: self)
+            self.tutorialFase1()
         }))
         actions.append(SCNAction.run({ _ in
             
@@ -293,6 +282,20 @@ class Fase1GameController: GameController {
         }))
         let actionSequence = SCNAction.sequence(actions)
         self.cameraNode.runAction(actionSequence)
+    }
+    
+    func tutorialFase1() {
+        
+        if(!self.scene.isPaused){
+            if self.tutorialFase1Overlay == nil {
+                self.tutorialFase1Overlay = SKScene(fileNamed: "TutorialFase1Overlay.sks") as? TutorialFase1Overlay
+                self.tutorialFase1Overlay?.scaleMode = .aspectFill
+                self.tutorialFase1Overlay?.gameOptionsDelegate = self
+            }
+            
+            self.scnView.overlaySKScene = self.tutorialFase1Overlay
+            self.gameStateMachine.enter(TutorialFase1State.self)
+        }
     }
     
     func setupAudioPoints() {
@@ -311,9 +314,6 @@ class Fase1GameController: GameController {
                 let fireDistance: Float
                 
                 switch soundName {
-                    
-                case "F1_Pepper_1":
-                    fireDistance = 165
                     
                 case "F1_Pepper_2":
                     fireDistance = 20
@@ -496,6 +496,34 @@ class Fase1GameController: GameController {
     }
 }
 
+extension Fase1GameController: LevelDelegate {
+    
+    // Atenção não pode pausar a cena senão o audio não será executado.
+    func setuptFinishLevel() {
+        
+        let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks") as! FinishOverlay
+        finishLevelOverlay.gameOptionsDelegate = self
+        finishLevelOverlay.scaleMode = .aspectFill
+        finishLevelOverlay.setForwardMode()
+        self.scnView.overlaySKScene = finishLevelOverlay
+        
+        // Play the scene to reproduce the sound
+        gameStateMachine.enter(PlayState.self)
+        
+        self.soundController.playSoundEffect(soundName: "FinishLevelSound", loops: false, node: self.cameraNode)
+    }
+    
+    func tutorialEnded() {
+        self.generatePotatoCrowd(markerName: "tutorialSpawnPoint", amount: 3)
+        self.playFirstPepperAudio()
+    }
+    
+    func resetSounds() {
+        // Restart the background music
+        self.soundController.playbackgroundMusic(soundName: "backgroundMusic", loops: true, node: self.cameraNode)
+        
+    }
+}
 
 
 

@@ -12,17 +12,13 @@ import SceneKit
 import SpriteKit
 import GameplayKit
 
-class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate, LevelDelegate {
+class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
    
     private var missionController: MissionController!
     private var bigBridgeBattleController: BigBridgeBattleController!
     open var newMissionOverlay: NewMissionOverlay?
     
-    func resetSounds() {
-        // Restart the background music
-        self.soundController.playbackgroundMusic(soundName: "backgroundMusic", loops: true, node: self.cameraNode)
-        
-    }
+   
     override func stopSounds()
     {
         // Clean all the sounds
@@ -69,7 +65,7 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate, L
     
     // MARK: Initializer
     init(scnView: SCNView, gameControllerDelegate: GameViewControllerDelagate) {
-        super.init(scnView: scnView, levelIdentifier: "level2", gameControllerDelegate:  gameControllerDelegate)
+        super.init(scnView: scnView, levelIdentifier: "level2", gameControllerDelegate:  gameControllerDelegate, levelDelegate: self)
         
         //load the main scene
         guard let scene = SCNScene(named: "Game.scnassets/fases/fase2.scn") else {
@@ -509,5 +505,17 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate, L
             
             self.missionController.breakBox(boxNode: boxNode)
         }
+    }
+}
+
+extension Fase2GameController: LevelDelegate {
+    func tutorialEnded() {
+        
+    }
+    
+    func resetSounds() {
+        // Restart the background music
+        self.soundController.playbackgroundMusic(soundName: "backgroundMusic", loops: true, node: self.cameraNode)
+        
     }
 }

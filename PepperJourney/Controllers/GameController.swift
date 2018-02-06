@@ -28,11 +28,13 @@ enum CategoryMaskType: Int {
 
 protocol LevelDelegate {
     func resetSounds()
-     func setuptFinishLevel() 
+    func setuptFinishLevel()
+    func tutorialEnded()
 }
 
-class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
+class GameController: NSObject, SCNSceneRendererDelegate {
     
+    private var levelDelegate: LevelDelegate!
     var entityManager: EntityManager!
     var character: Character!
     var characterStateMachine: GKStateMachine!
@@ -159,8 +161,10 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     }
     
     // MARK: Initializer
-    init(scnView: SCNView, levelIdentifier: String, gameControllerDelegate: GameViewControllerDelagate) {
+    init(scnView: SCNView, levelIdentifier: String, gameControllerDelegate: GameViewControllerDelagate, levelDelegate: LevelDelegate) {
         super.init()
+        
+        self.levelDelegate = levelDelegate
         
         //set scnView
         self.scnView = scnView
@@ -444,21 +448,6 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
 //        self.endedAd(wonReward: true)//apagar delete
     }
     
-	func tutorialFase1(fase1: Fase1GameController) {
-        
-        if(!self.scene.isPaused){
-            if self.tutorialFase1Overlay == nil {
-                self.tutorialFase1Overlay = SKScene(fileNamed: "TutorialFase1Overlay.sks") as? TutorialFase1Overlay
-                self.tutorialFase1Overlay?.scaleMode = .aspectFill
-                self.tutorialFase1Overlay?.gameOptionsDelegate = self
-				self.tutorialFase1Overlay?.fase1GameController = fase1
-            }
-            
-            self.scnView.overlaySKScene = self.tutorialFase1Overlay
-            self.gameStateMachine.enter(TutorialFase1State.self)
-        }
-    }
-    
 }
 
 extension GameController : Controls {
@@ -536,4 +525,9 @@ extension GameController : SCNPhysicsContactDelegate {
     }
 }
 
+extension GameController: GameOptions {
+    func tutorialClosed() {
+        self.levelDelegate.tutorialEnded()
+    }
+}
 

@@ -15,8 +15,7 @@ protocol GameOptions  {
     func resume()
     func loadAd(loadedVideoFeedback: @escaping () -> Void)
     func cancelAd()
-	func tutorialFase1(fase1: Fase1GameController)
     func nextLevel()
     func previousLevel()
-//    func skipTutorial()
+    func tutorialClosed()
 }
