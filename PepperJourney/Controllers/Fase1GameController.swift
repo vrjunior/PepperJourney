@@ -17,10 +17,10 @@ class Fase1GameController: GameController {
     private var isWinner:Bool = false
     private var firstTimePlayingTutorial:Bool = true
     
-    override func resetSounds() {
+    func resetSounds() {
         // Restart the background music
         self.soundController.playbackgroundMusic(soundName: "backgroundMusic", loops: true, node: self.cameraNode)
-        
+
     }
     
     override func stopSounds() {
@@ -107,7 +107,7 @@ class Fase1GameController: GameController {
     
     override func initializeTheGame () {
         super.initializeTheGame()
-        
+        self.resetSounds()
         gameStateMachine.enter(TutorialFase1State.self)
     }
     
@@ -151,12 +151,12 @@ class Fase1GameController: GameController {
         
         self.prepereToStartGame()
         
-        let videoSender = VideoSender(blockAfterVideo: self.prepareToNextLevel, cutScenePath: "cutscene1.mp4", cutSceneSubtitlePath: "cutscene1.srt".localized)
+        let videoSender = VideoSender(blockAfterVideo: self.setuptFinishLevel, cutScenePath: "cutscene1.mp4", cutSceneSubtitlePath: "cutscene1.srt".localized)
         self.gameControllerDelegate?.playCutScene(videoSender: videoSender)
     }
     
     // Atenção não pode pausar a cena senão o audio não será executado.
-    func prepareToNextLevel() {
+    func setuptFinishLevel() {
         
         let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks") as! FinishOverlay
         finishLevelOverlay.gameOptionsDelegate = self
@@ -167,11 +167,7 @@ class Fase1GameController: GameController {
         // Play the scene to reproduce the sound
         gameStateMachine.enter(PlayState.self)
         
-        let soundAction = self.soundController.getSoundAction(soundName: "FinishLevelSound", loops: false)
-        self.cameraNode.runAction(soundAction) {
-            self.soundController.removeAllSound()
-            print("removeu")
-        }
+         self.soundController.playSoundEffect(soundName: "FinishLevelSound", loops: false, node: self.cameraNode)
     }
     
     override func startGame() {

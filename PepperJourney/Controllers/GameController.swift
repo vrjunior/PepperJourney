@@ -26,6 +26,10 @@ enum CategoryMaskType: Int {
     case checkPoint   = 512
 }
 
+protocol LevelDelegate {
+    func resetSounds()
+     func setuptFinishLevel() 
+}
 
 class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     
@@ -82,12 +86,6 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
             }
             character!.direction = direction
         }
-    }
-    
-    func resetSounds() {
-        // Restart the background music
-        self.soundController.playbackgroundMusic(soundName: "backgroundMusic", loops: true, node: self.cameraNode)
-        
     }
     
     func stopSounds() {
@@ -293,8 +291,6 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         
         // Reset of this flag
         self.continueGameEnable = false
-        
-        self.resetSounds()
     }
     
     func startGame() {
@@ -413,12 +409,16 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
         }
         
     }
+    func prepareToCloseLevel() {
+        self.soundController.removeAllSounds()
+    }
 
     // Cancela a exibição do Ad
     func cancelAd() {
         self.gameControllerDelegate?.cancelAd()
     }
     func nextLevel() {
+        self.prepareToCloseLevel()
         self.sceneRenderer = nil
         if self.levelIdentifier == "level1" {
             self.gameControllerDelegate?.setComic(named: "level2")
@@ -428,6 +428,7 @@ class GameController: NSObject, SCNSceneRendererDelegate, GameOptions {
     }
     
     func previousLevel() {
+        self.prepareToCloseLevel()
          self.sceneRenderer = nil
         if self.levelIdentifier == "level2" {
             self.gameControllerDelegate?.setComic(named: "level1")

@@ -64,6 +64,7 @@ extension FinishOverlay : SKButtonDelegate {
     func buttonReleased(target: SKButton) {
         if target == restartButton {
             gameOptionsDelegate?.restart()
+            self.restartButton.colorBlendFactor = target.defaultColorBlendFactor
         }
         else if target == forwardButton {
             gameOptionsDelegate?.nextLevel()
@@ -75,8 +76,7 @@ extension FinishOverlay : SKButtonDelegate {
     
     
     func buttonPressed(target: SKButton) {
-        
-       
+       target.colorBlendFactor = target.defaultColorBlendFactor
 
         
     }

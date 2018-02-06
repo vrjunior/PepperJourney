@@ -7,6 +7,8 @@
 */
 
 "cutscene1.srt" = "cutscene1_ptbr.srt";
+"cutscene2.srt" = "cutscene2_ptbr.srt";
+"cutscene3.srt" = "cutscene3_ptbr.srt";
 
 //F1_Pepper_1
 "I have to run!" = "Tenho que correr";

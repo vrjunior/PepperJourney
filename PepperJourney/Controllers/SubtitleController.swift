@@ -19,6 +19,7 @@ struct Subtitle {
     var duration: TimeInterval!
     var text: [String]
 }
+
 class SubtitleController {
     let fadeInDuration: TimeInterval = 0
     let fadeOutDuration: TimeInterval = 0
@@ -61,23 +62,23 @@ class SubtitleController {
                                                                                         "challenge ahead, I wish you good luck!".localized]))
         
         // Level 2
-        self.subtitles.append(Subtitle(name: "F2_Pepper_1", duration: 2.09, text: ["Look, a box!"]))
-        self.subtitles.append(Subtitle(name: "F2_Pepper_4", duration: 4.66, text: ["O my god! The Potato",
-                                                                                   "Empire is worst than I thought"]))
-        self.subtitles.append(Subtitle(name: "F2_Pepper_5", duration: 1.94, text: ["Ohhh… There is nothing here!"]))
-        self.subtitles.append(Subtitle(name: "F2_Pepper_6", duration: 2.42, text: ["Ohhh… There is nothing here!"]))
-        self.subtitles.append(Subtitle(name: "F2_Pepper_7", duration: 2.53, text: ["Ohhh… There is nothing here!"]))
-        self.subtitles.append(Subtitle(name: "F2_Pepper_8", duration: 2.09, text: ["Aah I chose the wrong path"]))
-        self.subtitles.append(Subtitle(name: "F2_Pepper_9", duration: 2.85, text: ["I chose the wrong path, again"]))
-        self.subtitles.append(Subtitle(name: "F2_Pepper_10", duration: 1.22, text: ["I chose the wrong path"]))
-        self.subtitles.append(Subtitle(name: "F2_Pepper_11", duration: 2.78, text: ["I chose the wrong path, again"]))
-        self.subtitles.append(Subtitle(name: "F2_Pepper_12", duration: 2.56, text: ["Nooo, another dead end"]))
-        self.subtitles.append(Subtitle(name: "F2_Pepper_13", duration: 3.24, text: ["Ohh… Nooo, another dead end!?"]))
-        self.subtitles.append(Subtitle(name: "F2_Pepper_14", duration: 3.61, text: ["So many ways!",
-                                                                                    "which one should I pick?"]))
-        self.subtitles.append(Subtitle(name: "F2_Pepper_15", duration: 5.82, text: ["Now I can throw fire",
-                                                                                    "Let's fry some potatoes!"]))
-        self.subtitles.append(Subtitle(name: "F2_Potato_1", duration: 2.20, text: ["Stop her", "She is realizing  our prisioners"]))
+        self.subtitles.append(Subtitle(name: "F2_Pepper_1", duration: 2.09, text: ["Look, a box!".localized]))
+        self.subtitles.append(Subtitle(name: "F2_Pepper_4", duration: 4.66, text: ["O my god! The Potato".localized,
+                                                                                   "Empire is worst than I thought".localized]))
+        self.subtitles.append(Subtitle(name: "F2_Pepper_5", duration: 1.94, text: ["Ohhh… There is nothing here!".localized]))
+        self.subtitles.append(Subtitle(name: "F2_Pepper_6", duration: 2.42, text: ["Ohhh… There is nothing here!".localized]))
+        self.subtitles.append(Subtitle(name: "F2_Pepper_7", duration: 2.53, text: ["Ohhh… There is nothing here!".localized]))
+        self.subtitles.append(Subtitle(name: "F2_Pepper_8", duration: 2.09, text: ["Aah I chose the wrong path".localized]))
+        self.subtitles.append(Subtitle(name: "F2_Pepper_9", duration: 2.85, text: ["I chose the wrong path, again".localized]))
+        self.subtitles.append(Subtitle(name: "F2_Pepper_10", duration: 1.22, text: ["I chose the wrong path".localized]))
+        self.subtitles.append(Subtitle(name: "F2_Pepper_11", duration: 2.78, text: ["I chose the wrong path, again".localized]))
+        self.subtitles.append(Subtitle(name: "F2_Pepper_12", duration: 2.56, text: ["Nooo, another dead end".localized]))
+        self.subtitles.append(Subtitle(name: "F2_Pepper_13", duration: 3.24, text: ["Ohh… Nooo, another dead end!?".localized]))
+        self.subtitles.append(Subtitle(name: "F2_Pepper_14", duration: 3.61, text: ["So many ways!".localized,
+                                                                                    "which one should I pick?".localized]))
+        self.subtitles.append(Subtitle(name: "F2_Pepper_15", duration: 5.82, text: ["Now I can throw fire".localized,
+                                                                                    "Let's fry some potatoes!".localized]))
+        self.subtitles.append(Subtitle(name: "F2_Potato_1", duration: 2.20, text: ["Stop her", "She is realizing  our prisioners".localized]))
     }
     
     required init?(coder aDecoder: NSCoder) {

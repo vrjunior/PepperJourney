@@ -12,20 +12,17 @@ import SceneKit
 import SpriteKit
 import GameplayKit
 
-class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
+class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate, LevelDelegate {
    
     private var missionController: MissionController!
     private var bigBridgeBattleController: BigBridgeBattleController!
     open var newMissionOverlay: NewMissionOverlay?
     
-    
-    override func resetSounds()
-    {
+    func resetSounds() {
         // Restart the background music
         self.soundController.playbackgroundMusic(soundName: "backgroundMusic", loops: true, node: self.cameraNode)
         
     }
-    
     override func stopSounds()
     {
         // Clean all the sounds
@@ -170,19 +167,15 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         self.character.characterNode.isHidden = true
     }
     
-    
-    
-    override func setupFinishLevel() {
-        gameStateMachine.enter(PauseState.self)
+    func playCutscene3() {
+         gameStateMachine.enter(PauseState.self)
         
-        self.prepereToStartGame()
-        
-        let videoSender = VideoSender(blockAfterVideo: self.prepareToNextLevel, cutScenePath: "cutscene3.mp4", cutSceneSubtitlePath: "cutscene2.srt".localized)
+        let videoSender = VideoSender(blockAfterVideo: self.setuptFinishLevel, cutScenePath: "cutscene3.mp4", cutSceneSubtitlePath: "cutscene3.srt".localized)
         self.gameControllerDelegate?.playCutScene(videoSender: videoSender)
-
     }
     
-    func prepareToNextLevel() {
+    func setuptFinishLevel() {
+        self.prepereToStartGame()
         
         let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks") as! FinishOverlay
         finishLevelOverlay.gameOptionsDelegate = self
@@ -193,10 +186,9 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         // Play the scene to reproduce the sound
         gameStateMachine.enter(PlayState.self)
         
-        let soundAction = self.soundController.getSoundAction(soundName: "FinishLevelSound", loops: false)
-        self.cameraNode.runAction(soundAction) {
-            self.soundController.removeAllSound()
-        }
+        self.soundController.playSoundEffect(soundName: "FinishLevelSound", loops: false, node: self.cameraNode)
+        
+        
     }
     
     override func startGame() {
@@ -263,7 +255,7 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         self.startGame()
     }
     func releasedAllPrisoners() {
-        self.setupFinishLevel()
+        self.playCutscene3()
     }
     func showNewMission() {
         

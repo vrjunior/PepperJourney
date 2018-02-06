@@ -135,7 +135,7 @@ class SoundController
         self.sounds.removeValue(forKey: soundName)
     }
     
-    public func removeAllSound() {
+    public func removeAllSounds() {
         self.sounds.removeAll()
         
     }
