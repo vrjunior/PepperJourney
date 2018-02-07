@@ -240,7 +240,8 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         self.startGame()
     }
     func releasedAllPrisoners() {
-        self.playCutscene3()
+            self.playCutscene3()
+        
     }
     func showNewMission() {
         

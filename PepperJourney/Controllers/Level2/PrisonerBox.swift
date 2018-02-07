@@ -55,9 +55,6 @@ class PrisonerBox: DistanceAlarmDelegate {
         // Add the box where the characters will be arrested
         self.loadBox()
         
-        // Add the components responsable by cleaning the entity
-        self.addEntityCleaners()
-        
     }
     
     func fireDistanceAlarm(modelComponent: ModelComponent) {
@@ -167,9 +164,8 @@ class PrisonerBox: DistanceAlarmDelegate {
             self.loadPrisoner(prisoner: prisoner)
         }
        
-        
-        // Run the conversation
-        
+        // Add the components responsable by cleaning the entity
+        self.addEntityCleaners()
         
         // Run audio conversation and after run charactersEcape function
         let prisoner = self.prisoners[0]
