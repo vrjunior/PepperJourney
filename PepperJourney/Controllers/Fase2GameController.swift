@@ -17,7 +17,7 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
     private var missionController: MissionController!
     private var bigBridgeBattleController: BigBridgeBattleController!
     open var newMissionOverlay: NewMissionOverlay?
-    
+    let defaultZFar: Double = 700
    
     override func stopSounds()
     {
@@ -124,15 +124,17 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
     }
     
     override func initializeTheGame () {
-        //        guard let node = character.component(ofType: ModelComponent.self)?.modelNode else
-        //        {
-        //            fatalError("Character node not found")
-        //        }
         
+        // TO DO:
+        // FAZER USO DO DELEGATE NOS CASOS EM QUE NAO É CONTINUE E PROS CASOS QUE É
+        if !self.continueGameEnable {
+            // reset of mission things
+            self.missionController.resetMission()
+        }
         super.initializeTheGame()
         // Show de character
         self.character.characterNode.isHidden = false
-        self.cameraNode.camera?.zFar = 700
+        self.cameraNode.camera?.zFar = self.defaultZFar
 
         
         self.entityManager.setupGameInitialization()
@@ -144,12 +146,10 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         // Reset of all the sounds
         self.resetSounds()
         
-        // reset of mission things
-        self.missionController.resetMission()
         
         // Reset battle
         self.bigBridgeBattleController.resetBattle()
-        self.character.setupCharacter()
+        
         
     }
     
@@ -440,6 +440,12 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
                     //pause controls
                     self.controlsOverlay?.isPausedControl = true
                 }
+            }
+            // If have contact with the checkpoint
+            else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.checkPoint.rawValue {
+                
+                self.lastCheckPoint = anotherNode
+                
             }
                 
             

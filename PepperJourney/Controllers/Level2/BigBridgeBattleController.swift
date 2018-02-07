@@ -33,7 +33,7 @@ class BigBridgeBattleController {
     var battleState: BattleState = .releasingPrisoners
     
     var potatoesToCreate: Float = 0
-    let totalPotatoNumber:Float = 1//15
+    let totalPotatoNumber:Float = 15
     
     var generationPoints = [SCNVector3]()
     
