@@ -495,7 +495,7 @@ extension Fase1GameController: LevelDelegate {
         DispatchQueue.main.async { [unowned self] in
             if let lifeComponent = self.character.component(ofType: LifeComponent.self) {
                 if lifeComponent.canReceiveDamage {
-                    lifeComponent.receiveDamage(enemyCategory: enemyCategory, waitTime: 0.2)
+                    lifeComponent.receiveDamage(enemyCategory: enemyCategory, waitTime: 0.5)
                     let currentLife = lifeComponent.getLifePercentage()
                     
                     if currentLife <= 0 {

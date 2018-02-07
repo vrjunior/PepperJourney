@@ -11,7 +11,7 @@ import GameKit
 
 class LifeComponent : GKComponent {
     
-    private var lifeValue: Float = 100
+    public private(set) var lifeValue: Float = 100
     private let maxLifeValue: Float = 100
     
     public var canReceiveDamage: Bool = true
@@ -24,19 +24,16 @@ class LifeComponent : GKComponent {
             if self.entity is Character {
                 
                 if enemyCategory == .potato {
-                    self.lifeValue -= 30
+                    self.lifeValue -= 10
                 }
                 // cactus
                 if enemyCategory == .obstacle {
-                    self.lifeValue -= 10
+                    self.lifeValue -= 5
                 }
-            }
-            
-            if self.entity is PotatoEntity {
-                
             }
         }
         
+
         let when = DispatchTime.now() + waitTime
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.canReceiveDamage = true

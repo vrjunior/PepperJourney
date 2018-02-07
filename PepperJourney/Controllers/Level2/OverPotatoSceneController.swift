@@ -127,6 +127,7 @@ class OverPotatoSceneController {
                 self.changeToCamera(cameraName: "camera2")
 
                 SoundController.sharedInstance.playSoundEffect(soundName: "generalSpeech", loops: false, node: self.cameras[1])
+                SubtitleController.sharedInstance.setupSubtitle(subName: "generalSpeech")
 
             },
 
@@ -156,7 +157,9 @@ class OverPotatoSceneController {
             SCNAction.run{ _ in
 
                 // Attack order
-                SoundController.sharedInstance.playSoundEffect(soundName: "attackOrder", loops: false, node: self.cameras[2])
+                SoundController.sharedInstance.playSoundEffect(soundName: "attackOrder", loops: false, node: (self.scnView?.pointOfView)!)
+                SubtitleController.sharedInstance.setupSubtitle(subName: "attackOrder")
+                
             },
 
             // wait the attack order

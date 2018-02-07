@@ -343,10 +343,6 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         
         // update characters
-        if character == nil {
-            print("ERROR getting character")
-            return
-        }
         character!.update(atTime: time, with: renderer)
         self.updateFollowingCamera()
         self.entityManager.update(atTime: time)

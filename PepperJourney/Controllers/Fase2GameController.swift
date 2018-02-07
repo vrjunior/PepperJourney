@@ -150,6 +150,7 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
             self.entityManager.tutorialEnemyGeneration?.setupPotatoGeneratorSystem()
             self.cameraNode.camera?.zFar = self.defaultZFar
         }
+        super.initializeTheGame()
        
       
         // Show de character
@@ -531,7 +532,7 @@ extension Fase2GameController: LevelDelegate {
         DispatchQueue.main.async { [unowned self] in
             if let lifeComponent = self.character.component(ofType: LifeComponent.self) {
                 if lifeComponent.canReceiveDamage {
-                    lifeComponent.receiveDamage(enemyCategory: .potato, waitTime: 0.2)
+                    lifeComponent.receiveDamage(enemyCategory: .potato, waitTime: 0.5)
                     let currentLife = lifeComponent.getLifePercentage()
                     
                     if currentLife <= 0 {

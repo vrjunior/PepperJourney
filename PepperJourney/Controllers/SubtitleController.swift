@@ -79,6 +79,10 @@ class SubtitleController {
         self.subtitles.append(Subtitle(name: "F2_Pepper_15", duration: 5.82, text: ["Now I can throw fire".localized,
                                                                                     "Let's fry some potatoes!".localized]))
         self.subtitles.append(Subtitle(name: "F2_Potato_1", duration: 2.20, text: ["Stop her", "She is realizing  our prisioners".localized]))
+        
+        self.subtitles.append(Subtitle(name: "attackOrder", duration: 2.23, text: ["Troop Attack!!!".localized]))
+        self.subtitles.append(Subtitle(name: "generalSpeech", duration: 4.58, text: ["Potatoes, it's the last chance".localized,
+                                                                            "to destroy this pepper".localized]))
     }
     
     required init?(coder aDecoder: NSCoder) {
