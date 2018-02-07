@@ -26,7 +26,10 @@ class LifeComponent : GKComponent {
                 if enemyCategory == .potato {
                     self.lifeValue -= 30
                 }
-                
+                // cactus
+                if enemyCategory == .obstacle {
+                    self.lifeValue -= 15
+                }
             }
             
             if self.entity is PotatoEntity {

@@ -422,6 +422,26 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
                     }
                 }  
             }
+            
+            // Colided with a cactus
+            else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.obstacle.rawValue,
+            anotherNode?.name == "Cactus" {
+                
+                DispatchQueue.main.async { [unowned self] in
+                    if let lifeComponent = self.character.component(ofType: LifeComponent.self) {
+                        if lifeComponent.canReceiveDamage {
+                            lifeComponent.receiveDamage(enemyCategory: .obstacle, waitTime: 0.2)
+                            let currentLife = lifeComponent.getLifePercentage()
+                            
+                            if currentLife <= 0 {
+                                self.setupGameOver()
+                                return
+                            }
+                            self.overlayDelegate?.updateLifeIndicator(percentage: currentLife)
+                        }
+                    }
+                }
+            }
                 
             else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.lake.rawValue {
                 
