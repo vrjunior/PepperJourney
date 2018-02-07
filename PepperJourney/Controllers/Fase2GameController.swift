@@ -17,7 +17,7 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
     private var missionController: MissionController!
     private var bigBridgeBattleController: BigBridgeBattleController!
     open var newMissionOverlay: NewMissionOverlay?
-    let defaultZFar: Double = 700
+    let defaultZFar: Double = 4000
    
     override func stopSounds()
     {
@@ -125,31 +125,38 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
     
     override func initializeTheGame () {
         
+        var battleState: BattleState
+        if self.missionController.missionState == .openedBox4 {
+            battleState = .waitingPepper
+            
+            // to respect the battle potato number
+            self.entityManager.killAllPotatoes()
+        }
+        else {
+            battleState = .releasingPrisoners
+        }
+        // Reset battle
+        self.bigBridgeBattleController.resetBattle(initialState: battleState)
+        
         // TO DO:
         // FAZER USO DO DELEGATE NOS CASOS EM QUE NAO É CONTINUE E PROS CASOS QUE É
         if !self.continueGameEnable {
+         
             // reset of mission things
             self.missionController.resetMission()
+            
+            // Reset the tutorial
+            // Configuration of the potato generator system
+            self.entityManager.tutorialEnemyGeneration?.setupPotatoGeneratorSystem()
+            self.cameraNode.camera?.zFar = self.defaultZFar
         }
-        super.initializeTheGame()
+       
+      
         // Show de character
         self.character.characterNode.isHidden = false
-        self.cameraNode.camera?.zFar = self.defaultZFar
-
-        
-        self.entityManager.setupGameInitialization()
-        
-        // Reset the tutorial
-        // Configuration of the potato generator system
-        self.entityManager.tutorialEnemyGeneration?.setupPotatoGeneratorSystem()
-
+       
         // Reset of all the sounds
         self.resetSounds()
-        
-        
-        // Reset battle
-        self.bigBridgeBattleController.resetBattle()
-        
         
     }
     

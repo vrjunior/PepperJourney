@@ -30,7 +30,7 @@ enum BattleState {
 
 class BigBridgeBattleController {
     weak var scnView: SCNView!
-    var battleState: BattleState = .releasingPrisoners
+    public private(set) var battleState: BattleState = .releasingPrisoners
     
     var potatoesToCreate: Float = 0
     let totalPotatoNumber:Float = 15
@@ -82,8 +82,8 @@ class BigBridgeBattleController {
         self.trapBridge = trapBridge
     }
     
-    public func resetBattle() {
-        self.battleState = .releasingPrisoners
+    public func resetBattle(initialState: BattleState) {
+        self.battleState = initialState
         self.actionSceneController.resetSceneState()
         self.potatoesToCreate = self.totalPotatoNumber
         self.timeCounter = 0
