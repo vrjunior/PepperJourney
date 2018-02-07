@@ -28,7 +28,7 @@ class LifeComponent : GKComponent {
                 }
                 // cactus
                 if enemyCategory == .obstacle {
-                    self.lifeValue -= 15
+                    self.lifeValue -= 10
                 }
             }
             

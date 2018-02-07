@@ -143,7 +143,7 @@ class Fase1GameController: GameController {
         }
     }
     
-    override func setupFinishLevel() {
+    func setupFinishLevel() {
         gameStateMachine.enter(PauseState.self)
         
         self.prepereToStartGame()
@@ -387,40 +387,14 @@ class Fase1GameController: GameController {
             }
                 // foi pego por uma batata
             else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.potato.rawValue {
-                DispatchQueue.main.async { [unowned self] in
-                    if let lifeComponent = self.character.component(ofType: LifeComponent.self) {
-                        if lifeComponent.canReceiveDamage {
-                            lifeComponent.receiveDamage(enemyCategory: .potato, waitTime: 0.2)
-                            let currentLife = lifeComponent.getLifePercentage()
-                            
-                            if currentLife <= 0 {
-                                self.setupGameOver()
-                                return
-                            }
-                            self.overlayDelegate?.updateLifeIndicator(percentage: currentLife)
-                        }
-                    }
-                }
+                self.reciveDamage(enemyCategory: .potato)
                 
             }
                 // Colided with a cactus
             else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.obstacle.rawValue,
                 anotherNode?.name == "Cactus" {
                 
-                DispatchQueue.main.async { [unowned self] in
-                    if let lifeComponent = self.character.component(ofType: LifeComponent.self) {
-                        if lifeComponent.canReceiveDamage {
-                            lifeComponent.receiveDamage(enemyCategory: .obstacle, waitTime: 0.2)
-                            let currentLife = lifeComponent.getLifePercentage()
-                            
-                            if currentLife <= 0 {
-                                self.setupGameOver()
-                                return
-                            }
-                            self.overlayDelegate?.updateLifeIndicator(percentage: currentLife)
-                        }
-                    }
-                }
+                self.reciveDamage(enemyCategory: .obstacle)
             }
                 
             else if anotherNode?.physicsBody?.categoryBitMask == CategoryMaskType.lake.rawValue {
@@ -516,6 +490,25 @@ class Fase1GameController: GameController {
 }
 
 extension Fase1GameController: LevelDelegate {
+    
+    func reciveDamage(enemyCategory: CategoryMaskType) {
+        DispatchQueue.main.async { [unowned self] in
+            if let lifeComponent = self.character.component(ofType: LifeComponent.self) {
+                if lifeComponent.canReceiveDamage {
+                    lifeComponent.receiveDamage(enemyCategory: enemyCategory, waitTime: 0.2)
+                    let currentLife = lifeComponent.getLifePercentage()
+                    
+                    if currentLife <= 0 {
+                        self.setupGameOver()
+                        return
+                    }
+                    self.overlayDelegate?.updateLifeIndicator(percentage: currentLife)
+                    self.indicateDamage()
+                }
+            }
+        }
+    }
+    
     
     // Atenção não pode pausar a cena senão o audio não será executado.
     func setuptFinishLevel() {

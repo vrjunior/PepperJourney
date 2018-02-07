@@ -30,6 +30,7 @@ protocol LevelDelegate {
     func resetSounds()
     func setuptFinishLevel()
     func tutorialEnded()
+    func reciveDamage(enemyCategory: CategoryMaskType)
 }
 
 class GameController: NSObject, SCNSceneRendererDelegate {
@@ -257,8 +258,13 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     
     }
     
-    func setupFinishLevel() {
+    func indicateDamage() {
         
+        self.controlsOverlay?.setDamageIndicator(alpha: 0.7)
+        
+        self.scene.rootNode.runAction(SCNAction.wait(duration: 0.2)) {
+            self.controlsOverlay?.setDamageIndicator(alpha: 0)
+        }
     }
     
     func initializeTheGame () {

@@ -44,7 +44,7 @@ class ControlsOverlay: SKScene {
             
         }
     }
-
+    private var damageIndicator: SKSpriteNode!
     private var subtitleLabel: SKLabelNode!
     private var jumpButton: JumpButton!
     private var attackButton: AttackButton!
@@ -91,6 +91,8 @@ class ControlsOverlay: SKScene {
         self.jumpButton = self.childNode(withName: "jumpButton") as! JumpButton
         self.attackButton = self.childNode(withName: "attackButton") as! AttackButton
         self.cameraControl = self.childNode(withName: "cameraControl") as! CameraControl
+        self.damageIndicator = self.childNode(withName: "damageIndicator") as! SKSpriteNode
+        self.damageIndicator.alpha = 0
 
         self.pauseButton = self.childNode(withName: "pauseButton") as! SKButton
         self.pauseButton.delegate = self
@@ -104,6 +106,11 @@ class ControlsOverlay: SKScene {
         // disable interation in scenekit
         self.isUserInteractionEnabled = false
         
+    }
+    
+    public func setDamageIndicator(alpha: CGFloat) {
+    
+        self.damageIndicator.alpha = alpha
     }
     
     func updateMissionCounter(label: String) {
@@ -152,16 +159,13 @@ extension ControlsOverlay : SKButtonDelegate {
     func buttonReleased(target: SKButton) {
         if target == pauseButton {
             self.gameOptionsDelegate?.pause()
+
         }
-       
+        
     }
     
 
     func buttonPressed(target: SKButton) {
-      
-
-        
-
     }
 
 }
