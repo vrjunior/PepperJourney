@@ -15,8 +15,8 @@ class OverPotatoSceneController {
     var overPotatoSceneNode: SCNNode!
     
     var cameras = [SCNNode]()
-    var camera1StartPosition: SCNVector3!
-    var troopStartPosition: SCNVector3!
+    var camera1StartPosition: float3!
+    var troopStartPosition: float3!
     
     public var troopNode: SCNNode!
     public var battalions: [SCNNode]!
@@ -59,8 +59,12 @@ class OverPotatoSceneController {
       
         self.resetBridge()
         
-        // Reset nodes
-        self.resetNodes()
+        // Reset the camera 1
+        self.cameras[0].position = SCNVector3(self.camera1StartPosition)
+        self.cameras[0].eulerAngles = SCNVector3(0,0,0)
+        
+        // Reset the troop to the initial position
+        self.troopNode.position = SCNVector3(self.troopStartPosition)
         
         // Clean all actions
         self.cleanActions()
@@ -218,15 +222,6 @@ class OverPotatoSceneController {
     
     }
     
-    func resetNodes() {
-        // Cameras
-        self.cameras[0].runAction(SCNAction.move(to: self.camera1StartPosition, duration: 0))
-        self.cameras[0].runAction(SCNAction.rotateTo(x: 0, y: 0, z: 0, duration: 0))
-        
-        // army
-        self.troopNode.runAction(SCNAction.move(to: self.troopStartPosition, duration: 0))
-    }
-    
     func getNodeActionsFromBase(nodeName: String) -> SCNAction {
         
         guard let actionNode = self.actionsScene.rootNode.childNode(withName: nodeName, recursively: false) else {
@@ -274,7 +269,7 @@ class OverPotatoSceneController {
                 fatalError("Error getting camera or camera or camera start position")
         }
         
-        self.camera1StartPosition = cameraStartPosition
+        self.camera1StartPosition = float3(cameraStartPosition)
         self.cameras = [camera1, camera2, camera3, camera4]
         
         guard let potatoesNode = self.overPotatoSceneNode.childNode(withName: "potatoes", recursively: false),
@@ -288,8 +283,9 @@ class OverPotatoSceneController {
         self.generalNode = general
         self.drumPotatoes = drumPotatoes
         self.troopNode = potatoesArmy
-        self.troopStartPosition = self.troopNode.position
+        self.troopStartPosition = float3(self.troopNode.position)
         self.battalions = armyRef.childNodes
+
     }
     
     func changeToCamera(cameraName: String) {
