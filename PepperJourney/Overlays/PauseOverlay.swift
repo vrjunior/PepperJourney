@@ -21,16 +21,16 @@ class PauseOverlay: SKScene {
     override func sceneDidLoad() {
         
         //setup nodes
-        self.resumeButton = self.childNode(withName: "resumeButton") as! SKButton
+        self.resumeButton = self.childNode(withName: "buttons/resumeButton") as! SKButton
         self.resumeButton.delegate = self
         
-        self.restartButton = self.childNode(withName: "restartButton") as! SKButton
+        self.restartButton = self.childNode(withName: "buttons/restartButton") as! SKButton
         self.restartButton.delegate = self
         
-        self.menuButton = self.childNode(withName: "menuButton") as! SKButton
-        self.resumeButton.delegate = self
+        self.menuButton = self.childNode(withName: "buttons/menuButton") as! SKButton
+        self.menuButton.delegate = self
         
-        self.settingsButton = self.childNode(withName: "settingsButton") as! SKButton
+        self.settingsButton = self.childNode(withName: "buttons/settingsButton") as! SKButton
         self.settingsButton.delegate = self
         
     }
@@ -39,6 +39,11 @@ class PauseOverlay: SKScene {
 extension PauseOverlay : SKButtonDelegate {
     func buttonReleased(target: SKButton) {
         target.colorBlendFactor = 0
+    }
+    
+    func buttonPressed(target: SKButton) {
+        
+        target.colorBlendFactor = target.defaultColorBlendFactor
         
         if target == restartButton {
             self.gameOptionsDelegate?.restart()
@@ -47,16 +52,11 @@ extension PauseOverlay : SKButtonDelegate {
             self.gameOptionsDelegate?.resume()
         }
         else if target == menuButton {
-            //TODO handle menuButton
+            self.gameOptionsDelegate?.goToMenu()
         }
         else if target == settingsButton {
             //TODO handle settingsButton
         }
-    }
-    
-    func buttonPressed(target: SKButton) {
-        
-        target.colorBlendFactor = target.defaultColorBlendFactor
 
     }
     

@@ -28,6 +28,7 @@ struct Comic {
 protocol GameViewControllerDelagate: NSObjectProtocol {
     func runNextComic()
     func setComic(named: String)
+    func setMenu()
     
     // Ads
     func showAd(blockToRunAfter: @escaping (Bool) -> Void, loadedVideoFeedback:  @escaping () -> Void)
@@ -46,6 +47,10 @@ class GameViewController: UIViewController {
     var gameView: SCNView {
         return view as! SCNView
     }
+    var gameController: GameController?
+    var menu: MenuController?
+    
+    
     func setupComics() {
         let level1     = Comic(name: "level1", previousComic: nil, nextComic: "cutscene1", runComic: self.level1)
         
@@ -60,7 +65,7 @@ class GameViewController: UIViewController {
         self.comics = [level1, cutscene1, cutscene2, level2, cutscene3]
         
     }
-    var gameController: GameController?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,6 +86,7 @@ class GameViewController: UIViewController {
             if comic.name == named {
                 self.currentComic = comic
                 self.currentComic.runComic()
+                self.menu = nil
                 return
             }
         }
@@ -99,14 +105,30 @@ class GameViewController: UIViewController {
         
         
     }
+    func foo() {
+        
+    }
     func cutscene1() {
+        self.setMenu()
+        let videoSender = VideoSender(blockAfterVideo: foo, cutScenePath: "cutscene1.mp4", cutSceneSubtitlePath: "cutscene1.srt".localized)
+        
+        self.playCutScene(videoSender: videoSender)
         
     }
     func cutscene2() {
+        self.setMenu()
+        let videoSender = VideoSender(blockAfterVideo: foo, cutScenePath: "cutscene2.mp4", cutSceneSubtitlePath: "cutscene2.srt".localized)
         
+        self.playCutScene(videoSender: videoSender)
     }
     func cutscene3() {
+        self.setMenu()
+        let videoSender = VideoSender(blockAfterVideo: foo, cutScenePath: "cutscene3.mp4", cutSceneSubtitlePath: "cutscene3.srt".localized)
         
+        self.playCutScene(videoSender: videoSender)
+    }
+    func setMenu() {
+        self.menu = MenuController(scnView: self.gameView, gameControllerDelegate: self)
     }
     override var shouldAutorotate: Bool {
         return true

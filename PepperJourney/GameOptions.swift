@@ -18,4 +18,6 @@ protocol GameOptions  {
     func nextLevel()
     func previousLevel()
     func tutorialClosed()
+    func goToMenu()
+    func goToComic(comic: String)
 }

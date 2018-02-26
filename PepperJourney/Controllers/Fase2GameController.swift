@@ -230,7 +230,7 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
     }
     
     func playCutscene2() {
-        let videoSender = VideoSender(blockAfterVideo: self.tutorialLevel2, cutScenePath: "cutScene2.mp4", cutSceneSubtitlePath: "cutscene2.srt".localized)
+        let videoSender = VideoSender(blockAfterVideo: self.tutorialLevel2, cutScenePath: "cutscene2.mp4", cutSceneSubtitlePath: "cutscene2.srt".localized)
         
         self.gameControllerDelegate?.playCutScene(videoSender: videoSender)
 

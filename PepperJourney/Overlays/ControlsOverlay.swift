@@ -157,15 +157,16 @@ extension ControlsOverlay: SubtitleProtocol {
 
 extension ControlsOverlay : SKButtonDelegate {
     func buttonReleased(target: SKButton) {
-        if target == pauseButton {
-            self.gameOptionsDelegate?.pause()
-
-        }
+        
         
     }
     
 
     func buttonPressed(target: SKButton) {
+        if target == pauseButton {
+            self.gameOptionsDelegate?.pause()
+            
+        }
     }
 
 }
