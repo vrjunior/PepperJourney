@@ -144,6 +144,9 @@ class Fase1GameController: GameController {
     }
     
     func setupFinishLevel() {
+        
+        UserDefaults.standard.set(4, forKey: "comicReleased")
+        
         gameStateMachine.enter(PauseState.self)
         
         self.prepereToStartGame()
@@ -516,7 +519,7 @@ extension Fase1GameController: LevelDelegate {
         let finishLevelOverlay = SKScene(fileNamed: "FinishOverlay.sks") as! FinishOverlay
         finishLevelOverlay.gameOptionsDelegate = self
         finishLevelOverlay.scaleMode = .aspectFill
-        finishLevelOverlay.setForwardMode()
+        finishLevelOverlay.setNextLevel(enabled: true)
         self.scnView.overlaySKScene = finishLevelOverlay
         
         // Play the scene to reproduce the sound

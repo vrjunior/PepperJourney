@@ -35,6 +35,10 @@ class MenuController: NSObject, SCNSceneRendererDelegate {
     }
 }
 extension MenuController: GameOptions {
+    func resetGame() {
+        self.gameControllerDelegate?.resetGame()
+    }
+    
     func start() {
     }
     
@@ -46,7 +50,9 @@ extension MenuController: GameOptions {
     func nextLevel() {}
     func previousLevel() {}
     func tutorialClosed() {}
-    func goToMenu() {}
+    func goToMenu() {
+        self.gameControllerDelegate?.setMenu()
+    }
     
     func goToComic(comic: String) {
         self.gameControllerDelegate?.setComic(named: comic)

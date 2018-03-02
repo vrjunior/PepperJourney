@@ -20,4 +20,5 @@ protocol GameOptions  {
     func tutorialClosed()
     func goToMenu()
     func goToComic(comic: String)
+    func resetGame()
 }

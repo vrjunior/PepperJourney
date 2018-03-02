@@ -528,6 +528,12 @@ extension GameController : SCNPhysicsContactDelegate {
 }
 
 extension GameController: GameOptions {
+    func resetGame() {
+        self.gameControllerDelegate?.resetGame()
+    }
+    
+    func goToSettings() {}
+    
     func goToComic(comic: String) {
         self.gameControllerDelegate?.setComic(named: comic)
     }

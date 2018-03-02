@@ -48,9 +48,9 @@
 		9C3ADB2920264714004360CF /* SCNMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C3ADB2820264714004360CF /* SCNMath.swift */; };
 		9C4806811FC88A2700168571 /* SinkComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4806801FC88A2700168571 /* SinkComponent.swift */; };
 		9C4806851FCC505000168571 /* splashingWater2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9C4806841FCC504F00168571 /* splashingWater2.wav */; };
+		9C63C7A62045D6050050D2E4 /* MenuOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C63C7A82045D6050050D2E4 /* MenuOverlay.sks */; };
 		9C6C53A720408FC20076F825 /* GameOverOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C6C53A920408FC20076F825 /* GameOverOverlay.sks */; };
 		9C6C53AC20438ED00076F825 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6C53AB20438ED00076F825 /* MenuController.swift */; };
-		9C6C53B2204487680076F825 /* MenuOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9C6C53B1204487680076F825 /* MenuOverlay.sks */; };
 		9C6C53B42044A1EC0076F825 /* MenuOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6C53B32044A1EC0076F825 /* MenuOverlay.swift */; };
 		9C6D3DEB1F93252A00B8FA2A /* Game.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C6D3DEA1F93252500B8FA2A /* Game.scnassets */; };
 		9C774A631FE1997C00A388CC /* SubtitleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C774A621FE1997C00A388CC /* SubtitleController.swift */; };
@@ -110,8 +110,6 @@
 		D25AD5AE1F87ECF900F2093E /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25AD5AD1F87ECF900F2093E /* Character.swift */; };
 		D25AD5B11F8809DE00F2093E /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25AD5B01F8809DE00F2093E /* SceneKit.framework */; };
 		D25AD5B31F8809E500F2093E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25AD5B21F8809E500F2093E /* GameKit.framework */; };
-		D25BAE221FC60443000ED0EC /* SettingsOverlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = D25BAE211FC60443000ED0EC /* SettingsOverlay.sks */; };
-		D25BAE261FC60864000ED0EC /* SettingsOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25BAE251FC60864000ED0EC /* SettingsOverlay.swift */; };
 		D26035F11FCDC57B00E4F069 /* FinishOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26035F01FCDC57B00E4F069 /* FinishOverlay.swift */; };
 		D26035F31FCDC66C00E4F069 /* CGPoint+FromUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26035F21FCDC66C00E4F069 /* CGPoint+FromUIView.swift */; };
 		D26035F61FCDE53D00E4F069 /* cutscene1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D26035F51FCDDB4100E4F069 /* cutscene1.mp4 */; };
@@ -190,10 +188,10 @@
 		9C3ADB2820264714004360CF /* SCNMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCNMath.swift; sourceTree = "<group>"; };
 		9C4806801FC88A2700168571 /* SinkComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinkComponent.swift; sourceTree = "<group>"; };
 		9C4806841FCC504F00168571 /* splashingWater2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splashingWater2.wav; sourceTree = "<group>"; };
+		9C63C7A72045D6050050D2E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Base; path = Base.lproj/MenuOverlay.sks; sourceTree = "<group>"; };
 		9C6C53A820408FC20076F825 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Base; path = Base.lproj/GameOverOverlay.sks; sourceTree = "<group>"; };
 		9C6C53AA20408FCB0076F825 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = "pt-BR"; path = "pt-BR.lproj/GameOverOverlay.sks"; sourceTree = "<group>"; };
 		9C6C53AB20438ED00076F825 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
-		9C6C53B1204487680076F825 /* MenuOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuOverlay.sks; sourceTree = "<group>"; };
 		9C6C53B32044A1EC0076F825 /* MenuOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuOverlay.swift; sourceTree = "<group>"; };
 		9C6D3DEA1F93252500B8FA2A /* Game.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Game.scnassets; sourceTree = "<group>"; };
 		9C774A621FE1997C00A388CC /* SubtitleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleController.swift; sourceTree = "<group>"; };
@@ -255,8 +253,6 @@
 		D25AD5AD1F87ECF900F2093E /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		D25AD5B01F8809DE00F2093E /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		D25AD5B21F8809E500F2093E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
-		D25BAE211FC60443000ED0EC /* SettingsOverlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = SettingsOverlay.sks; path = PepperJourney/Overlays/SettingsOverlay.sks; sourceTree = SOURCE_ROOT; };
-		D25BAE251FC60864000ED0EC /* SettingsOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsOverlay.swift; sourceTree = "<group>"; };
 		D26035F01FCDC57B00E4F069 /* FinishOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishOverlay.swift; sourceTree = "<group>"; };
 		D26035F21FCDC66C00E4F069 /* CGPoint+FromUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+FromUIView.swift"; sourceTree = "<group>"; };
 		D26035F51FCDDB4100E4F069 /* cutscene1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = cutscene1.mp4; sourceTree = "<group>"; };
@@ -478,8 +474,6 @@
 				D26035F01FCDC57B00E4F069 /* FinishOverlay.swift */,
 				9C6C53A920408FC20076F825 /* GameOverOverlay.sks */,
 				D20108881FBE11D9007660E3 /* GameOverOverlay.swift */,
-				D25BAE211FC60443000ED0EC /* SettingsOverlay.sks */,
-				D25BAE251FC60864000ED0EC /* SettingsOverlay.swift */,
 				D2983A421FF2C8AE00979A52 /* PauseOverlay.sks */,
 				D201088A1FBE11D9007660E3 /* PauseOverlay.swift */,
 				D2983A461FF2C8E300979A52 /* StartOverlay.sks */,
@@ -491,7 +485,7 @@
 				D2FBD29F1FE19D3600F47A9F /* SKButton.swift */,
 				9C2FEE8C200D2801006A5274 /* NewMissionOverlay.sks */,
 				9C2FEE8E200D2978006A5274 /* NewMissionOverlay.swift */,
-				9C6C53B1204487680076F825 /* MenuOverlay.sks */,
+				9C63C7A82045D6050050D2E4 /* MenuOverlay.sks */,
 				9C6C53B32044A1EC0076F825 /* MenuOverlay.swift */,
 			);
 			name = Overlays;
@@ -708,7 +702,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C6C53B2204487680076F825 /* MenuOverlay.sks in Resources */,
+				9C63C7A62045D6050050D2E4 /* MenuOverlay.sks in Resources */,
 				9C0350E71FD0A52800970006 /* F1_Pepper_3.wav in Resources */,
 				9CE4A50B1FD08D3800A02DE5 /* F1_Pepper_1.wav in Resources */,
 				9C1E5D34200FD4320080AF92 /* Rumors.wav in Resources */,
@@ -749,7 +743,6 @@
 				9C8CEBB7201F375800446C97 /* marching-concrete-loop.aiff in Resources */,
 				9C06C5C3200F895E001A6A1C /* F2_Pepper_14.wav in Resources */,
 				9C6C53A720408FC20076F825 /* GameOverOverlay.sks in Resources */,
-				D25BAE221FC60443000ED0EC /* SettingsOverlay.sks in Resources */,
 				9C06C5C4200F895E001A6A1C /* F2_Pepper_15.wav in Resources */,
 				9C0350E81FD0A52800970006 /* F1_Potato_1.wav in Resources */,
 				9C7DE8852029B19F00C4D2A2 /* cutscene2.srt in Resources */,
@@ -864,7 +857,6 @@
 				B0676A301FE143E30001BA27 /* MoveAlong.swift in Sources */,
 				9C2FEE8F200D2978006A5274 /* NewMissionOverlay.swift in Sources */,
 				9CAF1BB01FFFEB6000D9D70A /* RewardAdvertisement.swift in Sources */,
-				D25BAE261FC60864000ED0EC /* SettingsOverlay.swift in Sources */,
 				9CD635A31FD8CEB90016CC7B /* PrisonerBox.swift in Sources */,
 				B095F5D41FE0240300B4F386 /* TutorialFase1State.swift in Sources */,
 				D26035F11FCDC57B00E4F069 /* FinishOverlay.swift in Sources */,
@@ -921,6 +913,14 @@
 				9C2FEE8D200D280C006A5274 /* pt-BR */,
 			);
 			name = NewMissionOverlay.sks;
+			sourceTree = "<group>";
+		};
+		9C63C7A82045D6050050D2E4 /* MenuOverlay.sks */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9C63C7A72045D6050050D2E4 /* Base */,
+			);
+			name = MenuOverlay.sks;
 			sourceTree = "<group>";
 		};
 		9C6C53A920408FC20076F825 /* GameOverOverlay.sks */ = {

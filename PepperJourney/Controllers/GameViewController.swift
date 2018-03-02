@@ -29,6 +29,7 @@ protocol GameViewControllerDelagate: NSObjectProtocol {
     func runNextComic()
     func setComic(named: String)
     func setMenu()
+    func resetGame()
     
     // Ads
     func showAd(blockToRunAfter: @escaping (Bool) -> Void, loadedVideoFeedback:  @escaping () -> Void)
@@ -80,6 +81,10 @@ class GameViewController: UIViewController {
         // Configure the view
         gameView.backgroundColor = UIColor.black
         
+        if UserDefaults.standard.integer(forKey: "comicReleased") == 0 {
+            UserDefaults.standard.set(1, forKey: "comicReleased")
+        }
+        
     }
     func setComic(named: String) {
         for comic in self.comics {
@@ -105,25 +110,23 @@ class GameViewController: UIViewController {
         
         
     }
-    func foo() {
-        
-    }
+    
     func cutscene1() {
-        self.setMenu()
-        let videoSender = VideoSender(blockAfterVideo: foo, cutScenePath: "cutscene1.mp4", cutSceneSubtitlePath: "cutscene1.srt".localized)
+        
+        let videoSender = VideoSender(blockAfterVideo: self.setMenu, cutScenePath: "cutscene1.mp4", cutSceneSubtitlePath: "cutscene1.srt".localized)
         
         self.playCutScene(videoSender: videoSender)
         
     }
     func cutscene2() {
         self.setMenu()
-        let videoSender = VideoSender(blockAfterVideo: foo, cutScenePath: "cutscene2.mp4", cutSceneSubtitlePath: "cutscene2.srt".localized)
+        let videoSender = VideoSender(blockAfterVideo: self.setMenu, cutScenePath: "cutscene2.mp4", cutSceneSubtitlePath: "cutscene2.srt".localized)
         
         self.playCutScene(videoSender: videoSender)
     }
     func cutscene3() {
         self.setMenu()
-        let videoSender = VideoSender(blockAfterVideo: foo, cutScenePath: "cutscene3.mp4", cutSceneSubtitlePath: "cutscene3.srt".localized)
+        let videoSender = VideoSender(blockAfterVideo: self.setMenu, cutScenePath: "cutscene3.mp4", cutSceneSubtitlePath: "cutscene3.srt".localized)
         
         self.playCutScene(videoSender: videoSender)
     }
@@ -173,6 +176,11 @@ class GameViewController: UIViewController {
 }
 
 extension GameViewController: GameViewControllerDelagate {
+    func resetGame() {
+         UserDefaults.standard.set(1, forKey: "comicReleased")
+    }
+    
+    
     func cancelAd() {
         self.rewardAd.isWaiting = false
     }

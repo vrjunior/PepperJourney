@@ -2,7 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "SettingsButton.png",
+      "filename" : "settingsButton.png",
       "scale" : "1x"
     },
     {

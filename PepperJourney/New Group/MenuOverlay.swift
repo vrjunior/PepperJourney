@@ -8,56 +8,91 @@
 
 import Foundation
 import SpriteKit
+
+
+
 class MenuOverlay: SKScene {
     
     public var gameOptionsDelegate: GameOptions?
-    
+    let comicsOrder  = ["level1", "cutscene1", "cutscene2", "level2", "cutscene3"]
     private var comics = [SKButton]()
+    private var settingsButton: SKButton!
+    private var resetGameButton: SKButton!
+    private var settings: SKNode!
+    private var mask: SKButton!
     private let comicsNumber = 5
+    
     override func sceneDidLoad() {
+        self.resetGameButton = self.childNode(withName: "settings/resetGameButton") as! SKButton
+        self.resetGameButton.delegate = self
         
-        //setup nodes
-        for comic in 0 ..< self.comicsNumber {
-            if let comicButton = self.childNode(withName: "buttons/\(comic + 1)") as? SKButton {
-                comicButton.delegate = self
-                self.comics.append(comicButton)
+        self.settingsButton = self.childNode(withName: "settingsButton") as! SKButton
+        self.settingsButton.delegate = self
+        
+        self.settings = self.childNode(withName: "settings")
+        self.settings.isHidden = true
+        
+        self.mask = self.childNode(withName: "settings/mask") as! SKButton
+        self.mask.delegate = self
+        
+        let buttons = self.childNode(withName: "comicsNode")
+        guard let comics = buttons?.children as? [SKButton] else {
+            print("Error gettng level buttons")
+            return
+        }
+        self.comics = comics
+        self.updateComics()
+    
+    }
+    func updateComics() {
+        // PAY ATTENTION: The order of comics in sprite kit scene matter
+        let comicReleased = UserDefaults.standard.integer(forKey: "comicReleased")
+        
+        
+        for index in 0 ..< self.comics.count {
+            self.comics[index].delegate = self
+            if index < comicReleased {
+                self.comics[index].alpha = 0.0001
+            }
+            else {
+                self.comics[index].alpha = 1
             }
         }
-    
     }
 }
 
 extension MenuOverlay : SKButtonDelegate {
     func buttonReleased(target: SKButton) {
         target.colorBlendFactor = 0
+        if target == self.settingsButton {
+            self.settings.isHidden = false
+        }
+        else if target == self.resetGameButton {
+            self.gameOptionsDelegate?.resetGame()
+            self.updateComics()
+        }
+        else if target == self.mask {
+            self.settings.isHidden = true
+        }
     }
     
     func buttonPressed(target: SKButton) {
         
         target.colorBlendFactor = target.defaultColorBlendFactor
         
-        guard let name = target.name else {
+        if target == self.settingsButton {
             return
         }
-        
-        var comic: String
-        
-        switch name {
-        case "1":
-            comic = "level1"
-        case "2":
-            comic = "cutscene1"
-        case "3":
-            comic = "cutscene2"
-        case "4":
-            comic = "level2"
-        case "5":
-            comic = "cutscene3"
-        default:
-            comic = "level1"
+        guard let comicName = target.name else {
+            return
         }
+       
+        let comicReleased = UserDefaults.standard.integer(forKey: "comicReleased")
         
-        self.gameOptionsDelegate?.goToComic(comic: comic)
+        if let comicSelected = self.comics.index(of: target),
+        comicSelected < comicReleased {
+            self.gameOptionsDelegate?.goToComic(comic: comicName)
+        }
     }
     
 }

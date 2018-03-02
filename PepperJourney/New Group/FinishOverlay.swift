@@ -23,7 +23,7 @@ class FinishOverlay: SKScene {
     }
     
     private var restartButton: SKButton!
-    private var backwardButton: SKButton!
+    private var menuButton: SKButton!
     private var forwardButton: SKButton!
     
     private var video: SKVideoNode!
@@ -38,8 +38,8 @@ class FinishOverlay: SKScene {
     }
     
     func setupNodes() {
-        self.backwardButton = self.childNode(withName: "buttons/backwardButton") as! SKButton
-        self.backwardButton.delegate = self
+        self.menuButton = self.childNode(withName: "buttons/menuButton") as! SKButton
+        self.menuButton.delegate = self
         
         self.restartButton = self.childNode(withName: "buttons/restartButton") as! SKButton
         self.restartButton.delegate = self
@@ -49,17 +49,19 @@ class FinishOverlay: SKScene {
         self.forwardButton.delegate = self
     }
     
-    func setBackwardMode() {
-        self.forwardButton.isHidden = true
-        self.backwardButton.position.x = -150
-        self.restartButton.position.x = 150
+    func setNextLevel(enabled: Bool) {
+        if enabled {
+            self.forwardButton.isHidden = false
+            self.forwardButton.position.x = 275
+            self.menuButton.position.x = 0
+            self.restartButton.position.x = -275
+        }
+        else {
+            self.forwardButton.isHidden = true
+            self.menuButton.position.x = -150
+            self.restartButton.position.x = 150
+        }
     }
-    func setForwardMode() {
-        self.backwardButton.isHidden = true
-        self.forwardButton.position.x = 150
-        self.restartButton.position.x = -150
-    }
-    
 }
 
 extension FinishOverlay : SKButtonDelegate {
@@ -74,10 +76,8 @@ extension FinishOverlay : SKButtonDelegate {
             self.levelSelected = true
             gameOptionsDelegate?.nextLevel()
         }
-            
-        else if target == backwardButton, !self.levelSelected {
-            self.levelSelected = true
-            gameOptionsDelegate?.previousLevel()
+        else if target == self.menuButton {
+            self.gameOptionsDelegate?.goToMenu()
         }
     }
     
