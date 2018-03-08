@@ -50,6 +50,7 @@ class GameViewController: UIViewController {
     }
     var gameController: GameController?
     var menu: MenuController?
+    var gameEntry: GameEntryController?
     
     
     func setupComics() {
@@ -73,18 +74,19 @@ class GameViewController: UIViewController {
         
         self.setupComics()
         
-        self.setComic(named: "level1")
-        
         // Ads objects
         self.rewardAd = RewardAdvertisement(gameViewController: self)
         
         // Configure the view
         gameView.backgroundColor = UIColor.black
         
-        if UserDefaults.standard.integer(forKey: "comicReleased") == 0 {
+        if UserDefaults.standard.integer(forKey: "comicReleased") == 1 {// VOLTAR PARA ZERO
             UserDefaults.standard.set(1, forKey: "comicReleased")
+            self.runGameEntry()
         }
-        
+        else {
+            self.setMenu()
+        }
     }
     func setComic(named: String) {
         for comic in self.comics {
@@ -107,8 +109,7 @@ class GameViewController: UIViewController {
     func level2() {
         self.gameController = Fase2GameController(scnView: self.gameView, gameControllerDelegate: self)
         // Video delegates
-        
-        
+   
     }
     
     func cutscene1() {
@@ -132,6 +133,10 @@ class GameViewController: UIViewController {
     }
     func setMenu() {
         self.menu = MenuController(scnView: self.gameView, gameControllerDelegate: self)
+    }
+    
+    func runGameEntry() {
+        self.gameEntry = GameEntryController(scnView: self.gameView, gameControllerDelegate: self)
     }
     override var shouldAutorotate: Bool {
         return true

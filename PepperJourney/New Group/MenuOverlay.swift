@@ -21,6 +21,7 @@ class MenuOverlay: SKScene {
     private var settings: SKNode!
     private var mask: SKButton!
     private let comicsNumber = 5
+    private var levelSelected: Bool = false
     
     override func sceneDidLoad() {
         self.resetGameButton = self.childNode(withName: "settings/resetGameButton") as! SKButton
@@ -86,11 +87,15 @@ extension MenuOverlay : SKButtonDelegate {
         guard let comicName = target.name else {
             return
         }
+        if self.levelSelected == true {
+            return
+        }
        
         let comicReleased = UserDefaults.standard.integer(forKey: "comicReleased")
         
         if let comicSelected = self.comics.index(of: target),
         comicSelected < comicReleased {
+            self.levelSelected = true
             self.gameOptionsDelegate?.goToComic(comic: comicName)
         }
     }

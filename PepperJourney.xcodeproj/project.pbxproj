@@ -80,6 +80,7 @@
 		9CD635A61FD8CEDE0016CC7B /* TimeAlarmComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD635A41FD8CEDD0016CC7B /* TimeAlarmComponent.swift */; };
 		9CD635A71FD8CEDE0016CC7B /* DistanceAlarmComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD635A51FD8CEDE0016CC7B /* DistanceAlarmComponent.swift */; };
 		9CD8547A2008C611009C7218 /* CheckPointController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD854792008C611009C7218 /* CheckPointController.swift */; };
+		9CDFD39E2049C97100CAB168 /* GameEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDFD39D2049C97100CAB168 /* GameEntryController.swift */; };
 		9CE0FF431FC765B9004AF735 /* SoundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE0FF421FC765B9004AF735 /* SoundController.swift */; };
 		9CE0FF491FC854B2004AF735 /* splashingWater.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9CE0FF481FC854B1004AF735 /* splashingWater.wav */; };
 		9CE4A50B1FD08D3800A02DE5 /* F1_Pepper_1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9CE4A50A1FD08D3800A02DE5 /* F1_Pepper_1.wav */; };
@@ -179,6 +180,7 @@
 		9C1E5D30200FD0FD0080AF92 /* acuteYeah.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = acuteYeah.wav; sourceTree = "<group>"; };
 		9C1E5D32200FD4320080AF92 /* Rumors.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Rumors.wav; sourceTree = "<group>"; };
 		9C1E5D33200FD4320080AF92 /* WarriorAvocado.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = WarriorAvocado.wav; sourceTree = "<group>"; };
+		9C2029482051BCC300144C5A /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = "pt-BR"; path = "pt-BR.lproj/MenuOverlay.sks"; sourceTree = "<group>"; };
 		9C2306842017652100B1240F /* LicenseAdds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseAdds.swift; sourceTree = "<group>"; };
 		9C2FEE8B200D2801006A5274 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Base; path = Base.lproj/NewMissionOverlay.sks; sourceTree = "<group>"; };
 		9C2FEE8D200D280C006A5274 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = "pt-BR"; path = "pt-BR.lproj/NewMissionOverlay.sks"; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 		9CD635A41FD8CEDD0016CC7B /* TimeAlarmComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeAlarmComponent.swift; sourceTree = "<group>"; };
 		9CD635A51FD8CEDE0016CC7B /* DistanceAlarmComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceAlarmComponent.swift; sourceTree = "<group>"; };
 		9CD854792008C611009C7218 /* CheckPointController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPointController.swift; sourceTree = "<group>"; };
+		9CDFD39D2049C97100CAB168 /* GameEntryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEntryController.swift; sourceTree = "<group>"; };
 		9CE0FF421FC765B9004AF735 /* SoundController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundController.swift; sourceTree = "<group>"; };
 		9CE0FF481FC854B1004AF735 /* splashingWater.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = splashingWater.wav; sourceTree = "<group>"; };
 		9CE4A50A1FD08D3800A02DE5 /* F1_Pepper_1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = F1_Pepper_1.wav; sourceTree = "<group>"; };
@@ -399,6 +402,7 @@
 				9C774A621FE1997C00A388CC /* SubtitleController.swift */,
 				9CE0FF421FC765B9004AF735 /* SoundController.swift */,
 				9CD854792008C611009C7218 /* CheckPointController.swift */,
+				9CDFD39D2049C97100CAB168 /* GameEntryController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -852,6 +856,7 @@
 				9C3ADB2720263D0F004360CF /* MemoryOptimizationController.swift in Sources */,
 				9C1DD988202754CC00895923 /* PotatoStateMachine.swift in Sources */,
 				D2983A541FF2CBAA00979A52 /* String+Localized.swift in Sources */,
+				9CDFD39E2049C97100CAB168 /* GameEntryController.swift in Sources */,
 				9C2FEE92200D2C9D006A5274 /* MissionController.swift in Sources */,
 				9C03A2421F9A33DD008F191A /* EntityManager.swift in Sources */,
 				B0676A301FE143E30001BA27 /* MoveAlong.swift in Sources */,
@@ -919,6 +924,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				9C63C7A72045D6050050D2E4 /* Base */,
+				9C2029482051BCC300144C5A /* pt-BR */,
 			);
 			name = MenuOverlay.sks;
 			sourceTree = "<group>";

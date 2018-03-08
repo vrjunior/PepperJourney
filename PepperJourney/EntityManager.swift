@@ -136,6 +136,15 @@ class EntityManager {
     
 
     /***************************************************************************************************/
+    
+    func setPotatoesSpeed(speed: Float, acceleration: Float) {
+        for potato in self.potatoes {
+            potato.component(ofType: PursueComponent.self)?.speed = speed
+            potato.component(ofType: PursueComponent.self)?.maxAcceleration = acceleration
+        }
+        
+    }
+    
     func initEntityManager (scene: SCNScene, gameController: GameController, soundController: SoundController)
     {
         self.scene = scene

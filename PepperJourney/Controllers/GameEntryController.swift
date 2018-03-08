@@ -1,8 +1,8 @@
 //
-//  MenuController.swift
+//  GameEntryController.swift
 //  PepperJourney
 //
-//  Created by Marcelo Martimiano Junior on 25/02/18.
+//  Created by Marcelo Martimiano Junior on 02/03/18.
 //  Copyright © 2018 Valmir Junior. All rights reserved.
 //
 
@@ -10,37 +10,42 @@ import Foundation
 import SceneKit
 import SpriteKit
 
-class MenuController: NSObject, SCNSceneRendererDelegate {
+class GameEntryController: NSObject, SCNSceneRendererDelegate {
     public var scnView: SCNView!
     public var sceneRenderer: SCNSceneRenderer?
     public weak var gameControllerDelegate: GameViewControllerDelagate?
     
-
     init(scnView: SCNView, gameControllerDelegate: GameViewControllerDelagate) {
         super.init()
-
+        
         //set scnView
         self.scnView = scnView
-        scnView.scene = SCNScene(named: "Game.scnassets/menuScene.scn")
+        scnView.scene = SCNScene(named: "Game.scnassets/fases/comicScene.scn")
         scnView.delegate = self
         self.gameControllerDelegate = gameControllerDelegate
         
-        //        self.scnView.debugOptions = SCNDebugOptions.showPhysicsShapes
-        //        self.scnView.showsStatistics = true
-        
-        if let tapOverlay = SKScene(fileNamed: "MenuOverlay.sks") as? MenuOverlay {
+        self.scnView.pointOfView = self.scnView.scene?.rootNode.childNode(withName: "comicCamera", recursively: true)
+        self.scnView.scene?.rootNode.runAction(SCNAction.wait(duration: 5), completionHandler: {
+            self.setTapToStart()
+        })
+    }
+    
+    func setTapToStart() {
+        if let tapOverlay = SKScene(fileNamed: "StartOverlay.sks") as? StartOverlay {
             tapOverlay.gameOptionsDelegate = self
             tapOverlay.scaleMode = .aspectFill
             self.scnView.overlaySKScene = tapOverlay
         }
     }
+    
 }
-extension MenuController: GameOptions {
-    func resetGame() {
-        self.gameControllerDelegate?.resetGame()
-    }
+
+
+extension GameEntryController: GameOptions {
+    func resetGame() {}
     
     func start() {
+        self.gameControllerDelegate?.setComic(named: "level1")
     }
     
     func restart() {}
@@ -51,12 +56,7 @@ extension MenuController: GameOptions {
     func nextLevel() {}
     func previousLevel() {}
     func tutorialClosed() {}
-    func goToMenu() {
-        self.gameControllerDelegate?.setMenu()
-    }
-    
-    func goToComic(comic: String) {
-        self.gameControllerDelegate?.setComic(named: comic)
-    }
+    func goToMenu() {}
+    func goToComic(comic: String) {}
 }
 

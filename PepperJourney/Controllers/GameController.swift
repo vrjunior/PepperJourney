@@ -161,6 +161,22 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         self.gameStateMachine.enter(PauseState.self)
     }
     
+    func getNodeActionsFromBase(sceneName: String, nodeName: String) -> SCNAction {
+        
+        guard let scene = SCNScene(named: sceneName),
+        let actionNode = scene.rootNode.childNode(withName: nodeName, recursively: true) else {
+            fatalError("Error getting \(nodeName) node from \(sceneName) scene")
+        }
+        
+        let actionKey = actionNode.actionKeys[0]
+        
+        guard let action = actionNode.action(forKey: actionKey) else {
+            fatalError("Error getting action")
+        }
+        
+        return action
+    }
+    
     // MARK: Initializer
     init(scnView: SCNView, levelIdentifier: String, gameControllerDelegate: GameViewControllerDelagate, levelDelegate: LevelDelegate) {
         super.init()
@@ -186,27 +202,15 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         
         self.followingCamera.position = self.followingCameraInitialPosition.position
         self.followingCamera.eulerAngles = self.followingCameraInitialPosition.eulerAngles
-        self.followingCamera.orientation = self.followingCameraInitialPosition.orientation
+        
         
         self.cameraNode.position = self.cameraInitialPosition.position
         self.cameraNode.eulerAngles = self.cameraInitialPosition.eulerAngles
-        self.cameraNode.orientation = self.cameraInitialPosition.orientation
         
         self.setupCamera()
         
     }
    
-    func setupTapToStart() {
-        
-        // Do the setup to restart the game
-        self.prepereToStartGame()
-        
-        let tapOverlay = SKScene(fileNamed: "StartOverlay.sks") as! StartOverlay
-        tapOverlay.gameOptionsDelegate = self
-        tapOverlay.scaleMode = .aspectFill
-        self.scnView.overlaySKScene = tapOverlay
-        
-    }
     func endedAd(wonReward: Bool) {
         if wonReward {
             //reset lifebar
