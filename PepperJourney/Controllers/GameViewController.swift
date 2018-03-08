@@ -80,7 +80,7 @@ class GameViewController: UIViewController {
         // Configure the view
         gameView.backgroundColor = UIColor.black
         
-        if UserDefaults.standard.integer(forKey: "comicReleased") == 1 {// VOLTAR PARA ZERO
+        if UserDefaults.standard.integer(forKey: "comicReleased") <= 1 {
             UserDefaults.standard.set(1, forKey: "comicReleased")
             self.runGameEntry()
         }
@@ -120,13 +120,12 @@ class GameViewController: UIViewController {
         
     }
     func cutscene2() {
-        self.setMenu()
         let videoSender = VideoSender(blockAfterVideo: self.setMenu, cutScenePath: "cutscene2.mp4", cutSceneSubtitlePath: "cutscene2.srt".localized)
         
         self.playCutScene(videoSender: videoSender)
     }
     func cutscene3() {
-        self.setMenu()
+        
         let videoSender = VideoSender(blockAfterVideo: self.setMenu, cutScenePath: "cutscene3.mp4", cutSceneSubtitlePath: "cutscene3.srt".localized)
         
         self.playCutScene(videoSender: videoSender)
