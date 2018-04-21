@@ -27,7 +27,7 @@ class AttackLimiterComponent: GKComponent {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func tryAttack(originNode: SCNNode, direction: float3, velocity: float3)
+    func tryAttack(character: SCNNode, forceModule: Float)
     {
         guard let entity = self.entity else { fatalError()}
         
@@ -42,7 +42,7 @@ class AttackLimiterComponent: GKComponent {
         guard let attackComponent = entity.component(ofType: AttackComponent.self) else {fatalError()}
         
         
-        attackComponent.attack(originNode: originNode, direction: direction, velocity: velocity)
+        attackComponent.attack(character: character, forceModule: forceModule)
     }
     func emptyFireLevelHandler() {
         

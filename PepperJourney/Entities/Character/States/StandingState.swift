@@ -31,7 +31,7 @@ class StandingState: BaseState {
             standingType = .standing2
         }
         
-        character.playAnimationOnce(type: standingType!)
+        character?.playAnimationOnce(type: standingType!)
     }
     
     override func willExit(to nextState: GKState) {
@@ -39,7 +39,7 @@ class StandingState: BaseState {
         timer.invalidate()
         
         if let standingType = self.standingType {
-            character.stopAnimation(type: standingType)
+            character?.stopAnimation(type: standingType)
         }
     }
     

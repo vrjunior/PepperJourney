@@ -13,11 +13,11 @@ class WalkingState: BaseState {
     
     // MARK: GK Overrides
     override func didEnter(from previousState: GKState?) {
-        self.character.playAnimation(type: .walking)
+        self.character?.playAnimation(type: .walking)
     }
     
     override func willExit(to nextState: GKState) {
-        self.character.stopAnimation(type: .walking)
+        self.character?.stopAnimation(type: .walking)
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {

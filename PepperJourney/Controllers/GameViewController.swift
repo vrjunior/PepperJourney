@@ -91,6 +91,9 @@ class GameViewController: UIViewController {
     func setComic(named: String) {
         for comic in self.comics {
             if comic.name == named {
+                
+                self.gameView.delegate = nil
+                
                 self.currentComic = comic
                 self.currentComic.runComic()
                 self.menu = nil

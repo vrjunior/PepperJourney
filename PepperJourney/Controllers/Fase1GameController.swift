@@ -96,7 +96,15 @@ class Fase1GameController: GameController {
         scnView.scene = scene
         
         //load the character
-        self.setupCharacter()
+        
+        let states = [
+                        StandingState(),
+                        WalkingState(),
+                        RunningState(),
+                        JumpingState(),
+                        JumpingMoveState()]
+        
+        self.setupCharacter(states: states)
         
         self.setupCamera()
         

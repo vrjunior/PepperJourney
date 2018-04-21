@@ -11,17 +11,12 @@ import GameplayKit
 
 class BaseState: GKState {
     
-    let scene: SCNScene
-    let character:Character
+    public weak var scene: SCNScene?
+    public weak var character:Character?
     
-    init(scene: SCNScene, character: Character) {
+    public func setupState(scene: SCNScene, character: Character) {
         self.scene = scene
         self.character = character
     }
-    
-    
-    // MARK: GK Overrides
-    
-    
     
 }

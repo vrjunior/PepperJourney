@@ -99,20 +99,18 @@ class GameController: NSObject, SCNSceneRendererDelegate {
     func setupSounds() {
         
     }
-    func setupCharacter() {
+    func setupCharacter(states: [BaseState]) {
         // create the character with your components
         self.character = self.entityManager.character
         self.character.setupCharacter()
         
-        characterStateMachine = GKStateMachine(states: [
-            StandingState(scene: scene, character: character),
-            WalkingState(scene: scene, character: character),
-            RunningState(scene: scene, character: character),
-            JumpingState(scene: scene, character: character),
-            JumpingMoveState(scene: scene, character: character),
-            AttackState(scene: scene, character: character)
-            ])
         
+        // Passa a cena e o objeto do tipo Character para a o estado
+        for state in states {
+            state.setupState(scene: self.scene, character: self.character)
+        }
+        
+        characterStateMachine = GKStateMachine(states: states)
     }
     func addNotifications() {
         let nc = NotificationCenter.default

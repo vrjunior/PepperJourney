@@ -19,18 +19,22 @@ class AttackComponent: GKComponent
     private var attacks = [Attack]()
     private weak var scene: SCNScene!
     private var fireBallLifeTime: TimeInterval = 1
+    private weak var originNode: SCNNode!
+    private weak var targetNode: SCNNode!
     
-    init(scene: SCNScene)
+    init(scene: SCNScene, originNode: SCNNode, targetNode: SCNNode)
     {
         super.init()
         self.scene = scene
+        self.originNode = originNode
+        self.targetNode = targetNode
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func attack(originNode: SCNNode, direction: float3, velocity: float3)
+    func attack(character: SCNNode, forceModule: Float)
     {
         guard let scene = SCNScene(named: "Game.scnassets/character/FireBall.scn") else
         {
@@ -40,35 +44,32 @@ class AttackComponent: GKComponent
             fatalError("Error getting fireball node")
         }
         
-        // Initial position
-        fireBall.position = originNode.presentation.position
-        fireBall.position.y += 5
+       
+        
+        
+        let origin = self.originNode.presentation.worldPosition
+        let target = self.targetNode.presentation.worldPosition
+        
+        
+        // direction
+        let direction = SCNVector3(target.x - origin.x, 0, target.z - origin.z)
         
         
         // add to the scene
+        let characterPosition = character.presentation.worldPosition
+        fireBall.worldPosition = characterPosition
+        fireBall.worldPosition.y += 5
         self.scene.rootNode.addChildNode(fireBall)
-        
+
         // Handle with the movimentation of fireball
         var forceVector = SCNVector3()
-        
-        if velocity.allZero()
-        {
-            // Parameters chosen empirically
-            forceVector.x = 10 * direction.x
-            forceVector.z = 10 * direction.z
-            print(direction)
-        }
-        else
-        {
-            forceVector.x = direction.x + 15 * velocity.x
-            forceVector.z = direction.z + 15 * velocity.z
-           
-        }
 
+        forceVector.x = direction.x * forceModule
+        forceVector.z = direction.z * forceModule
         forceVector.y = 20
-        
+
         fireBall.physicsBody?.applyForce(forceVector, asImpulse: true)
-        
+
         // Controller of disapear the fireballs
         let newAttack = Attack(fireBall: fireBall, time: 0)
         self.attacks.append(newAttack)

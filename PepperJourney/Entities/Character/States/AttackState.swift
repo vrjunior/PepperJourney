@@ -10,9 +10,16 @@ import Foundation
 import GameKit
 
 class AttackState : BaseState {
-    
+    weak var targetNode: SCNNode?
     private var animationType: AnimationType?
+    let attackForceModule: Float = 10
     
+    
+    init(targetNode: SCNNode) {
+        super.init()
+        self.targetNode = targetNode
+        
+    }
     override func didEnter(from previousState: GKState?) {
         
         self.shootFireBall()
@@ -48,16 +55,14 @@ class AttackState : BaseState {
     }
     
     func shootFireBall() {
-        guard let attackLimiterComponent = self.character.component(ofType: AttackLimiterComponent.self) else
+        guard let attackLimiterComponent = self.character?.component(ofType: AttackLimiterComponent.self),
+        let target = self.targetNode else
         {
             fatalError("Error getting attack limiter component")
         }
         
-        var lauchPosition = self.character.characterNode.presentation.position
-        lauchPosition.y = self.character.characterNode.presentation.position.y + 5
         
-        
-        attackLimiterComponent.tryAttack(originNode: self.character.characterNode, direction: self.character.lastDirection, velocity: self.character.characterVelocity)
+        attackLimiterComponent.tryAttack(character: self.character!.characterNode, forceModule: attackForceModule)
     }
     
 }

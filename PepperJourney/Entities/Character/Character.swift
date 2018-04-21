@@ -58,13 +58,13 @@ class Character: GKEntity {
     var trackingAgentComponent: GKAgent3D!
     
     // MARK: - Initialization
-    init(scene: SCNScene, jumpDelegate: JumpDelegate?, soundController: SoundController) {
+    init(scene: SCNScene, jumpDelegate: JumpDelegate?, soundController: SoundController, levelComponents: [GKComponent] = [GKComponent()]) {
         super.init()
         
         self.jumpDelegate = jumpDelegate
         self.loadCharacter(scene: scene)
         self.loadAnimations()
-        self.loadComponents(scene: scene, soundController: soundController)
+        self.loadComponents(scene: scene, soundController: soundController, otherComponents: levelComponents)
     }
     
     func setupCharacter(initialPosition: SCNVector3? = nil) {
@@ -114,7 +114,7 @@ class Character: GKEntity {
         }
     }
     
-    private func loadComponents(scene: SCNScene, soundController: SoundController) {
+    private func loadComponents(scene: SCNScene, soundController: SoundController, otherComponents: [GKComponent]) {
         let jumpComponent = JumpComponent(character: self.characterNode, impulse: self.jumpImpulse)
         
         //adding delgate to jump
@@ -130,22 +130,14 @@ class Character: GKEntity {
         self.addComponent(sinkComponent)
         EntityManager.sharedInstance.loadToComponentSystem(component: sinkComponent)
         
-        // Attack component
-        let attackComponent = AttackComponent(scene: scene)
-        self.addComponent(attackComponent)
-        
-        // Power Level Component
-        let powerLevelComponent = PowerLevelCompoenent(MaxPower: 30, defaultPowerLevel: 30)
-        self.addComponent(powerLevelComponent)
-        
-        // Attack Limiter Component
-        let attackLimiterComponent = AttackLimiterComponent(rechargeInterval: 5, chargeRate: 1, dischargeRate: 1)
-        self.addComponent(attackLimiterComponent)
-        self.entityManager.loadToComponentSystem(component: attackLimiterComponent)
-        
         //Life component
         let lifeComponent = LifeComponent()
         self.addComponent(lifeComponent)
+        
+        // Load level components
+        for component in otherComponents {
+            self.addComponent(component)
+        }
         
     }
     

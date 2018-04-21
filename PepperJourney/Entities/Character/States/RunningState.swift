@@ -13,11 +13,11 @@ class RunningState: BaseState {
     
     // MARK: GK Overrides
     override func didEnter(from previousState: GKState?) {
-        self.character.playAnimation(type: .running)
+        self.character?.playAnimation(type: .running)
     }
     
     override func willExit(to nextState: GKState) {
-        self.character.stopAnimation(type: .running)
+        self.character?.stopAnimation(type: .running)
     }
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
@@ -25,7 +25,7 @@ class RunningState: BaseState {
             return false
         }
         
-        if character.isJumping {
+        if (character?.isJumping)! {
             return false
         }
         

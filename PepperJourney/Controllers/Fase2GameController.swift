@@ -62,6 +62,27 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         self.gameStateMachine.enter(PauseState.self)
     }
     
+    func levelComponents() -> [GKComponent] {
+        
+        // Attack component
+        guard let directionAttackNode = self.scene.rootNode.childNode(withName: "directionAttackNode", recursively: true),
+            let originNode = directionAttackNode.childNode(withName: "origin", recursively: false),
+            let targetNode = directionAttackNode.childNode(withName: "attackTarget", recursively: false) else {
+                
+                fatalError("Error getting directionAttackNode")
+        }
+        let attackComponent = AttackComponent(scene: scene, originNode: originNode, targetNode: targetNode)
+        
+        
+        // Power Level Component
+        let powerLevelComponent = PowerLevelCompoenent(MaxPower: 30, defaultPowerLevel: 30)
+        
+        // Attack Limiter Component
+        let attackLimiterComponent = AttackLimiterComponent(rechargeInterval: 5, chargeRate: 1, dischargeRate: 1)
+        self.entityManager.loadToComponentSystem(component: attackLimiterComponent)
+        
+        return [attackComponent, powerLevelComponent, attackLimiterComponent]
+    }
     
     // MARK: Initializer
     init(scnView: SCNView, gameControllerDelegate: GameViewControllerDelagate) {
@@ -75,7 +96,9 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         
         // Get the entity manager instance
         self.entityManager = EntityManager.sharedInstance
-        self.entityManager.character = Character(scene: self.scene, jumpDelegate: self, soundController: self.soundController)
+
+        let level2Components = levelComponents()
+        self.entityManager.character = Character(scene: self.scene, jumpDelegate: self, soundController: self.soundController, levelComponents: level2Components)
         self.entityManager.initEntityManager(scene: self.scene, gameController: self, soundController: self.soundController)
         
         // Add component systems to the entity manager
@@ -91,8 +114,23 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         scnView.scene = scene
         scnView.delegate = self
         
+        
+        
         //load the character
-        self.setupCharacter()
+        guard let attackTarget = self.scene.rootNode.childNode(withName: "attackTarget", recursively: true) else {
+            print("Error gettin attack target")
+            return
+        }
+        
+        let states = [
+            StandingState(),
+            WalkingState(),
+            RunningState(),
+            JumpingState(),
+            JumpingMoveState(),
+            AttackState(targetNode: attackTarget)]
+        
+        self.setupCharacter(states: states)
         
         self.setupCamera()
         
