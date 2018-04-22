@@ -135,12 +135,12 @@ class GameController: NSObject, SCNSceneRendererDelegate {
         lookAtConstraint.influenceFactor = 1
         
         let distanceConstraint = SCNDistanceConstraint(target: self.character.characterNode)
-        distanceConstraint.minimumDistance = 45
-        distanceConstraint.maximumDistance = 45
+        distanceConstraint.minimumDistance = 30
+        distanceConstraint.maximumDistance = 30
         
         let keepAltitude = SCNTransformConstraint.positionConstraint(inWorldSpace: true) { (node: SCNNode, position: SCNVector3) -> SCNVector3 in
             var position = float3(position)
-            position.y = self.character.characterNode.presentation.position.y + 20
+            position.y = self.character.characterNode.presentation.position.y + 10
             if position.y < 10
             {
                 position.y = 10

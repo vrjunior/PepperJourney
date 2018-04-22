@@ -266,8 +266,9 @@ class EntityManager {
         self.previousUpdateTime = time
         
         /* Character update */
-        guard let attackComponent = self.character.component(ofType: AttackComponent.self)else{fatalError()}
-        attackComponent.update(deltaTime: deltaTime)
+        if let attackComponent = self.character.component(ofType: AttackComponent.self) {
+            attackComponent.update(deltaTime: deltaTime)
+        }
         
     }
    
