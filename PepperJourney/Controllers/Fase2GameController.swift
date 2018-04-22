@@ -265,6 +265,8 @@ class Fase2GameController: GameController, MissionDelegate, BigBattleDelegate {
         self.bigBridgeBattleController.update(deltaTime: deltaTime)
         
         self.memoryOptimization.update(pepperPosition: self.character.characterNode.worldPosition, deltaTime: deltaTime)
+        
+        print("\(self.character.characterNode.presentation.eulerAngles.y)   \(self.cameraNode.parent?.presentation.eulerAngles.y)")
     }
     
     func playCutscene2() {

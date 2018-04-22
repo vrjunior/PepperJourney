@@ -34,8 +34,16 @@ class AttackComponent: GKComponent
         fatalError("init(coder:) has not been implemented")
     }
     
-    func attack(character: SCNNode, forceModule: Float)
+    // Character tem que ter uma funcao rotateTo
+    func attack(character: Character, forceModule: Float)
     {
+        // get camera angle
+        if let parentAngle = self.targetNode?.parent?.parent?.parent?.presentation.eulerAngles.y,
+        let cameraAngle = self.targetNode?.parent?.parent?.presentation.eulerAngles.y {
+            character.rotateTo(angle: CGFloat(cameraAngle + parentAngle - Float.pi))
+            print(self.targetNode?.parent?.parent?.parent?.name)
+        }
+        
         guard let scene = SCNScene(named: "Game.scnassets/character/FireBall.scn") else
         {
             fatalError("Error getting FireBall.scn")
@@ -45,7 +53,7 @@ class AttackComponent: GKComponent
         }
         
        
-        
+        // TODO: Fazer protocolo
         
         let origin = self.originNode.presentation.worldPosition
         let target = self.targetNode.presentation.worldPosition
@@ -56,7 +64,7 @@ class AttackComponent: GKComponent
         
         
         // add to the scene
-        let characterPosition = character.presentation.worldPosition
+        let characterPosition = character.characterNode.presentation.worldPosition
         fireBall.worldPosition = characterPosition
         fireBall.worldPosition.y += 5
         self.scene.rootNode.addChildNode(fireBall)

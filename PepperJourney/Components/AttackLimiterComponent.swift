@@ -27,7 +27,7 @@ class AttackLimiterComponent: GKComponent {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func tryAttack(character: SCNNode, forceModule: Float)
+    func tryAttack(character: Character, forceModule: Float)
     {
         guard let entity = self.entity else { fatalError()}
         

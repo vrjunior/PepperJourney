@@ -253,7 +253,7 @@ class Character: GKEntity {
         self.characterNode.simdPosition = self.initialPosition
     }
     
-    func rotateBy(angle: CGFloat) {
+    func rotateTo(angle: CGFloat) {
         directionAngle = angle
     }
     

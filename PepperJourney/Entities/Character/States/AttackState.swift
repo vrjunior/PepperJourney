@@ -62,7 +62,7 @@ class AttackState : BaseState {
         }
         
         
-        attackLimiterComponent.tryAttack(character: self.character!.characterNode, forceModule: attackForceModule)
+        attackLimiterComponent.tryAttack(character: self.character!, forceModule: attackForceModule)
     }
     
 }
